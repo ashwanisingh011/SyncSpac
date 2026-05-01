@@ -26,6 +26,6 @@ const ProjectSchema: Schema = new Schema({
         inProgress: [{type: Schema.Types.ObjectId, ref: "Task"}],
         done: [{type: Schema.Types.ObjectId, ref: "Task"}]
     }
-})
+}, {timestamps: true});
 
 export default mongoose.model<IProject>("Project", ProjectSchema);
