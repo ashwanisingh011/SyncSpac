@@ -1,21 +1,12 @@
-import mongoose, {Document, Schema} from "mongoose"
+import mongoose, {Schema, Document} from 'mongoose';
 
 export interface ITask extends Document {
-    title: String,
-    columnId: mongoose.Types.ObjectId,
-    assignee: mongoose.Types.ObjectId,
-    dueDate: Date,
-    priority: String,
-    attachments: String[],
-    subTasks: SubTask[],
-    labels: String[],
-    description: String,
-    comments: Comment[],
-    estimatedTime: Number,  
-    actualTime: Number,
-    
+    title: string;
+    description?: string;
+    status: 'todo' | 'inProgress' | 'done';
+    project: mongoose.Types.ObjectId;
+    assigned?: mongoose.Types.ObjectId;
 }
-
 
 const TaskSchema: Schema = new Schema({
     title: {
@@ -23,61 +14,24 @@ const TaskSchema: Schema = new Schema({
         required: true,
         trim: true
     },
-    columnId: {
-        type: Schema.Types.ObjectId,
-        ref: "Column",
-        required: true
-    },
-    assignee: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        default: null
-    },
-    dueDate: {
-        type: Date,
-        default: null
-    },
-    priority: {
-        type: String,
-        enum: ["low", "medium", "high"],
-        default: "medium"
-    },
-    attachments: {
-        type: [String],
-        default: []
-    },
-    subTasks: {
-        type: [{
-            title: String,
-            completed: Boolean
-        }],
-        default: []
-    },
-    labels: {
-        type: [String],
-        default: []
-    },
     description: {
         type: String,
-        trim: true,
-        default: ""
+        trim: true
     },
-    comments: {
-        type: [{
-            author: String,
-            content: String,
-            timestamp: Date
-        }],
-        default: []
+    status: {
+        type: String,
+        enum: ['todo', 'inProgress', 'done'],
+        default: 'todo'
     },
-    estimatedTime: {
-        type: Number,
-        default: 0
+    project: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Project',
+        required: true
     },
-    actualTime: {
-        type: Number,
-        default: 0
+    assigned: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
     }
-})
+}, {timestamps: true});
 
-export default mongoose.model<ITask>("Task", TaskSchema);
+export default mongoose.model<ITask>('Task', TaskSchema);
