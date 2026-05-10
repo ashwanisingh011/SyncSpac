@@ -5,7 +5,7 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import workspaceRoutes from './routes/workspaceRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
-
+import taskRoutes from './routes/taskRoutes.js';
 
 dotenv.config();
 
@@ -18,6 +18,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/workspace', workspaceRoutes);
 app.use('/api/project', projectRoutes);
+app.use('/api/task', taskRoutes)
 
 connectDB()
 .then(() => {
