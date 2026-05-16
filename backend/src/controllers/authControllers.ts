@@ -73,3 +73,22 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const forgotPassword = async (req: Request, res: Response): Promise<void> => {
+  const {email} = req.body;
+
+  try{
+    const user = await User.findOne({email});
+    if(!user){
+      res.status(400).json({message: "User does not exist"});
+      return;
+    }
+
+    // Here you would typically generate a password reset token and send an email to the user with instructions on how to reset their password.
+
+    res.status(200).json({message: "Password reset instructions sent to email (not implemented)"}); 
+  } catch (error){
+    console.error("Error in forgotPassword: ", error);
+    res.status(500).json({message: "Server error"});  
+  }
+}
