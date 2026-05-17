@@ -16,7 +16,7 @@ export const createWorkspace = async (
 
     const workspace = await Workspace.create({
       name,
-      owner: req.userId.id,
+      owner: req.userId._id,
       members: [{ user: req.userId.id, role: "admin" }],
       projects: [],
     });
