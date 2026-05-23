@@ -33,3 +33,24 @@ export const createProject = async(req: AuthRequest, res: Response): Promise<voi
         res.status(500).json({message: "Server error"});
     }
 }
+
+export const getProjectById = async (req: AuthRequest, res: Response): Promise<void> => {
+    try {
+        const projectId = req.params.id;
+
+        const project = await Project.findById(projectId).populate('columns.todo columns.inProgress columns.done');
+
+        if(!project){
+            res.status(400).json({success: false, message: "Project ID is required"})
+            return;
+        }
+
+        res.status(200).json({
+            success: true,
+            project
+        })
+
+    } catch (error) {
+        res.status(500).json({success: false, message: "Server error"});
+    }
+}
