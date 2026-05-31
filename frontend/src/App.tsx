@@ -1,9 +1,13 @@
+import KhanbanBoard from './components/KanbanBoard'
+
+
+
 
 function App() {
 
   return (
     <>
-      <h1 className="text-red-500">Testing...</h1>
+      <KhanbanBoard project={} />
     </>
   )
 }
