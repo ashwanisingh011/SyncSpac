@@ -1,5 +1,18 @@
+interface Task {
+  _id: string;
+  title: string;
+}
 
-function KanbanBoard({project}) {
+interface Project {
+  name: string;
+  columns: {
+    todo: Task[];
+    inProgress: Task[];
+    done: Task[];
+  };
+}
+
+const KanbanBoard = ({project}: {project: Project}) => {
     if(!project){
         return <div>Loading...</div>
     }
