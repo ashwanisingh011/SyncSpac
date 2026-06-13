@@ -1,7 +1,7 @@
 import  {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import KanbanBoard from './KanbanBoard.tsx'
-import { fetchProject } from '../api/projectService.ts'
+import { fetchProjectById } from '../api/projectService.ts'
 
 
 const ProjectPage = () => {
@@ -12,7 +12,7 @@ const ProjectPage = () => {
     useEffect(() => {
         const getProject = async () => {
            try {
-            const {data} = await fetchProject(id!);
+            const {data} = await fetchProjectById(id!);
             setProject(data);
            } catch (error) {
             console.error("Failed to fetch project:", error);
