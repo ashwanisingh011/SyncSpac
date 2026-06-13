@@ -11,4 +11,7 @@ API.interceptors.request.use((req) => {
        
 });
 
-export const fetchProject = (id: string) => API.get(`/projects/${id}`)
+
+export const createProject = (projectData: any) => API.post('/projects', projectData);
+export const fetchProjectById = (id: string) => API.get(`/projects/${id}`)
+export const fetchAllProjects = () => API.get('/projects');
