@@ -7,3 +7,8 @@ export const login = async (credentials: any) => {
     localStorage.setItem('token', data.token);
     return data;
 };
+
+export const register = async (userInfo: any) => {
+    const {data} = await API.post('/auth/register', userInfo);
+    return data;
+}
