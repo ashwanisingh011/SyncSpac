@@ -32,7 +32,7 @@ const KanbanBoard = ({project}: {project: Project}) => {
     const columnsData = [
         { id: 'todo', title: 'Todo', icon: CircleDot, iconColor: 'text-[#8A8F98]', items: project.columns.todo || [] },
         { id: 'inprogress', title: 'In Progress', icon: Clock, iconColor: 'text-[#F2C94C]', items: project.columns.inProgress || [] },
-        { id: 'done', title: 'Done', icon: CheckCircle2, iconColor: 'text-[#5E6AD2]', items: project.columns.done || [] }
+        { id: 'done', title: 'Done', icon: CheckCircle2, iconColor: 'text-[#E8E8FD]', items: project.columns.done || [] }
     ];
 
   return (

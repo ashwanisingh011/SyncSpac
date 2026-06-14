@@ -51,25 +51,19 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="w-screen h-screen overflow-hidden bg-[#0E1015] text-[#E8E8FD] font-sans selection:bg-[#5E6AD2]/30 flex antialiased" style={{ WebkitFontSmoothing: 'antialiased' }}>
-
-      {/* Background Mesh Glow */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#5E6AD2]/5 blur-[140px] rounded-full mix-blend-screen" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#5E6AD2]/5 blur-[140px] rounded-full mix-blend-screen" />
-      </div>
+    <div className="w-screen h-screen overflow-hidden bg-[#0E1015] text-[#E8E8FD] font-sans selection:bg-white/20 flex antialiased" style={{ WebkitFontSmoothing: 'antialiased' }}>
 
       {/* Sidebar */}
-      <aside className="w-[240px] shrink-0 h-full flex flex-col bg-[#17181D]/80 backdrop-blur-md border-r border-white/[0.04] z-20 relative">
+      <aside className="w-[240px] shrink-0 h-full flex flex-col bg-[#17181D] border-r border-white/[0.04] z-20 relative">
 
         {/* Workspace Header Dropdown Container */}
         <div className="h-11 px-3 flex items-center justify-between shrink-0 relative">
           <button
             onClick={() => setIsWorkspaceOpen(!isWorkspaceOpen)}
-            className="flex items-center gap-2 h-7 px-1.5 rounded-md hover:bg-white/[0.05] transition-colors focus:outline-none focus:ring-2 focus:ring-[#5E6AD2]/50 w-full"
+            className="flex items-center gap-2 h-7 px-1.5 rounded-md hover:bg-white/[0.05] transition-colors focus:outline-none w-full"
           >
-            <div className="w-4 h-4 rounded-[3px] bg-gradient-to-tr from-[#5E6AD2] to-[#8C98F2] flex items-center justify-center shadow-sm">
-              <span className="text-white text-[9px] font-bold leading-none">A</span>
+            <div className="w-4 h-4 rounded-[3px] bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-sm">
+              <span className="text-[#E8E8FD] text-[9px] font-bold leading-none">A</span>
             </div>
             <span className="text-[13px] font-medium text-[#E8E8FD] flex-1 text-left">Acme Corp</span>
             <ChevronDown className="w-3.5 h-3.5 text-[#8A8F98]" />
@@ -88,15 +82,15 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 <div className="p-1.5 flex flex-col gap-0.5">
                   <span className="text-[10px] font-semibold text-[#8A8F98] uppercase tracking-wider px-2 py-1">Workspaces</span>
                   <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#E8E8FD] bg-white/[0.05] rounded-[5px] text-left">
-                     <div className="w-4 h-4 rounded-[3px] bg-gradient-to-tr from-[#5E6AD2] to-[#8C98F2] flex items-center justify-center shadow-sm">
-                        <span className="text-white text-[9px] font-bold leading-none">A</span>
+                     <div className="w-4 h-4 rounded-[3px] bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-sm">
+                        <span className="text-[#E8E8FD] text-[9px] font-bold leading-none">A</span>
                      </div>
                      <span className="flex-1">Acme Corp</span>
-                     <Check className="w-3.5 h-3.5 text-[#5E6AD2]" />
+                     <Check className="w-3.5 h-3.5 text-[#E8E8FD]" />
                   </button>
                   <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.03] rounded-[5px] text-left transition-colors">
-                     <div className="w-4 h-4 rounded-[3px] bg-gradient-to-tr from-[#E5484D] to-[#F28C8C] flex items-center justify-center shadow-sm">
-                        <span className="text-white text-[9px] font-bold leading-none">P</span>
+                     <div className="w-4 h-4 rounded-[3px] bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-sm">
+                        <span className="text-[#E8E8FD] text-[9px] font-bold leading-none">P</span>
                      </div>
                      <span className="flex-1">Personal</span>
                   </button>
@@ -164,7 +158,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   )}
 
                   <div className="relative z-10 flex items-center gap-2">
-                    <item.icon className={cn("w-3.5 h-3.5 transition-colors", isActive ? "text-[#5E6AD2]" : "text-[#8A8F98] group-hover:text-[#E8E8FD]")} />
+                    <item.icon className={cn("w-3.5 h-3.5 transition-colors", isActive ? "text-[#E8E8FD]" : "text-[#8A8F98] group-hover:text-[#E8E8FD]")} />
                     <span className={cn("font-medium transition-colors", isActive ? "text-[#E8E8FD]" : "text-[#8A8F98] group-hover:text-[#E8E8FD]")}>
                       {item.label}
                     </span>
@@ -264,7 +258,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <div className="flex items-center gap-4">
               <button className="relative text-[#8A8F98] hover:text-[#E8E8FD] transition-colors focus:outline-none">
                 <Bell className="w-[14px] h-[14px]" />
-                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-[#5E6AD2] rounded-full border-[1.5px] border-[#0E1015]" />
+                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-[#E8E8FD] rounded-full border-[1.5px] border-[#0E1015]" />
               </button>
 
               {/* Avatar Group */}

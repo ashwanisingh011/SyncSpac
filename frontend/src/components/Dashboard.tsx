@@ -22,8 +22,8 @@ const Dashboard = () => {
         {/* Project List Actions */}
         <div className="px-8 pt-6 pb-4 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded-[4px] bg-[#5E6AD2] flex items-center justify-center shadow-sm">
-                <span className="text-white text-[11px] font-bold">P</span>
+            <div className="w-5 h-5 rounded-[4px] bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-sm">
+                <span className="text-[#E8E8FD] text-[11px] font-bold">P</span>
             </div>
             <h1 className="text-[14px] font-medium text-[#E8E8FD]">Projects</h1>
           </div>
@@ -45,7 +45,7 @@ const Dashboard = () => {
                 </button>
             </div>
 
-            <button onClick={() => navigate('/project')} className="flex items-center gap-1.5 px-3 h-7 bg-[#5E6AD2] hover:bg-[#6C77DB] text-white text-[13px] font-medium rounded-md transition-colors focus:outline-none shadow-sm">
+            <button onClick={() => navigate('/project')} className="flex items-center gap-1.5 px-3 h-7 bg-[#E8E8FD] hover:bg-white text-[#0E1015] text-[13px] font-medium rounded-md transition-colors focus:outline-none shadow-sm">
               <Plus className="w-[14px] h-[14px]" />
               New Project
             </button>
@@ -77,7 +77,7 @@ const Dashboard = () => {
                             className="group flex items-center px-4 h-12 bg-transparent hover:bg-white/[0.03] rounded-lg cursor-pointer transition-colors border border-transparent hover:border-white/[0.04]"
                         >
                             <div className="w-8 flex items-center justify-center">
-                                <div className="w-2.5 h-2.5 rounded-full border-2 border-[#5E6AD2]"></div>
+                                <div className="w-2.5 h-2.5 rounded-full border-2 border-[#E8E8FD]"></div>
                             </div>
                             <div className="flex-1 flex items-center gap-3">
                                 <span className="text-[13px] font-medium text-[#E8E8FD]">{p.name}</span>
@@ -105,7 +105,7 @@ const Dashboard = () => {
                         >
                             <div className="flex items-start justify-between mb-3">
                                 <div className="w-8 h-8 rounded-lg bg-white/[0.04] flex items-center justify-center border border-white/[0.02]">
-                                    <div className="w-2.5 h-2.5 rounded-full border-2 border-[#5E6AD2]"></div>
+                                    <div className="w-2.5 h-2.5 rounded-full border-2 border-[#E8E8FD]"></div>
                                 </div>
                                 <button className="opacity-0 group-hover:opacity-100 p-1 text-[#8A8F98] hover:text-[#E8E8FD] transition-all"><MoreHorizontal className="w-[14px] h-[14px]" /></button>
                             </div>
