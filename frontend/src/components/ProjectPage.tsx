@@ -1,6 +1,6 @@
 import  {useState, useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { MoreHorizontal, ArrowLeft, Share2 } from 'lucide-react'
+import { MoreHorizontal, Share2 } from 'lucide-react'
 import KanbanBoard from './KanbanBoard.tsx'
 import { fetchProjectById } from '../api/projectService.ts'
 
