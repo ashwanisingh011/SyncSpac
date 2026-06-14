@@ -53,33 +53,26 @@ const ProjectPage = () => {
     }
 
     return (
-        <div className="h-full flex flex-col max-w-[1600px] mx-auto w-full">
-            {/* Page Header */}
-            <div className="mb-8 flex items-end justify-between shrink-0">
+        <div className="h-full flex flex-col w-full bg-[#0E1015]">
+            {/* Project Actions Header */}
+            <div className="px-8 pt-6 pb-4 flex items-end justify-between shrink-0">
                 <div>
-                    <div className="flex items-center gap-2 mb-2 text-sm">
-                        <button onClick={() => navigate('/dashboard')} className="text-slate-500 hover:text-slate-300 transition-colors focus:outline-none flex items-center gap-1">
-                            <ArrowLeft className="w-3 h-3" />
-                            Projects
-                        </button>
-                        <span className="text-slate-700">/</span>
-                        <span className="text-indigo-400 font-medium">LIN-{project._id?.substring(0, 4).toUpperCase() || 'PROJ'}</span>
+                    <div className="flex items-center gap-2 mb-1.5">
+                        <div className="w-4 h-4 rounded-[3px] bg-[#5E6AD2] flex items-center justify-center shadow-sm">
+                            <span className="text-white text-[9px] font-bold leading-none">P</span>
+                        </div>
+                        <span className="text-[13px] font-medium text-[#E8E8FD]">{project.name}</span>
+                        <span className="text-[13px] text-[#8A8F98]">· LIN-{project._id?.substring(0, 4).toUpperCase() || 'PROJ'}</span>
                     </div>
-                    <h1 className="text-2xl font-semibold text-slate-100 tracking-tight">{project.name}</h1>
-                    {project.description && <p className="text-slate-500 mt-1 text-sm">{project.description}</p>}
+                    {project.description && <p className="text-[13px] text-[#8A8F98] max-w-xl">{project.description}</p>}
                 </div>
                 <div className="flex items-center gap-3">
-                    <div className="flex -space-x-2 mr-2">
-                        <img className="w-7 h-7 rounded-full border-2 border-[#070a13] relative z-[3]" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64" alt="Team member" />
-                        <img className="w-7 h-7 rounded-full border-2 border-[#070a13] relative z-[2]" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&h=64" alt="Team member" />
-                        <img className="w-7 h-7 rounded-full border-2 border-[#070a13] relative z-[1]" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&h=64" alt="Team member" />
-                    </div>
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-300 bg-slate-900 border border-slate-800 rounded-md hover:bg-slate-800 hover:text-white transition-colors focus:outline-none">
+                    <button className="flex items-center gap-1.5 px-3 h-7 text-[13px] font-medium text-[#E8E8FD] bg-white/[0.05] border border-white/[0.04] rounded-md hover:bg-white/[0.08] transition-colors focus:outline-none">
                         <Share2 className="w-3.5 h-3.5" />
                         Share
                     </button>
-                    <button className="p-1.5 text-slate-400 bg-slate-900 border border-slate-800 rounded-md hover:bg-slate-800 hover:text-white transition-colors focus:outline-none">
-                        <MoreHorizontal className="w-4 h-4" />
+                    <button className="flex items-center justify-center w-7 h-7 text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.05] rounded-md transition-colors focus:outline-none">
+                        <MoreHorizontal className="w-3.5 h-3.5" />
                     </button>
                 </div>
             </div>

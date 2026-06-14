@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Layout,
-  Layers,
-  MessageSquare,
-  Activity,
-  ChevronDown,
-  Bell,
-  Settings,
+  Inbox,
+  Clock,
   Search,
-  Plus
+  Plus,
+  Briefcase,
+  Users,
+  Settings,
+  Layers,
+  ChevronDown,
+  ChevronRight,
+  PenSquare,
+  Bell,
+  Check
 } from 'lucide-react';
-
-// Utilities
+import { useLocation } from 'react-router-dom';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -24,211 +27,269 @@ export interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-const NAV_ITEMS = [
-  { id: 'kanban', label: 'Kanban Board', icon: Layout, shortcut: '⌘1' },
-  { id: 'projects', label: 'Projects', icon: Layers, shortcut: '⌘2' },
-  { id: 'chat', label: 'Real-Time Chat', icon: MessageSquare, shortcut: '⌘3' },
-  { id: 'analytics', label: 'Activity Analytics', icon: Activity, shortcut: '⌘4' },
+const TOP_NAV = [
+  { id: 'inbox', label: 'Inbox', icon: Inbox },
+  { id: 'my-issues', label: 'My Issues', icon: Clock },
+];
+
+const YOUR_TEAMS = [
+  { id: 'engineering', label: 'Engineering', icon: Layers },
+  { id: 'design', label: 'Design', icon: Briefcase },
 ];
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
-  const [activeTab, setActiveTab] = useState('kanban');
-  const [hoveredTab, setHoveredTab] = useState<string | null>(null);
-  const [workspaceOpen, setWorkspaceOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('engineering');
+  const [isWorkspaceOpen, setIsWorkspaceOpen] = useState(false);
+  const [sidebarHover, setSidebarHover] = useState<string | null>(null);
+  const location = useLocation();
+
+  // Create mock breadcrumbs based on route
+  const getBreadcrumbs = () => {
+    if (location.pathname.includes('/project/')) return "Workspace > Projects > Design System Revamp";
+    if (location.pathname.includes('/dashboard')) return "Workspace > Projects";
+    return "Workspace";
+  }
 
   return (
-    <div className="w-screen h-screen overflow-hidden bg-[#070a13] text-slate-400 font-sans selection:bg-indigo-600/30">
+    <div className="w-screen h-screen overflow-hidden bg-[#0E1015] text-[#E8E8FD] font-sans selection:bg-[#5E6AD2]/30 flex antialiased" style={{ WebkitFontSmoothing: 'antialiased' }}>
+
       {/* Background Mesh Glow */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/5 blur-[140px] rounded-full" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-indigo-600/5 blur-[140px] rounded-full" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#5E6AD2]/5 blur-[140px] rounded-full mix-blend-screen" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#5E6AD2]/5 blur-[140px] rounded-full mix-blend-screen" />
       </div>
 
-      <div className="relative z-10 flex h-full w-full">
-        {/* Sidebar */}
-        <aside className="w-64 h-full flex flex-col bg-slate-950/80 backdrop-blur-md border-r border-slate-900/60 z-20">
+      {/* Sidebar */}
+      <aside className="w-[240px] shrink-0 h-full flex flex-col bg-[#17181D]/80 backdrop-blur-md border-r border-white/[0.04] z-20 relative">
 
-          {/* Workspace Dropdown Container */}
-          <div className="relative p-4">
-            <button
-              onClick={() => setWorkspaceOpen(!workspaceOpen)}
-              className="w-full flex items-center justify-between p-2 rounded-lg hover:bg-slate-900/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-indigo-600/50"
-            >
-              <div className="flex items-center gap-3">
-                <div className="h-6 w-6 rounded-md bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                  <span className="text-white text-xs font-bold leading-none tracking-wider">A</span>
+        {/* Workspace Header Dropdown Container */}
+        <div className="h-11 px-3 flex items-center justify-between shrink-0 relative">
+          <button
+            onClick={() => setIsWorkspaceOpen(!isWorkspaceOpen)}
+            className="flex items-center gap-2 h-7 px-1.5 rounded-md hover:bg-white/[0.05] transition-colors focus:outline-none focus:ring-2 focus:ring-[#5E6AD2]/50 w-full"
+          >
+            <div className="w-4 h-4 rounded-[3px] bg-gradient-to-tr from-[#5E6AD2] to-[#8C98F2] flex items-center justify-center shadow-sm">
+              <span className="text-white text-[9px] font-bold leading-none">A</span>
+            </div>
+            <span className="text-[13px] font-medium text-[#E8E8FD] flex-1 text-left">Acme Corp</span>
+            <ChevronDown className="w-3.5 h-3.5 text-[#8A8F98]" />
+          </button>
+
+          {/* Animated Workspace Dropdown */}
+          <AnimatePresence>
+            {isWorkspaceOpen && (
+              <motion.div
+                initial={{ scale: 0.96, y: -8, opacity: 0 }}
+                animate={{ scale: 1, y: 0, opacity: 1 }}
+                exit={{ scale: 0.96, y: -8, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                className="absolute top-10 left-3 right-3 bg-[#1C1D22] border border-white/[0.08] rounded-lg shadow-xl shadow-black/50 overflow-hidden z-50 origin-top"
+              >
+                <div className="p-1.5 flex flex-col gap-0.5">
+                  <span className="text-[10px] font-semibold text-[#8A8F98] uppercase tracking-wider px-2 py-1">Workspaces</span>
+                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#E8E8FD] bg-white/[0.05] rounded-[5px] text-left">
+                     <div className="w-4 h-4 rounded-[3px] bg-gradient-to-tr from-[#5E6AD2] to-[#8C98F2] flex items-center justify-center shadow-sm">
+                        <span className="text-white text-[9px] font-bold leading-none">A</span>
+                     </div>
+                     <span className="flex-1">Acme Corp</span>
+                     <Check className="w-3.5 h-3.5 text-[#5E6AD2]" />
+                  </button>
+                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.03] rounded-[5px] text-left transition-colors">
+                     <div className="w-4 h-4 rounded-[3px] bg-gradient-to-tr from-[#E5484D] to-[#F28C8C] flex items-center justify-center shadow-sm">
+                        <span className="text-white text-[9px] font-bold leading-none">P</span>
+                     </div>
+                     <span className="flex-1">Personal</span>
+                  </button>
+                  <div className="h-[1px] w-full bg-white/[0.04] my-1" />
+                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.03] rounded-[5px] text-left transition-colors">
+                     <Plus className="w-3.5 h-3.5" />
+                     <span>Create Workspace</span>
+                  </button>
                 </div>
-                <span className="text-slate-200 font-medium tracking-wide text-sm group-hover:text-white transition-colors">Acme Corp</span>
-              </div>
-              <ChevronDown className="w-4 h-4 text-slate-500 group-hover:text-slate-300 transition-colors" />
-            </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
-            {/* Workspace Dropdown Menu */}
-            <AnimatePresence>
-              {workspaceOpen && (
-                <motion.div
-                  initial={{ scale: 0.96, y: -8, opacity: 0 }}
-                  animate={{ scale: 1, y: 0, opacity: 1 }}
-                  exit={{ scale: 0.96, y: -8, opacity: 0 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  className="absolute top-16 left-4 right-4 bg-slate-900 border border-slate-800/60 rounded-lg shadow-xl shadow-black/50 overflow-hidden z-50 origin-top"
-                >
-                  <div className="p-1">
-                    <button className="w-full text-left px-3 py-2 text-sm text-slate-200 bg-slate-800/50 rounded-md">Acme Corp</button>
-                    <button className="w-full text-left px-3 py-2 text-sm text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 rounded-md transition-colors">Personal</button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+        {/* Global Actions */}
+        <div className="px-3 pb-2 pt-1">
+          <button className="w-full flex items-center gap-2 h-7 px-2 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.05] rounded-md transition-colors text-left group overflow-hidden">
+            <PenSquare className="w-3.5 h-3.5" />
+            <span className="flex-1">New Issue</span>
+            {/* Animated Pill */}
+            <motion.div
+               initial={{ x: 10, opacity: 0 }}
+               whileHover={{ x: 0, opacity: 1 }}
+               className="text-[10px] border border-white/10 px-1 rounded-[3px] font-mono tracking-wider bg-white/[0.03] text-[#E8E8FD]"
+            >
+              C
+            </motion.div>
+          </button>
+          <button className="w-full flex items-center gap-2 h-7 px-2 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.05] rounded-md transition-colors text-left group overflow-hidden mt-0.5">
+            <Search className="w-3.5 h-3.5" />
+            <span className="flex-1">Search</span>
+             {/* Animated Pill */}
+            <motion.div
+               initial={{ x: 10, opacity: 0 }}
+               whileHover={{ x: 0, opacity: 1 }}
+               className="text-[10px] border border-white/10 px-1 rounded-[3px] font-mono tracking-wider bg-white/[0.03] text-[#E8E8FD]"
+            >
+              ⌘K
+            </motion.div>
+          </button>
+        </div>
 
-          {/* Navigation */}
-          <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-            {NAV_ITEMS.map((item) => {
+        {/* Navigation Groups */}
+        <div className="flex-1 overflow-y-auto px-3 space-y-5 pt-2">
+
+          {/* Top Level */}
+          <div className="space-y-0.5 relative">
+            {TOP_NAV.map((item) => {
               const isActive = activeTab === item.id;
-              const isHovered = hoveredTab === item.id;
-
               return (
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  onMouseEnter={() => setHoveredTab(item.id)}
-                  onMouseLeave={() => setHoveredTab(null)}
-                  className="relative w-full flex items-center justify-between px-3 py-2 text-sm rounded-md focus:outline-none outline-none group"
+                  onMouseEnter={() => setSidebarHover(item.id)}
+                  onMouseLeave={() => setSidebarHover(null)}
+                  className="w-full flex items-center justify-between h-7 px-2 text-[13px] rounded-md relative z-10 transition-colors focus:outline-none group overflow-hidden"
                 >
                   {/* Indicator Slider Active State */}
                   {isActive && (
                     <motion.div
-                      layoutId="activeTabIndicator"
-                      className="absolute inset-0 bg-slate-900/60 rounded-md border border-slate-800/50"
+                      layoutId="sidebar-active"
+                      className="absolute inset-0 bg-white/[0.06] rounded-md z-0"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
 
-                  {/* Indicator Slider Hover State (only when not active) */}
-                  {isHovered && !isActive && (
-                    <motion.div
-                      layoutId="hoverTabIndicator"
-                      className="absolute inset-0 bg-slate-900/30 rounded-md"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.15 }}
-                    />
-                  )}
-
-                  <div className="relative flex items-center gap-3 z-10">
-                    <item.icon
-                      className={cn(
-                        "w-4 h-4 transition-colors duration-200",
-                        isActive ? "text-indigo-400" : isHovered ? "text-indigo-400" : "text-slate-500"
-                      )}
-                    />
-                    <span
-                      className={cn(
-                        "font-medium tracking-wide transition-colors duration-200",
-                        isActive ? "text-slate-200" : isHovered ? "text-slate-200" : "text-slate-400"
-                      )}
-                    >
+                  <div className="relative z-10 flex items-center gap-2">
+                    <item.icon className={cn("w-3.5 h-3.5 transition-colors", isActive ? "text-[#5E6AD2]" : "text-[#8A8F98] group-hover:text-[#E8E8FD]")} />
+                    <span className={cn("font-medium transition-colors", isActive ? "text-[#E8E8FD]" : "text-[#8A8F98] group-hover:text-[#E8E8FD]")}>
                       {item.label}
                     </span>
                   </div>
 
-                  {/* Micro-Hover Animation Tip */}
+                  {/* Micro-hover Sliding Pill for nav items */}
                   <AnimatePresence>
-                    {isHovered && (
-                      <motion.div
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 5 }}
-                        className="relative z-10 px-1.5 py-0.5 rounded text-[10px] font-mono font-medium tracking-wider bg-slate-800 text-slate-400 border border-slate-700"
-                      >
-                        {item.shortcut}
-                      </motion.div>
-                    )}
+                     {sidebarHover === item.id && !isActive && (
+                         <motion.div
+                            initial={{ x: 10, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: 10, opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            className="relative z-10 text-[9px] font-mono font-medium tracking-wider bg-white/[0.05] px-1 rounded-[3px] text-[#E8E8FD] border border-white/[0.05]"
+                         >
+                            ⌘{(TOP_NAV.indexOf(item) + 1)}
+                         </motion.div>
+                     )}
                   </AnimatePresence>
                 </button>
-              );
+              )
             })}
-          </nav>
+          </div>
 
-          {/* Bottom Profile Utility */}
-          <div className="p-4 border-t border-slate-900/60">
-            <div className="flex items-center justify-between group">
-              <button className="flex items-center gap-3 flex-1 hover:bg-slate-900/50 p-2 -ml-2 rounded-lg transition-colors focus:outline-none">
-                <div className="relative">
-                  <img
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64"
-                    alt="User"
-                    className="w-8 h-8 rounded-full border border-slate-800 object-cover"
-                  />
-                  <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-[1.5px] border-[#070a13] rounded-full" />
-                </div>
-                <div className="flex flex-col items-start text-left">
-                  <span className="text-sm font-medium text-slate-200 tracking-wide">Jane Doe</span>
-                  <span className="text-[11px] text-slate-500 tracking-wider uppercase">Lead Engineer</span>
-                </div>
-              </button>
-              <button className="p-1.5 text-slate-500 hover:text-slate-300 hover:bg-slate-800 rounded-md transition-colors focus:outline-none">
-                <Settings className="w-4 h-4" />
-              </button>
+          {/* Teams */}
+          <div>
+            <div className="flex items-center justify-between px-2 h-6 group/header cursor-pointer mb-0.5">
+              <span className="text-[11px] font-semibold text-[#8A8F98] tracking-wide uppercase group-hover/header:text-[#E8E8FD] transition-colors">Your Teams</span>
+              <button className="opacity-0 group-hover/header:opacity-100 text-[#8A8F98] hover:text-[#E8E8FD] transition-opacity"><Plus className="w-3.5 h-3.5" /></button>
+            </div>
+            <div className="space-y-0.5 relative">
+              {YOUR_TEAMS.map((item) => {
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveTab(item.id)}
+                    onMouseEnter={() => setSidebarHover(item.id)}
+                    onMouseLeave={() => setSidebarHover(null)}
+                    className="w-full flex items-center gap-2 h-7 px-2 text-[13px] rounded-md relative z-10 transition-colors focus:outline-none group"
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="sidebar-active"
+                        className="absolute inset-0 bg-white/[0.06] rounded-md z-0"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <div className="w-3.5 flex justify-center">
+                        <ChevronRight className="w-3 h-3 text-[#8A8F98] opacity-0 group-hover:opacity-100 -ml-1 transition-opacity" />
+                    </div>
+                    <span className={cn("relative z-10 font-medium -ml-1 transition-colors", isActive ? "text-[#E8E8FD]" : "text-[#8A8F98] group-hover:text-[#E8E8FD]")}>
+                      {item.label}
+                    </span>
+                  </button>
+                )
+              })}
             </div>
           </div>
-        </aside>
+        </div>
 
-        {/* Main Workspace Area */}
-        <main className="flex-1 h-full flex flex-col overflow-hidden relative z-10 bg-transparent">
+        {/* Bottom Profile */}
+        <div className="px-3 pb-3 pt-2 mt-auto">
+           <button className="w-full flex items-center justify-between h-8 px-2 text-[13px] text-[#8A8F98] hover:bg-white/[0.05] rounded-md transition-colors group">
+              <div className="flex items-center gap-2">
+                 <div className="w-4 h-4 rounded-full bg-[#1C1D22] border border-white/10 overflow-hidden shrink-0 relative">
+                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&fit=crop" className="w-full h-full object-cover" alt="User" />
+                 </div>
+                 <span className="font-medium truncate flex-1 text-left group-hover:text-[#E8E8FD] transition-colors">Jane Doe</span>
+              </div>
+              <Settings className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+           </button>
+        </div>
+      </aside>
 
-          {/* Header Bar */}
-          <header className="h-14 flex items-center justify-between px-6 border-b border-slate-900/60 bg-slate-950/40 backdrop-blur-sm z-20 shrink-0">
+      {/* Main Workspace Area */}
+      <main className="flex-1 flex flex-col h-full overflow-hidden relative z-10 bg-transparent">
+
+        {/* Global Header Bar */}
+        <header className="h-12 flex items-center justify-between px-6 border-b border-white/[0.04] bg-[#0E1015]/80 backdrop-blur-md z-20 shrink-0">
             {/* Breadcrumbs */}
-            <div className="flex items-center text-sm tracking-wide">
-              <span className="text-slate-500 hover:text-slate-300 cursor-pointer transition-colors">Workspace</span>
-              <span className="mx-2 text-slate-700">/</span>
-              <span className="text-slate-500 hover:text-slate-300 cursor-pointer transition-colors">Projects</span>
-              <span className="mx-2 text-slate-700">/</span>
-              <span className="text-slate-200 font-medium">{NAV_ITEMS.find(item => item.id === activeTab)?.label}</span>
+            <div className="flex items-center text-[13px] font-medium tracking-wide">
+              {getBreadcrumbs().split(' > ').map((crumb, idx, arr) => (
+                <React.Fragment key={idx}>
+                   <span className={cn(
+                       "cursor-pointer transition-colors",
+                       idx === arr.length - 1 ? "text-[#E8E8FD]" : "text-[#8A8F98] hover:text-[#E8E8FD]"
+                   )}>
+                       {crumb}
+                   </span>
+                   {idx < arr.length - 1 && <span className="mx-2 text-[#2E3038]">/</span>}
+                </React.Fragment>
+              ))}
             </div>
 
             {/* Right Actions */}
-            <div className="flex items-center gap-5">
-              <button className="text-slate-400 hover:text-indigo-400 transition-colors focus:outline-none">
-                <Search className="w-4 h-4" />
-              </button>
-
-              <button className="relative text-slate-400 hover:text-indigo-400 transition-colors focus:outline-none">
-                <Bell className="w-4 h-4" />
-                <span className="absolute top-0 right-0 w-1.5 h-1.5 bg-indigo-500 rounded-full border border-[#070a13]" />
+            <div className="flex items-center gap-4">
+              <button className="relative text-[#8A8F98] hover:text-[#E8E8FD] transition-colors focus:outline-none">
+                <Bell className="w-[14px] h-[14px]" />
+                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-[#5E6AD2] rounded-full border-[1.5px] border-[#0E1015]" />
               </button>
 
               {/* Avatar Group */}
-              <div className="flex -space-x-2">
-                <img className="w-6 h-6 rounded-full border-2 border-[#070a13] relative z-[3]" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64" alt="Team member" />
-                <img className="w-6 h-6 rounded-full border-2 border-[#070a13] relative z-[2]" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&h=64" alt="Team member" />
-                <img className="w-6 h-6 rounded-full border-2 border-[#070a13] relative z-[1]" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&h=64" alt="Team member" />
+              <div className="flex -space-x-1.5">
+                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-[3]" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&fit=crop" alt="Team member" />
+                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-[2]" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop" alt="Team member" />
+                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-[1]" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop" alt="Team member" />
               </div>
-
-              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-md tracking-wide transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-600/50 shadow-sm shadow-indigo-600/20">
-                <Plus className="w-3 h-3" />
-                New Task
-              </button>
             </div>
-          </header>
+        </header>
 
-          {/* Page Canvas Container */}
-          <div className="flex-1 overflow-y-auto overflow-x-hidden p-8 relative">
+        {/* Page Canvas Container (with Entrance Animation) */}
+        <div className="flex-1 overflow-y-auto overflow-x-hidden relative">
             <motion.div
-              key={activeTab} // Retrigger animation when tab changes
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="max-w-7xl mx-auto h-full"
+               key={location.pathname}
+               initial={{ opacity: 0, y: 12 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+               className="h-full w-full"
             >
-              {children}
+               {children}
             </motion.div>
-          </div>
-        </main>
-      </div>
+        </div>
+      </main>
+
     </div>
   );
 }
