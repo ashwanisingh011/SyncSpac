@@ -1,1 +1,100 @@
 @import "tailwindcss";
+
+/* ─── Design Tokens (Linear-exact) ─────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --bg-app:        #0f1011;
+  --bg-sidebar:    #141516;
+  --bg-card:       #1a1b1e;
+  --bg-elevated:   #1e1f22;
+  --bg-hover:      #212225;
+  --bg-active:     #26272b;
+
+  /* Borders */
+  --border-base:   rgba(255,255,255,0.06);
+  --border-strong: rgba(255,255,255,0.10);
+  --border-focus:  rgba(94,106,210,0.60);
+
+  /* Text */
+  --text-primary:   #f7f8f8;
+  --text-secondary: #9b9ea4;
+  --text-tertiary:  #5e6169;
+  --text-disabled:  #404348;
+
+  /* Accent — Linear lavender-blue */
+  --accent:         #5e6ad2;
+  --accent-hover:   #6b78e5;
+  --accent-muted:   rgba(94,106,210,0.12);
+  --accent-border:  rgba(94,106,210,0.25);
+
+  /* Functional */
+  --success:   #4cb782;
+  --warning:   #f2a20a;
+  --danger:    #e5534b;
+  --info:      #388bfd;
+
+  /* Typography */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  --font-mono: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background: var(--bg-app);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color-scheme: dark;
+  overflow: hidden;
+}
+
+/* ─── Scrollbars ────────────────────────────────────────────────────────────── */
+.scrollbar-none { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.14); }
+
+/* ─── Focus ─────────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(94,106,210,0.28);
+  color: var(--text-primary);
+}
+
+/* ─── Input autofill dark override ─────────────────────────────────────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 100px var(--bg-elevated) inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  caret-color: var(--text-primary);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* ─── Utility classes ───────────────────────────────────────────────────────── */
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(94,106,210,0.3), 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* ─── Ring color fix for Tailwind v4 ────────────────────────────────────────── */
+.ring-app-bg { --tw-ring-color: #0f1011; }
+.ring-sidebar-bg { --tw-ring-color: #141516; }
