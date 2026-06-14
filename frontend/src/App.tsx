@@ -4,6 +4,7 @@ import CreateProject from './components/CreateProject.tsx';
 import Login from './components/Login.tsx';
 import Register from './components/Register.tsx';
 import Dashboard from './components/Dashboard.tsx';
+import { DashboardLayout } from './components/DashboardLayout.tsx';
 
 
 function App() {
@@ -14,9 +15,22 @@ function App() {
       <Routes>
         <Route path = '/' element={<Login />} />
         <Route path = '/register' element={<Register />} />
-        <Route path = '/dashboard' element={<Dashboard />} />
-        <Route path = '/project' element={<CreateProject />} />
-        <Route path = "/project/:id" element={<ProjectPage />} />
+
+        <Route path = '/dashboard' element={
+          <DashboardLayout>
+            <Dashboard />
+          </DashboardLayout>
+        } />
+        <Route path = '/project' element={
+          <DashboardLayout>
+            <CreateProject />
+          </DashboardLayout>
+        } />
+        <Route path = "/project/:id" element={
+          <DashboardLayout>
+            <ProjectPage />
+          </DashboardLayout>
+        } />
       </Routes>
     </BrowserRouter>
     </>
