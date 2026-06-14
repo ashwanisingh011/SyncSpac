@@ -6,7 +6,7 @@ import {
   Search,
   Plus,
   Briefcase,
-  Users,
+
   Settings,
   Layers,
   ChevronDown,
