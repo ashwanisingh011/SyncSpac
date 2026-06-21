@@ -53,13 +53,13 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="w-screen h-screen overflow-hidden bg-[#0E1015] text-[#E8E8FD] font-sans selection:bg-white/20 flex antialiased" style={{ WebkitFontSmoothing: 'antialiased' }}>
 
       {/* Sidebar */}
-      <aside className="w-[240px] shrink-0 h-full flex flex-col bg-[#17181D] border-r border-white/[0.04] z-20 relative">
+      <aside className="w-60 shrink-0 h-full flex flex-col bg-[#17181D] border-r border-white/4 z-20 relative">
 
         {/* Workspace Header Dropdown Container */}
         <div className="h-11 px-3 flex items-center justify-between shrink-0 relative">
           <button
             onClick={() => setIsWorkspaceOpen(!isWorkspaceOpen)}
-            className="flex items-center gap-2 h-7 px-1.5 rounded-md hover:bg-white/[0.05] transition-colors focus:outline-none w-full"
+            className="flex items-center gap-2 h-7 px-1.5 rounded-md hover:bg-white/5 transition-colors focus:outline-none w-full"
           >
             <div className="w-4 h-4 rounded-[3px] bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-sm">
               <span className="text-[#E8E8FD] text-[9px] font-bold leading-none">A</span>
@@ -76,25 +76,25 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 animate={{ scale: 1, y: 0, opacity: 1 }}
                 exit={{ scale: 0.96, y: -8, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="absolute top-10 left-3 right-3 bg-[#1C1D22] border border-white/[0.08] rounded-lg shadow-xl shadow-black/50 overflow-hidden z-50 origin-top"
+                className="absolute top-10 left-3 right-3 bg-[#1C1D22] border border-white/8 rounded-lg shadow-xl shadow-black/50 overflow-hidden z-50 origin-top"
               >
                 <div className="p-1.5 flex flex-col gap-0.5">
                   <span className="text-[10px] font-semibold text-[#8A8F98] uppercase tracking-wider px-2 py-1">Workspaces</span>
-                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#E8E8FD] bg-white/[0.05] rounded-[5px] text-left">
+                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#E8E8FD] bg-white/5 rounded-[5px] text-left">
                      <div className="w-4 h-4 rounded-[3px] bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-sm">
                         <span className="text-[#E8E8FD] text-[9px] font-bold leading-none">A</span>
                      </div>
                      <span className="flex-1">Acme Corp</span>
                      <Check className="w-3.5 h-3.5 text-[#E8E8FD]" />
                   </button>
-                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.03] rounded-[5px] text-left transition-colors">
+                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/3 rounded-[5px] text-left transition-colors">
                      <div className="w-4 h-4 rounded-[3px] bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-sm">
                         <span className="text-[#E8E8FD] text-[9px] font-bold leading-none">P</span>
                      </div>
                      <span className="flex-1">Personal</span>
                   </button>
-                  <div className="h-[1px] w-full bg-white/[0.04] my-1" />
-                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.03] rounded-[5px] text-left transition-colors">
+                  <div className="h-px w-full bg-white/4 my-1" />
+                  <button className="w-full flex items-center gap-2 px-2 py-1.5 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/3 rounded-[5px] text-left transition-colors">
                      <Plus className="w-3.5 h-3.5" />
                      <span>Create Workspace</span>
                   </button>
@@ -106,26 +106,26 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
         {/* Global Actions */}
         <div className="px-3 pb-2 pt-1">
-          <button className="w-full flex items-center gap-2 h-7 px-2 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.05] rounded-md transition-colors text-left group overflow-hidden">
+          <button className="w-full flex items-center gap-2 h-7 px-2 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/5 rounded-md transition-colors text-left group overflow-hidden">
             <PenSquare className="w-3.5 h-3.5" />
             <span className="flex-1">New Issue</span>
             {/* Animated Pill */}
             <motion.div
                initial={{ x: 10, opacity: 0 }}
                whileHover={{ x: 0, opacity: 1 }}
-               className="text-[10px] border border-white/10 px-1 rounded-[3px] font-mono tracking-wider bg-white/[0.03] text-[#E8E8FD]"
+               className="text-[10px] border border-white/10 px-1 rounded-[3px] font-mono tracking-wider bg-white/3 text-[#E8E8FD]"
             >
               C
             </motion.div>
           </button>
-          <button className="w-full flex items-center gap-2 h-7 px-2 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/[0.05] rounded-md transition-colors text-left group overflow-hidden mt-0.5">
+          <button className="w-full flex items-center gap-2 h-7 px-2 text-[13px] text-[#8A8F98] hover:text-[#E8E8FD] hover:bg-white/5 rounded-md transition-colors text-left group overflow-hidden mt-0.5">
             <Search className="w-3.5 h-3.5" />
             <span className="flex-1">Search</span>
              {/* Animated Pill */}
             <motion.div
                initial={{ x: 10, opacity: 0 }}
                whileHover={{ x: 0, opacity: 1 }}
-               className="text-[10px] border border-white/10 px-1 rounded-[3px] font-mono tracking-wider bg-white/[0.03] text-[#E8E8FD]"
+               className="text-[10px] border border-white/10 px-1 rounded-[3px] font-mono tracking-wider bg-white/3 text-[#E8E8FD]"
             >
               ⌘K
             </motion.div>
@@ -151,7 +151,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   {isActive && (
                     <motion.div
                       layoutId="sidebar-active"
-                      className="absolute inset-0 bg-white/[0.06] rounded-md z-0"
+                      className="absolute inset-0 bg-white/6 rounded-md z-0"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -171,7 +171,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: 10, opacity: 0 }}
                             transition={{ duration: 0.15 }}
-                            className="relative z-10 text-[9px] font-mono font-medium tracking-wider bg-white/[0.05] px-1 rounded-[3px] text-[#E8E8FD] border border-white/[0.05]"
+                            className="relative z-10 text-[9px] font-mono font-medium tracking-wider bg-white/5 px-1 rounded-[3px] text-[#E8E8FD] border border-white/5"
                          >
                             ⌘{(TOP_NAV.indexOf(item) + 1)}
                          </motion.div>
@@ -202,7 +202,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                     {isActive && (
                       <motion.div
                         layoutId="sidebar-active"
-                        className="absolute inset-0 bg-white/[0.06] rounded-md z-0"
+                        className="absolute inset-0 bg-white/6 rounded-md z-0"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -221,7 +221,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
         {/* Bottom Profile */}
         <div className="px-3 pb-3 pt-2 mt-auto">
-           <button className="w-full flex items-center justify-between h-8 px-2 text-[13px] text-[#8A8F98] hover:bg-white/[0.05] rounded-md transition-colors group">
+           <button className="w-full flex items-center justify-between h-8 px-2 text-[13px] text-[#8A8F98] hover:bg-white/5 rounded-md transition-colors group">
               <div className="flex items-center gap-2">
                  <div className="w-4 h-4 rounded-full bg-[#1C1D22] border border-white/10 overflow-hidden shrink-0 relative">
                      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&fit=crop" className="w-full h-full object-cover" alt="User" />
@@ -237,7 +237,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       <main className="flex-1 flex flex-col h-full overflow-hidden relative z-10 bg-transparent">
 
         {/* Global Header Bar */}
-        <header className="h-12 flex items-center justify-between px-6 border-b border-white/[0.04] bg-[#0E1015]/80 backdrop-blur-md z-20 shrink-0">
+        <header className="h-12 flex items-center justify-between px-6 border-b border-white/4 bg-[#0E1015]/80 backdrop-blur-md z-20 shrink-0">
             {/* Breadcrumbs */}
             <div className="flex items-center text-[13px] font-medium tracking-wide">
               {getBreadcrumbs().split(' > ').map((crumb, idx, arr) => (
@@ -256,15 +256,15 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             {/* Right Actions */}
             <div className="flex items-center gap-4">
               <button className="relative text-[#8A8F98] hover:text-[#E8E8FD] transition-colors focus:outline-none">
-                <Bell className="w-[14px] h-[14px]" />
+                <Bell className="w-3.5 h-3.5" />
                 <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-[#E8E8FD] rounded-full border-[1.5px] border-[#0E1015]" />
               </button>
 
               {/* Avatar Group */}
               <div className="flex -space-x-1.5">
-                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-[3]" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&fit=crop" alt="Team member" />
-                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-[2]" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop" alt="Team member" />
-                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-[1]" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop" alt="Team member" />
+                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-3" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&fit=crop" alt="Team member" />
+                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-2" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop" alt="Team member" />
+                <img className="w-5 h-5 rounded-full border-[1.5px] border-[#0E1015] relative z-1" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop" alt="Team member" />
               </div>
             </div>
         </header>
