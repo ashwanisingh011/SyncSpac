@@ -49,18 +49,18 @@ const Login = () => {
         <div className="min-h-screen bg-[#0E1015] flex flex-col justify-center items-center p-4 antialiased selection:bg-white/20">
             {/* Minimal Background Element */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-               <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.015] blur-[120px] rounded-full" />
+               <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-white/1.5 blur-[120px] rounded-full" />
             </div>
 
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="w-full max-w-[380px] relative z-10"
+                className="w-full max-w-95 relative z-10"
             >
                 {/* Logo/Brand */}
                 <motion.div variants={itemVariants} className="flex justify-center mb-8">
-                    <div className="w-10 h-10 rounded-[8px] bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-lg shadow-black/50">
+                    <div className="w-10 h-10 rounded-lg bg-[#2E3038] border border-white/10 flex items-center justify-center shadow-lg shadow-black/50">
                         <Box className="w-5 h-5 text-[#E8E8FD]" />
                     </div>
                 </motion.div>
@@ -77,7 +77,7 @@ const Login = () => {
                                 type="email"
                                 required
                                 placeholder="Email address"
-                                className="w-full bg-[#1C1D22] border border-white/[0.06] text-[#E8E8FD] text-[14px] px-4 py-3 rounded-lg focus:outline-none focus:border-white/20 focus:bg-[#232429] transition-all placeholder:text-[#8A8F98]"
+                                className="w-full bg-[#1C1D22] border border-white/6 text-[#E8E8FD] text-[14px] px-4 py-3 rounded-lg focus:outline-none focus:border-white/20 focus:bg-[#232429] transition-all placeholder:text-[#8A8F98]"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -87,7 +87,7 @@ const Login = () => {
                                 type="password"
                                 required
                                 placeholder="Password"
-                                className="w-full bg-[#1C1D22] border border-white/[0.06] text-[#E8E8FD] text-[14px] px-4 py-3 rounded-lg focus:outline-none focus:border-white/20 focus:bg-[#232429] transition-all placeholder:text-[#8A8F98]"
+                                className="w-full bg-[#1C1D22] border border-white/6 text-[#E8E8FD] text-[14px] px-4 py-3 rounded-lg focus:outline-none focus:border-white/20 focus:bg-[#232429] transition-all placeholder:text-[#8A8F98]"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
