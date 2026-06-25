@@ -3,6 +3,8 @@ import { register } from '../api/authService.ts';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Box } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../store/slices/authSlice.ts';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -30,6 +32,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -37,8 +40,17 @@ const Register = () => {
         setIsLoading(true);
         setError(null);
         try {
-            await register({name, email, password});
-            navigate('/');
+           const data =  await register({name, email, password});
+           if(data && data.token && data.user){
+            dispatch(setCredentials({
+                user: data.user,
+                token: data.token
+            }));
+            navigate('/dashboard');
+           } else{
+            alert("Registration successful! Please log in.");
+            navigate('/login');
+           }
         } catch (err: any) {
             setError('Registration failed. Please try again.');
         } finally {
