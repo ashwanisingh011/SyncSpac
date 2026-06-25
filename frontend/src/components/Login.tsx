@@ -3,6 +3,8 @@ import { login } from '../api/authService.ts';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Box } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../store/slices/authSlice.ts';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,6 +31,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSubmit = async(e: React.FormEvent) => {
@@ -36,7 +40,12 @@ const Login = () => {
         setIsLoading(true);
         setError(null);
         try {
-            await login({email, password});
+            const data = await login({email, password});
+
+            dispatch(setCredentials({
+                user: data.user,
+                token: data.token
+            }));
             navigate('/dashboard');
         } catch (err: any) {
             setError('Login failed. Please check your credentials.');
