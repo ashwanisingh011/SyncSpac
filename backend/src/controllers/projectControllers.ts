@@ -2,19 +2,41 @@ import {type Response } from 'express';
 import Project from '../models/Project.js';
 import { type AuthRequest } from '../middleware/authMiddleware.js';
 import Workspace from '../models/Workspace.js';
+import mongoose from 'mongoose';
 
 export const createProject = async(req: AuthRequest, res: Response): Promise<void> => {
     try {
-        const {name, workspaceId} = req.body;
+        const {name, description, workspaceId} = req.body;
 
-        if(!name || !workspaceId){
-            res.status(400).json({message: "Project name and workspace ID are required"});
+        if(!name){
+            res.status(400).json({message: "Project name is required"});
+            return;
+        }
+
+        let targetWorkspaceId = workspaceId;
+
+        if (!targetWorkspaceId && req.userId?.id) {
+            const workspace = await Workspace.findOne({
+                $or: [
+                    { owner: req.userId.id },
+                    { 'members.user': req.userId.id }
+                ]
+            }).sort({ createdAt: 1 });
+
+            if (workspace) {
+                targetWorkspaceId = workspace._id.toString();
+            }
+        }
+
+        if(!targetWorkspaceId){
+            res.status(400).json({message: "Workspace ID is required"});
             return;
         }
 
         const project = await Project.create({
             name,
-            workspace: workspaceId,
+            description,
+            workspace: targetWorkspaceId,
             columns: {
                 todo: [],
                 inProgress: [],
@@ -22,7 +44,7 @@ export const createProject = async(req: AuthRequest, res: Response): Promise<voi
             }
         });
 
-        await Workspace.findByIdAndUpdate(workspaceId, {$push: {projects: project._id}})
+        await Workspace.findByIdAndUpdate(targetWorkspaceId, {$push: {projects: project._id}})
 
         res.status(201).json({
             message: "Project created successfully",
@@ -41,7 +63,7 @@ export const getProjectById = async (req: AuthRequest, res: Response): Promise<v
         const project = await Project.findById(projectId).populate('columns.todo columns.inProgress columns.done');
 
         if(!project){
-            res.status(400).json({success: false, message: "Project ID is required"})
+            res.status(404).json({success: false, message: "Project not found"})
             return;
         }
 

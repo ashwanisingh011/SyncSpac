@@ -1,20 +1,22 @@
 import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { fetchAllProjects } from '../api/projectService'  
 import { Plus, MoreHorizontal, LayoutGrid, List } from 'lucide-react'
 
 const Dashboard = () => {
 
     const [projects, setProjects] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
     const navigate = useNavigate();
 
+    
     useEffect(() => {
-        axios.get('http://localhost:5001/api/projects', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(res => setProjects(res.data)).catch(err => console.error("Failed to fetch projects", err));
+       fetchAllProjects().then(res => {
+        setProjects(res.data.projects || res.data);
+       })
+       .catch(err => console.error('Error fetching projects:', err))
+       .finally(() => setIsLoading(false));
     }, [])
 
   return (

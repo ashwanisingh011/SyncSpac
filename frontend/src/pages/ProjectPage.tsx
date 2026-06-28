@@ -15,7 +15,7 @@ const ProjectPage = () => {
         const getProject = async () => {
            try {
             const {data} = await fetchProjectById(id!);
-            setProject(data);
+            setProject(data.project || data);
            } catch (error) {
             console.error("Failed to fetch project:", error);
            }finally{

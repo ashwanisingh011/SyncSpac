@@ -2,6 +2,7 @@ import mongoose,{Document, Schema} from "mongoose";
 
 export interface IProject extends Document {
     name: string,
+    description?: string,
     workspace: mongoose.Types.ObjectId,
     columns: {
         todo: mongoose.Types.ObjectId[];
@@ -15,6 +16,11 @@ const ProjectSchema: Schema = new Schema({
         type: String,
         trim: true,
         required: true
+    },
+    description: {
+        type: String,
+        trim: true,
+        default: ''
     },
     workspace: {
         type: Schema.Types.ObjectId,

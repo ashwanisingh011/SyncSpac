@@ -1,10 +1,11 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import ProjectPage from './pages/ProjectPage.tsx';
 import CreateProject from './components/CreateProject.tsx';
 import Login from './pages/Login.tsx';
 import Register from './pages/Register.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import { DashboardLayout } from './layouts/DashboardLayout.tsx';
+import { ProtectedRoute } from './components/ProtectedRoute.tsx';
 
 
 function App() {
@@ -13,23 +14,33 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} /> 
         <Route path = '/login' element={<Login />} />
         <Route path = '/register' element={<Register />} />
 
         <Route path = '/dashboard' element={
-          <DashboardLayout>
+          <ProtectedRoute>
+            <DashboardLayout>
             <Dashboard />
           </DashboardLayout>
+          </ProtectedRoute>
+          
         } />
         <Route path = '/project' element={
-          <DashboardLayout>
+          <ProtectedRoute>
+            <DashboardLayout>
             <CreateProject />
-          </DashboardLayout>
+            </DashboardLayout>
+          </ProtectedRoute>
+          
         } />
         <Route path = "/project/:id" element={
-          <DashboardLayout>
+          <ProtectedRoute>
+            <DashboardLayout>
             <ProjectPage />
           </DashboardLayout>
+          </ProtectedRoute>
+          
         } />
       </Routes>
     </BrowserRouter>

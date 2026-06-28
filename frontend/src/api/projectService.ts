@@ -12,6 +12,7 @@ API.interceptors.request.use((req) => {
 });
 
 
-export const createProject = (projectData: any) => API.post('/projects', projectData);
-export const fetchProjectById = (id: string) => API.get(`/projects/${id}`)
-export const fetchAllProjects = () => API.get('/projects');
+export const createProject = (projectData: any) => API.post('/project', projectData);
+export const fetchProjectById = (id: string) => API.get(`/project/${id}`)
+export const fetchAllProjects = () => API.get('/project');
+export const fetchWorkspaceProjects = (workspaceId: string) => API.get(`/workspaces/${workspaceId}/projects`);

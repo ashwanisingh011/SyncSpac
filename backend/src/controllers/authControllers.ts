@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import Workspace from "../models/Workspace.js";
 
 export const registerUser = async (
   req: Request,
@@ -23,6 +24,13 @@ export const registerUser = async (
       name,
       email,
       password: hashedPassword,
+    });
+
+    await Workspace.create({
+      name: `${name}'s Workspace`,
+      owner: user._id,
+      members: [{user: user._id, role: "admin"}],
+      projects: []
     });
 
     res.status(201).json({
