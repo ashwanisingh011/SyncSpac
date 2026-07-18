@@ -1,0 +1,11 @@
+* Use Next.js App Router
+* Use TypeScript only
+* Avoid using any
+* Use reusable components
+* Keep code modular
+* Follow existing TaskBridge UI
+* Keep components API-ready
+* Do not modify backend logic
+* Use TailwindCSS
+* Prefer async/await
+* Use functional React components
