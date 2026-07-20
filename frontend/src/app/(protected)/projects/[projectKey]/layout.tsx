@@ -2,13 +2,14 @@
 
 import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { Outlet } from 'react-router-dom';
 import LeftSidebar from '@/components/LeftSidebar';
 import { ProjectDataProvider } from '@/context/projectDataContext';
 import { LayoutDashboard, KanbanSquare, ListTodo, FolderOpen, BarChart2, Clock, Settings } from 'lucide-react';
 import clsx from 'clsx';
 
 interface ProjectLayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function ProjectLayout({ children }: ProjectLayoutProps): React.JSX.Element {
@@ -69,7 +70,7 @@ export default function ProjectLayout({ children }: ProjectLayoutProps): React.J
           </div>
 
           <div className="flex-1 overflow-auto">
-            {children}
+            {children || <Outlet />}
           </div>
         </div>
       </div>

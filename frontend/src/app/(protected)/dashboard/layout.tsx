@@ -142,8 +142,9 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
 import { useOrganization } from '@/context/useOrganization';
 import { useAuth } from '@/context/useAuth';
 import { isClientUser } from '@/lib/clientAccess';
+import { Outlet } from 'react-router-dom';
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }: { children?: React.ReactNode }) {
   const { currentOrg } = useOrganization();
   const { user } = useAuth();
   const pathname = usePathname();
@@ -158,12 +159,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }, [isOrgAdmin, isClient, pathname, router]);
 
   if (!isOrgAdmin) {
-    return pathname === '/dashboard' || isClient ? <>{children}</> : null;
+    return pathname === '/dashboard' || isClient ? <>{children || <Outlet />}</> : null;
   }
 
   return (
     <OrgDashboardProvider>
-      <DashboardShell>{children}</DashboardShell>
+      <DashboardShell>{children || <Outlet />}</DashboardShell>
     </OrgDashboardProvider>
   );
 }
