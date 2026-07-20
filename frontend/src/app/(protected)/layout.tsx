@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { Outlet } from 'react-router-dom';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import OrgGate from '@/components/OrgGate';
 import ClientRouteGuard from '@/components/ClientRouteGuard';
@@ -13,7 +14,7 @@ import { isClientUser } from '@/lib/clientAccess';
 import { isSuperAdmin } from '@/lib/userRoles';
 
 interface ProtectedLayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function ProtectedLayout({ children }: ProtectedLayoutProps): React.JSX.Element {
@@ -70,7 +71,7 @@ export default function ProtectedLayout({ children }: ProtectedLayoutProps): Rea
             <div className="min-h-screen flex flex-col bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100">
               {showTopNavbar && <TopNavbar />}
               <main className="flex-1 flex overflow-hidden">
-                {children}
+                {children || <Outlet />}
               </main>
             </div>
           </NotificationProvider>
@@ -79,3 +80,4 @@ export default function ProtectedLayout({ children }: ProtectedLayoutProps): Rea
     </ProtectedRoute>
   );
 }
+

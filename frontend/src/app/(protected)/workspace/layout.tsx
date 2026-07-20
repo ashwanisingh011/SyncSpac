@@ -3,12 +3,14 @@
 import type { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { Outlet } from 'react-router-dom';
 import WorkspaceSidebar from '@/components/workspace/WorkspaceSidebar';
 import { useOrganization } from '@/context/useOrganization';
 import { usePermission } from '@/hooks/usePermission';
 import { Building2, Users, UsersRound, Network, Settings, CreditCard } from 'lucide-react';
 import type { PermissionCode } from '@/lib/rbacMatrix';
 import clsx from 'clsx';
+
 
 const navItems: {
   label: string;
@@ -25,7 +27,7 @@ const navItems: {
   { label: 'Billing', href: '/workspace/billing', icon: CreditCard, permission: 'manage_billing' },
 ];
 
-export default function WorkspaceLayout({ children }: { children: ReactNode }) {
+export default function WorkspaceLayout({ children }: { children?: ReactNode }) {
   const pathname = usePathname();
   const { currentOrg } = useOrganization();
   const { hasPermission, hasRole } = usePermission();
@@ -119,7 +121,7 @@ export default function WorkspaceLayout({ children }: { children: ReactNode }) {
 
         {/* Page Content */}
         <div className="flex-1 overflow-y-auto">
-          <div className="max-w-5xl mx-auto w-full p-6 lg:p-8">{children}</div>
+          <div className="max-w-5xl mx-auto w-full p-6 lg:p-8">{children || <Outlet />}</div>
         </div>
       </div>
     </div>

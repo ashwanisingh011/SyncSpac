@@ -14,6 +14,8 @@ import type { ISprintData } from '@/types/workspace';
 import ClientSidebar from './components/ClientSidebar';
 import ClientHeader from './components/ClientHeader';
 import { useNotifications } from '@/context/NotificationContext';
+import { Outlet } from 'react-router-dom';
+
 
 interface ClientDashboardContextType {
   projects: Project[];
@@ -37,7 +39,7 @@ export function useClientDashboard() {
   return context;
 }
 
-export default function ClientDashboardLayout({ children }: { children: React.ReactNode }) {
+export default function ClientDashboardLayout({ children }: { children?: React.ReactNode }) {
   const { user } = useAuth();
   const { currentOrg, organizations, setCurrentOrg } = useOrganization();
   const { unreadCount } = useNotifications();
@@ -192,7 +194,7 @@ export default function ClientDashboardLayout({ children }: { children: React.Re
                   <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
                 </div>
               ) : (
-                children
+                children || <Outlet />
               )}
             </div>
           </main>
