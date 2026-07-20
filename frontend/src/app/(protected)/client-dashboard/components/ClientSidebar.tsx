@@ -54,7 +54,7 @@ export default function ClientSidebar({
             <div className="flex h-7 w-7 items-center justify-center rounded bg-[#DEEBFF] dark:bg-slate-900 shadow-sm">
               <Grid className="h-3.5 w-3.5 text-[#0052CC] dark:text-blue-400" />
             </div>
-            <span className="text-md font-bold tracking-tight text-slate-800 dark:text-white">TaskBridge</span>
+            <span className="text-md font-bold tracking-tight text-slate-800 dark:text-white">SyncSpac</span>
           </Link>
           <button
             type="button"

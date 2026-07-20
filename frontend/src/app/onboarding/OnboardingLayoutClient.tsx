@@ -15,7 +15,7 @@ export default function OnboardingLayoutClient({ children }: { children: ReactNo
           className="flex items-center gap-2 text-[#0052CC] font-bold hover:text-[#0747A6] dark:text-[#579DFF]"
         >
           <Grid className="w-5 h-5" />
-          <span className="text-lg">TaskBridge</span>
+          <span className="text-lg">SyncSpac</span>
         </Link>
 
         <UserProfileMenu

@@ -100,7 +100,7 @@ export default function OrgSidebar({
               <Grid className="w-3.5 h-3.5 text-[#0052CC] dark:text-blue-400" />
             </div>
             <span className="text-[14px] font-bold text-slate-800 tracking-tight dark:text-white">
-              TaskBridge
+              SyncSpac
             </span>
           </div>
           <button

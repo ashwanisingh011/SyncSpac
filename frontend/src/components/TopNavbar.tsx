@@ -42,7 +42,7 @@ export default function TopNavbar(): React.JSX.Element {
 
           <Link href="/projects" className="flex items-center gap-2 text-[#0052CC] font-bold hover:text-[#0747A6] dark:text-[#579DFF] dark:hover:text-[#85B8FF]">
             <Grid className="w-5 h-5" />
-            <span className="text-xl">TaskBridge</span>
+            <span className="text-xl">SyncSpac</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-4 text-sm font-medium">
@@ -99,7 +99,7 @@ export default function TopNavbar(): React.JSX.Element {
             <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-5">
               <div className="flex items-center gap-2 text-[#0052CC] font-bold dark:text-[#579DFF]">
                 <Grid className="w-5 h-5" />
-                <span className="text-lg">TaskBridge</span>
+                <span className="text-lg">SyncSpac</span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}

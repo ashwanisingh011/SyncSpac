@@ -170,17 +170,17 @@ const LoginForm = (): React.JSX.Element => {
 
         <section>
           <div className="mb-6 flex items-center justify-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded bg-[#0052CC] text-sm font-bold text-white shadow-sm">
-            T
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#0052CC] to-[#2684FF] text-sm font-bold tracking-tight text-white shadow-sm">
+            SS
           </div>
-          <span className="text-xl font-semibold tracking-tight text-[#172B4D] dark:text-white">TaskBridge</span>
+          <span className="text-xl font-semibold tracking-tight text-[#172B4D] dark:text-white">SyncSpac</span>
           </div>
 
           <div className="relative overflow-hidden rounded-lg border border-white/80 bg-white/95 px-10 py-8 shadow-[0_16px_48px_rgba(9,30,66,0.18)] backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
           <AuthCardPattern />
           <div className="relative">
             <div className="mx-auto mb-5 flex h-10 w-10 items-center justify-center rounded-lg bg-[#E9F2FF] text-[#0052CC] shadow-sm dark:bg-blue-950/60 dark:text-[#85B8FF]">
-              <span className="text-sm font-bold">TB</span>
+              <span className="text-sm font-bold">SS</span>
             </div>
             <h1 className="mb-6 text-center text-base font-semibold text-[#172B4D] dark:text-white">
               Log in to continue
@@ -287,7 +287,7 @@ const LoginForm = (): React.JSX.Element => {
             </Link>
           </p>
           <p className="mt-3 text-center text-sm text-[#6B778C] dark:text-slate-400">
-            New to TaskBridge?{' '}
+            New to SyncSpac?{' '}
             <Link
               href={`/register?redirect=${encodeURIComponent(redirectTo)}`}
               className="font-medium text-[#0052CC] hover:underline dark:text-[#579DFF]"

@@ -71,7 +71,7 @@ export default function Sidebar({ isOpen, onClose, activeItem, onActiveItemChang
               <Grid className="w-4 h-4 text-white" />
             </div>
             <div>
-              <span className="text-[15px] font-bold text-slate-800 dark:text-white tracking-tight">TaskBridge</span>
+              <span className="text-[15px] font-bold text-slate-800 dark:text-white tracking-tight">SyncSpac</span>
               <div className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest -mt-0.5">Super Admin</div>
             </div>
           </div>

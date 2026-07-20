@@ -187,9 +187,9 @@ const RegisterForm = (): React.JSX.Element => {
         <section>
           <div className="mb-6 flex items-center justify-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded bg-[#0052CC] text-sm font-bold text-white shadow-sm">
-              T
+              S
             </div>
-            <span className="text-xl font-semibold tracking-tight text-[#172B4D] dark:text-white">TaskBridge</span>
+            <span className="text-xl font-semibold tracking-tight text-[#172B4D] dark:text-white">SyncSpac</span>
           </div>
 
           <div className="relative overflow-hidden rounded-lg border border-white/80 bg-white/95 px-10 py-8 shadow-[0_16px_48px_rgba(9,30,66,0.18)] backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
