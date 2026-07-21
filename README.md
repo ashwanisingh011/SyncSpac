@@ -1,4 +1,4 @@
-# SyncSpac (TaskBridge) — Enterprise Multi-Tenant Project Management & Collaboration Platform
+# SyncSpac — Enterprise Multi-Tenant Project Management & Collaboration Platform
 
 > An enterprise-grade, real-time project management and workspace collaboration system designed for multi-tenant organizations, high-frequency task tracking, asynchronous queue processing, and granular access control.
 
@@ -6,7 +6,7 @@
 
 ## Executive Overview
 
-**SyncSpac** (internally code-named *TaskBridge*) is a full-stack, multi-tenant project management platform engineered to deliver corporate-level collaboration, high-concurrency real-time updates, multi-tier organization billing, and isolated client access. Designed with scalability and operational security at its core, SyncSpac empowers enterprise organizations to manage complex project lifecycles, file assets, sprint schedules, and user roles within isolated multi-tenant environments.
+**SyncSpac** is a full-stack, multi-tenant project management platform engineered to deliver corporate-level collaboration, high-concurrency real-time updates, multi-tier organization billing, and isolated client access. Designed with scalability and operational security at its core, SyncSpac empowers enterprise organizations to manage complex project lifecycles, file assets, sprint schedules, and user roles within isolated multi-tenant environments.
 
 ### Target Audience & Engineering Focus
 * **Senior Engineers & System Architects**: Reviewing high-concurrency event-driven real-time architectures, asynchronous task queue design, Mongoose schema modeling across 28 entities, and multi-tenant resource boundary isolation.
@@ -192,7 +192,7 @@ NODE_ENV=development
 FRONTEND_URL=http://localhost:3000
 
 # Database Configuration
-MONGODB_URI=mongodb://localhost:27017/taskbridge
+MONGODB_URI=mongodb://localhost:27017/syncspac
 
 # JWT & Authentication
 JWT_SECRET=your_super_secret_jwt_key_change_in_production
@@ -206,13 +206,13 @@ REDIS_PORT=6379
 EMAIL_PORT=587
 EMAIL_USER=your_smtp_user
 EMAIL_PASS=your_smtp_password
-EMAIL_FROM=noreply@taskbridge.com
+EMAIL_FROM=noreply@syncspac.com
 
 # Initial Superadmin Provisioning
 SUPERADMIN_FIRST_NAME=Super
 SUPERADMIN_LAST_NAME=Admin
-SUPERADMIN_USERNAME=taskbridge_admin
-SUPERADMIN_EMAIL=admin@taskbridge.io
+SUPERADMIN_USERNAME=syncspac_admin
+SUPERADMIN_EMAIL=admin@syncspac.io
 SUPERADMIN_PASSWORD=YourSecurePassword123!
 
 # Cloudinary Storage Configuration
@@ -279,4 +279,4 @@ NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_your_razorpay_key_id_here
 
 ## License & Attribution
 
-SyncSpac (TaskBridge) is an open-source enterprise software project. Built with high standards of software engineering, robust data isolation, and modern web architectures.
+SyncSpac is an open-source enterprise software project. Built with high standards of software engineering, robust data isolation, and modern web architectures.
