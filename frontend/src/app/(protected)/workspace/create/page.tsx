@@ -47,24 +47,24 @@ export default function CreateWorkspacePage() {
       {/* Back link */}
       <Link
         href="/workspace"
-        className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-content-tertiary hover:text-content transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to workspace
       </Link>
 
       {/* Card */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      <div className="rounded-2xl border border-line bg-surface p-7 shadow-sm">
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/40">
-            <Building2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-subtle">
+            <Building2 className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <h1 className="text-lg font-semibold text-content">
               Create your organization
             </h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-content-tertiary">
               This is your team&apos;s home in TaskBridge.
             </p>
           </div>
@@ -78,9 +78,9 @@ export default function CreateWorkspacePage() {
       </div>
 
       {/* Info note */}
-      <p className="text-xs text-slate-500 dark:text-slate-400">
+      <p className="text-xs text-content-tertiary">
         By creating a workspace, you agree to the{' '}
-        <span className="text-blue-600 hover:underline cursor-pointer dark:text-blue-400">
+        <span className="text-primary hover:underline cursor-pointer">
           Terms of Service
         </span>
         . You will be the workspace owner.

@@ -14,12 +14,12 @@ interface RecentProjectsProps {
 }
 
 const statusConfig: Record<string, { label: string; badge: string }> = {
-  active:     { label: 'In Progress', badge: 'bg-[#DEEBFF] text-[#0747A6] dark:bg-blue-950/30 dark:text-blue-300' },
-  completed:  { label: 'Completed',   badge: 'bg-[#E3FCEF] text-[#006644] dark:bg-emerald-950/30 dark:text-emerald-300' },
-  'on-hold':  { label: 'On Hold',     badge: 'bg-[#FFF0B3] text-[#172B4D] dark:bg-amber-950/30 dark:text-amber-300' },
+  active:     { label: 'In Progress', badge: 'bg-[#DEEBFF] text-[#0747A6]' },
+  completed:  { label: 'Completed',   badge: 'bg-success/10 text-[#006644]' },
+  'on-hold':  { label: 'On Hold',     badge: 'bg-[#FFF0B3] text-content' },
 };
 
-const projectColors = ['#0052CC', '#00A3BF', '#00875A', '#FFAB00', '#6554C0', '#DE350B'];
+const projectColors = ['var(--primary)', '#00A3BF', 'var(--status-done)', 'var(--warning)', '#6554C0', 'var(--danger)'];
 
 export default function RecentProjects({ projects, allTasks, onProjectSelect, onViewAllProjects }: RecentProjectsProps) {
   const enrichedProjects = useMemo(() => {
@@ -46,23 +46,23 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
   }, [projects, allTasks]);
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded border border-[#DFE1E6] dark:border-slate-800 overflow-hidden">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-[#DFE1E6] dark:border-slate-800">
+    <div className="bg-surface rounded border border-line overflow-hidden">
+      <div className="flex items-center justify-between px-5 py-4 border-b border-line">
         <div>
-          <h3 className="text-sm font-semibold text-[#091E42] dark:text-slate-100 font-sans">Recent Projects</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-sans">Active and recent project progress</p>
+          <h3 className="text-sm font-semibold text-content font-sans">Recent Projects</h3>
+          <p className="text-xs text-content-tertiary mt-0.5 font-sans">Active and recent project progress</p>
         </div>
         {onViewAllProjects ? (
           <button
             onClick={onViewAllProjects}
-            className="text-xs font-semibold text-[#0052CC] dark:text-indigo-400 hover:underline flex items-center gap-1 font-sans cursor-pointer"
+            className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 font-sans cursor-pointer"
           >
             View all <ExternalLink className="w-3 h-3" />
           </button>
         ) : (
           <Link
             href="/dashboard/projects"
-            className="text-xs font-semibold text-[#0052CC] dark:text-indigo-400 hover:underline flex items-center gap-1 font-sans"
+            className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 font-sans"
           >
             View all <ExternalLink className="w-3 h-3" />
           </Link>
@@ -71,13 +71,13 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
 
       {projects.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <p className="text-sm text-slate-500 dark:text-slate-450 font-sans">No projects yet.</p>
+          <p className="text-sm text-content-tertiary font-sans">No projects yet.</p>
           {onViewAllProjects ? (
-            <button onClick={onViewAllProjects} className="text-xs text-[#0052CC] dark:text-indigo-400 hover:underline mt-1 font-sans cursor-pointer">
+            <button onClick={onViewAllProjects} className="text-xs text-primary hover:underline mt-1 font-sans cursor-pointer">
               Create your first project →
             </button>
           ) : (
-            <Link href="/dashboard/projects" className="text-xs text-[#0052CC] dark:text-indigo-400 hover:underline mt-1 font-sans">
+            <Link href="/dashboard/projects" className="text-xs text-primary hover:underline mt-1 font-sans">
               Create your first project →
             </Link>
           )}
@@ -88,11 +88,11 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
           <div className="hidden sm:block overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-[#DFE1E6] dark:border-slate-800">
+                <tr className="border-b border-line">
                   {['Project', 'Progress', 'Status', 'Deadline'].map((h) => (
                     <th
                       key={h}
-                      className="text-left text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3 font-sans"
+                      className="text-left text-[10px] font-bold text-content-tertiary uppercase tracking-wider px-5 py-3 font-sans"
                     >
                       {h}
                     </th>
@@ -105,7 +105,7 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
                   return (
                     <tr
                       key={p._id}
-                      className="border-b border-slate-100 dark:border-slate-805/50 last:border-0 hover:bg-[#F4F5F7]/40 dark:hover:bg-slate-805/30 transition-colors group"
+                      className="border-b border-line/50 last:border-0 hover:bg-surface-hover/40 transition-colors group"
                     >
                       {/* Project */}
                       <td className="px-5 py-3.5">
@@ -121,10 +121,10 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
                               {p.key.substring(0, 3).toUpperCase()}
                             </div>
                             <div>
-                              <p className="text-sm font-medium text-[#091E42] dark:text-slate-200 group-hover:text-[#0052CC] dark:group-hover:text-blue-400 transition-colors font-sans">
+                              <p className="text-sm font-medium text-content group-hover:text-primary transition-colors font-sans">
                                 {p.name}
                               </p>
-                              <p className="text-[10px] text-slate-450 dark:text-slate-505 font-sans capitalize">{p.projectType}</p>
+                              <p className="text-[10px] text-content-tertiary font-sans capitalize">{p.projectType}</p>
                             </div>
                           </button>
                         ) : (
@@ -136,10 +136,10 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
                               {p.key.substring(0, 3).toUpperCase()}
                             </div>
                             <div>
-                              <p className="text-sm font-medium text-[#091E42] dark:text-slate-200 group-hover:text-[#0052CC] dark:group-hover:text-blue-400 transition-colors font-sans">
+                              <p className="text-sm font-medium text-content group-hover:text-primary transition-colors font-sans">
                                 {p.name}
                               </p>
-                              <p className="text-[10px] text-slate-450 dark:text-slate-505 font-sans capitalize">{p.projectType}</p>
+                              <p className="text-[10px] text-content-tertiary font-sans capitalize">{p.projectType}</p>
                             </div>
                           </Link>
                         )}
@@ -148,17 +148,17 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
                       {/* Progress */}
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-2 min-w-[125px]">
-                          <div className="w-20 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden shrink-0">
+                          <div className="w-20 h-1.5 bg-surface-hover rounded-full overflow-hidden shrink-0">
                             <div
                               className="h-full rounded-full transition-all"
                               style={{ width: `${p.progress}%`, background: p.color }}
                             />
                           </div>
-                          <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 font-sans whitespace-nowrap shrink-0">
+                          <span className="text-xs font-semibold text-content-secondary font-sans whitespace-nowrap shrink-0">
                             {p.progress}%
                           </span>
                         </div>
-                        <p className="text-[10px] text-slate-400 dark:text-slate-550 mt-1 font-sans">
+                        <p className="text-[10px] text-content-tertiary mt-1 font-sans">
                           {p.tasksDone}/{p.tasksTotal} tasks
                         </p>
                       </td>
@@ -173,8 +173,8 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
                       {/* Deadline */}
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-1.5">
-                          <Clock className="w-3 h-3 text-slate-400" />
-                          <span className="text-xs text-slate-600 dark:text-slate-400 font-sans">
+                          <Clock className="w-3 h-3 text-content-tertiary" />
+                          <span className="text-xs text-content-secondary font-sans">
                             {new Date(p.updatedAt).toLocaleDateString(undefined, {
                               month: 'short',
                               day: 'numeric',
@@ -191,7 +191,7 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
           </div>
 
           {/* Mobile Card List View */}
-          <div className="block sm:hidden divide-y divide-slate-100 dark:divide-slate-800">
+          <div className="block sm:hidden divide-y divide-line">
             {enrichedProjects.map((p) => {
               const sc = statusConfig[p.status] ?? statusConfig.active;
               const linkContent = (
@@ -203,16 +203,16 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
                     {p.key.substring(0, 3).toUpperCase()}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#091E42] dark:text-slate-200 group-hover:text-[#0052CC] dark:group-hover:text-blue-400 transition-colors font-sans">
+                    <p className="text-sm font-semibold text-content group-hover:text-primary transition-colors font-sans">
                       {p.name}
                     </p>
-                    <p className="text-[10px] text-slate-450 dark:text-slate-500 font-sans capitalize">{p.projectType}</p>
+                    <p className="text-[10px] text-content-tertiary font-sans capitalize">{p.projectType}</p>
                   </div>
                 </div>
               );
 
               return (
-                <div key={p._id} className="p-4 space-y-3 hover:bg-[#F4F5F7]/45 dark:hover:bg-slate-850/20 transition-colors">
+                <div key={p._id} className="p-4 space-y-3 hover:bg-surface-hover/45 transition-colors">
                   {/* Title & Status */}
                   <div className="flex items-center justify-between gap-3">
                     {onProjectSelect ? (
@@ -231,30 +231,30 @@ export default function RecentProjects({ projects, allTasks, onProjectSelect, on
                   </div>
 
                   {/* Progress & Deadline Grid */}
-                  <div className="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-50 dark:border-slate-800/30 text-xs">
+                  <div className="grid grid-cols-2 gap-3 pt-2.5 border-t border-line text-xs">
                     <div>
-                      <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider mb-1">Progress</span>
+                      <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider mb-1">Progress</span>
                       <div className="flex items-center gap-2">
-                        <div className="w-16 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden shrink-0">
+                        <div className="w-16 h-1.5 bg-surface-hover rounded-full overflow-hidden shrink-0">
                           <div
                             className="h-full rounded-full transition-all"
                             style={{ width: `${p.progress}%`, background: p.color }}
                           />
                         </div>
-                        <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">
+                        <span className="text-[11px] font-semibold text-content-secondary">
                           {p.progress}%
                         </span>
                       </div>
-                      <span className="text-[9px] text-slate-450 dark:text-slate-550 block mt-0.5 font-sans">
+                      <span className="text-[9px] text-content-tertiary block mt-0.5 font-sans">
                         {p.tasksDone}/{p.tasksTotal} tasks
                       </span>
                     </div>
 
                     <div>
-                      <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider mb-1">Deadline</span>
+                      <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider mb-1">Deadline</span>
                       <div className="flex items-center gap-1.5 mt-0.5">
-                        <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                        <span className="text-[11px] text-slate-600 dark:text-slate-400 font-sans">
+                        <Clock className="w-3.5 h-3.5 text-content-tertiary shrink-0" />
+                        <span className="text-[11px] text-content-secondary font-sans">
                           {new Date(p.updatedAt).toLocaleDateString(undefined, {
                             month: 'short',
                             day: 'numeric',

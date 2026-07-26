@@ -60,7 +60,7 @@ export default function AvatarUpload({ size = 'lg' }: AvatarUploadProps) {
     <div className="flex items-center gap-5">
       <div className="relative shrink-0">
         <div
-          className={`${dimension} rounded-full overflow-hidden border-2 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex items-center justify-center`}
+          className={`${dimension} rounded-full overflow-hidden border-2 border-line bg-surface-hover flex items-center justify-center`}
         >
           {authUser?.avatar ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -70,7 +70,7 @@ export default function AvatarUpload({ size = 'lg' }: AvatarUploadProps) {
               className="w-full h-full object-cover"
             />
           ) : (
-            <User className="w-10 h-10 text-slate-400" />
+            <User className="w-10 h-10 text-content-tertiary" />
           )}
           {isUploading && (
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -82,7 +82,7 @@ export default function AvatarUpload({ size = 'lg' }: AvatarUploadProps) {
           type="button"
           disabled={isUploading}
           onClick={() => inputRef.current?.click()}
-          className="absolute -bottom-1 -right-1 p-2 rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 disabled:opacity-60 transition-colors"
+          className="absolute -bottom-1 -right-1 p-2 rounded-full bg-primary text-primary-content shadow-md hover:bg-primary-hover disabled:opacity-60 transition-colors"
           aria-label="Upload profile photo"
         >
           <Camera className="w-4 h-4" />
@@ -96,17 +96,17 @@ export default function AvatarUpload({ size = 'lg' }: AvatarUploadProps) {
         />
       </div>
       <div>
-        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
+        <p className="text-sm font-medium text-content">
           Profile photo
         </p>
-        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-xs">
+        <p className="mt-1 text-xs text-content-tertiary max-w-xs">
           Uploaded to Cloudinary via your account. JPG, PNG, or WebP up to {MAX_SIZE_MB} MB.
         </p>
         <button
           type="button"
           disabled={isUploading}
           onClick={() => inputRef.current?.click()}
-          className="mt-3 text-xs font-semibold text-blue-600 hover:underline dark:text-blue-400 disabled:opacity-50"
+          className="mt-3 text-xs font-semibold text-primary hover:underline disabled:opacity-50"
         >
           {isUploading ? 'Uploading…' : 'Change photo'}
         </button>

@@ -90,13 +90,13 @@ export default function UserProfileMenu({
     const Icon = icon;
     const baseClass =
       options.variant === 'danger'
-        ? 'w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors dark:text-red-400 dark:hover:bg-red-950/40'
-        : 'w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors dark:text-slate-200 dark:hover:bg-slate-800';
+        ? 'w-full flex items-center gap-3 px-4 py-2.5 text-sm text-danger hover:bg-danger/10 transition-colors'
+        : 'w-full flex items-center gap-3 px-4 py-2.5 text-sm text-content-secondary hover:bg-surface-hover transition-colors';
 
     if (options.href) {
       return (
         <Link key={key} href={options.href} onClick={() => setOpen(false)} className={baseClass}>
-          <Icon className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+          <Icon className="w-4 h-4 text-content-tertiary" />
           {label}
         </Link>
       );
@@ -112,7 +112,7 @@ export default function UserProfileMenu({
         }}
         className={baseClass}
       >
-        <Icon className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+        <Icon className="w-4 h-4 text-content-tertiary" />
         {label}
       </button>
     );
@@ -156,7 +156,7 @@ export default function UserProfileMenu({
       <button
         type="button"
         onClick={() => setOpen(!isOpen)}
-        className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 transition-colors dark:hover:bg-slate-800"
+        className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-surface-hover transition-colors"
         aria-expanded={isOpen}
         aria-haspopup="menu"
       >
@@ -171,31 +171,31 @@ export default function UserProfileMenu({
           )}
         </div>
         {showChevron && (
-          <ChevronDown className="w-3.5 h-3.5 text-slate-400 hidden sm:block dark:text-slate-500" />
+          <ChevronDown className="w-3.5 h-3.5 text-content-tertiary hidden sm:block" />
         )}
       </button>
 
       {isOpen && (
         <div
           role="menu"
-          className="absolute right-0 top-12 w-52 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-50 dark:bg-slate-900 dark:border-slate-800"
+          className="absolute right-0 top-12 w-52 bg-surface rounded-xl shadow-xl border border-line overflow-hidden z-50"
         >
-          <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800">
-            <p className="text-sm font-semibold text-slate-800 truncate dark:text-slate-100">
+          <div className="px-4 py-3 border-b border-line">
+            <p className="text-sm font-semibold text-content truncate">
               {user?.name || 'User'}
             </p>
-            <p className="text-xs text-slate-500 truncate dark:text-slate-400">
+            <p className="text-xs text-content-tertiary truncate">
               {user?.email || ''}
             </p>
           </div>
 
           {menuItems}
 
-          <div className="border-t border-slate-100 dark:border-slate-800">
+          <div className="border-t border-line">
             <button
               type="button"
               onClick={handleSignOut}
-              className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors dark:text-red-400 dark:hover:bg-red-950/40"
+              className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-danger hover:bg-danger/10 transition-colors"
             >
               <LogOut className="w-4 h-4" />
               Sign out

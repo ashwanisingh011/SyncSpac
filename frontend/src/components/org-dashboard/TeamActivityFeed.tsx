@@ -90,30 +90,30 @@ export default function TeamActivityFeed({ allTasks }: TeamActivityFeedProps) {
   };
 
   const colorMap: Record<string, { bg: string; icon: string }> = {
-    emerald: { bg: 'bg-[#E3FCEF] dark:bg-emerald-950/40', icon: 'text-[#006644] dark:text-emerald-300' },
-    violet:  { bg: 'bg-[#EAE6FF] dark:bg-purple-950/40',   icon: 'text-[#403294] dark:text-purple-300'   },
-    blue:    { bg: 'bg-[#DEEBFF] dark:bg-blue-950/40',       icon: 'text-[#0747A6] dark:text-blue-300'       },
-    indigo:  { bg: 'bg-[#DEEBFF] dark:bg-indigo-950/40',   icon: 'text-[#0747A6] dark:text-indigo-300'   },
-    amber:   { bg: 'bg-[#FFF0B3] dark:bg-amber-950/40',     icon: 'text-[#172B4D] dark:text-amber-300'     },
-    green:   { bg: 'bg-[#E3FCEF] dark:bg-green-950/40',     icon: 'text-[#006644] dark:text-green-300'     },
+    emerald: { bg: 'bg-success/10', icon: 'text-[#006644]' },
+    violet:  { bg: 'bg-status-review/12',   icon: 'text-status-review'   },
+    blue:    { bg: 'bg-[#DEEBFF]',       icon: 'text-[#0747A6]'       },
+    indigo:  { bg: 'bg-[#DEEBFF]',   icon: 'text-[#0747A6]'   },
+    amber:   { bg: 'bg-[#FFF0B3]',     icon: 'text-content'     },
+    green:   { bg: 'bg-success/10',     icon: 'text-[#006644]'     },
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded border border-[#DFE1E6] dark:border-slate-800 p-5">
+    <div className="bg-surface rounded border border-line p-5">
       <div className="flex items-center justify-between mb-5">
         <div>
-          <h3 className="text-sm font-semibold text-[#091E42] dark:text-slate-105 font-sans">Team Activity</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-sans">Latest workspace events</p>
+          <h3 className="text-sm font-semibold text-content font-sans">Team Activity</h3>
+          <p className="text-xs text-content-tertiary mt-0.5 font-sans">Latest workspace events</p>
         </div>
       </div>
 
       {activities.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-8 text-center">
-          <p className="text-xs text-slate-400 dark:text-slate-500 font-sans">No recent activity yet.</p>
+          <p className="text-xs text-content-tertiary font-sans">No recent activity yet.</p>
         </div>
       ) : (
         <div className="relative">
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-[#DFE1E6] dark:bg-slate-800" />
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-[#DFE1E6]" />
           <ul className="space-y-4">
             {activities.map((activity) => {
               const Icon = iconMap[activity.icon] ?? CheckCircle2;
@@ -133,24 +133,24 @@ export default function TeamActivityFeed({ allTasks }: TeamActivityFeedProps) {
                       >
                         {activity.userInitials}
                       </div>
-                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 font-sans">
+                      <span className="text-xs font-semibold text-content font-sans">
                         {activity.user}
                       </span>
-                      <span className="text-xs text-slate-500 dark:text-slate-450 font-sans">
+                      <span className="text-xs text-content-tertiary font-sans">
                         {activity.message}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-600 dark:text-slate-350 mt-0.5 truncate font-medium font-sans">
+                    <p className="text-xs text-content-secondary mt-0.5 truncate font-medium font-sans">
                       {activity.detail}
                     </p>
                     {activity.project && (
-                      <p className="text-[10px] text-[#0052CC] dark:text-blue-400 mt-0.5 font-sans">
+                      <p className="text-[10px] text-primary mt-0.5 font-sans">
                         {activity.project}
                       </p>
                     )}
                     <div className="flex items-center gap-1 mt-0.5">
-                      <Clock className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
-                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-sans">
+                      <Clock className="w-3.5 h-3.5 text-content-tertiary" />
+                      <span className="text-[10px] text-content-tertiary font-sans">
                         {activity.time}
                       </span>
                     </div>

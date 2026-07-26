@@ -10,7 +10,7 @@ const renderLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: an
   // If it's 100% (or very close), render it in the center of the donut hole
   if (percent > 0.99) {
     return (
-      <text x={cx} y={cy} fill="currentColor" className="text-slate-800 dark:text-slate-100" textAnchor="middle" dominantBaseline="central" fontSize={13} fontWeight={800}>
+      <text x={cx} y={cy} fill="currentColor" className="text-content" textAnchor="middle" dominantBaseline="central" fontSize={13} fontWeight={800}>
         100%
       </text>
     );
@@ -39,10 +39,10 @@ export default function ProjectProgressChart({ projects }: ProjectProgressChartP
     };
 
     return [
-      { name: 'Completed',   value: counts['Completed'],   fill: '#00875A' },
-      { name: 'In Progress', value: counts['In Progress'], fill: '#0052CC' },
-      { name: 'On Hold',     value: counts['On Hold'],     fill: '#FFAB00' },
-      { name: 'Archived',    value: counts['Archived'],    fill: '#42526E' },
+      { name: 'Completed',   value: counts['Completed'],   fill: 'var(--status-done)' },
+      { name: 'In Progress', value: counts['In Progress'], fill: 'var(--primary)' },
+      { name: 'On Hold',     value: counts['On Hold'],     fill: 'var(--warning)' },
+      { name: 'Archived',    value: counts['Archived'],    fill: 'var(--content-tertiary)' },
     ].filter((d) => d.value > 0);
   }, [projects]);
 
@@ -50,18 +50,18 @@ export default function ProjectProgressChart({ projects }: ProjectProgressChartP
 
   if (total === 0) {
     return (
-      <div className="bg-white dark:bg-slate-900 rounded border border-[#DFE1E6] dark:border-slate-800 p-5 flex flex-col items-center justify-center h-[230px]">
-        <p className="text-sm font-semibold text-[#091E42] dark:text-slate-100 mb-1 font-sans">Project Status</p>
-        <p className="text-xs text-slate-400 dark:text-slate-500 font-sans">No projects yet. Create one to see distribution.</p>
+      <div className="bg-surface rounded border border-line p-5 flex flex-col items-center justify-center h-[230px]">
+        <p className="text-sm font-semibold text-content mb-1 font-sans">Project Status</p>
+        <p className="text-xs text-content-tertiary font-sans">No projects yet. Create one to see distribution.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded border border-[#DFE1E6] dark:border-slate-800 p-5">
+    <div className="bg-surface rounded border border-line p-5">
       <div className="mb-4">
-        <h3 className="text-sm font-semibold text-[#091E42] dark:text-slate-105 font-sans">Project Status</h3>
-        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-sans">Distribution of {total} total projects</p>
+        <h3 className="text-sm font-semibold text-content font-sans">Project Status</h3>
+        <p className="text-xs text-content-tertiary mt-0.5 font-sans">Distribution of {total} total projects</p>
       </div>
       <div className="flex items-center gap-4">
         <div className="w-[140px] h-[140px] shrink-0">
@@ -84,7 +84,7 @@ export default function ProjectProgressChart({ projects }: ProjectProgressChartP
               </Pie>
               <Tooltip
                 formatter={(v: unknown) => [`${v} projects`, '']}
-                contentStyle={{ borderRadius: '4px', border: '1px solid #DFE1E6', fontSize: 12 }}
+                contentStyle={{ borderRadius: '4px', border: '1px solid var(--border-default)', fontSize: 12 }}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -95,11 +95,11 @@ export default function ProjectProgressChart({ projects }: ProjectProgressChartP
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-sm" style={{ background: item.fill }} />
-                  <span className="text-xs font-medium text-slate-700 dark:text-slate-300 font-sans">{item.name}</span>
+                  <span className="text-xs font-medium text-content-secondary font-sans">{item.name}</span>
                 </div>
-                <span className="text-xs font-semibold text-slate-800 dark:text-slate-100 font-sans">{item.value}</span>
+                <span className="text-xs font-semibold text-content font-sans">{item.value}</span>
               </div>
-              <div className="h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div className="h-1 bg-surface-hover rounded-full overflow-hidden">
                 <div
                   className="h-full rounded-full"
                   style={{ width: `${(item.value / total) * 100}%`, background: item.fill }}

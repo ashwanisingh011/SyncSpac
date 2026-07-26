@@ -38,7 +38,7 @@ const Field = ({
   required = false,
 }: FieldProps) => (
   <div className="flex flex-col gap-1.5">
-    <label className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+    <label className="text-xs font-semibold uppercase tracking-wide text-content-tertiary">
       {label}
     </label>
     <div className="relative">
@@ -52,12 +52,12 @@ const Field = ({
         placeholder={placeholder}
         required={required}
         className={`w-full rounded-xl border px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${disabled || readOnly
-          ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-500 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-500'
-          : 'border-slate-300 bg-white text-slate-900 hover:border-slate-400 focus:border-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:border-slate-600 dark:focus:border-blue-500'
+          ? 'cursor-not-allowed border-line bg-surface-sunken text-content-tertiary'
+          : 'border-line-strong bg-surface text-content hover:border-slate-400 focus:border-line-focus dark:text-white'
           } ${icon ? 'pr-10' : ''}`}
       />
       {icon && (
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-content-tertiary">
           {icon}
         </span>
       )}
@@ -67,7 +67,7 @@ const Field = ({
 
 // ─── Section card wrapper ─────────────────────────────────────────────────────
 const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950 ${className}`}>
+  <div className={`rounded-2xl border border-line bg-surface shadow-sm ${className}`}>
     {children}
   </div>
 );
@@ -85,16 +85,16 @@ const CredRow = ({ icon, title, subtitle, iconBg, onClick }: CredRowProps) => (
   <button
     type="button"
     onClick={onClick}
-    className="flex w-full items-center gap-4 rounded-xl p-4 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-900/60 group"
+    className="flex w-full items-center gap-4 rounded-xl p-4 text-left transition-colors hover:bg-surface-hover/60 group"
   >
     <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${iconBg}`}>
       {icon}
     </div>
     <div className="min-w-0 flex-1">
-      <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{title}</p>
-      <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{subtitle}</p>
+      <p className="text-sm font-semibold text-content">{title}</p>
+      <p className="mt-0.5 text-xs text-content-tertiary leading-relaxed">{subtitle}</p>
     </div>
-    <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5" />
+    <ChevronRight className="h-4 w-4 shrink-0 text-content-tertiary transition-transform group-hover:translate-x-0.5" />
   </button>
 );
 
@@ -113,7 +113,7 @@ const PasswordPanel = ({ onClose, onSubmit, data, onChange, loading }: PasswordP
   const [showConfirm, setShowConfirm] = useState(false);
 
   return (
-    <div className="border-t border-slate-100 dark:border-slate-800 px-4 pb-4 pt-3">
+    <div className="border-t border-line px-4 pb-4 pt-3">
       <form onSubmit={onSubmit} className="space-y-3">
         <Field
           label="Current password"
@@ -125,7 +125,7 @@ const PasswordPanel = ({ onClose, onSubmit, data, onChange, loading }: PasswordP
             <button
               type="button"
               onClick={() => setShowCurrent(prev => !prev)}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-350 focus:outline-none flex items-center justify-center"
+              className="text-content-tertiary hover:text-content focus:outline-none flex items-center justify-center"
             >
               {showCurrent ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -141,7 +141,7 @@ const PasswordPanel = ({ onClose, onSubmit, data, onChange, loading }: PasswordP
             <button
               type="button"
               onClick={() => setShowNew(prev => !prev)}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-350 focus:outline-none flex items-center justify-center"
+              className="text-content-tertiary hover:text-content focus:outline-none flex items-center justify-center"
             >
               {showNew ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -157,7 +157,7 @@ const PasswordPanel = ({ onClose, onSubmit, data, onChange, loading }: PasswordP
             <button
               type="button"
               onClick={() => setShowConfirm(prev => !prev)}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-350 focus:outline-none flex items-center justify-center"
+              className="text-content-tertiary hover:text-content focus:outline-none flex items-center justify-center"
             >
               {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -167,7 +167,7 @@ const PasswordPanel = ({ onClose, onSubmit, data, onChange, loading }: PasswordP
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-content transition-colors hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2"
           >
             {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
             {loading ? 'Updating…' : 'Update password'}
@@ -175,7 +175,7 @@ const PasswordPanel = ({ onClose, onSubmit, data, onChange, loading }: PasswordP
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-colors hover:bg-slate-50 dark:hover:bg-slate-900 focus:outline-none"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-line-strong px-4 py-2 text-sm font-semibold text-content-secondary transition-colors hover:bg-surface-hover focus:outline-none"
           >
             <X className="h-3.5 w-3.5" />
             Cancel
@@ -196,7 +196,7 @@ interface EmailPanelProps {
 }
 
 const EmailPanel = ({ onClose, onSubmit, value, onChange, loading }: EmailPanelProps) => (
-  <div className="border-t border-slate-100 dark:border-slate-800 px-4 pb-4 pt-3">
+  <div className="border-t border-line px-4 pb-4 pt-3">
     <form onSubmit={onSubmit} className="space-y-3">
       <Field
         label="New email address"
@@ -205,14 +205,14 @@ const EmailPanel = ({ onClose, onSubmit, value, onChange, loading }: EmailPanelP
         onChange={(e) => onChange(e.target.value)}
         placeholder="you@example.com"
       />
-      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+      <p className="text-xs text-content-tertiary leading-relaxed">
         A verification link will be sent to the new address. Your email won't change until you confirm it.
       </p>
       <div className="flex items-center gap-2 pt-1">
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-content transition-colors hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2"
         >
           {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Mail className="h-3.5 w-3.5" />}
           {loading ? 'Sending…' : 'Request change'}
@@ -220,7 +220,7 @@ const EmailPanel = ({ onClose, onSubmit, value, onChange, loading }: EmailPanelP
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-colors hover:bg-slate-50 dark:hover:bg-slate-900 focus:outline-none"
+          className="inline-flex items-center gap-1.5 rounded-xl border border-line-strong px-4 py-2 text-sm font-semibold text-content-secondary transition-colors hover:bg-surface-hover focus:outline-none"
         >
           <X className="h-3.5 w-3.5" />
           Cancel
@@ -356,15 +356,15 @@ const ProfilePage = (): React.JSX.Element => {
   };
 
   return (
-    <div className="min-h-full w-full bg-slate-50 dark:bg-slate-900/30 px-4 py-6 sm:px-6 lg:px-8 xl:px-10">
+    <div className="min-h-full w-full bg-surface-sunken/30 px-4 py-6 sm:px-6 lg:px-8 xl:px-10">
       {/* ── Page header ─────────────────────────────────── */}
       <div className="mb-6 max-w-3xl xl:max-w-5xl mx-auto">
-        <nav className="mb-1 flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+        <nav className="mb-1 flex items-center gap-1.5 text-xs text-content-tertiary">
           <span>Home</span>
           <ChevronRight className="h-3 w-3" />
-          <span className="text-slate-700 dark:text-slate-300 font-medium">My Profile</span>
+          <span className="text-content-secondary font-medium">My Profile</span>
         </nav>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">My Profile</h1>
+        <h1 className="text-2xl font-bold text-content tracking-tight">My Profile</h1>
       </div>
 
       {/* ── Two-column grid on xl+ ─────────────────────── */}
@@ -378,14 +378,14 @@ const ProfilePage = (): React.JSX.Element => {
             <div className="p-5 sm:p-6">
               {/* Card header: title + Edit button (outside the form to avoid DOM reuse submit bug) */}
               <div className="flex items-center justify-between mb-5">
-                <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                <h2 className="text-base font-semibold text-content">
                   Profile Information
                 </h2>
                 {!isEditing && (
                   <button
                     type="button"
                     onClick={() => setIsEditing(true)}
-                    className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-3.5 py-2 text-sm font-semibold text-primary-content hover:bg-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2"
                   >
                     <Pencil className="h-3.5 w-3.5" />
                     Edit Profile
@@ -459,7 +459,7 @@ const ProfilePage = (): React.JSX.Element => {
                           designation: user?.designation || '',
                         });
                       }}
-                      className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors focus:outline-none"
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-line-strong px-4 py-2 text-sm font-semibold text-content-secondary hover:bg-surface-hover transition-colors focus:outline-none"
                     >
                       <X className="h-3.5 w-3.5" />
                       Cancel
@@ -467,7 +467,7 @@ const ProfilePage = (): React.JSX.Element => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-content hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2"
                     >
                       {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
                       {loading ? 'Saving…' : 'Save changes'}
@@ -481,20 +481,20 @@ const ProfilePage = (): React.JSX.Element => {
           {/* Credential Settings card */}
           <Card>
             <div className="p-5 sm:p-6">
-              <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100 mb-1">
+              <h2 className="text-base font-semibold text-content mb-1">
                 Credential Settings
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+              <p className="text-xs text-content-tertiary mb-4">
                 Manage your password and email address.
               </p>
             </div>
 
-            <div className="divide-y divide-slate-100 dark:divide-slate-800 border-t border-slate-100 dark:border-slate-800">
+            <div className="divide-y divide-line border-t border-line">
               {/* Change Password row */}
               <div>
                 <CredRow
-                  icon={<Lock className="h-5 w-5 text-blue-600 dark:text-blue-400" />}
-                  iconBg="bg-blue-50 dark:bg-blue-950/40"
+                  icon={<Lock className="h-5 w-5 text-primary" />}
+                  iconBg="bg-primary-subtle"
                   title="Change Password"
                   subtitle="Update your account password to keep your account secure."
                   onClick={() => toggleCredPanel('password')}
@@ -541,36 +541,36 @@ const ProfilePage = (): React.JSX.Element => {
 
           {/* Quick info card */}
           <Card className="p-5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500 mb-4">Account overview</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-content-tertiary mb-4">Account overview</p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-sm font-bold text-slate-600 dark:text-slate-300 shrink-0">
+                <div className="h-10 w-10 rounded-full bg-surface-hover flex items-center justify-center text-sm font-bold text-content-secondary shrink-0">
                   {user?.name?.charAt(0)?.toUpperCase() || '?'}
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 truncate">{user?.name || '—'}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{user?.email || '—'}</p>
+                  <p className="text-sm font-semibold text-content truncate">{user?.name || '—'}</p>
+                  <p className="text-xs text-content-tertiary truncate">{user?.email || '—'}</p>
                 </div>
               </div>
-              <div className="border-t border-slate-100 dark:border-slate-800 pt-3 space-y-2.5">
+              <div className="border-t border-line pt-3 space-y-2.5">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-500 dark:text-slate-400">Role</span>
-                  <span className="font-medium text-slate-700 dark:text-slate-300 capitalize">{user?.role?.replace(/_/g, ' ') || '—'}</span>
+                  <span className="text-content-tertiary">Role</span>
+                  <span className="font-medium text-content-secondary capitalize">{user?.role?.replace(/_/g, ' ') || '—'}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-500 dark:text-slate-400">Organization</span>
-                  <span className="font-medium text-slate-700 dark:text-slate-300 truncate max-w-[130px] text-right">{currentOrg?.name || '—'}</span>
+                  <span className="text-content-tertiary">Organization</span>
+                  <span className="font-medium text-content-secondary truncate max-w-[130px] text-right">{currentOrg?.name || '—'}</span>
                 </div>
                 {user?.designation && (
                   <div className="flex justify-between text-xs">
-                    <span className="text-slate-500 dark:text-slate-400">Designation</span>
-                    <span className="font-medium text-slate-700 dark:text-slate-300 truncate max-w-[130px] text-right">{user.designation}</span>
+                    <span className="text-content-tertiary">Designation</span>
+                    <span className="font-medium text-content-secondary truncate max-w-[130px] text-right">{user.designation}</span>
                   </div>
                 )}
                 {user?.phoneNumber && (
                   <div className="flex justify-between text-xs">
-                    <span className="text-slate-500 dark:text-slate-400">Phone</span>
-                    <span className="font-medium text-slate-700 dark:text-slate-300">{user.phoneNumber}</span>
+                    <span className="text-content-tertiary">Phone</span>
+                    <span className="font-medium text-content-secondary">{user.phoneNumber}</span>
                   </div>
                 )}
               </div>
@@ -579,8 +579,8 @@ const ProfilePage = (): React.JSX.Element => {
 
           {/* Security tips card */}
           <Card className="p-5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500 mb-3">Security tips</p>
-            <ul className="space-y-2.5 text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs font-semibold uppercase tracking-wide text-content-tertiary mb-3">Security tips</p>
+            <ul className="space-y-2.5 text-xs text-content-tertiary">
               {[
                 'Use a strong, unique password.',
                 'Enable two-factor authentication.',
@@ -588,7 +588,7 @@ const ProfilePage = (): React.JSX.Element => {
                 'Review active sessions regularly.',
               ].map((tip) => (
                 <li key={tip} className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
+                  <span className="mt-0.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
                   {tip}
                 </li>
               ))}

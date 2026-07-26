@@ -23,17 +23,17 @@ import { getFriendlyApiErrorMessage } from '@/lib/apiErrors';
 // ── Skeleton loader rows ─────────────────────────────────────────────────────
 function SkeletonRow() {
   return (
-    <div className="grid grid-cols-[minmax(220px,1fr)_140px_110px_130px_auto] items-center gap-4 px-5 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+    <div className="grid grid-cols-[minmax(220px,1fr)_140px_110px_130px_auto] items-center gap-4 px-5 py-3.5 border-b border-line/80 last:border-0">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 animate-pulse shrink-0" />
+        <div className="w-10 h-10 rounded-full bg-surface-hover animate-pulse shrink-0" />
         <div className="space-y-2 flex-1">
-          <div className="h-3.5 w-32 bg-slate-200 dark:bg-slate-800 rounded-full animate-pulse" />
-          <div className="h-2.5 w-48 bg-slate-100 dark:bg-slate-700 rounded-full animate-pulse" />
+          <div className="h-3.5 w-32 bg-surface-hover rounded-full animate-pulse" />
+          <div className="h-2.5 w-48 bg-surface-hover rounded-full animate-pulse" />
         </div>
       </div>
-      <div className="h-6 w-20 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse" />
-      <div className="h-6 w-16 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse" />
-      <div className="h-3 w-24 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse" />
+      <div className="h-6 w-20 bg-surface-hover rounded-full animate-pulse" />
+      <div className="h-6 w-16 bg-surface-hover rounded-full animate-pulse" />
+      <div className="h-3 w-24 bg-surface-hover rounded-full animate-pulse" />
       <div className="w-9" />
     </div>
   );
@@ -41,11 +41,11 @@ function SkeletonRow() {
 
 function SkeletonTable() {
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-sm overflow-hidden">
+    <div className="rounded-2xl border border-line bg-surface shadow-sm overflow-hidden">
       {/* Header */}
-      <div className="grid grid-cols-[minmax(220px,1fr)_140px_110px_130px_auto] items-center gap-4 px-5 py-3 bg-slate-50/80 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800">
+      <div className="grid grid-cols-[minmax(220px,1fr)_140px_110px_130px_auto] items-center gap-4 px-5 py-3 bg-slate-50/80 border-b border-line">
         {['Member', 'Role', 'Status', 'Joined', ''].map((col, i) => (
-          <span key={i} className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          <span key={i} className="text-[11px] font-semibold uppercase tracking-wider text-content-tertiary">
             {col}
           </span>
         ))}
@@ -183,7 +183,7 @@ export default function MembersPage() {
   if (!isOrgReady) {
     return (
       <div className="flex items-center justify-center py-32">
-        <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+        <Loader2 className="w-6 h-6 animate-spin text-content-tertiary" />
       </div>
     );
   }
@@ -219,7 +219,7 @@ export default function MembersPage() {
             <button
               type="button"
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 active:scale-[0.98] transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm shadow-blue-600/20"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-primary-content hover:bg-primary-hover active:scale-[0.98] transition-all focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2 shadow-sm"
             >
               <Plus className="w-4 h-4" />
               Add Member
@@ -230,18 +230,18 @@ export default function MembersPage() {
 
       {/* Search bar */}
       <div className="relative max-w-xs">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-content-tertiary pointer-events-none" />
         <input
           type="text"
           placeholder="Search by name or email…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-9 pr-8 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all shadow-sm"
+          className="w-full pl-9 pr-8 py-2.5 text-sm rounded-xl border border-line bg-surface text-content placeholder:text-content-tertiary outline-none focus:border-line-focus focus:ring-2 focus:ring-primary/20 transition-all shadow-sm"
         />
         {search && (
           <button
             onClick={() => setSearch('')}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded text-slate-400 hover:text-slate-600 transition-colors"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded text-content-tertiary hover:text-content transition-colors"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -252,18 +252,18 @@ export default function MembersPage() {
       {isLoading ? (
         <SkeletonTable />
       ) : loadError ? (
-        <div className="rounded-2xl border border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-950/20 px-6 py-12 flex flex-col items-center gap-4 text-center">
-          <AlertCircle className="w-10 h-10 text-red-500" />
+        <div className="rounded-2xl border border-danger/25 bg-red-50/50 px-6 py-12 flex flex-col items-center gap-4 text-center">
+          <AlertCircle className="w-10 h-10 text-danger" />
           <div>
-            <p className="text-sm font-medium text-red-800 dark:text-red-300">
+            <p className="text-sm font-medium text-red-800">
               Could not load members
             </p>
-            <p className="mt-1 text-xs text-red-600 dark:text-red-400 max-w-sm">{loadError}</p>
+            <p className="mt-1 text-xs text-danger max-w-sm">{loadError}</p>
           </div>
           <button
             type="button"
             onClick={() => fetchMembers()}
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-content hover:bg-primary-hover"
           >
             <RefreshCw className="w-4 h-4" />
             Try again
@@ -271,13 +271,13 @@ export default function MembersPage() {
         </div>
       ) : members.length === 0 ? (
         // Empty state — no members at all
-        <div className="rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center py-20 text-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-            <Users className="w-8 h-8 text-slate-400 dark:text-slate-500" />
+        <div className="rounded-2xl border border-dashed border-line flex flex-col items-center justify-center py-20 text-center gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-surface-hover flex items-center justify-center">
+            <Users className="w-8 h-8 text-content-tertiary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">No members yet</p>
-            <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
+            <p className="text-sm font-medium text-content-secondary">No members yet</p>
+            <p className="mt-1 text-xs text-content-tertiary">
               Invite your first teammate to get started.
             </p>
           </div>
@@ -285,7 +285,7 @@ export default function MembersPage() {
             <button
               type="button"
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-all shadow-sm shadow-blue-600/20"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-primary-content hover:bg-primary-hover transition-all shadow-sm"
             >
               <Plus className="w-4 h-4" />
               Add Member
@@ -294,19 +294,19 @@ export default function MembersPage() {
         </div>
       ) : filtered.length === 0 ? (
         // No search results
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-6 py-16 flex flex-col items-center gap-3 text-center shadow-sm">
-          <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-            <Search className="w-5 h-5 text-slate-400" />
+        <div className="rounded-2xl border border-line bg-surface px-6 py-16 flex flex-col items-center gap-3 text-center shadow-sm">
+          <div className="w-12 h-12 rounded-full bg-surface-hover flex items-center justify-center">
+            <Search className="w-5 h-5 text-content-tertiary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">No results found</p>
-            <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
+            <p className="text-sm font-medium text-content-secondary">No results found</p>
+            <p className="mt-1 text-xs text-content-tertiary">
               No members match &ldquo;{search}&rdquo;
             </p>
           </div>
           <button
             onClick={() => setSearch('')}
-            className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+            className="text-xs text-primary hover:underline"
           >
             Clear search
           </button>

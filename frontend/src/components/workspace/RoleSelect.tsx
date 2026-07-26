@@ -33,11 +33,11 @@ export default function RoleSelect({
         disabled={isDisabled}
         onChange={(event) => onChange(event.target.value)}
         className={clsx(
-          'w-full appearance-none rounded-lg border bg-white font-medium text-slate-800 outline-none transition',
-          'focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-60',
-          'dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/30',
+          'w-full appearance-none rounded-lg border bg-surface font-medium text-content outline-none transition',
+          'focus:border-line-focus focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-60',
+          '',
           size === 'sm' ? 'h-9 px-3 pr-9 text-xs' : 'h-10 px-3 pr-10 text-sm',
-          value ? 'border-slate-300' : 'border-slate-200 text-slate-500',
+          value ? 'border-line-strong' : 'border-line text-content-tertiary',
         )}
       >
         {!value && <option value="">{placeholder}</option>}
@@ -47,7 +47,7 @@ export default function RoleSelect({
           </option>
         ))}
       </select>
-      <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-slate-400">
+      <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-content-tertiary">
         {loading ? (
           <Loader2 className="h-4 w-4 animate-spin" />
         ) : (

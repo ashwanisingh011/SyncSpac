@@ -75,21 +75,21 @@ export default function TaskAnalyticsChart({ allTasks, sprints }: TaskAnalyticsC
   }, [sprints]);
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded border border-[#DFE1E6] dark:border-slate-800 p-5">
+    <div className="bg-surface rounded border border-line p-5">
       <div className="flex items-start justify-between mb-4 flex-wrap gap-2">
         <div>
-          <h3 className="text-sm font-semibold text-[#091E42] dark:text-slate-105 font-sans">Task Analytics</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-sans">Weekly completion &amp; sprint velocity</p>
+          <h3 className="text-sm font-semibold text-content font-sans">Task Analytics</h3>
+          <p className="text-xs text-content-tertiary mt-0.5 font-sans">Weekly completion &amp; sprint velocity</p>
         </div>
-        <div className="flex gap-1 bg-[#F4F5F7] dark:bg-slate-800 rounded p-0.5">
+        <div className="flex gap-1 bg-surface-hover rounded p-0.5">
           {tabs.map((t, i) => (
             <button
               key={t}
               onClick={() => setTab(i)}
               className={`px-3 py-1 rounded text-xs font-semibold font-sans transition-all ${
                 tab === i
-                  ? 'bg-white dark:bg-slate-700 text-[#0052CC] dark:text-white shadow-sm border border-[#DFE1E6] dark:border-slate-600'
-                  : 'text-[#42526E] hover:text-[#091E42] dark:text-slate-400 dark:hover:text-slate-205'
+                  ? 'bg-surface text-primary shadow-card border border-line'
+                  : 'text-content-secondary hover:text-content'
               }`}
             >
               {t}
@@ -103,23 +103,23 @@ export default function TaskAnalyticsChart({ allTasks, sprints }: TaskAnalyticsC
           <AreaChart data={taskTrendData} margin={{ top: 4, right: 4, left: -24, bottom: 0 }}>
             <defs>
               <linearGradient id="gradCompleted" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0052CC" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="#0052CC" stopOpacity={0} />
+                <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.15} />
+                <stop offset="95%" stopColor="var(--primary)" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="gradCreated" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#00875A" stopOpacity={0.12} />
-                <stop offset="95%" stopColor="#00875A" stopOpacity={0} />
+                <stop offset="5%" stopColor="var(--status-done)" stopOpacity={0.12} />
+                <stop offset="95%" stopColor="var(--status-done)" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#DFE1E6" className="dark:stroke-slate-800" vertical={false} />
-            <XAxis dataKey="day" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} />
-            <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} />
-            <Tooltip contentStyle={{ borderRadius: '4px', border: '1px solid #DFE1E6', fontSize: 12, backgroundColor: '#ffffff', color: '#1e293b' }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border-default)" className="" vertical={false} />
+            <XAxis dataKey="day" tick={{ fontSize: 11, fill: 'var(--content-tertiary)' }} tickLine={false} axisLine={false} />
+            <YAxis tick={{ fontSize: 11, fill: 'var(--content-tertiary)' }} tickLine={false} axisLine={false} />
+            <Tooltip contentStyle={{ borderRadius: '4px', border: '1px solid var(--border-default)', fontSize: 12, backgroundColor: '#ffffff', color: '#1e293b' }} />
             <Area
               type="monotone"
               dataKey="completed"
               name="Completed"
-              stroke="#0052CC"
+              stroke="var(--primary)"
               strokeWidth={2}
               fill="url(#gradCompleted)"
               dot={false}
@@ -129,7 +129,7 @@ export default function TaskAnalyticsChart({ allTasks, sprints }: TaskAnalyticsC
               type="monotone"
               dataKey="created"
               name="Created"
-              stroke="#00875A"
+              stroke="var(--status-done)"
               strokeWidth={2}
               fill="url(#gradCreated)"
               dot={false}
@@ -138,12 +138,12 @@ export default function TaskAnalyticsChart({ allTasks, sprints }: TaskAnalyticsC
           </AreaChart>
         ) : (
           <BarChart data={sprintData} margin={{ top: 4, right: 4, left: -24, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#DFE1E6" className="dark:stroke-slate-800" vertical={false} />
-            <XAxis dataKey="sprint" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} />
-            <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} />
-            <Tooltip contentStyle={{ borderRadius: '4px', border: '1px solid #DFE1E6', fontSize: 12, backgroundColor: '#ffffff', color: '#1e293b' }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border-default)" className="" vertical={false} />
+            <XAxis dataKey="sprint" tick={{ fontSize: 11, fill: 'var(--content-tertiary)' }} tickLine={false} axisLine={false} />
+            <YAxis tick={{ fontSize: 11, fill: 'var(--content-tertiary)' }} tickLine={false} axisLine={false} />
+            <Tooltip contentStyle={{ borderRadius: '4px', border: '1px solid var(--border-default)', fontSize: 12, backgroundColor: '#ffffff', color: '#1e293b' }} />
             <Bar dataKey="planned" name="Planned" fill="#DEEBFF" radius={[3, 3, 0, 0]} maxBarSize={28} />
-            <Bar dataKey="velocity" name="Velocity" fill="#0052CC" radius={[3, 3, 0, 0]} maxBarSize={28} />
+            <Bar dataKey="velocity" name="Velocity" fill="var(--primary)" radius={[3, 3, 0, 0]} maxBarSize={28} />
           </BarChart>
         )}
       </ResponsiveContainer>

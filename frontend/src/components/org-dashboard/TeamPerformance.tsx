@@ -90,18 +90,18 @@ export default function TeamPerformance({ allTasks, members }: TeamPerformancePr
   }, [performers]);
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded border border-[#DFE1E6] dark:border-slate-800 p-5">
+    <div className="bg-surface rounded border border-line p-5">
       <div className="flex items-start justify-between mb-5">
         <div>
-          <h3 className="text-sm font-semibold text-[#091E42] dark:text-slate-105 font-sans">Team Performance</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-sans">Top performers &amp; workload distribution</p>
+          <h3 className="text-sm font-semibold text-content font-sans">Team Performance</h3>
+          <p className="text-xs text-content-tertiary mt-0.5 font-sans">Top performers &amp; workload distribution</p>
         </div>
         <Trophy className="w-4 h-4 text-amber-400" />
       </div>
 
       {performers.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-8 text-center">
-          <p className="text-xs text-slate-400 dark:text-slate-500 font-sans">
+          <p className="text-xs text-content-tertiary font-sans">
             Assign tasks to team members to see performance data.
           </p>
         </div>
@@ -114,12 +114,12 @@ export default function TeamPerformance({ allTasks, members }: TeamPerformancePr
                 <span
                   className={`text-[11px] font-bold w-4 shrink-0 ${
                     i === 0
-                      ? 'text-amber-500'
+                      ? 'text-warning'
                       : i === 1
-                      ? 'text-slate-400'
+                      ? 'text-content-tertiary'
                       : i === 2
                       ? 'text-orange-400'
-                      : 'text-slate-300 dark:text-slate-600'
+                      : 'text-content-tertiary'
                   }`}
                 >
                   #{i + 1}
@@ -132,21 +132,21 @@ export default function TeamPerformance({ allTasks, members }: TeamPerformancePr
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate font-sans">
+                    <span className="text-xs font-semibold text-content truncate font-sans">
                       {p.name}
                     </span>
-                    <span className="text-xs font-bold text-[#0052CC] dark:text-blue-400 ml-2 font-sans">
+                    <span className="text-xs font-bold text-primary ml-2 font-sans">
                       {p.score}%
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <div className="flex-1 h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div className="flex-1 h-1 bg-surface-hover rounded-full overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-[#0052CC]"
+                        className="h-full rounded-full bg-primary"
                         style={{ width: `${p.score}%` }}
                       />
                     </div>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 shrink-0 font-sans">
+                    <span className="text-[10px] text-content-tertiary shrink-0 font-sans">
                       {p.completed} done
                     </span>
                   </div>
@@ -156,19 +156,19 @@ export default function TeamPerformance({ allTasks, members }: TeamPerformancePr
           </div>
 
           {/* Workload chart */}
-          <div className="border-t border-[#DFE1E6] dark:border-slate-800 pt-4">
-            <p className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 font-sans">
+          <div className="border-t border-line pt-4">
+            <p className="text-[11px] font-semibold text-content-tertiary uppercase tracking-wider mb-3 font-sans">
               Team Workload
             </p>
             <ResponsiveContainer width="100%" height={120}>
               <BarChart data={workloadData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#DFE1E6" className="dark:stroke-slate-800" vertical={false} />
-                <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#94a3b8' }} tickLine={false} axisLine={false} />
-                <YAxis tick={{ fontSize: 10, fill: '#94a3b8' }} tickLine={false} axisLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-default)" className="" vertical={false} />
+                <XAxis dataKey="name" tick={{ fontSize: 10, fill: 'var(--content-tertiary)' }} tickLine={false} axisLine={false} />
+                <YAxis tick={{ fontSize: 10, fill: 'var(--content-tertiary)' }} tickLine={false} axisLine={false} />
                 <Tooltip
-                  contentStyle={{ borderRadius: '4px', border: '1px solid #DFE1E6', fontSize: 11 }}
+                  contentStyle={{ borderRadius: '4px', border: '1px solid var(--border-default)', fontSize: 11 }}
                 />
-                <Bar dataKey="tasks" fill="#0052CC" radius={[3, 3, 0, 0]} maxBarSize={24} />
+                <Bar dataKey="tasks" fill="var(--primary)" radius={[3, 3, 0, 0]} maxBarSize={24} />
               </BarChart>
             </ResponsiveContainer>
           </div>
