@@ -23,18 +23,18 @@ export default function OrgAdminIssuePage({ params }: OrgIssuePageProps) {
 
   return (
     <ProjectDataProvider projectKey={projectKey}>
-      <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950">
+      <div className="flex flex-col min-h-screen bg-surface-sunken">
         {/* Back navigation bar */}
-        <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shrink-0">
+        <div className="flex items-center gap-3 px-6 py-3 bg-surface border-b border-line shrink-0">
           <button
             onClick={() => router.push(`/dashboard/projects/${projectKey}`)}
-            className="flex items-center gap-1.5 p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-all cursor-pointer"
+            className="flex items-center gap-1.5 p-1.5 rounded-lg border border-line hover:bg-surface-hover text-content-tertiary hover:text-content transition-all cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span className="text-xs font-medium">Back to {projectKey}</span>
           </button>
-          <span className="text-xs text-slate-400 dark:text-slate-500">/</span>
-          <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{issueKey}</span>
+          <span className="text-xs text-content-tertiary">/</span>
+          <span className="text-xs font-semibold text-content-secondary">{issueKey}</span>
         </div>
 
         {/* Issue page content — shares the same component used by member project pages */}

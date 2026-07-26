@@ -17,7 +17,7 @@ export default function DashboardTeamDetailPage({ params }: TeamDetailPageProps)
   const router = useRouter();
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6">
+    <div className="bg-surface rounded-2xl border border-line p-6">
       <TeamDetailPageContent
         teamId={teamId}
         onBack={() => router.push('/dashboard/teams')}

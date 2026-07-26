@@ -419,14 +419,14 @@ export default function TaskDetailsDialog({
           <div className="flex flex-1 overflow-hidden">
             {/* Left Panel - Details, Checklist, Attachments, Comments */}
             <div className="flex-1 overflow-y-auto px-6 py-5">
-              <h2 className="text-xl font-bold text-slate-855 leading-snug">{task?.title}</h2>
+              <h2 className="text-xl font-bold text-slate-900 leading-snug">{task?.title}</h2>
 
               {/* Description */}
               <div className="mt-4">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
                   Description
                 </h4>
-                <p className="mt-2 text-sm leading-relaxed text-slate-650">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   {task?.description || <span className="italic text-slate-400">No description provided.</span>}
                 </p>
               </div>
@@ -449,14 +449,14 @@ export default function TaskDetailsDialog({
                           onChange={() => handleToggleChecklist(item._id, item.isCompleted)}
                           className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
                         />
-                        <span className={item.isCompleted ? 'line-through text-slate-450' : 'font-medium'}>
+                        <span className={item.isCompleted ? 'line-through text-slate-500' : 'font-medium'}>
                           {item.title}
                         </span>
                       </label>
                       <button
                         type="button"
                         onClick={() => handleDeleteChecklist(item._id)}
-                        className="text-slate-400 hover:text-red-650"
+                        className="text-slate-400 hover:text-red-600"
                         aria-label="Delete item"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -501,7 +501,7 @@ export default function TaskDetailsDialog({
 
                 {attachmentsLoading && (
                   <div className="mt-3 flex justify-center py-2">
-                    <Loader2 className="h-5 w-5 animate-spin text-blue-650" />
+                    <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
                   </div>
                 )}
 
@@ -521,7 +521,7 @@ export default function TaskDetailsDialog({
                           download
                           target="_blank"
                           rel="noreferrer"
-                          className="rounded-lg p-1 text-slate-450 hover:bg-slate-100 hover:text-blue-600"
+                          className="rounded-lg p-1 text-slate-500 hover:bg-slate-100 hover:text-blue-600"
                           aria-label="Download attachment"
                         >
                           <Download className="h-3.5 w-3.5" />
@@ -529,7 +529,7 @@ export default function TaskDetailsDialog({
                         <button
                           type="button"
                           onClick={() => handleDeleteAttachment(file._id)}
-                          className="rounded-lg p-1 text-slate-455 hover:bg-slate-100 hover:text-red-600"
+                          className="rounded-lg p-1 text-slate-500 hover:bg-slate-100 hover:text-red-600"
                           aria-label="Delete attachment"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
@@ -554,7 +554,7 @@ export default function TaskDetailsDialog({
                     onChange={(e) => handleCommentChange(e.target.value)}
                     onKeyDown={handleTextareaKeyDown}
                     disabled={creatingComment}
-                    className="w-full rounded-xl border border-slate-200 p-3 text-sm text-slate-850 focus:border-blue-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 p-3 text-sm text-slate-800 focus:border-blue-500 focus:outline-none"
                     rows={3}
                   />
 
@@ -572,7 +572,7 @@ export default function TaskDetailsDialog({
                                 : 'text-slate-700 hover:bg-slate-50'
                             }`}
                           >
-                            <span className="h-5 w-5 rounded-full bg-blue-100 text-[10px] font-black text-blue-750 flex items-center justify-center shrink-0">
+                            <span className="h-5 w-5 rounded-full bg-blue-100 text-[10px] font-black text-blue-700 flex items-center justify-center shrink-0">
                               {member.name[0]}
                             </span>
                             <div className="min-w-0 flex-1">
@@ -604,7 +604,7 @@ export default function TaskDetailsDialog({
 
                     return (
                       <li key={comment._id} className="flex gap-3">
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-650 text-xs font-bold text-white">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-xs font-bold text-white">
                           {author?.avatar ? (
                             <img
                               src={author.avatar}
@@ -625,7 +625,7 @@ export default function TaskDetailsDialog({
                               })}
                             </p>
                           </div>
-                          <p className="mt-1 text-xs text-slate-650 leading-relaxed white-space-pre-wrap">
+                          <p className="mt-1 text-xs text-slate-600 leading-relaxed white-space-pre-wrap">
                             {comment.content}
                           </p>
 
@@ -757,7 +757,7 @@ export default function TaskDetailsDialog({
                   </span>
                 </div>
                 {isOverdue && (
-                  <div className="mt-1.5 flex items-center gap-1 text-[10px] font-semibold text-red-650">
+                  <div className="mt-1.5 flex items-center gap-1 text-[10px] font-semibold text-red-600">
                     <AlertCircle className="h-3 w-3" /> Overdue
                   </div>
                 )}
@@ -791,7 +791,7 @@ export default function TaskDetailsDialog({
                     </div>
                   </div>
                 ) : (
-                  <p className="mt-1 text-xs italic text-slate-450">Unassigned</p>
+                  <p className="mt-1 text-xs italic text-slate-500">Unassigned</p>
                 )}
               </div>
             </div>

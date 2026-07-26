@@ -43,7 +43,7 @@ export default function ClientDashboardOverviewPage(): React.JSX.Element {
   if (!selectedProject) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
-        <FolderOpen className="h-12 w-12 text-slate-355 mb-3 animate-pulse" />
+        <FolderOpen className="h-12 w-12 text-slate-400 mb-3 animate-pulse" />
         <h3 className="text-sm font-bold text-slate-800">No Active Projects</h3>
         <p className="text-xs text-slate-500 mt-1 max-w-sm">
           Your organization has not assigned any active projects to your workspace yet.
@@ -66,8 +66,8 @@ export default function ClientDashboardOverviewPage(): React.JSX.Element {
       {/* 3. Task Status Overview */}
       {/* <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 shadow-sm">
         <div className="mb-4">
-          <h3 className="text-sm font-semibold text-slate-805 dark:text-white">Task Status Overview</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-455 mt-0.5">Summary of task progress in the current cycle</p>
+          <h3 className="text-sm font-semibold text-slate-800 dark:text-white">Task Status Overview</h3>
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Summary of task progress in the current cycle</p>
         </div>
         <div className="grid grid-cols-2 gap-3.5 md:grid-cols-3 xl:grid-cols-6">
           {stats.statusOverview.map((item) => (

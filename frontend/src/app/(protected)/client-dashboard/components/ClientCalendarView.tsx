@@ -132,7 +132,7 @@ export default function ClientCalendarView({
       case 'low':
         return 'bg-blue-50 text-blue-700 border-blue-100 hover:bg-blue-100/60';
       default:
-        return 'bg-slate-50 text-slate-650 border-slate-100 hover:bg-slate-100/60';
+        return 'bg-slate-50 text-slate-600 border-slate-100 hover:bg-slate-100/60';
     }
   };
 

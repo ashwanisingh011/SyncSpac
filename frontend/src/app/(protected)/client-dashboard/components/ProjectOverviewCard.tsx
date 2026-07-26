@@ -23,7 +23,7 @@ function getStatusBadge(status?: Project['status']): { label: string; className:
     case 'on-hold':
       return { label: 'On Hold', className: 'bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border border-amber-200/50 dark:border-amber-900/30' };
     default:
-      return { label: 'In Progress', className: 'bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-450 border border-indigo-200/50 dark:border-indigo-900/30' };
+      return { label: 'In Progress', className: 'bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-900/30' };
   }
 }
 
@@ -84,14 +84,14 @@ export default function ProjectOverviewCard({
               </p>
 
               {project && (
-                <div className="mt-4 flex flex-wrap gap-4 text-xs text-slate-450 dark:text-slate-500 font-medium">
+                <div className="mt-4 flex flex-wrap gap-4 text-xs text-slate-500 dark:text-slate-500 font-medium">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5" />
-                    <span className="font-semibold text-slate-600 dark:text-slate-450">Start Date:</span> {startDate}
+                    <span className="font-semibold text-slate-600 dark:text-slate-500">Start Date:</span> {startDate}
                   </span>
                   <span className="flex items-center gap-1.5">
                     <ArrowUpRight className="w-3.5 h-3.5" />
-                    <span className="font-semibold text-slate-600 dark:text-slate-450">Expected Delivery:</span> {expectedDelivery}
+                    <span className="font-semibold text-slate-600 dark:text-slate-500">Expected Delivery:</span> {expectedDelivery}
                   </span>
                 </div>
               )}
@@ -102,10 +102,10 @@ export default function ProjectOverviewCard({
         {project && (
           <div className="w-full shrink-0 lg:w-60 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border border-slate-100 dark:border-slate-800/80 rounded-2xl p-4.5 shadow-sm">
             <div className="mb-2 flex items-end justify-between">
-              <span className="text-xs font-semibold text-slate-500 dark:text-slate-450">Overall Progress</span>
-              <span className="text-2xl font-black text-emerald-600 dark:text-emerald-450">{progressPercent}%</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-500">Overall Progress</span>
+              <span className="text-2xl font-black text-emerald-600 dark:text-emerald-400">{progressPercent}%</span>
             </div>
-            <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-850">
+            <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
               <div
                 className="h-full rounded-full bg-emerald-500 transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
@@ -113,7 +113,7 @@ export default function ProjectOverviewCard({
             </div>
             <div className="mt-3.5 flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              <span className="text-xs font-bold text-emerald-600 dark:text-emerald-450">Project On Track</span>
+              <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">Project On Track</span>
             </div>
           </div>
         )}

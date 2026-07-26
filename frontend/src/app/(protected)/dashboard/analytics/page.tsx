@@ -16,13 +16,13 @@ export default function AnalyticsPage() {
 
   if (!isAnalyticsIncluded) {
     return (
-      <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 text-center space-y-6 max-w-xl mx-auto mt-10 font-sans shadow-xl">
-        <div className="w-16 h-16 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-md">
+      <div className="bg-surface rounded-3xl p-8 border border-line text-center space-y-6 max-w-xl mx-auto mt-10 font-sans shadow-xl">
+        <div className="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-md">
           📊
         </div>
         <div className="space-y-2">
-          <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Advanced Analytics &amp; Reports</h2>
-          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md mx-auto">
+          <h2 className="text-xl font-extrabold text-content">Advanced Analytics &amp; Reports</h2>
+          <p className="text-xs text-content-tertiary leading-relaxed max-w-md mx-auto">
             Advanced analytics, performance charts, and sprint velocity reports are not available on your current plan ({currentOrg?.subscriptionStatus?.planName || 'Free'}).
           </p>
         </div>

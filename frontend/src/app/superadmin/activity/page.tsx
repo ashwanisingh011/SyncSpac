@@ -31,7 +31,7 @@ export default function SuperAdminActivityPage() {
           <select
             value={auditActionFilter}
             onChange={(e) => setAuditActionFilter(e.target.value)}
-            className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-205 dark:border-slate-800 rounded-lg px-2 py-1.5 outline-none cursor-pointer"
+            className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-1.5 outline-none cursor-pointer"
           >
             <option value="">All Actions</option>
             <option value="ban_user">Ban User</option>
@@ -43,19 +43,19 @@ export default function SuperAdminActivityPage() {
           </select>
 
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] text-slate-450 dark:text-slate-500 font-bold uppercase">From</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-500 font-bold uppercase">From</span>
             <input
               type="date"
               value={auditFromFilter}
               onChange={(e) => setAuditFromFilter(e.target.value)}
-              className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-205 dark:border-slate-800 rounded-lg px-2 py-1 outline-none text-slate-655 dark:text-slate-350 cursor-pointer"
+              className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-1 outline-none text-slate-700 dark:text-slate-400 cursor-pointer"
             />
-            <span className="text-[10px] text-slate-450 dark:text-slate-500 font-bold uppercase">To</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-500 font-bold uppercase">To</span>
             <input
               type="date"
               value={auditToFilter}
               onChange={(e) => setAuditToFilter(e.target.value)}
-              className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-205 dark:border-slate-800 rounded-lg px-2 py-1 outline-none text-slate-655 dark:text-slate-350 cursor-pointer"
+              className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-1 outline-none text-slate-700 dark:text-slate-400 cursor-pointer"
             />
           </div>
         </div>
@@ -77,7 +77,7 @@ export default function SuperAdminActivityPage() {
           <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-slate-150 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase font-black text-xs">
+                <tr className="border-b border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase font-black text-xs">
                   <th className="px-4 py-3">Action</th>
                   <th className="px-4 py-3">Performed By</th>
                   <th className="px-4 py-3">Description</th>
@@ -97,23 +97,23 @@ export default function SuperAdminActivityPage() {
                       <td className="px-4 py-3.5">
                         <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                           log.action.includes('ban') || log.action.includes('suspend')
-                            ? 'bg-red-50 text-red-655 dark:bg-red-950/20 dark:text-red-450'
+                            ? 'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400'
                             : log.action.includes('unban') || log.action.includes('activate')
-                            ? 'bg-emerald-50 text-emerald-655 dark:bg-emerald-950/20 dark:text-emerald-450'
-                            : 'bg-indigo-50 text-indigo-650 dark:bg-indigo-950/20 dark:text-indigo-400'
+                            ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400'
+                            : 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/20 dark:text-indigo-400'
                         }`}>
                           {log.action.replace('_', ' ')}
                         </span>
                       </td>
                       <td className="px-4 py-3.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
                         {actor}
-                        <span className="text-[10px] text-slate-450 dark:text-slate-550 font-normal block">{log.performedBy?.email}</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-500 font-normal block">{log.performedBy?.email}</span>
                       </td>
-                      <td className="px-4 py-3.5 text-xs text-slate-655 dark:text-slate-350 max-w-xs md:max-w-md truncate">
+                      <td className="px-4 py-3.5 text-xs text-slate-700 dark:text-slate-400 max-w-xs md:max-w-md truncate">
                         <span className="font-semibold block">{log.reason}</span>
-                        {targetText && <span className="text-[10px] text-slate-450 dark:text-slate-500">{targetText}</span>}
+                        {targetText && <span className="text-[10px] text-slate-500 dark:text-slate-500">{targetText}</span>}
                       </td>
-                      <td className="px-4 py-3.5 text-xs text-slate-400 dark:text-slate-550">
+                      <td className="px-4 py-3.5 text-xs text-slate-400 dark:text-slate-500">
                         {new Date(log.createdAt).toLocaleString()}
                       </td>
                     </tr>
@@ -138,10 +138,10 @@ export default function SuperAdminActivityPage() {
                   <div className="flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 pb-2">
                     <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                       log.action.includes('ban') || log.action.includes('suspend')
-                        ? 'bg-red-50 text-red-655 dark:bg-red-950/20 dark:text-red-450'
+                        ? 'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400'
                         : log.action.includes('unban') || log.action.includes('activate')
-                        ? 'bg-emerald-50 text-emerald-655 dark:bg-emerald-950/20 dark:text-emerald-450'
-                        : 'bg-indigo-50 text-indigo-650 dark:bg-indigo-950/20 dark:text-indigo-400'
+                        ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400'
+                        : 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/20 dark:text-indigo-400'
                     }`}>
                       {log.action.replace('_', ' ')}
                     </span>
@@ -151,7 +151,7 @@ export default function SuperAdminActivityPage() {
                   </div>
 
                   {/* Description / Reason */}
-                  <div className="text-xs text-slate-700 dark:text-slate-205 leading-relaxed">
+                  <div className="text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
                     <span className="font-semibold block text-slate-800 dark:text-white mb-0.5">{log.reason}</span>
                     {targetText && <span className="text-[10px] text-slate-400 dark:text-slate-500 block">{targetText}</span>}
                   </div>
@@ -162,7 +162,7 @@ export default function SuperAdminActivityPage() {
                       <span className="text-slate-400 block text-[9px] uppercase font-semibold">Performed By</span>
                       <span className="font-semibold text-slate-700 dark:text-slate-300">{actor}</span>
                     </div>
-                    <span className="text-slate-450 dark:text-slate-550 text-[10px]">{log.performedBy?.email}</span>
+                    <span className="text-slate-500 dark:text-slate-500 text-[10px]">{log.performedBy?.email}</span>
                   </div>
                 </div>
               );

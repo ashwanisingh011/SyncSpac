@@ -32,7 +32,7 @@ export default function ProgressDonutChart({
 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 shadow-sm flex flex-col h-full">
-      <div className="flex items-center gap-2 border-b border-slate-50 dark:border-slate-850 pb-3 mb-4 shrink-0">
+      <div className="flex items-center gap-2 border-b border-slate-50 dark:border-slate-800 pb-3 mb-4 shrink-0">
         <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-slate-800 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
           <Award className="h-4 w-4" />
         </div>
@@ -64,7 +64,7 @@ export default function ProgressDonutChart({
           </ResponsiveContainer>
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-2xl font-black text-slate-800 dark:text-white tracking-tight">{progressPercent}%</span>
-            <span className="text-[9px] font-bold text-slate-455 dark:text-slate-500 uppercase tracking-wider">Completed</span>
+            <span className="text-[9px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Completed</span>
           </div>
         </div>
 
@@ -78,7 +78,7 @@ export default function ProgressDonutChart({
                 <span className="h-3 w-3 rounded" style={{ background: item.color }} />
                 <span className="font-semibold text-slate-600 dark:text-slate-400">{item.label}</span>
               </div>
-              <span className="font-bold text-slate-850 dark:text-slate-200">
+              <span className="font-bold text-slate-800 dark:text-slate-200">
                 {item.value}
                 {stats.total > 0 && (
                   <span className="ml-1 font-medium text-slate-400 dark:text-slate-500 text-[10px]">

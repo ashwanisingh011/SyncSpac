@@ -140,7 +140,7 @@ export default function SuperAdminUsersPage() {
           <select
             value={userOrgFilter}
             onChange={(e) => setUserOrgFilter(e.target.value)}
-            className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-2.5 outline-none w-full text-slate-700 dark:text-slate-300"
+            className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-2.5 outline-none w-full text-slate-700 dark:text-slate-300"
           >
             <option value="">All Organizations</option>
             <option value="no_workspace">No Workspace</option>
@@ -155,7 +155,7 @@ export default function SuperAdminUsersPage() {
           <select
             value={userRoleFilter}
             onChange={(e) => setUserRoleFilter(e.target.value)}
-            className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-2.5 outline-none w-full text-slate-700 dark:text-slate-300"
+            className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-2.5 outline-none w-full text-slate-700 dark:text-slate-300"
           >
             <option value="">All Roles</option>
             <option value="org_admin">Org Admin</option>
@@ -170,7 +170,7 @@ export default function SuperAdminUsersPage() {
           <select
             value={userStatusFilter}
             onChange={(e) => setUserStatusFilter(e.target.value)}
-            className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-2.5 outline-none w-full text-slate-700 dark:text-slate-300"
+            className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-2.5 outline-none w-full text-slate-700 dark:text-slate-300"
           >
             <option value="">All Statuses</option>
             <option value="true">Active Only</option>
@@ -181,7 +181,7 @@ export default function SuperAdminUsersPage() {
 
       {/* Main Content Area */}
       {error && (
-        <div className="bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/50 rounded-xl p-4 text-red-655 dark:text-red-400 text-xs">
+        <div className="bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/50 rounded-xl p-4 text-red-700 dark:text-red-400 text-xs">
           {error}
         </div>
       )}
@@ -220,7 +220,7 @@ export default function SuperAdminUsersPage() {
                       {group.orgName}
                     </h3>
                   </div>
-                  <span className="bg-slate-50 dark:bg-slate-805 text-slate-600 dark:text-slate-350 text-xs px-2.5 py-1 rounded-full font-semibold border border-slate-100 dark:border-slate-750">
+                  <span className="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs px-2.5 py-1 rounded-full font-semibold border border-slate-100 dark:border-slate-700">
                     Total Users: {group.totalCount}
                   </span>
                 </div>
@@ -252,7 +252,7 @@ export default function SuperAdminUsersPage() {
                             >
                               <td className="px-4 py-3">
                                 <div className="flex items-center gap-2.5">
-                                  <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-slate-800 text-blue-650 dark:text-blue-400 flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
+                                  <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
                                     {usr.avatar ? (
                                       <img
                                         src={usr.avatar}
@@ -267,21 +267,21 @@ export default function SuperAdminUsersPage() {
                                     <span className="font-semibold text-slate-800 dark:text-slate-200 block leading-tight">
                                       {usr.name}
                                     </span>
-                                    <span className="text-xs text-slate-450">{usr.email}</span>
+                                    <span className="text-xs text-slate-500">{usr.email}</span>
                                   </div>
                                 </div>
                               </td>
-                              <td className="px-4 py-3 font-medium capitalize text-slate-655 dark:text-slate-400 text-xs">
+                              <td className="px-4 py-3 font-medium capitalize text-slate-700 dark:text-slate-400 text-xs">
                                 {usr.roleLabel || usr.role}
                               </td>
-                              <td className="px-4 py-3 text-xs text-slate-500 dark:text-slate-450">
+                              <td className="px-4 py-3 text-xs text-slate-500 dark:text-slate-500">
                                 {new Date(usr.createdAt).toLocaleDateString()}
                               </td>
                               <td className="px-4 py-3">
                                 <span
                                   className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${usr.status === 'active'
-                                      ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-450'
-                                      : 'bg-red-50 text-red-655 dark:bg-red-950/20 dark:text-red-400'
+                                      ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400'
+                                      : 'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400'
                                     }`}
                                 >
                                   {usr.status === 'active' ? 'Active' : 'Banned'}
@@ -290,7 +290,7 @@ export default function SuperAdminUsersPage() {
                               <td className="px-4 py-3 text-right shrink-0">
                                 <button
                                   onClick={() => setSelectedUser(usr)}
-                                  className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-600 dark:text-slate-350 cursor-pointer"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 cursor-pointer"
                                 >
                                   <Eye className="w-3.5 h-3.5" />
                                   View
@@ -311,7 +311,7 @@ export default function SuperAdminUsersPage() {
                         >
                           {/* User Info Row */}
                           <div className="flex items-start gap-3">
-                            <div className="w-10 h-10 rounded-full bg-blue-105 dark:bg-slate-800 text-blue-650 dark:text-blue-400 flex items-center justify-center font-bold text-sm shrink-0 overflow-hidden">
+                            <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm shrink-0 overflow-hidden">
                               {usr.avatar ? (
                                 <img
                                   src={usr.avatar}
@@ -326,7 +326,7 @@ export default function SuperAdminUsersPage() {
                               <span className="font-semibold text-slate-800 dark:text-slate-200 block text-sm leading-tight truncate">
                                 {usr.name}
                               </span>
-                              <span className="text-xs text-slate-450 block truncate mt-0.5">{usr.email}</span>
+                              <span className="text-xs text-slate-500 block truncate mt-0.5">{usr.email}</span>
                             </div>
                           </div>
 
@@ -334,7 +334,7 @@ export default function SuperAdminUsersPage() {
                           <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
                             <div>
                               <span className="text-slate-400 block text-[10px] uppercase font-semibold">Role</span>
-                              <span className="font-medium capitalize text-slate-655 dark:text-slate-300 block mt-0.5">
+                              <span className="font-medium capitalize text-slate-700 dark:text-slate-300 block mt-0.5">
                                 {usr.roleLabel || usr.role}
                               </span>
                             </div>
@@ -350,8 +350,8 @@ export default function SuperAdminUsersPage() {
                               <span className="text-slate-400 block text-[10px] uppercase font-semibold mb-0.5">Status</span>
                               <span
                                 className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${usr.status === 'active'
-                                    ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-450'
-                                    : 'bg-red-50 text-red-655 dark:bg-red-950/20 dark:text-red-400'
+                                    ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400'
+                                    : 'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400'
                                   }`}
                               >
                                 {usr.status === 'active' ? 'Active' : 'Banned'}
@@ -363,7 +363,7 @@ export default function SuperAdminUsersPage() {
                           <div className="flex items-center justify-end pt-1">
                             <button
                               onClick={() => setSelectedUser(usr)}
-                              className="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-600 dark:text-slate-350 cursor-pointer w-full"
+                              className="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 cursor-pointer w-full"
                             >
                               <Eye className="w-3.5 h-3.5" />
                               View
@@ -397,11 +397,11 @@ export default function SuperAdminUsersPage() {
                             onClick={() =>
                               setPages((prev) => ({ ...prev, [group.orgId]: currentPage - 1 }))
                             }
-                            className="p-1.5 rounded-lg border border-slate-205 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-850 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-slate-600 dark:text-slate-350"
+                            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-slate-600 dark:text-slate-400"
                           >
                             <ChevronLeft className="w-3.5 h-3.5" />
                           </button>
-                          <span className="text-xs text-slate-550 font-semibold px-2">
+                          <span className="text-xs text-slate-500 font-semibold px-2">
                             Page {currentPage} of {totalPages}
                           </span>
                           <button
@@ -409,7 +409,7 @@ export default function SuperAdminUsersPage() {
                             onClick={() =>
                               setPages((prev) => ({ ...prev, [group.orgId]: currentPage + 1 }))
                             }
-                            className="p-1.5 rounded-lg border border-slate-205 dark:border-slate-800 bg-white dark:bg-slate-955 hover:bg-slate-50 dark:hover:bg-slate-850 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-slate-600 dark:text-slate-350"
+                            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-slate-600 dark:text-slate-400"
                           >
                             <ChevronRight className="w-3.5 h-3.5" />
                           </button>

@@ -41,7 +41,7 @@ function ConfirmModal({
       />
 
       {/* Dialog */}
-      <div className="relative w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.15)] animate-[welcomeSlideUp_0.2s_ease_forwards]">
+      <div className="relative w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.15)] animate-scale-in">
         {/* Close */}
         <button
           onClick={onCancel}
@@ -470,21 +470,21 @@ export default function PlansListView({ onNavigate, onEditPlan }: PlansListViewP
                     <div className="bg-slate-50 dark:bg-slate-900/50 rounded-xl p-3.5 space-y-2.5 text-xs">
                       <div className="flex items-center justify-between">
                         <span className="text-slate-400 font-medium">Users Limit:</span>
-                        <span className="font-semibold text-slate-800 dark:text-slate-250">{renderLimit(plan.limits?.users)}</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">{renderLimit(plan.limits?.users)}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-slate-400 font-medium">Projects Limit:</span>
-                        <span className="font-semibold text-slate-800 dark:text-slate-250">{renderLimit(plan.limits?.projects)}</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">{renderLimit(plan.limits?.projects)}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-slate-400 font-medium">Storage Limit:</span>
-                        <span className="font-semibold text-slate-800 dark:text-slate-250">{renderLimit(plan.limits?.storage, ' GB')}</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">{renderLimit(plan.limits?.storage, ' GB')}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-slate-400 font-medium">API Calls Limit:</span>
-                        <span className="font-semibold text-slate-800 dark:text-slate-250">{renderLimit(plan.limits?.apiCalls, '/mo')}</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">{renderLimit(plan.limits?.apiCalls, '/mo')}</span>
                       </div>
-                      <div className="flex items-center justify-between border-t border-slate-150/60 dark:border-slate-800/80 pt-2.5">
+                      <div className="flex items-center justify-between border-t border-slate-100/60 dark:border-slate-800/80 pt-2.5">
                         <span className="text-slate-400 font-medium">Included Features:</span>
                         <span className="inline-flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200">
                           {plan.features.filter((f) => f.included).length} enabled

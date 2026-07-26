@@ -53,7 +53,7 @@ export default function StatCards({ stats, loading = false }: StatCardsProps) {
       label: 'Flagged Issues',
       value: stats?.flaggedIssues !== undefined ? stats.flaggedIssues.toLocaleString() : '...',
       icon: AlertTriangle,
-      color: { bg: 'bg-red-50 dark:bg-red-950/20', icon: 'text-red-650 dark:text-red-400' },
+      color: { bg: 'bg-red-50 dark:bg-red-950/20', icon: 'text-red-600 dark:text-red-400' },
       change: '-4.2%',
     },
     {
@@ -73,7 +73,7 @@ export default function StatCards({ stats, loading = false }: StatCardsProps) {
         return (
           <div
             key={card.id}
-            className="bg-white rounded-xl border border-slate-100 p-5 hover:shadow-md hover:border-slate-200 dark:bg-slate-900 dark:border-slate-800 dark:hover:border-slate-750 transition-all duration-200 cursor-default group"
+            className="bg-white rounded-xl border border-slate-100 p-5 hover:shadow-md hover:border-slate-200 dark:bg-slate-900 dark:border-slate-800 dark:hover:border-slate-700 transition-all duration-200 cursor-default group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className={`w-10 h-10 rounded-lg ${card.color.bg} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>

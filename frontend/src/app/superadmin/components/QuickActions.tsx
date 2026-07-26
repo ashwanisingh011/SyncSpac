@@ -92,7 +92,7 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
       id: 'security',
       label: 'Security Center',
       icon: Shield,
-      color: 'from-red-500 to-red-655 shadow-red-200 dark:shadow-none',
+      color: 'from-red-500 to-red-700 shadow-red-200 dark:shadow-none',
       onClick: () => setSecurityOpen(true)
     },
     {
@@ -115,7 +115,7 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
     <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 p-6">
       <div className="mb-5">
         <h3 className="text-sm font-semibold text-slate-800 dark:text-white">Quick Actions</h3>
-        <p className="text-xs text-slate-400 dark:text-slate-450 mt-0.5">Common admin operations</p>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Common admin operations</p>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {actions.map((action) => {
@@ -149,7 +149,7 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
                 <Building2 className="w-4 h-4 text-blue-600" />
                 Create Organization Workspace
               </h3>
-              <button onClick={() => setCreateOrgOpen(false)} className="text-slate-400 hover:text-slate-655 dark:hover:text-slate-350 cursor-pointer">
+              <button onClick={() => setCreateOrgOpen(false)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-400 cursor-pointer">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -162,7 +162,7 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
             )}
 
             {successMsg && (
-              <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/50 text-emerald-700 dark:text-emerald-450 p-3 rounded-lg text-xs font-semibold flex items-center gap-2">
+              <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/50 text-emerald-700 dark:text-emerald-400 p-3 rounded-lg text-xs font-semibold flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>{successMsg}</span>
               </div>
@@ -198,7 +198,7 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
                 <select
                   value={orgPlan}
                   onChange={(e) => setOrgPlan(e.target.value as any)}
-                  className="w-full text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-slate-705 dark:text-slate-350 focus:outline-none"
+                  className="w-full text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-400 focus:outline-none"
                 >
                   <option value="free">Free</option>
                   <option value="pro">Pro ($49/mo)</option>
@@ -211,7 +211,7 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
                 <button
                   type="button"
                   onClick={() => setCreateOrgOpen(false)}
-                  className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-850 cursor-pointer font-semibold"
+                  className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer font-semibold"
                 >
                   Cancel
                 </button>
@@ -238,29 +238,29 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
                 <Shield className="w-4 h-4 text-red-600" />
                 Security & Platform Diagnostics
               </h3>
-              <button onClick={() => setSecurityOpen(false)} className="text-slate-400 hover:text-slate-655 dark:hover:text-slate-350 cursor-pointer">
+              <button onClick={() => setSecurityOpen(false)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-400 cursor-pointer">
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="space-y-2.5 text-xs text-slate-600 dark:text-slate-350">
-              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-850">
+            <div className="space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
+              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-800">
                 <span className="font-semibold">Node Environment</span>
                 <span>{process.env.NODE_ENV || 'development'}</span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-850">
+              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-800">
                 <span className="font-semibold">Database Driver</span>
                 <span>Mongoose v8.4</span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-850">
+              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-800">
                 <span className="font-semibold">Cors Whitelist</span>
                 <span>http://localhost:3000</span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-850">
+              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-800">
                 <span className="font-semibold">Global Rate Limiter</span>
                 <span>200 req / 15 min per IP</span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-850">
+              <div className="flex justify-between py-1.5 border-b border-slate-50 dark:border-slate-800">
                 <span className="font-semibold">Failed Login Logins</span>
                 <span className="text-emerald-600 font-bold">Enabled</span>
               </div>
@@ -287,7 +287,7 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
                 <FileBarChart2 className="w-4 h-4 text-emerald-600" />
                 Generate Platform Reports
               </h3>
-              <button onClick={() => setReportOpen(false)} className="text-slate-400 hover:text-slate-655 dark:hover:text-slate-350 cursor-pointer">
+              <button onClick={() => setReportOpen(false)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-400 cursor-pointer">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -297,14 +297,14 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
             <div className="grid grid-cols-2 gap-3 pt-2">
               <button
                 onClick={() => { handleDownloadReport('users'); setReportOpen(false); }}
-                className="flex flex-col items-center justify-center p-4 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-850 transition-colors cursor-pointer text-xs font-semibold text-slate-700 dark:text-slate-300"
+                className="flex flex-col items-center justify-center p-4 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer text-xs font-semibold text-slate-700 dark:text-slate-300"
               >
-                <UserPlus className="w-6 h-6 text-blue-650 mb-2" />
+                <UserPlus className="w-6 h-6 text-blue-600 mb-2" />
                 Export Platform Users
               </button>
               <button
                 onClick={() => { handleDownloadReport('orgs'); setReportOpen(false); }}
-                className="flex flex-col items-center justify-center p-4 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-850 transition-colors cursor-pointer text-xs font-semibold text-slate-700 dark:text-slate-300"
+                className="flex flex-col items-center justify-center p-4 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer text-xs font-semibold text-slate-700 dark:text-slate-300"
               >
                 <Building2 className="w-6 h-6 text-emerald-600 mb-2" />
                 Export Organizations
@@ -314,7 +314,7 @@ export default function QuickActions({ setActiveItem, onRefreshStats }: QuickAct
             <div className="pt-2 flex justify-end">
               <button
                 onClick={() => setReportOpen(false)}
-                className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-850 cursor-pointer text-xs font-semibold"
+                className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer text-xs font-semibold"
               >
                 Cancel
               </button>

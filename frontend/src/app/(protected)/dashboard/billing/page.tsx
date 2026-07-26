@@ -8,7 +8,7 @@ import BillingPage from '@/app/(protected)/workspace/billing/page';
 
 export default function DashboardBillingPage() {
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 p-6">
+    <div className="bg-surface rounded-2xl border border-line p-6">
       <BillingPage />
     </div>
   );

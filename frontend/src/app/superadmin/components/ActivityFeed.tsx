@@ -82,7 +82,7 @@ export default function ActivityFeed({ logs, onNavigateToActivity }: ActivityFee
       <div className="flex items-center justify-between mb-5">
         <div>
           <h3 className="text-sm font-semibold text-slate-800 dark:text-white">Recent Activity</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-450 mt-0.5">Latest platform events</p>
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Latest platform events</p>
         </div>
         <button
           onClick={onNavigateToActivity}
@@ -121,10 +121,10 @@ export default function ActivityFeed({ logs, onNavigateToActivity }: ActivityFee
                     <Icon className={`w-3.5 h-3.5 ${colors.icon}`} />
                   </div>
                   <div className="flex-1 min-w-0 pt-0.5">
-                    <p className="text-xs font-semibold text-slate-800 dark:text-slate-205 leading-tight">{title}</p>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-450 mt-0.5 truncate">{subtitle}</p>
+                    <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 leading-tight">{title}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-500 mt-0.5 truncate">{subtitle}</p>
                     <div className="flex items-center gap-1 mt-1">
-                      <Clock className="w-2.5 h-2.5 text-slate-350 dark:text-slate-600" />
+                      <Clock className="w-2.5 h-2.5 text-slate-400 dark:text-slate-600" />
                       <span className="text-[9px] text-slate-400 dark:text-slate-500">{timeText}</span>
                     </div>
                   </div>

@@ -39,13 +39,13 @@ const getFileIcon = (mimeType?: string, name?: string) => {
 export default function DocumentsSection({ files, onTabChange }: DocumentsSectionProps): React.JSX.Element {
   return (
     <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 shadow-sm space-y-5">
-      <div className="flex items-center justify-between border-b border-slate-50 dark:border-slate-850 pb-3">
+      <div className="flex items-center justify-between border-b border-slate-50 dark:border-slate-800 pb-3">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-slate-800 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
             <FileText className="h-4 w-4" />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-slate-805 dark:text-white">Recent Documents</h3>
+            <h3 className="text-sm font-semibold text-slate-800 dark:text-white">Recent Documents</h3>
             <p className="text-[10px] text-slate-400 dark:text-slate-500">Quick access to project attachments</p>
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function DocumentsSection({ files, onTabChange }: DocumentsSectio
           <button
             type="button"
             onClick={() => onTabChange?.('documents')}
-            className="text-xs font-bold text-blue-605 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
+            className="text-xs font-bold text-blue-600 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
           >
             View All <ChevronRight className="w-3.5 h-3.5" />
           </button>
@@ -67,7 +67,7 @@ export default function DocumentsSection({ files, onTabChange }: DocumentsSectio
           {files.map((doc) => (
             <li
               key={doc._id}
-              className="flex items-center justify-between rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/20 px-3.5 py-3 hover:bg-slate-100/60 dark:hover:bg-slate-850/40 transition-colors"
+              className="flex items-center justify-between rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/20 px-3.5 py-3 hover:bg-slate-100/60 dark:hover:bg-slate-800/40 transition-colors"
             >
               <div className="flex min-w-0 items-center gap-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm">
@@ -87,7 +87,7 @@ export default function DocumentsSection({ files, onTabChange }: DocumentsSectio
                 download
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-150/45 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-indigo-400 transition-colors"
+                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100/45 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-indigo-400 transition-colors"
                 aria-label={`Download ${doc.name}`}
               >
                 <Download className="h-4 w-4" />

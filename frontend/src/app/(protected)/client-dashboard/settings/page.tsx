@@ -169,7 +169,7 @@ export default function ClientSettingsPage(): React.JSX.Element {
     <div className="space-y-6 animate-in fade-in duration-200">
       <div>
         <h2 className="text-lg font-bold text-slate-800 flex items-center gap-1.5">
-          <SettingsIcon className="h-5 w-5 text-blue-650" /> Account Settings
+          <SettingsIcon className="h-5 w-5 text-blue-600" /> Account Settings
         </h2>
         <p className="text-xs text-slate-400 mt-1">
           Adjust credential details and manage login sessions.
@@ -184,7 +184,7 @@ export default function ClientSettingsPage(): React.JSX.Element {
             className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm space-y-4"
           >
             <div className="flex items-center gap-2 pb-1.5 border-b border-slate-50">
-              <Lock className="h-4.5 w-4.5 text-blue-650" />
+              <Lock className="h-4.5 w-4.5 text-blue-600" />
               <h3 className="text-sm font-bold text-slate-800">Change Password</h3>
             </div>
 
@@ -251,7 +251,7 @@ export default function ClientSettingsPage(): React.JSX.Element {
                   type="button"
                   disabled={revokingAll}
                   onClick={handleRevokeAll}
-                  className="rounded-lg border border-red-200 px-2.5 py-1.5 text-[10px] font-bold text-red-650 hover:bg-red-50"
+                  className="rounded-lg border border-red-200 px-2.5 py-1.5 text-[10px] font-bold text-red-600 hover:bg-red-50"
                 >
                   {revokingAll ? 'Signing out…' : 'Sign out all'}
                 </button>
@@ -262,7 +262,7 @@ export default function ClientSettingsPage(): React.JSX.Element {
             <div className="flex-1 overflow-y-auto space-y-3.5 scrollbar-thin">
               {sessionsLoading ? (
                 <div className="flex justify-center items-center py-10">
-                  <Loader2 className="h-6 w-6 animate-spin text-blue-650" />
+                  <Loader2 className="h-6 w-6 animate-spin text-blue-600" />
                 </div>
               ) : sessions.length === 0 ? (
                 <p className="py-8 text-center text-xs text-slate-400">No active sessions found.</p>
@@ -277,7 +277,7 @@ export default function ClientSettingsPage(): React.JSX.Element {
                       key={session.id}
                       className="flex gap-3 border border-slate-100 rounded-xl p-3 hover:bg-slate-50/50"
                     >
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-50 text-slate-450 border border-slate-100">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-50 text-slate-500 border border-slate-100">
                         <DeviceIconComponent className="h-4.5 w-4.5" />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -289,7 +289,7 @@ export default function ClientSettingsPage(): React.JSX.Element {
                             </span>
                           )}
                         </div>
-                        <p className="text-[10px] text-slate-450 truncate">
+                        <p className="text-[10px] text-slate-500 truncate">
                           {ua.browser} • {session.ipAddress}
                         </p>
                         <p className="text-[9px] text-slate-400 mt-1">
@@ -300,7 +300,7 @@ export default function ClientSettingsPage(): React.JSX.Element {
                         type="button"
                         disabled={revokingId === session.id}
                         onClick={() => handleRevokeSession(session.id, isCurrent)}
-                        className="shrink-0 self-start text-[10px] font-bold text-red-650 hover:underline"
+                        className="shrink-0 self-start text-[10px] font-bold text-red-600 hover:underline"
                       >
                         {revokingId === session.id ? 'Revoking…' : 'Revoke'}
                       </button>

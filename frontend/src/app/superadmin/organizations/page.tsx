@@ -41,13 +41,13 @@ export default function SuperAdminOrganizationsPage() {
               placeholder="Search orgs..."
               value={orgSearch}
               onChange={(e) => setOrgSearch(e.target.value)}
-              className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-205 dark:border-slate-800 rounded-lg px-3 py-2 outline-none focus:border-blue-500 w-44"
+              className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 outline-none focus:border-blue-500 w-44"
             />
           </div>
           <select
             value={orgPlanFilter}
             onChange={(e) => setOrgPlanFilter(e.target.value)}
-            className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-205 dark:border-slate-800 rounded-lg px-2 py-2 outline-none"
+            className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-2 outline-none"
           >
             <option value="">All Plans</option>
             <option value="free">Free</option>
@@ -58,7 +58,7 @@ export default function SuperAdminOrganizationsPage() {
           <select
             value={orgStatusFilter}
             onChange={(e) => setOrgStatusFilter(e.target.value)}
-            className="text-xs bg-slate-50 dark:bg-slate-955 border border-slate-205 dark:border-slate-800 rounded-lg px-2 py-2 outline-none"
+            className="text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-2 outline-none"
           >
             <option value="">All Statuses</option>
             <option value="trial">Trial</option>
@@ -85,7 +85,7 @@ export default function SuperAdminOrganizationsPage() {
           <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-slate-150 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase font-black text-xs">
+                <tr className="border-b border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase font-black text-xs">
                   <th className="px-4 py-3">Organization</th>
                   <th className="px-4 py-3">Plan Subscription</th>
                   <th className="px-4 py-3">Stats</th>
@@ -97,7 +97,7 @@ export default function SuperAdminOrganizationsPage() {
                 {orgsList.map((org) => (
                   <tr key={org.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/10">
                     <td className="px-4 py-3.5">
-                      <span className="font-semibold text-slate-800 dark:text-slate-205 block leading-tight">{org.name}</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 block leading-tight">{org.name}</span>
                       <span className="text-xs text-slate-400">slug: {org.slug} &bull; Owner: {org.owner}</span>
                     </td>
                     
@@ -107,7 +107,7 @@ export default function SuperAdminOrganizationsPage() {
                         value={org.plan}
                         onChange={(e) => handleChangePlan(org.id, e.target.value as any)}
                         disabled={actionLoadingId === org.id}
-                        className="px-2.5 py-1 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 rounded text-xs font-semibold text-slate-700 dark:text-slate-350 focus:outline-none cursor-pointer"
+                        className="px-2.5 py-1 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 rounded text-xs font-semibold text-slate-700 dark:text-slate-400 focus:outline-none cursor-pointer"
                       >
                         <option value="free">Free</option>
                         <option value="pro">Pro</option>
@@ -124,10 +124,10 @@ export default function SuperAdminOrganizationsPage() {
                     <td className="px-4 py-3.5">
                       <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                         org.status === 'active'
-                          ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-450'
+                          ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400'
                           : org.status === 'suspended'
-                          ? 'bg-red-50 text-red-655 dark:bg-red-950/20 dark:text-red-450'
-                          : 'bg-amber-50 text-amber-600 dark:bg-amber-950/20 dark:text-amber-450'
+                          ? 'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400'
+                          : 'bg-amber-50 text-amber-600 dark:bg-amber-950/20 dark:text-amber-400'
                       }`}>
                         {org.status}
                       </span>
@@ -136,7 +136,7 @@ export default function SuperAdminOrganizationsPage() {
                     <td className="px-4 py-3.5 text-right space-x-1.5">
                       <button
                         onClick={() => setSelectedOrg(org)}
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-600 dark:text-slate-350 cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 cursor-pointer"
                       >
                         <Eye className="w-3.5 h-3.5" />
                         View
@@ -146,8 +146,8 @@ export default function SuperAdminOrganizationsPage() {
                         disabled={actionLoadingId === org.id}
                         className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-colors border cursor-pointer ${
                           org.status === 'suspended'
-                            ? 'bg-emerald-50 hover:bg-emerald-100 border-emerald-100 text-emerald-655 dark:bg-emerald-950/20 dark:border-emerald-900/50 dark:text-emerald-400'
-                            : 'bg-red-50 hover:bg-red-100 border-red-100 text-red-655 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400'
+                            ? 'bg-emerald-50 hover:bg-emerald-100 border-emerald-100 text-emerald-700 dark:bg-emerald-950/20 dark:border-emerald-900/50 dark:text-emerald-400'
+                            : 'bg-red-50 hover:bg-red-100 border-red-100 text-red-700 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400'
                         }`}
                       >
                         {actionLoadingId === org.id ? (
@@ -172,7 +172,7 @@ export default function SuperAdminOrganizationsPage() {
               <div key={org.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl p-4 space-y-4 shadow-sm">
                 {/* Organization Details */}
                 <div>
-                  <span className="font-semibold text-slate-800 dark:text-slate-205 block leading-tight text-sm">{org.name}</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 block leading-tight text-sm">{org.name}</span>
                   <span className="text-xs text-slate-400 mt-1 block">slug: {org.slug} &bull; Owner: {org.owner}</span>
                 </div>
 
@@ -184,7 +184,7 @@ export default function SuperAdminOrganizationsPage() {
                       value={org.plan}
                       onChange={(e) => handleChangePlan(org.id, e.target.value as any)}
                       disabled={actionLoadingId === org.id}
-                      className="px-2 py-0.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 rounded text-xs font-semibold text-slate-700 dark:text-slate-350 focus:outline-none cursor-pointer outline-none"
+                      className="px-2 py-0.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 rounded text-xs font-semibold text-slate-700 dark:text-slate-400 focus:outline-none cursor-pointer outline-none"
                     >
                       <option value="free">Free</option>
                       <option value="pro">Pro</option>
@@ -204,10 +204,10 @@ export default function SuperAdminOrganizationsPage() {
                     <span className="text-slate-400 block text-[10px] uppercase font-semibold mb-0.5">Billing Status</span>
                     <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                       org.status === 'active'
-                        ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-450'
+                        ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400'
                         : org.status === 'suspended'
-                        ? 'bg-red-50 text-red-655 dark:bg-red-950/20 dark:text-red-450'
-                        : 'bg-amber-50 text-amber-600 dark:bg-amber-950/20 dark:text-amber-450'
+                        ? 'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400'
+                        : 'bg-amber-50 text-amber-600 dark:bg-amber-950/20 dark:text-amber-400'
                     }`}>
                       {org.status}
                     </span>
@@ -218,7 +218,7 @@ export default function SuperAdminOrganizationsPage() {
                 <div className="flex items-center justify-end gap-2 pt-1">
                   <button
                     onClick={() => setSelectedOrg(org)}
-                    className="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-600 dark:text-slate-355 cursor-pointer flex-1"
+                    className="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 cursor-pointer flex-1"
                   >
                     <Eye className="w-3.5 h-3.5" />
                     View
@@ -228,8 +228,8 @@ export default function SuperAdminOrganizationsPage() {
                     disabled={actionLoadingId === org.id}
                     className={`inline-flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold shadow-sm transition-colors border cursor-pointer flex-1 ${
                       org.status === 'suspended'
-                        ? 'bg-emerald-50 hover:bg-emerald-100 border-emerald-100 text-emerald-655 dark:bg-emerald-950/20 dark:border-emerald-900/50 dark:text-emerald-400'
-                        : 'bg-red-50 hover:bg-red-100 border-red-100 text-red-655 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-450'
+                        ? 'bg-emerald-50 hover:bg-emerald-100 border-emerald-100 text-emerald-700 dark:bg-emerald-950/20 dark:border-emerald-900/50 dark:text-emerald-400'
+                        : 'bg-red-50 hover:bg-red-100 border-red-100 text-red-700 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400'
                     }`}
                   >
                     {actionLoadingId === org.id ? (
