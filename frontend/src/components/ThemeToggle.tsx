@@ -2,13 +2,25 @@
 
 import { useEffect, useState } from 'react';
 import { MoonStar, SunMedium } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { cn } from '@/lib/utils';
 
 interface ThemeToggleProps {
   className?: string;
 }
 
+/** Enable smooth color transitions briefly while the theme flips. */
+function withThemeTransition(apply: () => void): void {
+  const root = document.documentElement;
+  root.classList.add('theme-transition');
+  apply();
+  window.setTimeout(() => root.classList.remove('theme-transition'), 350);
+}
+
 export default function ThemeToggle({ className = '' }: ThemeToggleProps): React.JSX.Element {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(
+    () => typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+  );
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem('theme');
@@ -21,23 +33,41 @@ export default function ThemeToggle({ className = '' }: ThemeToggleProps): React
 
   const toggleTheme = (): void => {
     const nextMode = !isDarkMode;
-    document.documentElement.classList.toggle('dark', nextMode);
+    withThemeTransition(() => {
+      document.documentElement.classList.toggle('dark', nextMode);
+    });
     window.localStorage.setItem('theme', nextMode ? 'dark' : 'light');
     setIsDarkMode(nextMode);
   };
 
-  const Icon = isDarkMode ? SunMedium : MoonStar;
   const label = isDarkMode ? 'Switch to light mode' : 'Switch to dark mode';
 
   return (
-    <button
+    <motion.button
       type="button"
       onClick={toggleTheme}
       aria-label={label}
       title={label}
-      className={`inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 shadow-sm transition-colors hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-slate-950 ${className}`}
+      whileTap={{ scale: 0.9 }}
+      className={cn(
+        'inline-flex h-9 w-9 items-center justify-center rounded-md border border-line bg-surface text-content-secondary shadow-card transition-colors hover:bg-surface-hover hover:text-content cursor-pointer',
+        className
+      )}
     >
-      <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
-    </button>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={isDarkMode ? 'sun' : 'moon'}
+          initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+          animate={{ rotate: 0, opacity: 1, scale: 1 }}
+          exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
+          transition={{ duration: 0.18, ease: 'easeOut' }}
+          className="inline-flex"
+        >
+          {isDarkMode
+            ? <SunMedium className="h-[18px] w-[18px]" strokeWidth={2} />
+            : <MoonStar className="h-[18px] w-[18px]" strokeWidth={2} />}
+        </motion.span>
+      </AnimatePresence>
+    </motion.button>
   );
 }

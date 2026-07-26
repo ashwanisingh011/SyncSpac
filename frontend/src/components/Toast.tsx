@@ -1,6 +1,8 @@
 "use client";
 
-import { X } from 'lucide-react';
+import { X, CheckCircle2, AlertCircle, Info } from 'lucide-react';
+import { motion } from 'motion/react';
+import { cn } from '@/lib/utils';
 
 type ToastProps = {
   message: string;
@@ -10,36 +12,48 @@ type ToastProps = {
 
 const palette = {
   success: {
-    bg: 'bg-emerald-50 text-emerald-900 dark:bg-emerald-950/80 dark:text-emerald-300',
-    border: 'border-emerald-200 dark:border-emerald-700',
+    accent: 'bg-success',
+    iconWrap: 'bg-success/12 text-success',
+    Icon: CheckCircle2,
   },
   error: {
-    bg: 'bg-red-50 text-red-900 dark:bg-red-950/80 dark:text-red-200',
-    border: 'border-red-200 dark:border-red-700',
+    accent: 'bg-danger',
+    iconWrap: 'bg-danger/12 text-danger',
+    Icon: AlertCircle,
   },
   info: {
-    bg: 'bg-slate-50 text-slate-900 dark:bg-slate-900/90 dark:text-slate-100',
-    border: 'border-slate-200 dark:border-slate-700',
+    accent: 'bg-primary',
+    iconWrap: 'bg-primary-subtle text-primary',
+    Icon: Info,
   },
 };
 
 export default function Toast({ message, variant = 'info', onClose }: ToastProps) {
-  const styles = palette[variant];
+  const { accent, iconWrap, Icon } = palette[variant];
 
   return (
-    <div className={`fixed right-5 top-5 z-50 flex w-full items-center max-w-sm gap-3 rounded-2xl border px-4 py-3 shadow-xl ${styles.bg} ${styles.border}`} role="alert">
-      <div className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-base font-semibold text-slate-900 dark:bg-slate-900/70 dark:text-slate-100">
-        {variant === 'success' ? '✓' : variant === 'error' ? '!' : 'i'}
-      </div>
-      <div className="flex-1 text-sm leading-6 text-slate-900 dark:text-slate-100">{message}</div>
+    <motion.div
+      initial={{ opacity: 0, x: 48, scale: 0.96 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: 24, scale: 0.98 }}
+      transition={{ type: 'spring', stiffness: 420, damping: 30 }}
+      className="fixed right-5 top-5 z-[110] flex w-full max-w-sm items-center gap-3 overflow-hidden rounded-xl border border-line bg-surface-overlay py-3 pl-4 pr-3 shadow-overlay"
+      role="alert"
+    >
+      {/* Accent bar */}
+      <span className={cn('absolute left-0 top-0 h-full w-1', accent)} />
+      <span className={cn('flex h-8 w-8 shrink-0 items-center justify-center rounded-full', iconWrap)}>
+        <Icon className="h-4.5 w-4.5" />
+      </span>
+      <div className="flex-1 text-sm leading-5 text-content">{message}</div>
       <button
         type="button"
         onClick={onClose}
-        className="text-slate-500 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+        className="shrink-0 rounded-md p-1.5 text-content-tertiary transition-colors hover:bg-surface-hover hover:text-content cursor-pointer"
         aria-label="Dismiss notification"
       >
         <X className="h-4 w-4" />
       </button>
-    </div>
+    </motion.div>
   );
 }
