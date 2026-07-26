@@ -80,7 +80,16 @@ import ClientContactUsPage from '@/app/(protected)/client-dashboard/contact-us/p
 function withParams(Component: React.ComponentType<any>) {
   return function WrappedComponent(props: any) {
     const params = useParams();
-    const paramsPromise = Promise.resolve(params);
+    // React 19's `use()` reads pre-instrumented promises synchronously
+    // (status/value fields) — no Suspense round-trip. Creating a plain
+    // pending promise here would suspend the route forever, because each
+    // retry render builds a brand-new pending promise.
+    const paramsPromise = Promise.resolve(params) as Promise<typeof params> & {
+      status?: string;
+      value?: typeof params;
+    };
+    paramsPromise.status = 'fulfilled';
+    paramsPromise.value = params;
     return <Component {...props} params={paramsPromise} />;
   };
 }
