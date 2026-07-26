@@ -1,0 +1,5 @@
+# Assistant / IDE config
+.claude/
+
+# System files
+.DS_Store
