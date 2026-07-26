@@ -37,8 +37,8 @@ export default function ClientRouteGuard({ children }: ClientRouteGuardProps): R
 
   if (!isAuthReady || !isOrgReady) {
     return (
-      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-slate-500">
-        <Loader2 className="mr-2 h-5 w-5 animate-spin text-blue-600" />
+      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-content-tertiary">
+        <Loader2 className="mr-2 h-5 w-5 animate-spin text-primary" />
         Loading…
       </div>
     );
@@ -46,8 +46,8 @@ export default function ClientRouteGuard({ children }: ClientRouteGuardProps): R
 
   if (isClient && !isClientDashboard && !isProfileOrSettings) {
     return (
-      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-slate-500">
-        <Loader2 className="mr-2 h-5 w-5 animate-spin text-blue-600" />
+      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-content-tertiary">
+        <Loader2 className="mr-2 h-5 w-5 animate-spin text-primary" />
         Redirecting to your dashboard…
       </div>
     );
@@ -55,8 +55,8 @@ export default function ClientRouteGuard({ children }: ClientRouteGuardProps): R
 
   if (!isClient && isClientDashboard) {
     return (
-      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-slate-500">
-        <Loader2 className="mr-2 h-5 w-5 animate-spin text-blue-600" />
+      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-content-tertiary">
+        <Loader2 className="mr-2 h-5 w-5 animate-spin text-primary" />
         Redirecting…
       </div>
     );

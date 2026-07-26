@@ -1,17 +1,29 @@
 "use client";
 
 import { isSuperAdmin } from '@/lib/userRoles';
-import { Search, HelpCircle, Grid, Shield, Menu, X } from 'lucide-react';
+import { Search, Shield, Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { AnimatePresence, motion } from 'motion/react';
 import ThemeToggle from '@/components/ThemeToggle';
+import Logo from '@/components/Logo';
 import UserProfileMenu from '@/components/profile/UserProfileMenu';
 import { useState, useEffect } from 'react';
 import CommandPalette from '@/components/CommandPalette';
 import { useAuth } from '@/context/useAuth';
 import NotificationBell from '@/components/NotificationBell';
+import { cn } from '@/lib/utils';
+
+const NAV_LINKS = [
+  { label: 'Dashboard', href: '/dashboard' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Workspace', href: '/workspace' },
+  { label: 'Teams', href: '/workspace/teams' },
+];
 
 export default function TopNavbar(): React.JSX.Element {
   const { user } = useAuth();
+  const pathname = usePathname();
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
@@ -27,54 +39,77 @@ export default function TopNavbar(): React.JSX.Element {
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, []);
 
+  const isActive = (href: string): boolean => {
+    if (href === '/workspace') return pathname === '/workspace' || (pathname.startsWith('/workspace/') && !pathname.startsWith('/workspace/teams'));
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
   return (
     <>
-      <nav className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 text-slate-800 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100">
+      <nav className="glass sticky top-0 z-50 flex h-14 items-center justify-between border-b border-line px-4 text-content">
         <div className="flex items-center gap-3">
           {/* Hamburger button for mobile/tablet */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-900 transition-colors cursor-pointer"
+            className="md:hidden p-1.5 rounded-lg text-content-tertiary hover:bg-surface-hover transition-colors cursor-pointer"
             aria-label="Open global menu"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          <Link href="/projects" className="flex items-center gap-2 text-[#0052CC] font-bold hover:text-[#0747A6] dark:text-[#579DFF] dark:hover:text-[#85B8FF]">
-            <Grid className="w-5 h-5" />
-            <span className="text-xl">SyncSpac</span>
+          <Link href="/projects" className="transition-opacity hover:opacity-80">
+            <Logo size={24} />
           </Link>
 
-          <div className="hidden md:flex items-center gap-4 text-sm font-medium">
-            <Link href="/dashboard" className="hover:bg-slate-100 px-3 py-1.5 rounded-md transition-colors text-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Dashboard</Link>
-            <Link href="/projects" className="hover:bg-slate-100 px-3 py-1.5 rounded-md transition-colors text-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Projects</Link>
-            <Link href="/workspace" className="hover:bg-slate-100 px-3 py-1.5 rounded-md transition-colors text-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Workspace</Link>
-            <Link href="/workspace/teams" className="hover:bg-slate-100 px-3 py-1.5 rounded-md transition-colors text-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Teams</Link>
+          <div className="hidden md:flex items-center gap-1 text-sm font-medium ml-2">
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    'relative px-3 py-1.5 rounded-md transition-colors',
+                    active ? 'text-primary' : 'text-content-secondary hover:text-content hover:bg-surface-hover'
+                  )}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="topnav-active-pill"
+                      className="absolute inset-0 rounded-md bg-primary-subtle"
+                      transition={{ type: 'spring', stiffness: 480, damping: 36 }}
+                    />
+                  )}
+                  <span className="relative">{link.label}</span>
+                </Link>
+              );
+            })}
             {isSuperAdmin(user?.role) && (
-              <Link href="/superadmin" className="hover:bg-slate-100 px-3 py-1.5 rounded-md transition-colors text-blue-600 dark:text-blue-400 dark:hover:bg-slate-800 font-semibold">Admin</Link>
+              <Link
+                href="/superadmin"
+                className="px-3 py-1.5 rounded-md transition-colors font-semibold text-primary hover:bg-surface-hover"
+              >
+                Admin
+              </Link>
             )}
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="relative hidden sm:block w-64 cursor-pointer" onClick={() => setIsCommandPaletteOpen(true)}>
-            <input
-              type="text"
-              placeholder="Search... (⌘K)"
-              readOnly
-              className="w-full h-8 pl-8 pr-10 text-xs bg-slate-100 border border-transparent hover:border-slate-350 dark:hover:border-slate-800 rounded-md outline-none transition-all cursor-pointer dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-505"
-            />
-            <Search className="w-4 h-4 absolute left-2.5 top-2 text-slate-505" />
-            <span className="absolute right-2 top-1.5 px-1 py-0.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-[8px] font-sans font-black rounded text-slate-400 dark:text-slate-505">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setIsCommandPaletteOpen(true)}
+            className="group relative hidden sm:flex w-64 h-9 items-center gap-2 rounded-lg border border-line bg-surface-sunken px-3 text-xs text-content-tertiary transition-all hover:border-line-strong hover:bg-surface cursor-pointer"
+          >
+            <Search className="w-4 h-4" />
+            <span className="flex-1 text-left">Search anything…</span>
+            <span className="rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] font-semibold shadow-card">
               ⌘K
             </span>
-          </div>
+          </button>
 
           <ThemeToggle />
           <NotificationBell />
-          {/* <button className="p-1.5 hover:bg-slate-100 rounded-full text-slate-650 dark:text-slate-300 dark:hover:bg-slate-800">
-            <HelpCircle className="w-5 h-5" />
-          </button> */}
 
           <UserProfileMenu
             extraItems={
@@ -88,69 +123,77 @@ export default function TopNavbar(): React.JSX.Element {
       </nav>
 
       {/* Mobile Drawer menu */}
-      {mobileMenuOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs md:hidden"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
-          <aside className="fixed top-0 left-0 z-50 h-full w-64 bg-white dark:bg-slate-950 p-5 shadow-2xl md:hidden flex flex-col border-r border-slate-200 dark:border-slate-800 animate-in slide-in-from-left duration-200 text-slate-800 dark:text-slate-100">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-5">
-              <div className="flex items-center gap-2 text-[#0052CC] font-bold dark:text-[#579DFF]">
-                <Grid className="w-5 h-5" />
-                <span className="text-lg">SyncSpac</span>
-              </div>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-1 rounded-md text-slate-450 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors cursor-pointer"
-                aria-label="Close global menu"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <nav className="flex flex-col gap-1.5 font-medium">
-              <Link
-                href="/dashboard"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300"
-              >
-                Dashboard
-              </Link>
-              <Link
-                href="/projects"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300"
-              >
-                Projects
-              </Link>
-              <Link
-                href="/workspace"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300"
-              >
-                Workspace
-              </Link>
-              <Link
-                href="/workspace/teams"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300"
-              >
-                Teams
-              </Link>
-              {isSuperAdmin(user?.role) && (
-                <Link
-                  href="/superadmin"
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              className="fixed inset-0 z-50 bg-black/45 backdrop-blur-[3px] md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <motion.aside
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', stiffness: 380, damping: 36 }}
+              className="fixed top-0 left-0 z-50 h-full w-64 bg-surface-overlay p-5 shadow-overlay md:hidden flex flex-col border-r border-line text-content"
+            >
+              <div className="flex items-center justify-between pb-4 border-b border-line mb-5">
+                <Logo size={22} />
+                <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors hover:bg-slate-100 dark:hover:bg-slate-900 text-blue-600 dark:text-blue-400"
+                  className="p-1 rounded-md text-content-tertiary hover:text-content hover:bg-surface-hover transition-colors cursor-pointer"
+                  aria-label="Close global menu"
                 >
-                  Admin Panel
-                </Link>
-              )}
-            </nav>
-          </aside>
-        </>
-      )}
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <nav className="flex flex-col gap-1 font-medium">
+                {NAV_LINKS.map((link, i) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2, delay: 0.05 + i * 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        'block px-3 py-2.5 rounded-lg text-sm transition-colors',
+                        isActive(link.href)
+                          ? 'bg-primary-subtle text-primary font-semibold'
+                          : 'text-content-secondary hover:bg-surface-hover hover:text-content'
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                {isSuperAdmin(user?.role) && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2, delay: 0.05 + NAV_LINKS.length * 0.05 }}
+                  >
+                    <Link
+                      href="/superadmin"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-primary hover:bg-surface-hover"
+                    >
+                      Admin Panel
+                    </Link>
+                  </motion.div>
+                )}
+              </nav>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }

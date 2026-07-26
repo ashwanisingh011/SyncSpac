@@ -35,8 +35,8 @@ export default function OrgGate({ children }: { children: ReactNode }) {
 
   if (!isOrgReady) {
     return (
-      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-slate-500 dark:text-slate-400">
-        <Loader2 className="mr-2 h-5 w-5 animate-spin text-blue-600" />
+      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-content-tertiary">
+        <Loader2 className="mr-2 h-5 w-5 animate-spin text-primary" />
         Loading workspace…
       </div>
     );
@@ -44,8 +44,8 @@ export default function OrgGate({ children }: { children: ReactNode }) {
 
   if (organizations.length === 0) {
     return (
-      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-slate-500 dark:text-slate-400">
-        <Loader2 className="mr-2 h-5 w-5 animate-spin text-blue-600" />
+      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-content-tertiary">
+        <Loader2 className="mr-2 h-5 w-5 animate-spin text-primary" />
         Setting up your workspace…
       </div>
     );
@@ -53,8 +53,8 @@ export default function OrgGate({ children }: { children: ReactNode }) {
 
   if (!currentOrg && organizations.length > 1) {
     return (
-      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-slate-500 dark:text-slate-400">
-        <Loader2 className="mr-2 h-5 w-5 animate-spin text-blue-600" />
+      <div className="flex min-h-[50vh] flex-1 items-center justify-center text-sm text-content-tertiary">
+        <Loader2 className="mr-2 h-5 w-5 animate-spin text-primary" />
         Choose an organization…
       </div>
     );
