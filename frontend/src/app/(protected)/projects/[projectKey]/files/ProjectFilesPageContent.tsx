@@ -333,22 +333,22 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
       return <FileImage className="w-5 h-5 text-pink-500" />;
     }
     if (['zip', 'rar', 'tar', 'gz', '7z'].includes(ext || '')) {
-      return <FileArchive className="w-5 h-5 text-amber-500" />;
+      return <FileArchive className="w-5 h-5 text-warning" />;
     }
     if (['xls', 'xlsx', 'csv'].includes(ext || '')) {
-      return <FileSpreadsheet className="w-5 h-5 text-emerald-500" />;
+      return <FileSpreadsheet className="w-5 h-5 text-success" />;
     }
     if (['js', 'ts', 'tsx', 'html', 'css', 'json', 'py', 'go'].includes(ext || '')) {
-      return <FileCode className="w-5 h-5 text-blue-500" />;
+      return <FileCode className="w-5 h-5 text-primary" />;
     }
-    return <FileIcon className="w-5 h-5 text-slate-400" />;
+    return <FileIcon className="w-5 h-5 text-content-tertiary" />;
   };
 
   if (loadingProject || storeLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
-        <p className="text-sm text-slate-500 mt-2">Loading project context...</p>
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <p className="text-sm text-content-tertiary mt-2">Loading project context...</p>
       </div>
     );
   }
@@ -356,12 +356,12 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
   if (!project) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6">
-        <FolderOpen className="w-12 h-12 text-slate-350 mb-3 animate-pulse" />
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">Project Not Found</h3>
-        <p className="text-sm text-slate-500 mt-1 max-w-sm">
+        <FolderOpen className="w-12 h-12 text-content-tertiary mb-3 animate-pulse" />
+        <h3 className="text-lg font-bold text-content">Project Not Found</h3>
+        <p className="text-sm text-content-tertiary mt-1 max-w-sm">
           Could not resolve key <strong>{projectKey}</strong>.
         </p>
-        <Link href="/projects" className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium">
+        <Link href="/projects" className="mt-4 px-4 py-2 bg-primary text-primary-content rounded-lg text-sm font-medium">
           Back to Projects
         </Link>
       </div>
@@ -373,17 +373,17 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
       <AccessRestrictedModal isOpen={showAccessRestricted} onClose={() => setShowAccessRestricted(false)} />
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-line pb-5">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-            <Link href={`/projects/${project.key}`} className="hover:underline hover:text-blue-600">{project.name}</Link>
+          <div className="flex items-center gap-2 text-xs font-semibold text-content-tertiary">
+            <Link href={`/projects/${project.key}`} className="hover:underline hover:text-primary">{project.name}</Link>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-slate-700 dark:text-slate-300">Files</span>
+            <span className="text-content-secondary">Files</span>
           </div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-1">
+          <h1 className="text-2xl font-extrabold tracking-tight text-content mt-1">
             Project Files
           </h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-content-tertiary">
             Store documents, designs, and code attachments in nested directories.
           </p>
         </div>
@@ -393,12 +393,12 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => setIsFolderModalOpen(true)}
-              className="inline-flex items-center gap-1.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-750 dark:text-slate-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors"
+              className="inline-flex items-center gap-1.5 border border-line bg-surface hover:bg-surface-hover text-content-secondary px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors"
             >
               <Plus className="w-4 h-4" /> Create Folder
             </button>
 
-            <label className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md shadow-blue-500/10 transition-colors cursor-pointer">
+            <label className="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-lg text-sm font-semibold shadow-md shadow-blue-500/10 transition-colors cursor-pointer">
               <Upload className="w-4 h-4" /> Upload File
               <input
                 type="file"
@@ -413,34 +413,34 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
 
       {/* Upload Progress Bar */}
       {uploadProgress !== null && (
-        <div className="bg-blue-50 border border-blue-100 dark:bg-blue-950/20 dark:border-blue-900 rounded-lg p-4 space-y-2">
-          <div className="flex justify-between items-center text-xs text-blue-700 dark:text-blue-350 font-semibold">
+        <div className="bg-primary-subtle border border-primary/20 rounded-lg p-4 space-y-2">
+          <div className="flex justify-between items-center text-xs text-primary font-semibold">
             <span className="flex items-center gap-1.5">
               <Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading file...
             </span>
             <span>{uploadProgress}%</span>
           </div>
-          <div className="w-full bg-blue-100 dark:bg-blue-900 h-2 rounded-full overflow-hidden">
-            <div style={{ width: `${uploadProgress}%` }} className="bg-blue-600 h-full rounded-full transition-all duration-300" />
+          <div className="w-full bg-primary-subtle h-2 rounded-full overflow-hidden">
+            <div style={{ width: `${uploadProgress}%` }} className="bg-primary h-full rounded-full transition-all duration-300" />
           </div>
         </div>
       )}
 
       {/* Error Alert */}
       {(uploadError || folderError) && (
-        <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-lg text-sm font-semibold">
+        <div className="bg-danger/10 border border-danger/25 text-danger p-3 rounded-lg text-sm font-semibold">
           {uploadError || folderError}
         </div>
       )}
 
       {/* Breadcrumbs Navigation */}
-      <div className="flex items-center gap-2 text-sm text-slate-500 font-semibold px-1 py-2 overflow-x-auto">
+      <div className="flex items-center gap-2 text-sm text-content-tertiary font-semibold px-1 py-2 overflow-x-auto">
         {breadcrumbs.map((crumb, idx) => (
           <div key={idx} className="flex items-center shrink-0">
-            {idx > 0 && <ChevronRight className="w-4 h-4 text-slate-350 mx-1" />}
+            {idx > 0 && <ChevronRight className="w-4 h-4 text-content-tertiary mx-1" />}
             <button
               onClick={() => navigateToFolder(crumb.id, crumb.name)}
-              className={`hover:text-blue-600 hover:underline transition-colors ${idx === breadcrumbs.length - 1 ? 'text-slate-800 dark:text-slate-100 font-bold' : ''
+              className={`hover:text-primary hover:underline transition-colors ${idx === breadcrumbs.length - 1 ? 'text-content font-bold' : ''
                 }`}
             >
               {crumb.name}
@@ -450,17 +450,17 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
       </div>
 
       {/* Files List Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-205 dark:border-slate-800 shadow-sm overflow-hidden">
+      <div className="bg-surface rounded-xl border border-line shadow-sm overflow-hidden">
         {loadingFiles ? (
-          <div className="flex flex-col items-center justify-center p-12 text-slate-500">
-            <Loader2 className="w-7 h-7 animate-spin text-blue-600" />
+          <div className="flex flex-col items-center justify-center p-12 text-content-tertiary">
+            <Loader2 className="w-7 h-7 animate-spin text-primary" />
             <span className="text-xs mt-2">Reading directory...</span>
           </div>
         ) : filesList.length === 0 ? (
-          <div className="flex flex-col items-center justify-center p-16 text-center text-slate-400">
-            <FolderOpen className="w-12 h-12 text-slate-300 mb-3" />
-            <h3 className="text-sm font-bold text-slate-700 dark:text-slate-350">This directory is empty</h3>
-            <p className="text-xs text-slate-500 mt-0.5">Upload a file or create a subfolder to get started.</p>
+          <div className="flex flex-col items-center justify-center p-16 text-center text-content-tertiary">
+            <FolderOpen className="w-12 h-12 text-content-tertiary mb-3" />
+            <h3 className="text-sm font-bold text-content-secondary">This directory is empty</h3>
+            <p className="text-xs text-content-tertiary mt-0.5">Upload a file or create a subfolder to get started.</p>
           </div>
         ) : (
           <>
@@ -468,7 +468,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900 text-[11px] font-black text-slate-450 dark:text-slate-400 uppercase tracking-wider">
+                  <tr className="border-b border-line bg-slate-50/50 text-[11px] font-black text-content-tertiary uppercase tracking-wider">
                     <th className="px-6 py-3.5">Name</th>
                     <th className="px-6 py-3.5">Version</th>
                     <th className="px-6 py-3.5">Size</th>
@@ -477,20 +477,20 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                     <th className="px-6 py-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                <tbody className="divide-y divide-line">
                   {filesList.map((file) => (
                     <tr
                       key={file._id}
-                      className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors text-sm text-slate-700 dark:text-slate-300"
+                      className="hover:bg-slate-50/50 transition-colors text-sm text-content-secondary"
                     >
                       {/* Name */}
                       <td className="px-6 py-4">
                         {file.isFolder ? (
                           <button
                             onClick={() => navigateToFolder(file._id, file.name)}
-                            className="flex items-center gap-2.5 font-semibold text-slate-850 hover:text-blue-600 dark:text-slate-100 transition-colors text-left"
+                            className="flex items-center gap-2.5 font-semibold text-content hover:text-primary transition-colors text-left"
                           >
-                            <Folder className="w-5 h-5 text-blue-500 fill-blue-500/10 shrink-0" />
+                            <Folder className="w-5 h-5 text-primary fill-blue-500/10 shrink-0" />
                             <span>{file.name}</span>
                           </button>
                         ) : (
@@ -504,12 +504,12 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                       </td>
 
                       {/* Version */}
-                      <td className="px-6 py-4 text-xs font-semibold text-slate-500">
+                      <td className="px-6 py-4 text-xs font-semibold text-content-tertiary">
                         {!file.isFolder ? `v${file.version}` : '-'}
                       </td>
 
                       {/* Size */}
-                      <td className="px-6 py-4 text-xs text-slate-500 font-medium">
+                      <td className="px-6 py-4 text-xs text-content-tertiary font-medium">
                         {formatBytes(file.fileSize)}
                       </td>
 
@@ -523,18 +523,18 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                               className="w-5.5 h-5.5 rounded-full object-cover shrink-0"
                             />
                           ) : (
-                            <div className="w-5.5 h-5.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center text-[10px] font-extrabold shrink-0">
+                            <div className="w-5.5 h-5.5 rounded-full bg-surface-hover text-content-tertiary flex items-center justify-center text-[10px] font-extrabold shrink-0">
                               {file.uploadedBy?.name?.substring(0, 2).toUpperCase() || 'U'}
                             </div>
                           )}
-                          <span className="text-xs font-medium text-slate-655 dark:text-slate-450">
+                          <span className="text-xs font-medium text-content-secondary">
                             {file.uploadedBy?.name || 'Unknown User'}
                           </span>
                         </div>
                       </td>
 
                       {/* Updated At */}
-                      <td className="px-6 py-4 text-xs text-slate-500">
+                      <td className="px-6 py-4 text-xs text-content-tertiary">
                         {new Date(file.updatedAt).toLocaleDateString(undefined, {
                           month: 'short',
                           day: 'numeric',
@@ -553,7 +553,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                                   setSelectedFile(file);
                                   setIsVersionModalOpen(true);
                                 }}
-                                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                className="p-1.5 text-content-tertiary hover:text-content rounded-md hover:bg-surface-hover transition-colors cursor-pointer"
                                 title="File History"
                               >
                                 <History className="w-4 h-4" />
@@ -563,7 +563,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                                 href={file.fileUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                className="p-1.5 text-content-tertiary hover:text-content rounded-md hover:bg-surface-hover transition-colors cursor-pointer"
                                 title="View File"
                               >
                                 <Eye className="w-4 h-4" />
@@ -574,7 +574,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                                 target="_blank"
                                 rel="noreferrer"
                                 download={file.name}
-                                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                className="p-1.5 text-content-tertiary hover:text-content rounded-md hover:bg-surface-hover transition-colors cursor-pointer"
                                 title="Download File"
                               >
                                 <Download className="w-4 h-4" />
@@ -587,11 +587,11 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                                 <button
                                   onClick={() => handleDownloadFolder(file._id, file.name)}
                                   disabled={downloadingFolderId === file._id}
-                                  className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-[#F4F5F7]/50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                  className="p-1.5 text-content-tertiary hover:text-content rounded-md hover:bg-[#F4F5F7]/50 transition-colors cursor-pointer"
                                   title="Download Folder as ZIP"
                                 >
                                   {downloadingFolderId === file._id ? (
-                                    <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
+                                    <Loader2 className="w-4 h-4 animate-spin text-primary" />
                                   ) : (
                                     <Download className="w-4 h-4" />
                                   )}
@@ -605,11 +605,11 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                               <button
                                 onClick={() => handleDelete(file._id)}
                                 disabled={deletingId === file._id}
-                                className="p-1.5 text-slate-400 hover:text-red-650 rounded-md hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors cursor-pointer"
+                                className="p-1.5 text-content-tertiary hover:text-danger rounded-md hover:bg-danger/10 transition-colors cursor-pointer"
                                 title="Delete"
                               >
                                 {deletingId === file._id ? (
-                                  <Loader2 className="w-4 h-4 animate-spin text-red-500" />
+                                  <Loader2 className="w-4 h-4 animate-spin text-danger" />
                                 ) : (
                                   <Trash2 className="w-4 h-4" />
                                 )}
@@ -624,11 +624,11 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
             </div>
 
             {/* Mobile Card List View */}
-            <div className="block md:hidden divide-y divide-slate-100 dark:divide-slate-800">
+            <div className="block md:hidden divide-y divide-line">
               {filesList.map((file) => (
                 <div
                   key={file._id}
-                  className="p-4 space-y-3.5 hover:bg-slate-50/50 dark:hover:bg-slate-800/10 transition-colors text-slate-700 dark:text-slate-300"
+                  className="p-4 space-y-3.5 hover:bg-slate-50/50 transition-colors text-content-secondary"
                 >
                   {/* Header: Icon, Name & Version */}
                   <div className="flex items-start justify-between gap-3">
@@ -636,18 +636,18 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                       {file.isFolder ? (
                         <button
                           onClick={() => navigateToFolder(file._id, file.name)}
-                          className="flex items-center gap-2 font-bold text-slate-900 dark:text-slate-100 hover:text-blue-600 transition-colors text-left text-sm"
+                          className="flex items-center gap-2 font-bold text-content hover:text-primary transition-colors text-left text-sm"
                         >
-                          <Folder className="w-5 h-5 text-blue-500 fill-blue-500/10 shrink-0" />
+                          <Folder className="w-5 h-5 text-primary fill-blue-500/10 shrink-0" />
                           <span className="truncate">{file.name}</span>
                         </button>
                       ) : (
-                        <div className="flex items-center gap-2 font-semibold text-slate-800 dark:text-slate-200 text-sm">
+                        <div className="flex items-center gap-2 font-semibold text-content text-sm">
                           {getFileIcon(file.mimeType, file.name)}
                           <span className="truncate max-w-[200px]" title={file.name}>
                             {file.name}
                           </span>
-                          <span className="text-[10px] font-bold text-slate-400 shrink-0">
+                          <span className="text-[10px] font-bold text-content-tertiary shrink-0">
                             v{file.version}
                           </span>
                         </div>
@@ -663,7 +663,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                               setSelectedFile(file);
                               setIsVersionModalOpen(true);
                             }}
-                            className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-105 dark:hover:bg-slate-800 cursor-pointer"
+                            className="p-1.5 text-content-tertiary hover:text-content rounded-md hover:bg-surface-hover cursor-pointer"
                             title="File History"
                           >
                             <History className="w-4 h-4" />
@@ -672,7 +672,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                             href={file.fileUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-105 dark:hover:bg-slate-800 cursor-pointer"
+                            className="p-1.5 text-content-tertiary hover:text-content rounded-md hover:bg-surface-hover cursor-pointer"
                             title="View File"
                           >
                             <Eye className="w-4 h-4" />
@@ -682,7 +682,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                             target="_blank"
                             rel="noreferrer"
                             download={file.name}
-                            className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-105 dark:hover:bg-slate-800 cursor-pointer"
+                            className="p-1.5 text-content-tertiary hover:text-content rounded-md hover:bg-surface-hover cursor-pointer"
                             title="Download File"
                           >
                             <Download className="w-4 h-4" />
@@ -694,11 +694,11 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                             <button
                               onClick={() => handleDownloadFolder(file._id, file.name)}
                               disabled={downloadingFolderId === file._id}
-                              className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-205 rounded-md hover:bg-[#F4F5F7]/50 dark:hover:bg-slate-800 cursor-pointer"
+                              className="p-1.5 text-content-tertiary hover:text-content rounded-md hover:bg-[#F4F5F7]/50 cursor-pointer"
                               title="Download Folder as ZIP"
                             >
                               {downloadingFolderId === file._id ? (
-                                <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
+                                <Loader2 className="w-4 h-4 animate-spin text-primary" />
                               ) : (
                                 <Download className="w-4 h-4" />
                               )}
@@ -711,11 +711,11 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                         <button
                           onClick={() => handleDelete(file._id)}
                           disabled={deletingId === file._id}
-                          className="p-1.5 text-slate-400 hover:text-red-500 rounded-md hover:bg-red-50 dark:hover:bg-red-950/20 cursor-pointer"
+                          className="p-1.5 text-content-tertiary hover:text-danger rounded-md hover:bg-danger/10 cursor-pointer"
                           title="Delete"
                         >
                           {deletingId === file._id ? (
-                            <Loader2 className="w-4 h-4 animate-spin text-red-500" />
+                            <Loader2 className="w-4 h-4 animate-spin text-danger" />
                           ) : (
                             <Trash2 className="w-4 h-4" />
                           )}
@@ -726,7 +726,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
 
                   {/* Metadata Row */}
                   <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1">
-                    <div className="flex items-center gap-1.5 text-slate-500">
+                    <div className="flex items-center gap-1.5 text-content-tertiary">
                       {file.uploadedBy?.avatar ? (
                         <img
                           src={file.uploadedBy.avatar}
@@ -734,16 +734,16 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                           className="w-4.5 h-4.5 rounded-full object-cover shrink-0"
                         />
                       ) : (
-                        <div className="w-4.5 h-4.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center text-[8px] font-bold shrink-0">
+                        <div className="w-4.5 h-4.5 rounded-full bg-surface-hover text-content-tertiary flex items-center justify-center text-[8px] font-bold shrink-0">
                           {file.uploadedBy?.name?.substring(0, 2).toUpperCase() || 'U'}
                         </div>
                       )}
-                      <span className="text-[11px] font-medium text-slate-600 dark:text-slate-400">
+                      <span className="text-[11px] font-medium text-content-secondary">
                         {file.uploadedBy?.name || 'Unknown User'}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-3 text-[11px] text-slate-450 dark:text-slate-500 font-medium">
+                    <div className="flex items-center gap-3 text-[11px] text-content-tertiary font-medium">
                       <span>{formatBytes(file.fileSize)}</span>
                       <span>&bull;</span>
                       <span>
@@ -765,17 +765,17 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
       {/* --- Folder Modal --- */}
       {isFolderModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden p-6 space-y-4">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Create New Folder</h3>
+          <div className="w-full max-w-md bg-surface border border-line rounded-xl shadow-2xl overflow-hidden p-6 space-y-4">
+            <h3 className="text-lg font-bold text-content">Create New Folder</h3>
 
             <form onSubmit={handleCreateFolder} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-450 uppercase tracking-wider block mb-1">Folder Name</label>
+                <label className="text-xs font-bold text-content-tertiary uppercase tracking-wider block mb-1">Folder Name</label>
                 <input
                   type="text"
                   value={newFolderName}
                   onChange={(e) => setNewFolderName(e.target.value)}
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 rounded-lg text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-3 py-2 border border-line bg-surface rounded-lg text-sm text-content focus:outline-none focus:border-line-focus transition-colors"
                   placeholder="e.g. Assets, Documents"
                   required
                 />
@@ -789,14 +789,14 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                     setNewFolderName('');
                     setFolderError('');
                   }}
-                  className="px-4 py-2 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-350 transition-colors"
+                  className="px-4 py-2 border border-line hover:bg-surface-hover rounded-lg text-sm font-semibold text-content-secondary transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={creatingFolder || !newFolderName.trim()}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold shadow-md shadow-blue-500/10 transition-colors flex items-center gap-1.5"
+                  className="px-4 py-2 bg-primary hover:bg-primary-hover text-primary-content rounded-lg text-sm font-semibold shadow-md shadow-blue-500/10 transition-colors flex items-center gap-1.5"
                 >
                   {creatingFolder && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Create Folder
@@ -810,14 +810,14 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
       {/* --- Version History Modal --- */}
       {isVersionModalOpen && selectedFile && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden p-6 space-y-4">
+          <div className="w-full max-w-2xl bg-surface border border-line rounded-xl shadow-2xl overflow-hidden p-6 space-y-4">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">File History & Previous Copies</h3>
-                <p className="text-xs text-slate-500 mt-1">
-                  File: <strong className="text-slate-700 dark:text-slate-300">{selectedFile.name}</strong>
+                <h3 className="text-lg font-bold text-content">File History & Previous Copies</h3>
+                <p className="text-xs text-content-tertiary mt-1">
+                  File: <strong className="text-content-secondary">{selectedFile.name}</strong>
                 </p>
-                <p className="text-[11px] text-slate-400 mt-0.5">
+                <p className="text-[11px] text-content-tertiary mt-0.5">
                   Keep track of changes made to this file and download older copies if you need them.
                 </p>
               </div>
@@ -826,27 +826,27 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                   setIsVersionModalOpen(false);
                   setSelectedFile(null);
                 }}
-                className="text-slate-450 hover:text-slate-700 dark:hover:text-slate-350 text-xs font-bold cursor-pointer"
+                className="text-content-tertiary hover:text-content text-xs font-bold cursor-pointer"
               >
                 Close
               </button>
             </div>
 
-            <div className="border border-slate-100 dark:border-slate-800 rounded-lg overflow-hidden max-h-[300px] overflow-y-auto">
+            <div className="border border-line rounded-lg overflow-hidden max-h-[300px] overflow-y-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900 text-slate-455 dark:text-slate-455 uppercase font-black py-2.5 px-4 block flex justify-between">
+                  <tr className="border-b border-line bg-slate-50/50 text-content-tertiary uppercase font-black py-2.5 px-4 block flex justify-between">
                     <span className="w-1/4">Copy</span>
                     <span className="w-1/4">File Size</span>
                     <span className="w-1/4">Saved By</span>
                     <span className="w-1/4 text-right">Actions</span>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 block">
+                <tbody className="divide-y divide-line block">
                   {/* Current version */}
-                  <tr className="py-3 px-4 flex justify-between items-center bg-blue-50/30 dark:bg-blue-950/10 text-slate-850 dark:text-slate-250 font-bold">
+                  <tr className="py-3 px-4 flex justify-between items-center bg-blue-50/30 text-content font-bold">
                     <td className="w-1/4 flex items-center gap-1.5">
-                      <ArrowUpCircle className="w-4 h-4 text-blue-500 shrink-0" />
+                      <ArrowUpCircle className="w-4 h-4 text-primary shrink-0" />
                       Current active copy (Version {selectedFile.version})
                     </td>
                     <td className="w-1/4">{formatBytes(selectedFile.fileSize)}</td>
@@ -856,7 +856,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                         href={selectedFile.fileUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-blue-650 hover:underline"
+                        className="inline-flex items-center gap-1 text-primary hover:underline"
                       >
                         <Download className="w-3.5 h-3.5" /> Download
                       </a>
@@ -868,7 +868,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                     .slice()
                     .reverse()
                     .map((ver, idx) => (
-                      <tr key={idx} className="py-3 px-4 flex justify-between items-center text-slate-600 dark:text-slate-400">
+                      <tr key={idx} className="py-3 px-4 flex justify-between items-center text-content-secondary">
                         <td className="w-1/4 pl-5">Version {ver.version}</td>
                         <td className="w-1/4">{formatBytes(ver.fileSize)}</td>
                         <td className="w-1/4">{ver.uploadedBy ? (ver.uploadedBy as any).name : 'Unknown'}</td>
@@ -877,7 +877,7 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
                             href={ver.fileUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-slate-500 hover:text-blue-600 hover:underline"
+                            className="inline-flex items-center gap-1 text-content-tertiary hover:text-primary hover:underline"
                           >
                             <Download className="w-3.5 h-3.5" /> Download
                           </a>
@@ -890,12 +890,12 @@ export default function ProjectFilesPageContent({ projectKey }: ProjectFilesPage
 
             {/* Upload new version inside history modal */}
             {canDeleteFile(selectedFile) && (
-                <div className="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-lg p-4 flex items-center justify-between">
+                <div className="bg-surface-sunken border border-line rounded-lg p-4 flex items-center justify-between">
                   <div>
-                    <span className="text-xs font-extrabold text-slate-700 dark:text-slate-350 block">Upload Another Document</span>
-                    <span className="text-[10px] text-slate-500">Select a newer file from your computer to update this file. The older copies are kept safe below.</span>
+                    <span className="text-xs font-extrabold text-content-secondary block">Upload Another Document</span>
+                    <span className="text-[10px] text-content-tertiary">Select a newer file from your computer to update this file. The older copies are kept safe below.</span>
                   </div>
-                  <label className="bg-slate-200/80 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 px-3.5 py-1.5 rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer shrink-0">
+                  <label className="bg-slate-200/80 hover:bg-surface-hover text-content px-3.5 py-1.5 rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer shrink-0">
                     Select File
                     <input
                       type="file"

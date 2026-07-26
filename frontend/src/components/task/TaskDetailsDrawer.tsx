@@ -211,19 +211,19 @@ export default function TaskDetailsDrawer({
       {/* Backdrop overlay */}
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity"
+        className="absolute inset-0 bg-black/45 backdrop-blur-xs transition-opacity"
       />
 
       {/* Drawer Panel */}
-      <div className="relative w-full max-w-lg bg-white dark:bg-slate-900 h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-250 border-l border-slate-200 dark:border-slate-800">
+      <div className="relative w-full max-w-lg bg-surface h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-250 border-l border-line">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-line">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-black px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 uppercase tracking-wider">
+            <span className="text-xs font-black px-2 py-0.5 rounded bg-surface-hover text-content-tertiary uppercase tracking-wider">
               {task.taskKey}
             </span>
-            <span className="text-[10px] text-slate-400">Task details</span>
+            <span className="text-[10px] text-content-tertiary">Task details</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -231,11 +231,11 @@ export default function TaskDetailsDrawer({
               <button
                 onClick={handleDelete}
                 disabled={deleting}
-                className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
+                className="p-1.5 text-content-tertiary hover:text-danger rounded-lg hover:bg-danger/10 transition-colors"
                 title="Delete task"
               >
                 {deleting ? (
-                  <Loader2 className="w-4 h-4 animate-spin text-red-500" />
+                  <Loader2 className="w-4 h-4 animate-spin text-danger" />
                 ) : (
                   <Trash2 className="w-4.5 h-4.5" />
                 )}
@@ -243,7 +243,7 @@ export default function TaskDetailsDrawer({
             )}
             <button
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-250 rounded-lg transition-colors"
+              className="p-1.5 text-content-tertiary hover:text-content rounded-lg transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -255,7 +255,7 @@ export default function TaskDetailsDrawer({
           
           {/* Permission Info */}
           {!canUpdate && (
-            <div className="flex items-start gap-2.5 p-3 rounded-lg bg-amber-50 dark:bg-amber-950/20 text-[11px] text-amber-800 dark:text-amber-300 border border-amber-100 dark:border-amber-900">
+            <div className="flex items-start gap-2.5 p-3 rounded-lg bg-warning/10 text-[11px] text-amber-800 border border-amber-100">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold">Read-Only View</span>
@@ -267,7 +267,7 @@ export default function TaskDetailsDrawer({
           )}
 
           {canEditStatusOnly && !isEditing && (
-            <div className="flex items-start gap-2.5 p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 text-[11px] text-blue-800 dark:text-blue-300 border border-blue-100 dark:border-blue-900">
+            <div className="flex items-start gap-2.5 p-3 rounded-lg bg-primary-subtle text-[11px] text-primary border border-primary/20">
               <Shield className="w-4 h-4 shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold">Limited Edit Permissions</span>
@@ -279,7 +279,7 @@ export default function TaskDetailsDrawer({
           )}
 
           {errors.server && (
-            <div className="p-3 bg-red-50 border border-red-100 rounded-lg text-xs text-red-700">
+            <div className="p-3 bg-danger/10 border border-red-100 rounded-lg text-xs text-danger">
               {errors.server}
             </div>
           )}
@@ -289,7 +289,7 @@ export default function TaskDetailsDrawer({
             
             {/* Title - Edit / View */}
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">
+              <label className="block text-[10px] font-black uppercase tracking-wider text-content-tertiary mb-1.5">
                 Title
               </label>
               {isEditing && canEditAll ? (
@@ -297,11 +297,11 @@ export default function TaskDetailsDrawer({
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full h-9 px-3 text-sm border border-slate-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-slate-900 dark:text-white focus:border-blue-500 outline-none"
+                  className="w-full h-9 px-3 text-sm border border-line rounded-lg bg-surface text-content focus:border-line-focus outline-none"
                   required
                 />
               ) : (
-                <h3 className="text-base font-bold text-slate-850 dark:text-slate-100 leading-snug">
+                <h3 className="text-base font-bold text-content leading-snug">
                   {task.title}
                 </h3>
               )}
@@ -309,47 +309,47 @@ export default function TaskDetailsDrawer({
 
             {/* Description - Edit / View */}
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">
+              <label className="block text-[10px] font-black uppercase tracking-wider text-content-tertiary mb-1.5">
                 Description
               </label>
               {isEditing && canEditAll ? (
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full min-h-[100px] p-3 text-sm border border-slate-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-slate-900 dark:text-white outline-none focus:border-blue-500 resize-y"
+                  className="w-full min-h-[100px] p-3 text-sm border border-line rounded-lg bg-surface text-content outline-none focus:border-line-focus resize-y"
                   placeholder="Describe the task details..."
                 />
               ) : (
-                <p className="text-xs text-slate-600 dark:text-slate-400 bg-slate-50/50 dark:bg-slate-950/20 p-3 rounded-lg border border-slate-100 dark:border-slate-800 min-h-[60px] whitespace-pre-wrap leading-relaxed">
-                  {task.description || <span className="text-slate-400 italic">No description provided.</span>}
+                <p className="text-xs text-content-secondary bg-surface-sunken p-3 rounded-lg border border-line min-h-[60px] whitespace-pre-wrap leading-relaxed">
+                  {task.description || <span className="text-content-tertiary italic">No description provided.</span>}
                 </p>
               )}
             </div>
 
             {/* Task Type - Read-only badge */}
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">
+              <label className="block text-[10px] font-black uppercase tracking-wider text-content-tertiary mb-1.5">
                 Type
               </label>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg bg-surface-hover text-content-secondary">
                 {task.type === 'bug' ? '🐛' : task.type === 'epic' ? '⚡' : task.type === 'story' ? '📖' : task.type === 'subtask' ? '🔑' : task.type === 'improvement' ? '📈' : '📄'}
                 {(task.type || 'task').charAt(0).toUpperCase() + (task.type || 'task').slice(1)}
               </span>
             </div>
 
             {/* Task Controls Row */}
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-line">
               
               {/* Status Selector */}
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">
+                <label className="block text-[10px] font-black uppercase tracking-wider text-content-tertiary mb-1">
                   Status
                 </label>
                 {(isEditing && canEditAll) || canEditStatusOnly ? (
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value as TaskStatusType)}
-                    className="w-full h-8 px-2 text-xs rounded-lg border border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-250 outline-none"
+                    className="w-full h-8 px-2 text-xs rounded-lg border border-line bg-surface text-content outline-none"
                   >
                     {statusOptions.map((option) => (
                       <option key={option.status} value={option.status}>
@@ -361,18 +361,18 @@ export default function TaskDetailsDrawer({
                   <span
                     className={`inline-block text-[10px] uppercase font-black tracking-wider px-2 py-0.5 rounded-full ${
                       task.status === 'done'
-                        ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400'
+                        ? 'bg-success/10 text-success'
                         : task.status === 'in-progress'
-                        ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/20 dark:text-blue-400'
+                        ? 'bg-primary-subtle text-primary'
                         : task.status === 'review'
-                        ? 'bg-purple-50 text-purple-700 dark:bg-purple-950/20 dark:text-purple-400'
+                        ? 'bg-status-review/12 text-status-review'
                         : task.status === 'testing'
-                        ? 'bg-cyan-50 text-cyan-700 dark:bg-cyan-950/20 dark:text-cyan-400'
+                        ? 'bg-status-progress/12 text-status-progress'
                         : task.status === 'blocked'
-                        ? 'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400'
+                        ? 'bg-danger/10 text-danger'
                         : task.status === 'backlog'
-                        ? 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400'
-                        : 'bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400'
+                        ? 'bg-surface-hover text-content-secondary'
+                        : 'bg-warning/10 text-warning'
                     }`}
                   >
                     {formatTaskStatusLabel(task.status)}
@@ -382,14 +382,14 @@ export default function TaskDetailsDrawer({
 
               {/* Priority Selector */}
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">
+                <label className="block text-[10px] font-black uppercase tracking-wider text-content-tertiary mb-1">
                   Priority
                 </label>
                 {isEditing && canEditAll ? (
                   <select
                     value={priority}
                     onChange={(e) => setPriority(e.target.value as TaskPriorityType)}
-                    className="w-full h-8 px-2 text-xs rounded-lg border border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-250 outline-none"
+                    className="w-full h-8 px-2 text-xs rounded-lg border border-line bg-surface text-content outline-none"
                   >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
@@ -399,10 +399,10 @@ export default function TaskDetailsDrawer({
                   <span
                     className={`inline-block text-[10px] uppercase font-black tracking-wider px-2 py-0.5 rounded-full ${
                       task.priority === 'high'
-                        ? 'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400'
+                        ? 'bg-danger/10 text-danger'
                         : task.priority === 'medium'
-                        ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400'
-                        : 'bg-slate-100 text-slate-700 dark:bg-slate-850 dark:text-slate-450'
+                        ? 'bg-warning/10 text-warning'
+                        : 'bg-surface-hover text-content-secondary'
                     }`}
                   >
                     {task.priority}
@@ -412,16 +412,16 @@ export default function TaskDetailsDrawer({
             </div>
 
             {/* Assignee & Dates Details */}
-            <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs">
+            <div className="space-y-3 pt-4 border-t border-line text-xs">
               
               {/* Assignee */}
               <div className="flex items-center justify-between">
-                <span className="text-slate-450 font-medium">Assignee</span>
+                <span className="text-content-tertiary font-medium">Assignee</span>
                 {isEditing && canEditAll && !hasRole('developer') && !hasRole('qa_tester') && !hasRole('qa') ? (
                   <select
                     value={assignedTo}
                     onChange={(e) => setAssignedTo(e.target.value)}
-                    className="h-8 px-2 text-xs rounded-lg border border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-250 outline-none"
+                    className="h-8 px-2 text-xs rounded-lg border border-line bg-surface text-content outline-none"
                   >
                     <option value="">Unassigned</option>
                     {assignableMembers.map((member) => (
@@ -431,7 +431,7 @@ export default function TaskDetailsDrawer({
                     ))}
                   </select>
                 ) : (
-                  <span className="font-bold text-slate-700 dark:text-slate-350">
+                  <span className="font-bold text-content-secondary">
                     {task.assignedTo
                       ? typeof task.assignedTo === 'object'
                         ? task.assignedTo.name
@@ -443,16 +443,16 @@ export default function TaskDetailsDrawer({
 
               {/* Due Date */}
               <div className="flex items-center justify-between">
-                <span className="text-slate-450 font-medium">Due Date</span>
+                <span className="text-content-tertiary font-medium">Due Date</span>
                 {isEditing && canEditAll ? (
                   <input
                     type="date"
                     value={dueDate}
                     onChange={(e) => setDueDate(e.target.value)}
-                    className="h-8 px-2 text-xs rounded-lg border border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-250 outline-none"
+                    className="h-8 px-2 text-xs rounded-lg border border-line bg-surface text-content outline-none"
                   />
                 ) : (
-                  <span className="font-semibold text-slate-650 dark:text-slate-400">
+                  <span className="font-semibold text-content-secondary">
                     {task.dueDate
                       ? new Date(task.dueDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
                       : 'None'}
@@ -462,8 +462,8 @@ export default function TaskDetailsDrawer({
 
               {/* Creator */}
               <div className="flex items-center justify-between">
-                <span className="text-slate-450 font-medium">Created By</span>
-                <span className="font-semibold text-slate-650 dark:text-slate-400">
+                <span className="text-content-tertiary font-medium">Created By</span>
+                <span className="font-semibold text-content-secondary">
                   {typeof task.createdBy === 'object' ? task.createdBy.name : 'Unknown User'}
                 </span>
               </div>
@@ -471,8 +471,8 @@ export default function TaskDetailsDrawer({
               {/* Assigned By */}
               {task.assignedBy && (
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-450 font-medium">Assigned By</span>
-                  <span className="font-semibold text-slate-650 dark:text-slate-400">
+                  <span className="text-content-tertiary font-medium">Assigned By</span>
+                  <span className="font-semibold text-content-secondary">
                     {typeof task.assignedBy === 'object'
                       ? (task.assignedBy as { name?: string }).name ?? 'Unknown'
                       : task.assignedBy}
@@ -483,8 +483,8 @@ export default function TaskDetailsDrawer({
               {/* Project */}
               {task.project && typeof task.project === 'object' && (task.project as { name?: string }).name && (
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-450 font-medium">Project</span>
-                  <span className="font-semibold text-slate-650 dark:text-slate-400">
+                  <span className="text-content-tertiary font-medium">Project</span>
+                  <span className="font-semibold text-content-secondary">
                     {(task.project as { name?: string }).name}
                   </span>
                 </div>
@@ -498,30 +498,30 @@ export default function TaskDetailsDrawer({
                 return (
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-slate-450 font-medium">Checklist</span>
-                      <span className="font-bold text-slate-700 dark:text-slate-300">{done}/{total}</span>
+                      <span className="text-content-tertiary font-medium">Checklist</span>
+                      <span className="font-bold text-content-secondary">{done}/{total}</span>
                     </div>
-                    <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div className="w-full h-1.5 bg-surface-hover rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                        className="h-full bg-success rounded-full transition-all duration-500"
                         style={{ width: `${pct}%` }}
                       />
                     </div>
-                    <p className="text-[10px] text-slate-400 mt-0.5">{pct}% complete</p>
+                    <p className="text-[10px] text-content-tertiary mt-0.5">{pct}% complete</p>
                   </div>
                 );
               })()}
             </div>
 
             {/* Bottom Actions */}
-            <div className="flex justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-slate-800 mt-6">
+            <div className="flex justify-end gap-2.5 pt-4 border-t border-line mt-6">
               
               {/* Edit Mode Toggle */}
               {!isEditing && canEditAll && (
                 <button
                   type="button"
                   onClick={() => setIsEditing(true)}
-                  className="inline-flex items-center gap-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+                  className="inline-flex items-center gap-1 bg-surface-hover hover:bg-surface-hover text-content-secondary px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
                 >
                   <Edit2 className="w-3.5 h-3.5" /> Edit Details
                 </button>
@@ -540,7 +540,7 @@ export default function TaskDetailsDrawer({
                     setDueDate(task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '');
                     setAssignedTo(task.assignedTo ? (typeof task.assignedTo === 'object' ? task.assignedTo._id : task.assignedTo) : '');
                   }}
-                  className="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                  className="px-4 py-2 text-xs font-medium text-content-secondary hover:bg-surface-hover rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
@@ -551,7 +551,7 @@ export default function TaskDetailsDrawer({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold transition-colors shadow-sm"
+                  className="inline-flex items-center gap-1 bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-lg text-xs font-semibold transition-colors shadow-sm"
                 >
                   {loading ? (
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />

@@ -254,61 +254,61 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
   const getPriorityColor = (priority: string): string => {
     switch (priority) {
       case 'high':
-        return 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/20 dark:text-red-400 dark:border-red-900/40';
+        return 'bg-danger/10 text-danger border-danger/25';
       case 'medium':
         return 'bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/20 dark:text-orange-400 dark:border-orange-900/40';
       default:
-        return 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/40';
+        return 'bg-primary-subtle text-primary border-primary/25';
     }
   };
 
   if (projectLoading || loading) {
     return (
       <div className="flex items-center justify-center h-full min-h-[400px]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600 dark:text-[#579DFF]" />
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
       </div>
     );
   }
 
   if (projectError || pageError || !project) {
     return (
-      <div className="p-6 text-red-500 bg-red-50 border border-red-200 rounded-md dark:bg-red-950/40 dark:border-red-900/60 dark:text-red-200 m-4">
+      <div className="p-6 text-danger bg-danger/10 border border-danger/25 rounded-md m-4">
         {projectError || pageError || 'Project recurrent task settings could not be loaded.'}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-full bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100 p-6 overflow-y-auto">
+    <div className="flex flex-col h-full bg-surface text-content p-6 overflow-y-auto">
       <AccessRestrictedModal isOpen={showAccessRestricted} onClose={() => setShowAccessRestricted(false)} />
       {/* Toast Notification */}
       {successMsg && (
-        <div className="fixed bottom-4 right-4 bg-emerald-600 text-white px-4 py-3 rounded-md shadow-lg z-50 flex items-center gap-2 animate-slide-in text-sm font-medium">
+        <div className="fixed bottom-4 right-4 bg-success text-white px-4 py-3 rounded-md shadow-lg z-50 flex items-center gap-2 animate-slide-in text-sm font-medium">
           <CheckCircle className="w-4 h-4" />
           {successMsg}
         </div>
       )}
 
       {actionError && (
-        <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm font-medium text-amber-800 dark:border-amber-900/60 dark:bg-amber-950/30 dark:text-amber-200">
+        <div className="mb-4 rounded-lg border border-warning/25 bg-warning/10 p-3 text-sm font-medium text-amber-800">
           {actionError}
         </div>
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-200 dark:border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-line pb-4">
         <div>
-          <div className="text-xs text-slate-500 mb-1 uppercase tracking-wider font-semibold">Projects / {project.name}</div>
+          <div className="text-xs text-content-tertiary mb-1 uppercase tracking-wider font-semibold">Projects / {project.name}</div>
           <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
-            <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600 dark:text-[#85B8FF]" /> Recurring Tasks
+            <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" /> Recurring Tasks
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xl">
+          <p className="text-xs text-content-tertiary mt-1 max-w-xl">
             Configure automated task schedules. Templates in this list will periodically instantiate new tasks on your board.
           </p>
         </div>
         <button
           onClick={handleOpenCreateModal}
-          className="w-full sm:w-auto justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors cursor-pointer flex items-center gap-2 shadow-sm"
+          className="w-full sm:w-auto justify-center bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-md font-medium text-sm transition-colors cursor-pointer flex items-center gap-2 shadow-sm"
         >
           <Plus className="w-4 h-4" /> New Schedule
         </button>
@@ -316,15 +316,15 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
 
       {/* List / Table */}
       {templates.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-lg bg-slate-50 dark:bg-slate-900/20">
-          <Clock className="w-12 h-12 text-slate-300 dark:text-slate-700 mb-3" />
-          <h3 className="text-md font-semibold text-slate-700 dark:text-slate-300">No schedules configured</h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xs">
+        <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-line rounded-lg bg-surface-sunken/20">
+          <Clock className="w-12 h-12 text-content-tertiary mb-3" />
+          <h3 className="text-md font-semibold text-content-secondary">No schedules configured</h3>
+          <p className="text-xs text-content-tertiary mt-1 max-w-xs">
             Create templates for recurring tasks such as weekly reports, maintenance updates, or periodic reviews.
           </p>
           <button
             onClick={handleOpenCreateModal}
-            className="mt-4 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 px-4 py-2 rounded-md font-medium text-xs transition-colors cursor-pointer"
+            className="mt-4 bg-surface-hover hover:bg-surface-hover text-content-secondary px-4 py-2 rounded-md font-medium text-xs transition-colors cursor-pointer"
           >
             Create your first schedule
           </button>
@@ -332,10 +332,10 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
       ) : (
         <>
           {/* Desktop Table View */}
-          <div className="hidden lg:block border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-slate-900">
+          <div className="hidden lg:block border border-line rounded-lg overflow-hidden shadow-sm bg-surface">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                <tr className="bg-surface-sunken border-b border-line text-[10px] font-bold uppercase tracking-wider text-content-tertiary">
                   <th className="px-4 py-3">Schedule Title</th>
                   <th className="px-4 py-3">Schedule (Cron)</th>
                   <th className="px-4 py-3">Type</th>
@@ -346,7 +346,7 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                   <th className="px-4 py-3 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-xs">
+              <tbody className="divide-y divide-line text-xs">
                 {templates.map(template => {
                   const assigneeName = template.assignee
                     ? `${template.assignee.firstName || ''} ${template.assignee.lastName || ''}`.trim() || template.assignee.username
@@ -355,14 +355,14 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                   return (
                     <tr
                       key={template._id}
-                      className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"
+                      className="hover:bg-slate-50/50 transition-colors"
                     >
                       <td className="px-4 py-4.5 font-medium max-w-xs">
-                        <div className="font-semibold text-slate-900 dark:text-slate-100 truncate" title={template.title}>
+                        <div className="font-semibold text-content truncate" title={template.title}>
                           {template.title}
                         </div>
                         {template.description && (
-                          <div className="text-[10px] text-slate-400 dark:text-slate-550 truncate mt-0.5" title={template.description}>
+                          <div className="text-[10px] text-content-tertiary truncate mt-0.5" title={template.description}>
                             {template.description}
                           </div>
                         )}
@@ -384,13 +384,13 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                           </div>
                         )}
                       </td>
-                      <td className="px-4 py-4.5 font-mono text-[11px] text-slate-600 dark:text-slate-400">
+                      <td className="px-4 py-4.5 font-mono text-[11px] text-content-secondary">
                         <div className="flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                          <Calendar className="w-3.5 h-3.5 text-content-tertiary" />
                           <span>{template.cronExpression}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-4.5 capitalize font-medium text-slate-700 dark:text-slate-300">
+                      <td className="px-4 py-4.5 capitalize font-medium text-content-secondary">
                         {template.type}
                       </td>
                       <td className="px-4 py-4.5">
@@ -398,22 +398,22 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                           {template.priority}
                         </span>
                       </td>
-                      <td className="px-4 py-4.5 text-slate-600 dark:text-slate-400">
+                      <td className="px-4 py-4.5 text-content-secondary">
                         {assigneeName}
                       </td>
-                      <td className="px-4 py-4.5 text-slate-600 dark:text-slate-400">
-                        {template.isActive ? formatDate(template.nextRunTime) : <span className="text-slate-400 italic">Paused</span>}
+                      <td className="px-4 py-4.5 text-content-secondary">
+                        {template.isActive ? formatDate(template.nextRunTime) : <span className="text-content-tertiary italic">Paused</span>}
                       </td>
                       <td className="px-4 py-4.5 text-center">
                         <button
                           onClick={() => handleToggleActive(template)}
                           className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none ${
-                            template.isActive ? 'bg-indigo-600' : 'bg-slate-200 dark:bg-slate-700'
+                            template.isActive ? 'bg-indigo-600' : 'bg-surface-hover'
                           }`}
                           title={template.isActive ? 'Pause Schedule' : 'Activate Schedule'}
                         >
                           <span
-                            className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                            className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-surface shadow ring-0 transition duration-200 ease-in-out ${
                               template.isActive ? 'translate-x-4' : 'translate-x-0'
                             }`}
                           />
@@ -422,14 +422,14 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                       <td className="px-4 py-4.5 text-right space-x-1.5 shrink-0">
                         <button
                           onClick={() => handleOpenEditModal(template)}
-                          className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors cursor-pointer inline-flex"
+                          className="p-1.5 text-content-tertiary hover:text-primary hover:bg-surface-hover rounded transition-colors cursor-pointer inline-flex"
                           title="Edit Template"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteTemplate(template._id)}
-                          className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors cursor-pointer inline-flex"
+                          className="p-1.5 text-content-tertiary hover:text-danger hover:bg-surface-hover rounded transition-colors cursor-pointer inline-flex"
                           title="Delete Template"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -452,23 +452,23 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
               return (
                 <div
                   key={template._id}
-                  className="bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-800 rounded-xl p-4.5 space-y-4 shadow-sm"
+                  className="bg-surface border border-line rounded-xl p-4.5 space-y-4 shadow-sm"
                 >
                   {/* Title & Type Row */}
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0 flex-1">
-                      <span className="font-bold text-slate-900 dark:text-slate-100 text-sm leading-snug block break-words">
+                      <span className="font-bold text-content text-sm leading-snug block break-words">
                         {template.title}
                       </span>
                       {template.description && (
-                        <span className="text-xs text-slate-455 dark:text-slate-500 block break-words mt-1">
+                        <span className="text-xs text-content-tertiary block break-words mt-1">
                           {template.description}
                         </span>
                       )}
                     </div>
 
                     <div className="shrink-0 flex items-center gap-1.5">
-                      <span className="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-355 px-2 py-0.5 rounded capitalize font-semibold">
+                      <span className="text-[10px] bg-surface-hover text-content-secondary px-2 py-0.5 rounded capitalize font-semibold">
                         {template.type}
                       </span>
                     </div>
@@ -494,17 +494,17 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                   )}
 
                   {/* Schedule Details Grid */}
-                  <div className="grid grid-cols-1 min-[440px]:grid-cols-2 gap-3 pt-3.5 border-t border-slate-100 dark:border-slate-800 text-xs">
+                  <div className="grid grid-cols-1 min-[440px]:grid-cols-2 gap-3 pt-3.5 border-t border-line text-xs">
                     <div>
-                      <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider mb-0.5">Schedule (Cron)</span>
-                      <div className="flex items-center gap-1 text-slate-700 dark:text-slate-300 font-mono mt-1">
-                        <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider mb-0.5">Schedule (Cron)</span>
+                      <div className="flex items-center gap-1 text-content-secondary font-mono mt-1">
+                        <Calendar className="w-3.5 h-3.5 text-content-tertiary shrink-0" />
                         <span>{template.cronExpression}</span>
                       </div>
                     </div>
 
                     <div>
-                      <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider mb-0.5">Priority</span>
+                      <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider mb-0.5">Priority</span>
                       <div className="mt-1">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border capitalize ${getPriorityColor(template.priority)}`}>
                           {template.priority}
@@ -513,37 +513,37 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                     </div>
 
                     <div>
-                      <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Assignee</span>
-                      <span className="text-slate-750 dark:text-slate-300 block mt-1 font-semibold break-words">
+                      <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider">Assignee</span>
+                      <span className="text-content-secondary block mt-1 font-semibold break-words">
                         {assigneeName}
                       </span>
                     </div>
 
                     <div>
-                      <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Next Execution</span>
-                      <span className="text-slate-750 dark:text-slate-300 block mt-1 font-semibold break-words">
-                        {template.isActive ? formatDate(template.nextRunTime) : <span className="text-slate-400 italic">Paused</span>}
+                      <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider">Next Execution</span>
+                      <span className="text-content-secondary block mt-1 font-semibold break-words">
+                        {template.isActive ? formatDate(template.nextRunTime) : <span className="text-content-tertiary italic">Paused</span>}
                       </span>
                     </div>
                   </div>
 
                   {/* Toggle Status & Actions row */}
-                  <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center justify-between pt-3 border-t border-line">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleToggleActive(template)}
                         className={`relative inline-flex h-4.5 w-8 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none ${
-                          template.isActive ? 'bg-indigo-600' : 'bg-slate-200 dark:bg-slate-750'
+                          template.isActive ? 'bg-indigo-600' : 'bg-surface-hover'
                         }`}
                         title={template.isActive ? 'Pause Schedule' : 'Activate Schedule'}
                       >
                         <span
-                          className={`pointer-events-none inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                          className={`pointer-events-none inline-block h-3.5 w-3.5 transform rounded-full bg-surface shadow ring-0 transition duration-200 ease-in-out ${
                             template.isActive ? 'translate-x-3.5' : 'translate-x-0'
                           }`}
                         />
                       </button>
-                      <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                      <span className="text-xs text-content-tertiary font-semibold">
                         {template.isActive ? 'Active' : 'Paused'}
                       </span>
                     </div>
@@ -551,14 +551,14 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                     <div className="flex gap-1.5">
                       <button
                         onClick={() => handleOpenEditModal(template)}
-                        className="p-2 text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer inline-flex border border-slate-100 dark:border-slate-800"
+                        className="p-2 text-content-tertiary hover:text-primary hover:bg-surface-hover rounded-lg transition-colors cursor-pointer inline-flex border border-line"
                         title="Edit Template"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDeleteTemplate(template._id)}
-                        className="p-2 text-slate-400 hover:text-red-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer inline-flex border border-slate-100 dark:border-slate-800"
+                        className="p-2 text-content-tertiary hover:text-danger hover:bg-surface-hover rounded-lg transition-colors cursor-pointer inline-flex border border-line"
                         title="Delete Template"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -574,52 +574,52 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
 
       {/* Create / Edit Template Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/50 flex items-center justify-center z-50 animate-fade-in backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg max-w-lg w-full shadow-2xl relative my-8">
+        <div className="fixed inset-0 bg-black/45 flex items-center justify-center z-50 animate-fade-in backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-surface border border-line rounded-lg max-w-lg w-full shadow-2xl relative my-8">
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg cursor-pointer"
+              className="absolute right-4 top-4 text-content-tertiary hover:text-content dark:hover:text-white text-lg cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800">
-              <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">
+            <div className="px-6 py-4 border-b border-line">
+              <h3 className="text-lg font-bold text-content">
                 {editingTemplate ? 'Edit Recurring Schedule' : 'New Recurring Schedule'}
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">Specify task metadata and cron configuration</p>
+              <p className="text-xs text-content-tertiary mt-0.5">Specify task metadata and cron configuration</p>
             </div>
 
             <form onSubmit={handleSaveTemplate} className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Template Title *</label>
+                <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Template Title *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Weekly Status Update Report"
                   value={formTitle}
                   onChange={(e) => setFormTitle(e.target.value)}
-                  className="w-full h-9 px-3 border border-slate-300 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 outline-none"
+                  className="w-full h-9 px-3 border border-line-strong rounded-md text-sm bg-surface text-content focus:border-line-focus outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Description</label>
+                <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Description</label>
                 <textarea
                   placeholder="Task description template..."
                   value={formDesc}
                   onChange={(e) => setFormDesc(e.target.value)}
-                  className="w-full min-h-[70px] p-3 border border-slate-300 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 outline-none resize-y"
+                  className="w-full min-h-[70px] p-3 border border-line-strong rounded-md text-sm bg-surface text-content focus:border-line-focus outline-none resize-y"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Task Type</label>
+                  <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Task Type</label>
                   <select
                     value={formType}
                     onChange={(e) => setFormType(e.target.value as TaskType)}
-                    className="w-full h-9 px-3 border border-slate-300 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 outline-none"
+                    className="w-full h-9 px-3 border border-line-strong rounded-md text-sm bg-surface text-content focus:border-line-focus outline-none"
                   >
                     <option value="task">Task 📄</option>
                     <option value="bug">Bug 🐛</option>
@@ -630,11 +630,11 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Priority</label>
+                  <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Priority</label>
                   <select
                     value={formPriority}
                     onChange={(e) => setFormPriority(e.target.value as any)}
-                    className="w-full h-9 px-3 border border-slate-300 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 outline-none"
+                    className="w-full h-9 px-3 border border-line-strong rounded-md text-sm bg-surface text-content focus:border-line-focus outline-none"
                   >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
@@ -645,22 +645,22 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Original Estimate (min)</label>
+                  <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Original Estimate (min)</label>
                   <input
                     type="number"
                     min="0"
                     placeholder="e.g. 60"
                     value={formEstimate}
                     onChange={(e) => setFormEstimate(e.target.value)}
-                    className="w-full h-9 px-3 border border-slate-300 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 outline-none"
+                    className="w-full h-9 px-3 border border-line-strong rounded-md text-sm bg-surface text-content focus:border-line-focus outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Assignee</label>
+                  <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Assignee</label>
                   <select
                     value={formAssignee}
                     onChange={(e) => setFormAssignee(e.target.value)}
-                    className="w-full h-9 px-3 border border-slate-300 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 outline-none"
+                    className="w-full h-9 px-3 border border-line-strong rounded-md text-sm bg-surface text-content focus:border-line-focus outline-none"
                   >
                     <option value="">Unassigned</option>
                     {assignableMembers.map(m => (
@@ -674,8 +674,8 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
 
               {/* Labels selection */}
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Labels</label>
-                <div className="flex flex-wrap gap-1.5 p-2.5 border border-slate-300 dark:border-slate-700 rounded-md bg-white dark:bg-slate-950 max-h-24 overflow-y-auto">
+                <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Labels</label>
+                <div className="flex flex-wrap gap-1.5 p-2.5 border border-line-strong rounded-md bg-surface max-h-24 overflow-y-auto">
                   {labelsList.length > 0 ? (
                     labelsList.map(label => {
                       const isSelected = formSelectedLabels.includes(label._id);
@@ -691,7 +691,7 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                           className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border transition-colors cursor-pointer ${
                             isSelected
                               ? 'text-white'
-                              : 'text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-800'
+                              : 'text-content-tertiary border-line'
                           }`}
                           style={{
                             backgroundColor: isSelected ? label.color : 'transparent',
@@ -703,17 +703,17 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                       );
                     })
                   ) : (
-                    <span className="text-xs text-slate-400 italic">No labels available in project</span>
+                    <span className="text-xs text-content-tertiary italic">No labels available in project</span>
                   )}
                 </div>
               </div>
 
               {/* Cron configuration */}
-              <div className="border-t border-slate-100 dark:border-slate-800 pt-3 space-y-3">
-                <div className="font-semibold text-slate-800 dark:text-slate-200 text-xs">Scheduler Configuration</div>
+              <div className="border-t border-line pt-3 space-y-3">
+                <div className="font-semibold text-content text-xs">Scheduler Configuration</div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Cron Preset</label>
+                    <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Cron Preset</label>
                     <select
                       value={formCronPreset}
                       onChange={(e) => {
@@ -723,7 +723,7 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                           setFormCronCustom(val);
                         }
                       }}
-                      className="w-full h-9 px-3 border border-slate-300 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 outline-none"
+                      className="w-full h-9 px-3 border border-line-strong rounded-md text-sm bg-surface text-content focus:border-line-focus outline-none"
                     >
                       {CRON_PRESETS.map(p => (
                         <option key={p.value} value={p.value}>
@@ -733,7 +733,7 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Cron Expression *</label>
+                    <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Cron Expression *</label>
                     <input
                       type="text"
                       required
@@ -741,12 +741,12 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                       value={formCronCustom}
                       onChange={(e) => setFormCronCustom(e.target.value)}
                       placeholder="e.g. */5 * * * *"
-                      className="w-full h-9 px-3 border border-slate-300 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 outline-none disabled:opacity-60"
+                      className="w-full h-9 px-3 border border-line-strong rounded-md text-sm bg-surface text-content focus:border-line-focus outline-none disabled:opacity-60"
                     />
                   </div>
                 </div>
-                <div className="text-[10px] text-slate-400">
-                  Standard cron layout: <code className="bg-slate-100 px-1 dark:bg-slate-800">minute hour dayOfMonth month dayOfWeek</code>
+                <div className="text-[10px] text-content-tertiary">
+                  Standard cron layout: <code className="bg-surface-hover px-1">minute hour dayOfMonth month dayOfWeek</code>
                 </div>
               </div>
 
@@ -757,26 +757,26 @@ export default function RecurringPageContent({ projectKey }: RecurringPageConten
                   id="formIsActive"
                   checked={formIsActive}
                   onChange={(e) => setFormIsActive(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 dark:bg-slate-950 dark:border-slate-700"
+                  className="w-4 h-4 text-primary border-line-strong rounded focus:ring-primary/30"
                 />
-                <label htmlFor="formIsActive" className="text-sm text-slate-700 dark:text-slate-300 font-medium cursor-pointer">
+                <label htmlFor="formIsActive" className="text-sm text-content-secondary font-medium cursor-pointer">
                   Activate this schedule immediately
                 </label>
               </div>
 
               {/* Action buttons */}
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex justify-end gap-3 pt-4 border-t border-line">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-slate-300 dark:border-slate-750 text-slate-700 dark:text-slate-300 rounded-md text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
+                  className="px-4 py-2 border border-line-strong text-content-secondary rounded-md text-sm font-medium hover:bg-surface-hover cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={modalSubmitLoading || (formCronPreset === 'custom' && !formCronCustom.trim())}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 inline-flex items-center gap-1.5"
+                  className="bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 inline-flex items-center gap-1.5"
                 >
                   {modalSubmitLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   {editingTemplate ? 'Save Changes' : 'Create Schedule'}

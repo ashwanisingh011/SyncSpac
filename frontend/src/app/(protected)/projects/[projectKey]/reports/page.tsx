@@ -155,8 +155,8 @@ export default function ProjectReportsPage({ params }: ReportsPageProps) {
   if (loadingProject || storeLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
-        <p className="text-sm text-slate-500 mt-2">Loading project context...</p>
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <p className="text-sm text-content-tertiary mt-2">Loading project context...</p>
       </div>
     );
   }
@@ -164,12 +164,12 @@ export default function ProjectReportsPage({ params }: ReportsPageProps) {
   if (!project) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6">
-        <FolderOpen className="w-12 h-12 text-slate-350 mb-3 animate-pulse" />
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">Project Not Found</h3>
-        <p className="text-sm text-slate-500 mt-1 max-w-sm">
+        <FolderOpen className="w-12 h-12 text-content-tertiary mb-3 animate-pulse" />
+        <h3 className="text-lg font-bold text-content">Project Not Found</h3>
+        <p className="text-sm text-content-tertiary mt-1 max-w-sm">
           Could not resolve key <strong>{projectKey}</strong>.
         </p>
-        <Link href="/projects" className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium">
+        <Link href="/projects" className="mt-4 px-4 py-2 bg-primary text-primary-content rounded-lg text-sm font-medium">
           Back to Projects
         </Link>
       </div>
@@ -182,17 +182,17 @@ export default function ProjectReportsPage({ params }: ReportsPageProps) {
     <div className="p-6 md:p-8 max-w-6xl mx-auto w-full space-y-8">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-line pb-5">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-            <Link href={`/projects/${project.key}`} className="hover:underline hover:text-blue-600">{project.name}</Link>
+          <div className="flex items-center gap-2 text-xs font-semibold text-content-tertiary">
+            <Link href={`/projects/${project.key}`} className="hover:underline hover:text-primary">{project.name}</Link>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-slate-700 dark:text-slate-300">Reports</span>
+            <span className="text-content-secondary">Reports</span>
           </div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-1">
+          <h1 className="text-2xl font-extrabold tracking-tight text-content mt-1">
             Project Reports & Analytics
           </h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-content-tertiary">
             Monitor sprint progress, remaining story points, and team delivery velocity.
           </p>
         </div>
@@ -202,14 +202,14 @@ export default function ProjectReportsPage({ params }: ReportsPageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Sprint Burndown Widget (Left 2 Columns) */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 space-y-6">
+        <div className="lg:col-span-2 bg-surface rounded-xl border border-line shadow-sm p-6 space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <div>
-              <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-blue-600" />
+              <h2 className="text-base font-bold text-content flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-primary" />
                 Sprint Burndown
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-content-tertiary mt-0.5">
                 Tracks remaining story points vs. ideal linear progression.
               </p>
             </div>
@@ -218,7 +218,7 @@ export default function ProjectReportsPage({ params }: ReportsPageProps) {
             <select
               value={selectedSprintId}
               onChange={(e) => setSelectedSprintId(e.target.value)}
-              className="px-3 py-1.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-350 focus:outline-none focus:border-blue-500 transition-colors"
+              className="px-3 py-1.5 border border-line bg-surface rounded-lg text-xs font-semibold text-content-secondary focus:outline-none focus:border-line-focus transition-colors"
             >
               <option value="">-- Select Sprint --</option>
               {sprints.map((s) => (
@@ -231,16 +231,16 @@ export default function ProjectReportsPage({ params }: ReportsPageProps) {
 
           {/* Goal & Dates info */}
           {activeSprintInfo && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-900/55 p-3 rounded-lg text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-surface-sunken/55 p-3 rounded-lg text-xs">
               <div>
-                <span className="text-slate-400 font-semibold block mb-0.5">Sprint Goal</span>
-                <span className="font-bold text-slate-700 dark:text-slate-300">
+                <span className="text-content-tertiary font-semibold block mb-0.5">Sprint Goal</span>
+                <span className="font-bold text-content-secondary">
                   {activeSprintInfo.goal || 'No goal set'}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 font-semibold block mb-0.5">Duration</span>
-                <span className="font-bold text-slate-700 dark:text-slate-300">
+                <span className="text-content-tertiary font-semibold block mb-0.5">Duration</span>
+                <span className="font-bold text-content-secondary">
                   {activeSprintInfo.startDate
                     ? `${new Date(activeSprintInfo.startDate).toLocaleDateString()} – ${new Date(
                         activeSprintInfo.endDate!
@@ -254,15 +254,15 @@ export default function ProjectReportsPage({ params }: ReportsPageProps) {
           {/* Burndown Chart rendering */}
           <div className="h-[280px] w-full">
             {loadingBurndown ? (
-              <div className="flex flex-col items-center justify-center h-full text-slate-500">
-                <Loader2 className="w-7 h-7 animate-spin text-blue-600" />
+              <div className="flex flex-col items-center justify-center h-full text-content-tertiary">
+                <Loader2 className="w-7 h-7 animate-spin text-primary" />
                 <span className="text-xs mt-2">Computing daily progress...</span>
               </div>
             ) : burndownData.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-slate-450 text-center">
-                <BarChart2 className="w-10 h-10 text-slate-300 mb-2" />
+              <div className="flex flex-col items-center justify-center h-full text-content-tertiary text-center">
+                <BarChart2 className="w-10 h-10 text-content-tertiary mb-2" />
                 <span className="text-xs font-semibold">No data available for this sprint</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Add tasks to this sprint and update their status to done.</span>
+                <span className="text-[10px] text-content-tertiary mt-0.5">Add tasks to this sprint and update their status to done.</span>
               </div>
             ) : (
               isMounted && (
@@ -302,28 +302,28 @@ export default function ProjectReportsPage({ params }: ReportsPageProps) {
         </div>
 
         {/* Project Velocity (Right 1 Column) */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 space-y-6">
+        <div className="bg-surface rounded-xl border border-line shadow-sm p-6 space-y-6">
           <div>
-            <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <h2 className="text-base font-bold text-content flex items-center gap-2">
               <BarChart2 className="w-5 h-5 text-indigo-600" />
               Project Velocity
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-content-tertiary mt-0.5">
               Comparison of planned vs. completed story points across sprints.
             </p>
           </div>
 
           <div className="h-[280px] w-full">
             {loadingVelocity ? (
-              <div className="flex flex-col items-center justify-center h-full text-slate-500">
-                <Loader2 className="w-7 h-7 animate-spin text-blue-600" />
+              <div className="flex flex-col items-center justify-center h-full text-content-tertiary">
+                <Loader2 className="w-7 h-7 animate-spin text-primary" />
                 <span className="text-xs mt-2">Compiling velocity metrics...</span>
               </div>
             ) : velocityData.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-slate-450 text-center">
-                <Layers className="w-10 h-10 text-slate-300 mb-2" />
+              <div className="flex flex-col items-center justify-center h-full text-content-tertiary text-center">
+                <Layers className="w-10 h-10 text-content-tertiary mb-2" />
                 <span className="text-xs font-semibold">No sprint velocity history</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Sprints must be started or completed to record velocity.</span>
+                <span className="text-[10px] text-content-tertiary mt-0.5">Sprints must be started or completed to record velocity.</span>
               </div>
             ) : (
               isMounted && (

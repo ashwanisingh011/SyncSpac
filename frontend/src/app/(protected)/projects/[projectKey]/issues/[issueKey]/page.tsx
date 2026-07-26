@@ -343,7 +343,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
     if (filtered.length === 0) return null;
 
     return (
-      <div className="absolute z-50 mt-1 max-h-48 w-64 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg dark:border-slate-800 dark:bg-slate-950">
+      <div className="absolute z-50 mt-1 max-h-48 w-64 overflow-y-auto rounded-xl border border-line bg-surface p-1.5 shadow-lg">
         {filtered.map((member, idx) => {
           const isActive = idx === mentionActiveIndex;
           const username = member.username || member.name.toLowerCase().replace(/\s+/g, '');
@@ -353,11 +353,11 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
               type="button"
               onClick={() => selectMention(member, inputType)}
               className={`flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-xs transition-colors cursor-pointer ${isActive
-                ? 'bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100'
-                : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-900/50 dark:hover:text-slate-100'
+                ? 'bg-surface-hover text-content'
+                : 'text-content-secondary hover:bg-surface-hover hover:text-content'
                 }`}
             >
-              <div className="w-5 h-5 rounded-full bg-slate-200 text-slate-705 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center text-[9px] font-semibold overflow-hidden shrink-0 border border-slate-100 dark:border-slate-800">
+              <div className="w-5 h-5 rounded-full bg-surface-hover text-content-secondary flex items-center justify-center text-[9px] font-semibold overflow-hidden shrink-0 border border-line">
                 {member.avatarUrl ? (
                   <img src={member.avatarUrl} alt={member.name} className="w-full h-full object-cover" />
                 ) : (
@@ -365,8 +365,8 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="font-semibold truncate leading-tight text-slate-800 dark:text-slate-200">{member.name}</p>
-                <p className="text-[10px] text-slate-400 truncate leading-none mt-0.5">@{username}</p>
+                <p className="font-semibold truncate leading-tight text-content">{member.name}</p>
+                <p className="text-[10px] text-content-tertiary truncate leading-none mt-0.5">@{username}</p>
               </div>
             </button>
           );
@@ -707,14 +707,14 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full min-h-[400px]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
       </div>
     );
   }
 
   if (error || !project) {
     return (
-      <div className="p-6 text-red-500 bg-red-50 border border-red-200 rounded-md dark:bg-red-950/40 dark:border-red-900/60 dark:text-red-200 m-4">
+      <div className="p-6 text-danger bg-danger/10 border border-danger/25 rounded-md m-4">
         {error || 'Project data could not be loaded.'}
       </div>
     );
@@ -722,7 +722,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
   if (!issue) {
     return (
-      <div className="p-6 text-slate-500 dark:text-slate-400">
+      <div className="p-6 text-content-tertiary">
         Issue <span className="font-semibold">{issueKey}</span> not found in project <span className="font-semibold">{project.name}</span>.
       </div>
     );
@@ -1056,7 +1056,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
       case 'create':
         return (
           <span>
-            <strong className="font-semibold text-slate-805 dark:text-slate-200">{userDisplayName}</strong> created the task.
+            <strong className="font-semibold text-content">{userDisplayName}</strong> created the task.
           </span>
         );
       case 'update': {
@@ -1067,29 +1067,29 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
         return (
           <span>
-            <strong className="font-semibold text-slate-805 dark:text-slate-200">{userDisplayName}</strong> updated{' '}
-            <span className="font-medium text-slate-605 dark:text-slate-350">{formattedField}</span> from{' '}
-            <span className="italic text-slate-500">"{oldVal}"</span> to{' '}
-            <span className="italic font-semibold text-slate-808 dark:text-slate-200">"{newVal}"</span>.
+            <strong className="font-semibold text-content">{userDisplayName}</strong> updated{' '}
+            <span className="font-medium text-content-secondary">{formattedField}</span> from{' '}
+            <span className="italic text-content-tertiary">"{oldVal}"</span> to{' '}
+            <span className="italic font-semibold text-content">"{newVal}"</span>.
           </span>
         );
       }
       case 'comment':
         return (
           <span>
-            <strong className="font-semibold text-slate-805 dark:text-slate-200">{userDisplayName}</strong> added a comment.
+            <strong className="font-semibold text-content">{userDisplayName}</strong> added a comment.
           </span>
         );
       case 'attachment':
         return (
           <span>
-            <strong className="font-semibold text-slate-805 dark:text-slate-200">{userDisplayName}</strong> added an attachment.
+            <strong className="font-semibold text-content">{userDisplayName}</strong> added an attachment.
           </span>
         );
       default:
         return (
           <span>
-            <strong className="font-semibold text-slate-805 dark:text-slate-200">{userDisplayName}</strong> performed {item.action}.
+            <strong className="font-semibold text-content">{userDisplayName}</strong> performed {item.action}.
           </span>
         );
     }
@@ -1107,17 +1107,17 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
   };
 
   return (
-    <div className="flex flex-col h-full bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+    <div className="flex flex-col h-full bg-surface text-content">
       <AccessRestrictedModal isOpen={showAccessRestricted} onClose={() => setShowAccessRestricted(false)} />
       {actionWarning && (
-        <div className="fixed right-5 bottom-10 z-[60] flex max-w-sm items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900 shadow-xl dark:border-amber-900/60 dark:bg-amber-950/90 dark:text-amber-200">
+        <div className="fixed right-5 bottom-10 z-[60] flex max-w-sm items-start gap-3 rounded-xl border border-warning/25 bg-warning/10 px-4 py-3 text-sm font-medium text-warning shadow-xl">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
           <span>{actionWarning}</span>
         </div>
       )}
       {/* Top Header */}
-      <div className="px-4 pt-4 pb-4 flex items-center justify-between border-b border-transparent dark:border-slate-800">
-        <div className="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-500">
+      <div className="px-4 pt-4 pb-4 flex items-center justify-between border-b border-transparent">
+        <div className="flex items-center gap-3 text-sm text-content-tertiary">
           <Link href={`/projects/${projectKey}/board`} className="hover:underline">
             Projects
           </Link>
@@ -1126,23 +1126,23 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
             {project.name}
           </Link>
           <span>/</span>
-          <div className="flex items-center gap-1.5 text-slate-700 font-medium ml-1 dark:text-slate-300">
+          <div className="flex items-center gap-1.5 text-content-secondary font-medium ml-1">
             <IssueTypeIcon type={issue.type} />
             <span>{issue.taskKey}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+        <div className="flex items-center gap-2 text-content-secondary">
           {activeViewers.length > 0 && (
             <div className="flex items-center gap-1.5 mr-2">
-              <span className="text-xs text-slate-400">Viewing now:</span>
+              <span className="text-xs text-content-tertiary">Viewing now:</span>
               <div className="flex -space-x-1.5">
                 {activeViewers.map((viewer) => {
                   const initials = viewer.name ? viewer.name.charAt(0).toUpperCase() : 'U';
                   return (
                     <div
                       key={viewer.userId}
-                      className="w-6 h-6 rounded-full border border-white bg-slate-200 text-slate-700 dark:border-slate-950 dark:bg-slate-800 dark:text-slate-200 flex items-center justify-center text-[10px] font-semibold overflow-hidden"
+                      className="w-6 h-6 rounded-full border border-white bg-surface-hover text-content-secondary flex items-center justify-center text-[10px] font-semibold overflow-hidden"
                       title={`${viewer.name} is viewing this task`}
                     >
                       {viewer.avatar ? (
@@ -1157,27 +1157,27 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
               </div>
             </div>
           )}
-          {/* <button className="p-1.5 hover:bg-slate-100 rounded-sm transition-colors flex items-center gap-1.5 text-sm dark:hover:bg-slate-900">
+          {/* <button className="p-1.5 hover:bg-surface-hover rounded-sm transition-colors flex items-center gap-1.5 text-sm">
             <Share2 className="w-4 h-4" /> Share
           </button> */}
           <button
             onClick={handleToggleWatch}
             className={`p-1.5 rounded-sm transition-colors flex items-center gap-1.5 text-sm ${isWatching
-              ? 'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-950/40 dark:text-[#85B8FF] dark:hover:bg-blue-950/60'
-              : 'hover:bg-slate-100 text-slate-600 dark:text-slate-300 dark:hover:bg-slate-900'
+              ? 'bg-primary-subtle text-primary hover:bg-primary-subtle'
+              : 'hover:bg-surface-hover text-content-secondary'
               }`}
             title={isWatching ? 'Stop watching this issue' : 'Watch this issue'}
           >
             {isWatching ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             <span>{isWatching ? 'Watching' : 'Watch'}</span>
-            <span className="ml-0.5 px-1 bg-slate-200 dark:bg-slate-800 text-xs rounded-sm text-slate-600 dark:text-slate-400">
+            <span className="ml-0.5 px-1 bg-surface-hover text-xs rounded-sm text-content-secondary">
               {watchersCount}
             </span>
           </button>
-          {/* <button className="p-1.5 hover:bg-slate-100 rounded-sm transition-colors flex items-center gap-1.5 text-sm dark:hover:bg-slate-900">
+          {/* <button className="p-1.5 hover:bg-surface-hover rounded-sm transition-colors flex items-center gap-1.5 text-sm">
             <ThumbsUp className="w-4 h-4" />
           </button> */}
-          {/* <button className="p-1.5 hover:bg-slate-100 rounded-sm transition-colors dark:hover:bg-slate-900">
+          {/* <button className="p-1.5 hover:bg-surface-hover rounded-sm transition-colors">
             <MoreHorizontal className="w-5 h-5" />
           </button> */}
         </div>
@@ -1186,11 +1186,11 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
       <div className="flex-1 overflow-y-auto px-4 pb-6 flex flex-col lg:flex-row gap-10">
         {/* Left Column - Main Content */}
         <div className="flex-[2] min-w-0">
-          <h1 className="text-2xl font-semibold mb-4 hover:bg-slate-55 p-1 -ml-1 rounded-sm cursor-text transition-colors dark:hover:bg-slate-900">
+          <h1 className="text-2xl font-semibold mb-4 hover:bg-surface-hover p-1 -ml-1 rounded-sm cursor-text transition-colors">
             {issue.title}
           </h1>
 
-          <div className="flex items-center gap-2 mb-4 text-sm text-slate-600 font-medium dark:text-slate-300">
+          <div className="flex items-center gap-2 mb-4 text-sm text-content-secondary font-medium">
             <input
               type="file"
               id="attachment-upload"
@@ -1201,14 +1201,14 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
             <button
               onClick={() => document.getElementById('attachment-upload')?.click()}
               disabled={uploading}
-              className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-sm transition-colors dark:bg-slate-900 dark:hover:bg-slate-800 cursor-pointer disabled:opacity-50"
+              className="flex items-center gap-1.5 bg-surface-hover hover:bg-surface-hover px-3 py-1.5 rounded-sm transition-colors cursor-pointer disabled:opacity-50"
             >
               {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Paperclip className="w-4 h-4" />}
               {uploading ? 'Uploading...' : 'Attach'}
             </button>
             <button
               onClick={() => setIsLinkIssueOpen(true)}
-              className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-sm transition-colors dark:bg-slate-900 dark:hover:bg-slate-800 cursor-pointer"
+              className="flex items-center gap-1.5 bg-surface-hover hover:bg-surface-hover px-3 py-1.5 rounded-sm transition-colors cursor-pointer"
             >
               <LinkIcon className="w-4 h-4" /> Link issue
             </button>
@@ -1216,19 +1216,19 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
           {/* Description Section */}
           <div className="mb-6">
-            <h3 className="font-semibold text-slate-800 mb-3 dark:text-slate-100">Description</h3>
+            <h3 className="font-semibold text-content mb-3">Description</h3>
             {isEditingDesc ? (
               <div className="space-y-3">
                 <textarea
                   value={descValue}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescValue(e.target.value)}
-                  className="w-full min-h-[150px] p-3 border border-blue-500 rounded-sm outline-none resize-y text-sm focus:ring-1 focus:ring-blue-500 bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100 dark:border-[#579DFF]"
+                  className="w-full min-h-[150px] p-3 border border-primary rounded-sm outline-none resize-y text-sm focus:ring-1 focus:ring-primary/30 bg-surface text-content"
                   autoFocus
                 />
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleSaveDesc}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-sm text-sm font-medium transition-colors"
+                    className="bg-primary hover:bg-primary-hover text-primary-content px-3 py-1.5 rounded-sm text-sm font-medium transition-colors"
                   >
                     Save
                   </button>
@@ -1237,7 +1237,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                       setIsEditingDesc(false);
                       setDescValue(issue.description || '');
                     }}
-                    className="text-slate-650 hover:bg-slate-100 px-3 py-1.5 rounded-sm text-sm font-medium transition-colors dark:text-slate-300 dark:hover:bg-slate-900"
+                    className="text-content-secondary hover:bg-surface-hover px-3 py-1.5 rounded-sm text-sm font-medium transition-colors"
                   >
                     Cancel
                   </button>
@@ -1250,10 +1250,10 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                     setIsEditingDesc(true);
                   }
                 }}
-                className={'text-slate-700 text-sm min-h-[100px] p-2 -ml-2 rounded-sm transition-colors dark:text-slate-300 ' + ((canEditTask(issue) && !(hasRole('developer') || hasRole('qa_tester'))) ? 'cursor-text hover:bg-slate-50 dark:hover:bg-slate-900' : 'cursor-default')}
+                className={'text-content-secondary text-sm min-h-[100px] p-2 -ml-2 rounded-sm transition-colors ' + ((canEditTask(issue) && !(hasRole('developer') || hasRole('qa_tester'))) ? 'cursor-text hover:bg-surface-hover' : 'cursor-default')}
               >
                 {issue.description || (
-                  <span className="text-slate-400 italic dark:text-slate-500">Add a description...</span>
+                  <span className="text-content-tertiary italic">Add a description...</span>
                 )}
               </div>
             )}
@@ -1261,18 +1261,18 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
           {/* Attachments Section */}
           {(attachments.length > 0 || attachmentsLoading) && (
-            <div className="mb-6 border-t border-slate-100 pt-6 dark:border-slate-800">
+            <div className="mb-6 border-t border-line pt-6">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-semibold text-slate-800 dark:text-slate-100">Attachments</h3>
-                  <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full dark:bg-slate-800 dark:text-slate-400 font-medium">
+                  <h3 className="font-semibold text-content">Attachments</h3>
+                  <span className="text-xs bg-surface-hover text-content-secondary px-2 py-0.5 rounded-full font-medium">
                     {attachments.length}
                   </span>
                 </div>
                 <button
                   onClick={() => document.getElementById('attachment-upload')?.click()}
                   disabled={uploading}
-                  className="text-xs text-blue-600 hover:underline dark:text-[#579DFF] font-medium cursor-pointer disabled:opacity-50"
+                  className="text-xs text-primary hover:underline font-medium cursor-pointer disabled:opacity-50"
                 >
                   {uploading ? 'Uploading...' : '+ Add'}
                 </button>
@@ -1280,7 +1280,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
               {attachmentsLoading ? (
                 <div className="flex items-center justify-center py-6">
-                  <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+                  <Loader2 className="w-6 h-6 animate-spin text-content-tertiary" />
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -1294,7 +1294,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                     return (
                       <div
                         key={attachment._id}
-                        className="group flex items-start gap-3 p-3 border border-slate-200 rounded-lg hover:border-slate-300 hover:shadow-sm transition-all bg-white dark:bg-slate-900 dark:border-slate-800 dark:hover:border-slate-700"
+                        className="group flex items-start gap-3 p-3 border border-line rounded-lg hover:border-line-strong hover:shadow-card transition-all bg-surface"
                       >
                         {/* Thumbnail / Icon */}
                         {isImage ? (
@@ -1302,13 +1302,13 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                             <img
                               src={attachment.fileUrl}
                               alt={attachment.fileName}
-                              className="w-12 h-12 object-cover rounded-md border border-slate-200 dark:border-slate-700 cursor-pointer hover:opacity-80 transition-opacity"
+                              className="w-12 h-12 object-cover rounded-md border border-line cursor-pointer hover:opacity-80 transition-opacity"
                             />
                           </a>
                         ) : (
                           <a href={attachment.fileUrl} target="_blank" rel="noopener noreferrer" className="shrink-0">
-                            <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-md flex items-center justify-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                              <FileText className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+                            <div className="w-12 h-12 bg-surface-hover rounded-md flex items-center justify-center cursor-pointer hover:bg-surface-hover transition-colors">
+                              <FileText className="w-5 h-5 text-content-tertiary" />
                             </div>
                           </a>
                         )}
@@ -1319,12 +1319,12 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                             href={attachment.fileUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm font-medium text-slate-700 dark:text-slate-200 truncate block hover:text-blue-600 dark:hover:text-[#579DFF] transition-colors"
+                            className="text-sm font-medium text-content-secondary truncate block hover:text-primary transition-colors"
                             title={attachment.fileName}
                           >
                             {attachment.fileName}
                           </a>
-                          <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
+                          <div className="text-[11px] text-content-tertiary mt-0.5">
                             {formatFileSize(attachment.fileSize)} · {uploaderName} · {formatDate(attachment.createdAt)}
                           </div>
                         </div>
@@ -1332,7 +1332,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                         {/* Delete */}
                         <button
                           onClick={() => handleDeleteAttachment(attachment._id)}
-                          className="text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all p-1 cursor-pointer shrink-0"
+                          className="text-content-tertiary hover:text-danger opacity-0 group-hover:opacity-100 transition-all p-1 cursor-pointer shrink-0"
                           title="Delete attachment"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -1346,11 +1346,11 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
           )}
 
           {/* Checklist Section */}
-          <div className="mb-8 border-t border-slate-100 pt-6 dark:border-slate-800">
+          <div className="mb-8 border-t border-line pt-6">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-slate-800 dark:text-slate-100">Checklist</h3>
-                <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full dark:bg-slate-800 dark:text-slate-400 font-medium">
+                <h3 className="font-semibold text-content">Checklist</h3>
+                <span className="text-xs bg-surface-hover text-content-secondary px-2 py-0.5 rounded-full font-medium">
                   {completedChecklistCount}/{totalChecklistCount}
                 </span>
               </div>
@@ -1358,9 +1358,9 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
             {/* Checklist Progress Bar */}
             {totalChecklistCount > 0 && (
-              <div className="w-full bg-slate-100 h-1.5 rounded-full mb-4 overflow-hidden dark:bg-slate-800">
+              <div className="w-full bg-surface-hover h-1.5 rounded-full mb-4 overflow-hidden">
                 <div
-                  className="bg-blue-600 h-full rounded-full transition-all duration-300"
+                  className="bg-primary h-full rounded-full transition-all duration-300"
                   style={{ width: `${(completedChecklistCount / totalChecklistCount) * 100}%` }}
                 />
               </div>
@@ -1372,17 +1372,17 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                 {issue.checklist.map((item: IChecklistItem) => (
                   <div
                     key={item._id}
-                    className="flex items-center justify-between group py-1.5 px-2 hover:bg-slate-50 rounded-md transition-colors dark:hover:bg-slate-900/40"
+                    className="flex items-center justify-between group py-1.5 px-2 hover:bg-surface-hover rounded-md transition-colors"
                   >
                     <div className="flex items-center gap-3 flex-1 min-w-0">
                       <input
                         type="checkbox"
                         checked={item.isCompleted}
                         onChange={() => handleToggleChecklistItem(item._id, item.isCompleted)}
-                        className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-950 cursor-pointer"
+                        className="w-4 h-4 text-primary border-line-strong rounded focus:ring-primary/30 cursor-pointer"
                       />
                       <span
-                        className={`text-sm text-slate-700 dark:text-slate-300 truncate ${item.isCompleted ? 'line-through text-slate-400 dark:text-slate-500' : ''
+                        className={`text-sm text-content-secondary truncate ${item.isCompleted ? 'line-through text-content-tertiary' : ''
                           }`}
                       >
                         {item.title}
@@ -1390,7 +1390,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                     </div>
                     <button
                       onClick={() => handleDeleteChecklistItem(item._id)}
-                      className="text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1 cursor-pointer"
+                      className="text-content-tertiary hover:text-danger opacity-0 group-hover:opacity-100 transition-opacity p-1 cursor-pointer"
                       title="Delete checklist item"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -1407,11 +1407,11 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                 placeholder="Add checklist item..."
                 value={newChecklistItemTitle}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewChecklistItemTitle(e.target.value)}
-                className="flex-1 h-8 px-3 border border-slate-300 rounded-sm text-sm bg-white text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                className="flex-1 h-8 px-3 border border-line-strong rounded-sm text-sm bg-surface text-content placeholder:text-content-tertiary focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
               />
               <button
                 type="submit"
-                className="bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-slate-300 h-8 px-3 rounded-sm text-sm font-medium transition-colors cursor-pointer"
+                className="bg-surface-hover hover:bg-surface-hover text-content-secondary h-8 px-3 rounded-sm text-sm font-medium transition-colors cursor-pointer"
               >
                 Add
               </button>
@@ -1419,15 +1419,15 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
           </div>
 
           {/* Activity / Comments Section */}
-          <div className="border-t border-slate-100 pt-6 dark:border-slate-800">
+          <div className="border-t border-line pt-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-slate-800 dark:text-slate-100">Activity</h3>
-              <div className="flex bg-slate-100 p-0.5 rounded-md dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <h3 className="font-semibold text-content">Activity</h3>
+              <div className="flex bg-surface-hover p-0.5 rounded-md border border-line">
                 <button
                   onClick={() => setActiveTab('comments')}
                   className={`px-3 py-1 text-xs font-medium rounded-sm transition-all cursor-pointer ${activeTab === 'comments'
-                    ? 'bg-white text-slate-800 shadow-sm dark:bg-slate-805 dark:text-slate-100'
-                    : 'text-slate-500 hover:text-slate-850 dark:hover:text-slate-200'
+                    ? 'bg-surface text-content shadow-sm'
+                    : 'text-content-tertiary hover:text-content'
                     }`}
                 >
                   Comments
@@ -1435,8 +1435,8 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                 <button
                   onClick={() => setActiveTab('history')}
                   className={`px-3 py-1 text-xs font-medium rounded-sm transition-all cursor-pointer ${activeTab === 'history'
-                    ? 'bg-white text-slate-800 shadow-sm dark:bg-slate-805 dark:text-slate-100'
-                    : 'text-slate-500 hover:text-slate-850 dark:hover:text-slate-200'
+                    ? 'bg-surface text-content shadow-sm'
+                    : 'text-content-tertiary hover:text-content'
                     }`}
                 >
                   History
@@ -1448,7 +1448,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
               <>
                 {/* Comment Input */}
                 <div className="flex gap-4 mb-6">
-                  <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden select-none">
+                  <div className="w-8 h-8 rounded-full bg-primary text-primary-content flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden select-none">
                     {user?.avatar ? (
                       <img src={user.avatar} alt={user.name || ''} className="w-full h-full object-cover" />
                     ) : (
@@ -1468,7 +1468,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                             onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
                               handleTextareaKeyDown(e, newCommentText, 'new');
                             }}
-                            className="w-full min-h-[100px] p-3 border border-slate-300 rounded-sm outline-none resize-y text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                            className="w-full min-h-[100px] p-3 border border-line-strong rounded-sm outline-none resize-y text-sm focus:border-line-focus focus:ring-1 focus:ring-primary/30 bg-surface text-content"
                             autoFocus
                           />
                           {renderMentionDropdown('new')}
@@ -1476,7 +1476,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                         <div className="flex items-center gap-2">
                           <button
                             type="submit"
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-sm text-sm font-medium transition-colors cursor-pointer"
+                            className="bg-primary hover:bg-primary-hover text-primary-content px-3 py-1.5 rounded-sm text-sm font-medium transition-colors cursor-pointer"
                           >
                             Save
                           </button>
@@ -1486,7 +1486,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                               setIsCommentInputFocused(false);
                               setNewCommentText('');
                             }}
-                            className="text-slate-600 hover:bg-slate-100 px-3 py-1.5 rounded-sm text-sm font-medium transition-colors dark:text-slate-300 dark:hover:bg-slate-905 cursor-pointer"
+                            className="text-content-secondary hover:bg-surface-hover px-3 py-1.5 rounded-sm text-sm font-medium transition-colors cursor-pointer"
                           >
                             Cancel
                           </button>
@@ -1497,15 +1497,15 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                         type="text"
                         placeholder="Add a comment..."
                         onFocus={() => setIsCommentInputFocused(true)}
-                        className="w-full h-9 px-3 border border-slate-300 rounded-sm text-sm bg-white text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 cursor-text"
+                        className="w-full h-9 px-3 border border-line-strong rounded-sm text-sm bg-surface text-content placeholder:text-content-tertiary focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all cursor-text"
                       />
                     )}
                   </form>
                 </div>
 
                 {typingUsers.length > 0 && (
-                  <div className="flex items-center gap-1.5 text-xs text-slate-500 italic mb-3 ml-12 dark:text-slate-400">
-                    <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-400" />
+                  <div className="flex items-center gap-1.5 text-xs text-content-tertiary italic mb-3 ml-12">
+                    <Loader2 className="w-3.5 h-3.5 animate-spin text-content-tertiary" />
                     <span>
                       {typingUsers.map((u) => u.name).join(', ')} {typingUsers.length === 1 ? 'is' : 'are'} typing...
                     </span>
@@ -1515,7 +1515,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                 {/* Comments List */}
                 {commentsLoading ? (
                   <div className="flex items-center justify-center py-6">
-                    <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+                    <Loader2 className="w-6 h-6 animate-spin text-content-tertiary" />
                   </div>
                 ) : comments.length > 0 ? (
                   <div className="space-y-4">
@@ -1532,7 +1532,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
                       return (
                         <div key={comment._id} className="flex gap-4 group">
-                          <div className="w-8 h-8 rounded-full bg-slate-200 text-slate-705 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden select-none border border-slate-100 dark:border-slate-800">
+                          <div className="w-8 h-8 rounded-full bg-surface-hover text-content-secondary flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden select-none border border-line">
                             {author?.avatar ? (
                               <img src={author.avatar} alt={displayName} className="w-full h-full object-cover" />
                             ) : (
@@ -1541,10 +1541,10 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-baseline gap-2 mb-1">
-                              <span className="font-semibold text-sm text-slate-800 dark:text-slate-205">
+                              <span className="font-semibold text-sm text-content">
                                 {displayName}
                               </span>
-                              <span className="text-xs text-slate-400">
+                              <span className="text-xs text-content-tertiary">
                                 {formatDate(comment.createdAt)}
                               </span>
                             </div>
@@ -1560,14 +1560,14 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                                     onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
                                       handleTextareaKeyDown(e, editingCommentText, 'edit');
                                     }}
-                                    className="w-full min-h-[80px] p-2 border border-blue-500 rounded-sm outline-none text-sm bg-white text-slate-900 dark:bg-slate-909 dark:text-slate-100 dark:border-[#579DFF]"
+                                    className="w-full min-h-[80px] p-2 border border-primary rounded-sm outline-none text-sm bg-surface text-content"
                                   />
                                   {renderMentionDropdown('edit')}
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <button
                                     onClick={() => handleUpdateComment(comment._id)}
-                                    className="bg-blue-600 hover:bg-blue-707 text-white px-2.5 py-1 rounded-sm text-xs font-medium transition-colors cursor-pointer"
+                                    className="bg-primary hover:bg-primary-hover text-primary-content px-2.5 py-1 rounded-sm text-xs font-medium transition-colors cursor-pointer"
                                   >
                                     Save
                                   </button>
@@ -1576,7 +1576,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                                       setEditingCommentId(null);
                                       setEditingCommentText('');
                                     }}
-                                    className="text-slate-600 hover:bg-slate-101 px-2.5 py-1 rounded-sm text-xs font-medium transition-colors dark:text-slate-303 dark:hover:bg-slate-900 cursor-pointer"
+                                    className="text-content-secondary hover:bg-surface-hover px-2.5 py-1 rounded-sm text-xs font-medium transition-colors cursor-pointer"
                                   >
                                     Cancel
                                   </button>
@@ -1584,7 +1584,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                               </div>
                             ) : (
                               <>
-                                <div className="text-sm text-slate-700 dark:text-slate-300 break-words pr-4 whitespace-pre-wrap">
+                                <div className="text-sm text-content-secondary break-words pr-4 whitespace-pre-wrap">
                                   {comment.content}
                                 </div>
                                 <div className="flex items-center flex-wrap gap-2 mt-2">
@@ -1611,8 +1611,8 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                                           type="button"
                                           onClick={() => handleToggleReaction(comment._id, emoji)}
                                           className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium transition-colors cursor-pointer border ${hasReacted
-                                            ? 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800'
-                                            : 'bg-slate-50 text-slate-600 border-slate-100 hover:bg-slate-100 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-800 dark:hover:bg-slate-800'
+                                            ? 'bg-primary-subtle text-primary border-primary/25'
+                                            : 'bg-surface-sunken text-content-secondary border-line hover:bg-surface-hover'
                                             }`}
                                           title={emoji}
                                         >
@@ -1628,7 +1628,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                                     <button
                                       type="button"
                                       onClick={() => setActivePickerCommentId(activePickerCommentId === comment._id ? null : comment._id)}
-                                      className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-50 text-slate-500 border border-slate-105 hover:bg-slate-100 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-800 dark:hover:bg-slate-800 cursor-pointer"
+                                      className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-sunken text-content-tertiary border border-line hover:bg-surface-hover cursor-pointer"
                                       title="Add reaction"
                                     >
                                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1637,7 +1637,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                                     </button>
 
                                     {activePickerCommentId === comment._id && (
-                                      <div className="absolute z-40 bottom-8 left-0 flex items-center gap-1 p-1 bg-white border border-slate-200 rounded-xl shadow-lg dark:bg-slate-950 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-150">
+                                      <div className="absolute z-40 bottom-8 left-0 flex items-center gap-1 p-1 bg-surface border border-line rounded-xl shadow-lg animate-in fade-in slide-in-from-bottom-2 duration-150">
                                         {['👍', '❤️', '🔥', '👏', '😂', '🎉', '🚀'].map((emoji) => {
                                           const isReacted = comment.reactions?.some(
                                             (r) => {
@@ -1653,7 +1653,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                                                 handleToggleReaction(comment._id, emoji);
                                                 setActivePickerCommentId(null);
                                               }}
-                                              className={`w-7 h-7 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 text-sm transition-transform hover:scale-110 cursor-pointer ${isReacted ? 'bg-blue-50 dark:bg-blue-950/60' : ''
+                                              className={`w-7 h-7 flex items-center justify-center rounded-lg hover:bg-surface-hover text-sm transition-transform hover:scale-110 cursor-pointer ${isReacted ? 'bg-primary-subtle' : ''
                                                 }`}
                                             >
                                               {emoji}
@@ -1665,21 +1665,21 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                                   </div>
 
                                   {isAuthor && (
-                                    <div className="flex items-center gap-2 ml-1 text-slate-300 dark:text-slate-700">
+                                    <div className="flex items-center gap-2 ml-1 text-content-tertiary">
                                       <span className="text-[10px] select-none">•</span>
                                       <button
                                         onClick={() => {
                                           setEditingCommentId(comment._id);
                                           setEditingCommentText(comment.content);
                                         }}
-                                        className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:underline cursor-pointer"
+                                        className="text-xs text-content-tertiary hover:text-content hover:underline cursor-pointer"
                                       >
                                         Edit
                                       </button>
                                       <span className="text-[10px] select-none">•</span>
                                       <button
                                         onClick={() => handleDeleteComment(comment._id)}
-                                        className="text-xs text-slate-400 hover:text-red-500 hover:underline cursor-pointer"
+                                        className="text-xs text-content-tertiary hover:text-danger hover:underline cursor-pointer"
                                       >
                                         Delete
                                       </button>
@@ -1694,7 +1694,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                     })}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-sm text-slate-400 border border-slate-200 border-dashed rounded-sm bg-slate-50 dark:border-slate-800 dark:bg-slate-900/20 dark:text-slate-500">
+                  <div className="text-center py-8 text-sm text-content-tertiary border border-line border-dashed rounded-sm bg-surface-sunken">
                     No activity yet. Start the conversation by leaving a comment.
                   </div>
                 )}
@@ -1703,7 +1703,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
               /* History List */
               historyLoading ? (
                 <div className="flex items-center justify-center py-6">
-                  <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+                  <Loader2 className="w-6 h-6 animate-spin text-content-tertiary" />
                 </div>
               ) : history.length > 0 ? (
                 <div className="space-y-4">
@@ -1717,7 +1717,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
                     return (
                       <div key={item._id} className="flex gap-4 items-start text-sm">
-                        <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-600 dark:bg-slate-900 dark:text-slate-400 flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden select-none border border-slate-200 dark:border-slate-800">
+                        <div className="w-8 h-8 rounded-full bg-surface-hover text-content-secondary flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden select-none border border-line">
                           {author?.avatar ? (
                             <img src={author.avatar} alt={displayName} className="w-full h-full object-cover" />
                           ) : (
@@ -1725,10 +1725,10 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                           )}
                         </div>
                         <div className="flex-1 py-1">
-                          <div className="text-slate-600 dark:text-slate-300">
+                          <div className="text-content-secondary">
                             {formatHistoryDescription(item)}
                           </div>
-                          <div className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
+                          <div className="text-[10px] text-content-tertiary mt-0.5">
                             {formatDate(item.createdAt)}
                           </div>
                         </div>
@@ -1737,7 +1737,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                   })}
                 </div>
               ) : (
-                <div className="text-center py-8 text-sm text-slate-400 border border-slate-200 border-dashed rounded-sm bg-slate-50 dark:border-slate-800 dark:bg-slate-900/20 dark:text-slate-500">
+                <div className="text-center py-8 text-sm text-content-tertiary border border-line border-dashed rounded-sm bg-surface-sunken">
                   No history recorded for this task yet.
                 </div>
               )
@@ -1751,7 +1751,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
             <select
               value={issue.status}
               onChange={handleStatusChange}
-              className="w-auto bg-slate-100 hover:bg-slate-200 border border-transparent font-semibold text-slate-700 text-sm rounded-sm px-3 py-1.5 outline-none transition-colors appearance-none cursor-pointer uppercase tracking-wider dark:bg-blue-950/50 dark:text-[#85B8FF] dark:hover:bg-blue-950 dark:border-blue-900/40"
+              className="w-auto bg-surface-hover hover:bg-surface-hover border border-transparent font-semibold text-content-secondary text-sm rounded-sm px-3 py-1.5 outline-none transition-colors appearance-none cursor-pointer uppercase tracking-wider"
             >
               {statusOptions.map((option) => (
                 <option key={option.status} value={option.status}>
@@ -1761,15 +1761,15 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
             </select>
           </div>
 
-          <div className="border border-slate-200 rounded-sm dark:border-slate-800">
-            <div className="px-4 py-3 font-semibold text-sm border-b border-slate-200 bg-slate-50/50 dark:border-slate-800 dark:bg-slate-900">
+          <div className="border border-line rounded-sm">
+            <div className="px-4 py-3 font-semibold text-sm border-b border-line bg-surface-sunken">
               Details
             </div>
             <div className="p-4 space-y-4 text-sm">
               <div className="flex">
-                <div className="w-1/3 text-slate-500 font-medium dark:text-slate-500">Assignee</div>
+                <div className="w-1/3 text-content-tertiary font-medium">Assignee</div>
                 <div className="w-2/3 flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-medium overflow-hidden shrink-0">
+                  <div className="w-6 h-6 rounded-full bg-primary text-primary-content flex items-center justify-center text-[10px] font-medium overflow-hidden shrink-0">
                     {assignee ? (
                       assignee.avatarUrl ? (
                         <img src={assignee.avatarUrl} alt={assignee.name} className="w-full h-full object-cover" />
@@ -1780,16 +1780,16 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                       '?'
                     )}
                   </div>
-                  <span className="text-slate-700 hover:bg-slate-100 px-1 py-0.5 rounded-sm cursor-pointer dark:text-slate-300 dark:hover:bg-slate-900 truncate">
+                  <span className="text-content-secondary hover:bg-surface-hover px-1 py-0.5 rounded-sm cursor-pointer truncate">
                     {assignee ? assignee.name : 'Unassigned'}
                   </span>
                 </div>
               </div>
 
               <div className="flex">
-                <div className="w-1/3 text-slate-500 font-medium dark:text-slate-500">Reporter</div>
+                <div className="w-1/3 text-content-tertiary font-medium">Reporter</div>
                 <div className="w-2/3 flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-slate-400 text-white flex items-center justify-center text-[10px] font-medium overflow-hidden shrink-0">
+                  <div className="w-6 h-6 rounded-full bg-content-tertiary text-white flex items-center justify-center text-[10px] font-medium overflow-hidden shrink-0">
                     {reporter ? (
                       reporter.avatarUrl ? (
                         <img src={reporter.avatarUrl} alt={reporter.name} className="w-full h-full object-cover" />
@@ -1800,27 +1800,27 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                       '?'
                     )}
                   </div>
-                  <span className="text-slate-700 hover:bg-slate-100 px-1 py-0.5 rounded-sm cursor-pointer dark:text-slate-300 dark:hover:bg-slate-900 truncate">
+                  <span className="text-content-secondary hover:bg-surface-hover px-1 py-0.5 rounded-sm cursor-pointer truncate">
                     {reporter ? reporter.name : 'Unknown'}
                   </span>
                 </div>
               </div>
 
               <div className="flex">
-                <div className="w-1/3 text-slate-500 font-medium dark:text-slate-500">Priority</div>
-                <div className="w-2/3 flex items-center gap-2 hover:bg-slate-100 px-1 py-0.5 rounded-sm cursor-pointer -ml-1 w-max dark:hover:bg-slate-900">
+                <div className="w-1/3 text-content-tertiary font-medium">Priority</div>
+                <div className="w-2/3 flex items-center gap-2 hover:bg-surface-hover px-1 py-0.5 rounded-sm cursor-pointer -ml-1 w-max">
                   <PriorityIcon priority={issue.priority} />
-                  <span className="text-slate-700 dark:text-slate-300 capitalize">{issue.priority}</span>
+                  <span className="text-content-secondary capitalize">{issue.priority}</span>
                 </div>
               </div>
 
               <div className="flex">
-                <div className="w-1/3 text-slate-500 font-medium dark:text-slate-500">Sprint</div>
+                <div className="w-1/3 text-content-tertiary font-medium">Sprint</div>
                 <div className="w-2/3">
                   <select
                     value={issue.sprintId || 'backlog'}
                     onChange={handleSprintChange}
-                    className="w-auto bg-transparent hover:bg-slate-100 border border-transparent font-medium text-blue-600 text-sm rounded-sm px-1 py-0.5 outline-none transition-colors cursor-pointer dark:text-[#579DFF] dark:hover:bg-slate-900"
+                    className="w-auto bg-transparent hover:bg-surface-hover border border-transparent font-medium text-primary text-sm rounded-sm px-1 py-0.5 outline-none transition-colors cursor-pointer"
                   >
                     <option value="backlog">Backlog</option>
                     {sprints?.filter(s => s.status === 'active' || s.status === 'planned').map(s => (
@@ -1831,7 +1831,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
               </div>
 
               <div className="flex items-center">
-                <div className="w-1/3 text-slate-500 font-medium dark:text-slate-500">Story point</div>
+                <div className="w-1/3 text-content-tertiary font-medium">Story point</div>
                 <div className="w-2/3">
                   {isEditingStoryPoints ? (
                     <div className="flex items-center gap-1.5">
@@ -1840,12 +1840,12 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                         value={storyPointsValue}
                         onChange={(e) => setStoryPointsValue(e.target.value)}
                         placeholder="e.g. 5"
-                        className="w-16 h-7 px-1.5 border border-slate-300 rounded-sm text-xs bg-white text-slate-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                        className="w-16 h-7 px-1.5 border border-line-strong rounded-sm text-xs bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none"
                         autoFocus
                       />
                       <button
                         onClick={handleSaveStoryPoints}
-                        className="bg-blue-600 text-white text-xs px-2 py-1 rounded-sm hover:bg-blue-700 transition-colors"
+                        className="bg-primary text-primary-content text-xs px-2 py-1 rounded-sm hover:bg-primary-hover transition-colors"
                       >
                         Save
                       </button>
@@ -1854,7 +1854,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                           setIsEditingStoryPoints(false);
                           setStoryPointsValue(issue.storyPoints?.toString() || '');
                         }}
-                        className="text-slate-500 hover:bg-slate-100 text-xs px-2 py-1 rounded-sm transition-colors dark:text-slate-300 dark:hover:bg-slate-900"
+                        className="text-content-tertiary hover:bg-surface-hover text-xs px-2 py-1 rounded-sm transition-colors"
                       >
                         Cancel
                       </button>
@@ -1874,8 +1874,8 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                               setIsEditingStoryPoints(true);
                             }
                           }}
-                          className={`bg-slate-100 px-2 py-0.5 rounded-full text-xs font-semibold text-slate-700 transition-colors dark:bg-slate-800 dark:text-slate-300 ${canEditStoryPoints
-                              ? 'cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700'
+                          className={`bg-surface-hover px-2 py-0.5 rounded-full text-xs font-semibold text-content-secondary transition-colors ${canEditStoryPoints
+                              ? 'cursor-pointer hover:bg-surface-hover'
                               : 'cursor-default opacity-80'
                             }`}
                         >
@@ -1887,7 +1887,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                 </div>
               </div>              {/* Labels */}
               <div className="flex items-start relative">
-                <div className="w-1/3 text-slate-500 font-medium dark:text-slate-500 pt-0.5">Labels</div>
+                <div className="w-1/3 text-content-tertiary font-medium pt-0.5">Labels</div>
                 <div className="w-2/3">
                   <div className="flex flex-wrap gap-1.5 items-center">
                     {taskLabelIds.length > 0 ? (
@@ -1916,11 +1916,11 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                         );
                       })
                     ) : (
-                      <span className="text-slate-400 italic text-xs">No labels</span>
+                      <span className="text-content-tertiary italic text-xs">No labels</span>
                     )}
                     <button
                       onClick={() => setShowLabelDropdown(!showLabelDropdown)}
-                      className="w-5 h-5 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 transition-colors dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-400 cursor-pointer"
+                      className="w-5 h-5 flex items-center justify-center rounded-full bg-surface-hover hover:bg-surface-hover text-content-tertiary transition-colors cursor-pointer"
                       title="Add label"
                     >
                       <Plus className="w-3 h-3" />
@@ -1929,9 +1929,9 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
                   {/* Label Dropdown */}
                   {showLabelDropdown && (
-                    <div className="absolute right-0 top-full mt-1 w-64 bg-white border border-slate-200 rounded-lg shadow-xl z-30 dark:bg-slate-900 dark:border-slate-700 overflow-hidden">
-                      <div className="p-2 border-b border-slate-100 dark:border-slate-800">
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1 mb-1">
+                    <div className="absolute right-0 top-full mt-1 w-64 bg-surface border border-line rounded-lg shadow-xl z-30 overflow-hidden">
+                      <div className="p-2 border-b border-line">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-content-tertiary px-1 mb-1">
                           Select labels
                         </div>
                       </div>
@@ -1948,31 +1948,31 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                                     ? handleDetachLabel(label._id)
                                     : handleAttachLabel(label._id)
                                 }
-                                className="w-full flex items-center gap-2.5 px-2.5 py-1.5 text-sm rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer disabled:opacity-50 text-left"
+                                className="w-full flex items-center gap-2.5 px-2.5 py-1.5 text-sm rounded-md hover:bg-surface-hover transition-colors cursor-pointer disabled:opacity-50 text-left"
                               >
                                 <span
                                   className="w-3 h-3 rounded-full shrink-0 border"
                                   style={{ backgroundColor: label.color, borderColor: label.color }}
                                 />
-                                <span className="flex-1 text-slate-700 dark:text-slate-300 truncate text-xs font-medium">
+                                <span className="flex-1 text-content-secondary truncate text-xs font-medium">
                                   {label.name}
                                 </span>
                                 {isAttached && (
-                                  <Check className="w-3.5 h-3.5 text-blue-600 dark:text-[#579DFF] shrink-0" />
+                                  <Check className="w-3.5 h-3.5 text-primary shrink-0" />
                                 )}
                               </button>
                             );
                           })
                         ) : (
-                          <div className="px-3 py-2 text-xs text-slate-400 italic">No labels yet</div>
+                          <div className="px-3 py-2 text-xs text-content-tertiary italic">No labels yet</div>
                         )}
                       </div>
                       {/* Create new label inline */}
                       <form
                         onSubmit={handleCreateAndAttachLabel}
-                        className="border-t border-slate-100 dark:border-slate-800 p-2"
+                        className="border-t border-line p-2"
                       >
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1 mb-1.5">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-content-tertiary px-1 mb-1.5">
                           Create new label
                         </div>
                         <div className="flex items-center gap-1.5">
@@ -1980,7 +1980,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                             type="color"
                             value={newLabelColor}
                             onChange={(e) => setNewLabelColor(e.target.value)}
-                            className="w-7 h-7 rounded border border-slate-200 dark:border-slate-700 cursor-pointer p-0.5 bg-transparent"
+                            className="w-7 h-7 rounded border border-line cursor-pointer p-0.5 bg-transparent"
                             title="Pick label color"
                           />
                           <input
@@ -1988,22 +1988,22 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                             value={newLabelName}
                             onChange={(e) => setNewLabelName(e.target.value)}
                             placeholder="Label name..."
-                            className="flex-1 h-7 px-2 text-xs border border-slate-200 dark:border-slate-700 rounded-md bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 outline-none focus:border-blue-500"
+                            className="flex-1 h-7 px-2 text-xs border border-line rounded-md bg-surface text-content outline-none focus:border-line-focus"
                           />
                           <button
                             type="submit"
                             disabled={labelLoading || !newLabelName.trim()}
-                            className="h-7 px-2 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer disabled:opacity-50"
+                            className="h-7 px-2 text-xs font-medium bg-primary text-primary-content rounded-md hover:bg-primary-hover transition-colors cursor-pointer disabled:opacity-50"
                           >
                             Add
                           </button>
                         </div>
                       </form>
                       {/* Close button */}
-                      <div className="border-t border-slate-100 dark:border-slate-800 px-2 py-1.5">
+                      <div className="border-t border-line px-2 py-1.5">
                         <button
                           onClick={() => setShowLabelDropdown(false)}
-                          className="w-full text-center text-[11px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer"
+                          className="w-full text-center text-[11px] text-content-tertiary hover:text-content cursor-pointer"
                         >
                           Close
                         </button>
@@ -2015,7 +2015,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
               {/* Watchers Avatar List */}
               <div className="flex items-start">
-                <div className="w-1/3 text-slate-500 font-medium dark:text-slate-500">Watchers</div>
+                <div className="w-1/3 text-content-tertiary font-medium">Watchers</div>
                 <div className="w-2/3">
                   <div className="flex flex-wrap gap-1 items-center">
                     {issue.watchers && issue.watchers.length > 0 ? (
@@ -2026,7 +2026,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                           <div
                             key={watcherId}
                             title={member.name}
-                            className="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] font-semibold border border-white dark:border-slate-800 dark:bg-slate-800 dark:text-slate-205 overflow-hidden shrink-0"
+                            className="w-6 h-6 rounded-full bg-surface-hover text-content-secondary flex items-center justify-center text-[10px] font-semibold border border-white overflow-hidden shrink-0"
                           >
                             {member.avatarUrl ? (
                               <img src={member.avatarUrl} alt={member.name} className="w-full h-full object-cover" />
@@ -2037,19 +2037,19 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                         );
                       })
                     ) : (
-                      <span className="text-slate-400 italic text-xs">No watchers</span>
+                      <span className="text-content-tertiary italic text-xs">No watchers</span>
                     )}
                   </div>
                 </div>
               </div>
 
               {/* Time Tracking Widget */}
-              <div className="border-t border-slate-200 pt-4 dark:border-slate-800 space-y-3">
+              <div className="border-t border-line pt-4 space-y-3">
                 <div className="flex justify-between items-center">
-                  <div className="text-slate-500 font-medium dark:text-slate-500">Time tracking</div>
+                  <div className="text-content-tertiary font-medium">Time tracking</div>
                   <button
                     onClick={() => setIsLogTimeOpen(true)}
-                    className="text-xs text-blue-600 hover:underline dark:text-[#579DFF] font-medium cursor-pointer"
+                    className="text-xs text-primary hover:underline font-medium cursor-pointer"
                   >
                     Log work
                   </button>
@@ -2057,13 +2057,13 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
                 <div className="space-y-1">
                   {/* Progress Bar */}
-                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden dark:bg-slate-800 relative">
+                  <div className="w-full bg-surface-hover h-2 rounded-full overflow-hidden relative">
                     <div
-                      className="bg-blue-600 h-full rounded-full transition-all duration-300"
+                      className="bg-primary h-full rounded-full transition-all duration-300"
                       style={{ width: `${(issue.estimatedTime || 0) > 0 ? Math.min(Math.round((totalLoggedMinutes / (issue.estimatedTime || 1)) * 100), 100) : 0}%` }}
                     />
                   </div>
-                  <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400">
+                  <div className="flex justify-between text-[11px] text-content-tertiary">
                     <span>{totalLoggedMinutes}m logged</span>
                     <span>{(issue.estimatedTime || 0) > 0 ? `${issue.estimatedTime}m estimated` : 'No estimate'}</span>
                   </div>
@@ -2071,7 +2071,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
                 {/* Estimate Editor */}
                 <div className="flex items-center">
-                  <div className="w-1/3 text-slate-500 font-medium dark:text-slate-500">Estimate</div>
+                  <div className="w-1/3 text-content-tertiary font-medium">Estimate</div>
                   <div className="w-2/3">
                     {isEditingEstimate ? (
                       <div className="flex items-center gap-1.5">
@@ -2080,12 +2080,12 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                           value={estimateValue}
                           onChange={(e) => setEstimateValue(e.target.value)}
                           placeholder="e.g. 60"
-                          className="w-16 h-7 px-1.5 border border-slate-300 rounded-sm text-xs bg-white text-slate-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                          className="w-16 h-7 px-1.5 border border-line-strong rounded-sm text-xs bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none"
                           autoFocus
                         />
                         <button
                           onClick={handleSaveEstimate}
-                          className="bg-blue-600 text-white text-xs px-2 py-1 rounded-sm hover:bg-blue-700 transition-colors"
+                          className="bg-primary text-primary-content text-xs px-2 py-1 rounded-sm hover:bg-primary-hover transition-colors"
                         >
                           Save
                         </button>
@@ -2094,7 +2094,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                             setIsEditingEstimate(false);
                             setEstimateValue(issue.estimatedTime?.toString() || '');
                           }}
-                          className="text-slate-500 hover:bg-slate-100 text-xs px-2 py-1 rounded-sm transition-colors dark:text-slate-300 dark:hover:bg-slate-900"
+                          className="text-content-tertiary hover:bg-surface-hover text-xs px-2 py-1 rounded-sm transition-colors"
                         >
                           Cancel
                         </button>
@@ -2102,7 +2102,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                     ) : (
                       <span
                         onClick={() => setIsEditingEstimate(true)}
-                        className="bg-slate-100 px-2 py-0.5 rounded-full text-xs font-semibold text-slate-700 cursor-pointer hover:bg-slate-205 transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-707"
+                        className="bg-surface-hover px-2 py-0.5 rounded-full text-xs font-semibold text-content-secondary cursor-pointer hover:bg-surface-hover transition-colors"
                       >
                         {issue.estimatedTime ? `${issue.estimatedTime}m` : 'Add estimate'}
                       </span>
@@ -2112,8 +2112,8 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
                 {/* Logged Work List */}
                 {timeLogs.length > 0 && (
-                  <div className="mt-3 space-y-1.5 max-h-40 overflow-y-auto pr-1 border-t border-slate-100 pt-2 dark:border-slate-800/60">
-                    <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider dark:text-slate-400 mb-1">Time Logs</div>
+                  <div className="mt-3 space-y-1.5 max-h-40 overflow-y-auto pr-1 border-t border-line pt-2">
+                    <div className="text-[10px] font-semibold text-content-tertiary uppercase tracking-wider mb-1">Time Logs</div>
                     {timeLogs.map((log) => {
                       const logAuthor = log.user;
                       const logDisplayName = logAuthor
@@ -2121,18 +2121,18 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                         : 'Unknown User';
 
                       return (
-                        <div key={log._id} className="flex justify-between items-start text-xs border-b border-slate-101 pb-1.5 dark:border-slate-808/60 last:border-0 last:pb-0">
+                        <div key={log._id} className="flex justify-between items-start text-xs border-b border-line pb-1.5 last:border-0 last:pb-0">
                           <div className="flex-1 min-w-0 pr-2">
                             <div className="flex items-center gap-1">
-                              <span className="font-semibold text-slate-700 dark:text-slate-300 truncate max-w-[120px]">{logDisplayName}</span>
-                              <span className="text-slate-400">•</span>
-                              <span className="text-slate-500">{log.duration}m</span>
+                              <span className="font-semibold text-content-secondary truncate max-w-[120px]">{logDisplayName}</span>
+                              <span className="text-content-tertiary">•</span>
+                              <span className="text-content-tertiary">{log.duration}m</span>
                             </div>
-                            {log.description && <div className="text-slate-500 dark:text-slate-400 truncate mt-0.5 italic" title={log.description}>{log.description}</div>}
+                            {log.description && <div className="text-content-tertiary truncate mt-0.5 italic" title={log.description}>{log.description}</div>}
                           </div>
                           <button
                             onClick={() => handleDeleteLog(log._id)}
-                            className="text-slate-400 hover:text-red-500 p-0.5 cursor-pointer"
+                            className="text-content-tertiary hover:text-danger p-0.5 cursor-pointer"
                             title="Delete work log"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -2145,12 +2145,12 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
               </div>
 
               {/* Dependencies Widget */}
-              <div className="border-t border-slate-200 pt-4 dark:border-slate-800 space-y-3">
+              <div className="border-t border-line pt-4 space-y-3">
                 <div className="flex justify-between items-center">
-                  <div className="text-slate-500 font-medium dark:text-slate-500">Dependencies</div>
+                  <div className="text-content-tertiary font-medium">Dependencies</div>
                   <button
                     onClick={() => setIsLinkIssueOpen(true)}
-                    className="text-xs text-blue-600 hover:underline dark:text-[#579DFF] font-medium cursor-pointer"
+                    className="text-xs text-primary hover:underline font-medium cursor-pointer"
                   >
                     Link issue
                   </button>
@@ -2158,7 +2158,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
                 {dependenciesLoading ? (
                   <div className="flex items-center justify-center py-2">
-                    <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
+                    <Loader2 className="w-4 h-4 animate-spin text-content-tertiary" />
                   </div>
                 ) : dependencies.length > 0 ? (
                   <div className="space-y-2">
@@ -2176,37 +2176,37 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                       return (
                         <div
                           key={dep._id}
-                          className="flex items-center justify-between p-2 rounded bg-slate-50 border border-slate-100 dark:bg-slate-900 dark:border-slate-800 text-xs"
+                          className="flex items-center justify-between p-2 rounded bg-surface-sunken border border-line text-xs"
                         >
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">
+                              <span className="text-[10px] uppercase font-bold text-content-tertiary">
                                 {relationshipLabel}
                               </span>
                               <Link
                                 href={`/projects/${projectKey}/issues/${otherTask.taskKey}`}
-                                className="font-semibold text-blue-600 hover:underline dark:text-[#579DFF]"
+                                className="font-semibold text-primary hover:underline"
                               >
                                 {otherTask.taskKey}
                               </Link>
                               <span
                                 className={`text-[9px] px-1 py-0.2 rounded-sm font-medium ${otherTask.status === 'done'
-                                  ? 'bg-green-50 text-green-700 border border-green-200 dark:bg-green-950/30 dark:text-green-400 dark:border-green-900/40'
+                                  ? 'bg-success/10 text-success border border-success/25'
                                   : otherTask.status === 'blocked'
-                                    ? 'bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/40'
-                                    : 'bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700'
+                                    ? 'bg-danger/10 text-danger border border-danger/25'
+                                    : 'bg-surface-hover text-content-secondary border border-line'
                                   }`}
                               >
                                 {otherTask.status}
                               </span>
                             </div>
-                            <div className="text-slate-600 dark:text-slate-400 truncate mt-1" title={otherTask.title}>
+                            <div className="text-content-secondary truncate mt-1" title={otherTask.title}>
                               {otherTask.title}
                             </div>
                           </div>
                           <button
                             onClick={() => handleRemoveDependency(dep._id)}
-                            className="text-slate-400 hover:text-red-500 p-1 cursor-pointer shrink-0 ml-1.5"
+                            className="text-content-tertiary hover:text-danger p-1 cursor-pointer shrink-0 ml-1.5"
                             title="Remove dependency"
                           >
                             <X className="w-3.5 h-3.5" />
@@ -2216,7 +2216,7 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                     })}
                   </div>
                 ) : (
-                  <div className="text-center py-3 text-xs text-slate-400 italic">
+                  <div className="text-center py-3 text-xs text-content-tertiary italic">
                     No dependencies linked yet.
                   </div>
                 )}
@@ -2228,39 +2228,39 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
       {/* Log Work Modal */}
       {isLogTimeOpen && (
-        <div className="fixed inset-0 bg-slate-900/50 flex items-center justify-center z-50 animate-fade-in backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-md p-6 max-w-md w-full shadow-2xl relative">
-            <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Log work</h3>
+        <div className="fixed inset-0 bg-black/45 flex items-center justify-center z-50 animate-fade-in backdrop-blur-sm">
+          <div className="bg-surface border border-line rounded-md p-6 max-w-md w-full shadow-2xl relative">
+            <h3 className="text-lg font-semibold text-content mb-4">Log work</h3>
             <form onSubmit={handleLogTime} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Duration (minutes) *</label>
+                <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Duration (minutes) *</label>
                 <input
                   type="number"
                   required
                   placeholder="e.g. 60"
                   value={logDuration}
                   onChange={(e) => setLogDuration(e.target.value)}
-                  className="w-full h-9 px-3 border border-slate-300 rounded-sm text-sm bg-white text-slate-900 placeholder:text-slate-505 focus:border-blue-505 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                  className="w-full h-9 px-3 border border-line-strong rounded-sm text-sm bg-surface text-content placeholder:text-content-tertiary focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-505 uppercase tracking-wider mb-1 dark:text-slate-400">Date Logged</label>
+                <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Date Logged</label>
                 <input
                   type="date"
                   value={logDate}
                   onChange={(e) => setLogDate(e.target.value)}
-                  className="w-full h-9 px-3 border border-slate-300 rounded-sm text-sm bg-white text-slate-900 placeholder:text-slate-505 focus:border-blue-505 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                  className="w-full h-9 px-3 border border-line-strong rounded-sm text-sm bg-surface text-content placeholder:text-content-tertiary focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-505 uppercase tracking-wider mb-1 dark:text-slate-400">Description</label>
+                <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Description</label>
                 <textarea
                   placeholder="What did you work on?"
                   value={logDescription}
                   onChange={(e) => setLogDescription(e.target.value)}
-                  className="w-full min-h-[80px] p-3 border border-slate-300 rounded-sm outline-none resize-y text-sm focus:border-blue-505 focus:ring-1 focus:ring-blue-500 bg-white text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                  className="w-full min-h-[80px] p-3 border border-line-strong rounded-sm outline-none resize-y text-sm focus:border-line-focus focus:ring-1 focus:ring-primary/30 bg-surface text-content"
                 />
               </div>
 
@@ -2268,13 +2268,13 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                 <button
                   type="button"
                   onClick={() => setIsLogTimeOpen(false)}
-                  className="text-slate-600 hover:bg-slate-100 px-4 py-2 rounded-sm text-sm font-medium transition-colors dark:text-slate-300 dark:hover:bg-slate-900 cursor-pointer"
+                  className="text-content-secondary hover:bg-surface-hover px-4 py-2 rounded-sm text-sm font-medium transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-sm text-sm font-medium transition-colors cursor-pointer"
+                  className="bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-sm text-sm font-medium transition-colors cursor-pointer"
                 >
                   Log time
                 </button>
@@ -2286,24 +2286,24 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
 
       {/* Link Issue Modal */}
       {isLinkIssueOpen && (
-        <div className="fixed inset-0 bg-slate-900/50 flex items-center justify-center z-50 animate-fade-in backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-md p-6 max-w-md w-full shadow-2xl relative">
+        <div className="fixed inset-0 bg-black/45 flex items-center justify-center z-50 animate-fade-in backdrop-blur-sm">
+          <div className="bg-surface border border-line rounded-md p-6 max-w-md w-full shadow-2xl relative">
             <button
               onClick={() => setIsLinkIssueOpen(false)}
-              className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg cursor-pointer"
+              className="absolute right-4 top-4 text-content-tertiary hover:text-content text-lg cursor-pointer"
             >
               &times;
             </button>
 
-            <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Link issue</h3>
+            <h3 className="text-lg font-semibold text-content mb-4">Link issue</h3>
 
             <form onSubmit={handleAddDependency} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">This issue...</label>
+                <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">This issue...</label>
                 <select
                   value={linkType}
                   onChange={(e) => setLinkType(e.target.value as 'blocks' | 'blocked-by')}
-                  className="w-full h-9 px-3 border border-slate-300 rounded-sm text-sm bg-white text-slate-900 focus:border-blue-505 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                  className="w-full h-9 px-3 border border-line-strong rounded-sm text-sm bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
                 >
                   <option value="blocked-by">is blocked by</option>
                   <option value="blocks">blocks</option>
@@ -2311,12 +2311,12 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 dark:text-slate-400">Target Issue</label>
+                <label className="block text-xs font-semibold text-content-tertiary uppercase tracking-wider mb-1">Target Issue</label>
                 <select
                   required
                   value={linkTargetTaskId}
                   onChange={(e) => setLinkTargetTaskId(e.target.value)}
-                  className="w-full h-9 px-3 border border-slate-300 rounded-sm text-sm bg-white text-slate-900 focus:border-blue-505 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                  className="w-full h-9 px-3 border border-line-strong rounded-sm text-sm bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
                 >
                   <option value="">Select a task...</option>
                   {tasks
@@ -2333,14 +2333,14 @@ export function IssuePageContent({ projectKey, issueKey }: IssuePageContentProps
                 <button
                   type="button"
                   onClick={() => setIsLinkIssueOpen(false)}
-                  className="text-slate-600 hover:bg-slate-100 px-4 py-2 rounded-sm text-sm font-medium transition-colors dark:text-slate-300 dark:hover:bg-slate-900 cursor-pointer"
+                  className="text-content-secondary hover:bg-surface-hover px-4 py-2 rounded-sm text-sm font-medium transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={linking || !linkTargetTaskId}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-sm text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
+                  className="bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-sm text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
                 >
                   {linking && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Link

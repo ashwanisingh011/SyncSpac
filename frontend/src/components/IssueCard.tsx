@@ -7,6 +7,7 @@ import { useProjectData } from '@/context/projectDataContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { ITaskData } from '@/types/workspace';
+import { cn } from '@/lib/utils';
 
 interface IssueCardProps {
   issue: ITaskData;
@@ -72,22 +73,34 @@ export default function IssueCard({ issue, index, projectKey, issueUrlPrefix = '
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           onClick={handleCardClick}
-          className={`bg-white p-3 rounded-md shadow-sm border border-slate-200 mb-2 cursor-pointer hover:bg-slate-50 transition-colors dark:bg-slate-950 dark:border-slate-800 dark:hover:bg-slate-900 ${snapshot.isDragging ? 'shadow-md ring-2 ring-blue-500 ring-opacity-50 dark:ring-[#579DFF]' : ''}`}
+          style={{
+            ...provided.draggableProps.style,
+            // Slight tilt while dragging — Linear-style pick-up feel
+            transform: snapshot.isDragging
+              ? `${provided.draggableProps.style?.transform ?? ''} rotate(2deg)`
+              : provided.draggableProps.style?.transform,
+          }}
+          className={cn(
+            'group mb-2 cursor-pointer rounded-lg border border-line bg-surface p-3 shadow-card',
+            'transition-[border-color,box-shadow,background-color] duration-150',
+            'hover:border-line-strong hover:shadow-raised',
+            snapshot.isDragging && 'rotate-2 border-primary/40 shadow-overlay ring-1 ring-primary/30'
+          )}
         >
-          <div className="text-sm text-slate-800 mb-2 line-clamp-2 dark:text-slate-100">
+          <div className="mb-2 line-clamp-2 text-[13.5px] leading-snug text-content">
             {issue.title}
           </div>
 
           {/* Label indicators */}
           {issue.labels && issue.labels.length > 0 && (
-            <div className="flex flex-wrap gap-1 mb-2">
+            <div className="mb-2 flex flex-wrap gap-1">
               {issue.labels.map((label: any, idx: number) => {
                 // Labels can be populated objects or string IDs
                 if (typeof label === 'object' && label.name) {
                   return (
                     <span
                       key={label._id}
-                      className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full border"
+                      className="rounded-full border px-1.5 py-0.5 text-[9px] font-semibold"
                       style={{
                         backgroundColor: label.color + '18',
                         borderColor: label.color + '40',
@@ -102,7 +115,7 @@ export default function IssueCard({ issue, index, projectKey, issueUrlPrefix = '
                 return (
                   <span
                     key={typeof label === 'string' ? label : idx}
-                    className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"
+                    className="h-2 w-2 rounded-full bg-line-strong"
                     title="Label"
                   />
                 );
@@ -110,12 +123,12 @@ export default function IssueCard({ issue, index, projectKey, issueUrlPrefix = '
             </div>
           )}
 
-          <div className="flex items-center justify-between mt-3">
+          <div className="mt-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <IssueTypeIcon type={issue.type} />
               <Link
                 href={`${issueUrlPrefix}/${projectKey}/issues/${issue.taskKey}`}
-                className="text-xs font-medium text-slate-600 hover:text-blue-600 hover:underline dark:text-slate-400 dark:hover:text-[#579DFF]"
+                className="text-[11px] font-semibold tracking-wide text-content-tertiary transition-colors hover:text-primary hover:underline"
                 onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   // Pre-empt drag if clicking the link
                   e.stopPropagation();
@@ -129,24 +142,27 @@ export default function IssueCard({ issue, index, projectKey, issueUrlPrefix = '
               <PriorityIcon priority={issue.priority} />
 
               {issue.estimatedTime ? (
-                <div className="px-1.5 py-0.5 rounded-full bg-slate-100 text-[10px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-300" title="Estimated Time">
+                <div className="rounded-full bg-surface-hover px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-content-secondary" title="Estimated Time">
                   {issue.estimatedTime}m
                 </div>
               ) : null}
 
               {assignee ? (
                 <div
-                  className={`w-6 h-6 rounded-full ${assigneeAvatar ? 'bg-transparent' : getAvatarBgColor(assigneeName)} text-white flex items-center justify-center text-[10px] font-medium overflow-hidden ml-1 shrink-0`}
+                  className={cn(
+                    'ml-1 flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded-full text-[10px] font-medium text-white ring-2 ring-surface',
+                    assigneeAvatar ? 'bg-transparent' : getAvatarBgColor(assigneeName)
+                  )}
                   title={assigneeName}
                 >
                   {assigneeAvatar ? (
-                    <img src={assigneeAvatar} alt={assigneeName} className="w-full h-full object-cover" />
+                    <img src={assigneeAvatar} alt={assigneeName} className="h-full w-full object-cover" />
                   ) : (
                     getInitials(assigneeName)
                   )}
                 </div>
               ) : (
-                <div className="w-6 h-6 rounded-full bg-slate-200 border border-slate-300 border-dashed flex items-center justify-center ml-1 dark:bg-slate-800 dark:border-slate-700 shrink-0" title="Unassigned"></div>
+                <div className="ml-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-dashed border-line-strong bg-surface-hover" title="Unassigned"></div>
               )}
             </div>
           </div>
