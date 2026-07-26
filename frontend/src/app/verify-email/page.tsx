@@ -18,7 +18,7 @@ const VerifyEmailRedirectContent = () => {
   }, [token, router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center text-sm text-slate-500 dark:text-slate-400">
+    <div className="flex min-h-screen items-center justify-center text-sm text-content-tertiary">
       Redirecting...
     </div>
   );
@@ -31,7 +31,7 @@ const VerifyEmailRedirectContent = () => {
 const VerifyEmailRedirect = () => (
   <Suspense
     fallback={
-      <div className="flex min-h-screen items-center justify-center text-sm text-slate-500 dark:text-slate-400">
+      <div className="flex min-h-screen items-center justify-center text-sm text-content-tertiary">
         Loading...
       </div>
     }

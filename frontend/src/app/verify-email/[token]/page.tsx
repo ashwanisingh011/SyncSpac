@@ -168,15 +168,15 @@ const VerifyEmail = () => {
           status === 'error' ? (
             <>
               Need a new link?{' '}
-              <Link href={resendHref} className="font-medium text-[#0052CC] hover:underline dark:text-[#579DFF]">
+              <Link href={resendHref} className="font-medium text-primary hover:underline">
                 Back to sign up
               </Link>
             </>
           ) : null
         }
       >
-        <div className="rounded-3xl border border-[#DFE1E6] bg-[#F6F8FB] p-6 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200">
-          <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#6B778C] dark:text-slate-500">
+        <div className="rounded-2xl border border-line bg-surface-sunken p-6 text-sm text-content-secondary">
+          <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-content-tertiary">
             Email verification
           </div>
 
@@ -185,7 +185,7 @@ const VerifyEmail = () => {
             <div className="flex items-center gap-3">
               {/* Spinner */}
               <svg
-                className="h-5 w-5 animate-spin text-[#0052CC]"
+                className="h-5 w-5 animate-spin text-primary"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -204,7 +204,7 @@ const VerifyEmail = () => {
                   d="M4 12a8 8 0 018-8v8H4z"
                 />
               </svg>
-              <p className="text-sm leading-6 text-[#6B778C] dark:text-slate-400">
+              <p className="text-sm leading-6 text-content-tertiary">
                 Verifying your email…
               </p>
             </div>
@@ -215,7 +215,7 @@ const VerifyEmail = () => {
             <>
               {/* Green tick */}
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E3FCEF] text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-success/12 text-success">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -229,19 +229,19 @@ const VerifyEmail = () => {
                     />
                   </svg>
                 </div>
-                <p className="text-sm font-medium text-[#172B4D] dark:text-white">
+                <p className="text-sm font-medium text-content">
                   Email verified successfully!
                 </p>
               </div>
 
-              <p className="mb-4 text-sm leading-6 text-[#6B778C] dark:text-slate-400">
+              <p className="mb-4 text-sm leading-6 text-content-tertiary">
                 {message}
               </p>
 
               {/* Countdown info */}
-              <p className="mb-4 text-xs text-[#6B778C] dark:text-slate-500">
+              <p className="mb-4 text-xs text-content-tertiary">
                 Redirecting to login in{' '}
-                <span className="font-semibold tabular-nums text-[#0052CC] dark:text-[#579DFF]">
+                <span className="font-semibold tabular-nums text-primary">
                   {countdown}s
                 </span>
                 …
@@ -250,7 +250,7 @@ const VerifyEmail = () => {
               {/* Manual redirect button (in case countdown is slow) */}
               <Link
                 href="/login"
-                className="inline-flex rounded bg-[#0052CC] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0747A6]"
+                className="inline-flex rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-content transition hover:bg-primary-hover"
               >
                 Go to login now
               </Link>
@@ -264,13 +264,13 @@ const VerifyEmail = () => {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/login"
-                  className="inline-flex rounded bg-[#0052CC] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0747A6]"
+                  className="inline-flex rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-content transition hover:bg-primary-hover"
                 >
                   Go to login
                 </Link>
                 <Link
                   href={resendHref}
-                  className="inline-flex rounded border border-[#DFE1E6] px-4 py-2 text-sm font-semibold text-[#172B4D] transition hover:bg-white dark:border-slate-700 dark:text-white dark:hover:bg-slate-900"
+                  className="inline-flex rounded-lg border border-line px-4 py-2 text-sm font-semibold text-content transition hover:bg-surface-hover"
                 >
                   Back to sign up
                 </Link>

@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Building2, Plus, Link2 } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useOrganization } from '@/context/useOrganization';
 import { DASHBOARD_ROUTE } from '@/lib/postAuth';
 import { getPendingInviteAcceptPath } from '@/lib/inviteFlow';
@@ -31,67 +32,97 @@ export default function NoOrgPage() {
     <div className="w-full max-w-lg">
       {/* Hero */}
       <div className="text-center mb-10">
-        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600 shadow-lg shadow-blue-500/30">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-accent-500 shadow-raised"
+        >
           <Building2 className="w-8 h-8 text-white" />
-        </div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-          Welcome to TaskBridge
-        </h1>
-        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
+        </motion.div>
+        <motion.h1
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
+          className="text-2xl font-bold text-content"
+        >
+          Welcome to SyncSpac
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.18, ease: [0.25, 1, 0.5, 1] }}
+          className="mt-2 text-sm text-content-tertiary max-w-xs mx-auto"
+        >
           You&apos;re not part of any organization yet. Create a new one or join an
           existing one with an invite link.
-        </p>
+        </motion.p>
       </div>
 
       {/* Option cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Create */}
-        <button
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.26, ease: [0.25, 1, 0.5, 1] }}
+          whileHover={{ y: -4 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => router.push('/onboarding/create-org')}
-          className="group flex flex-col items-center gap-4 rounded-2xl border-2 border-slate-200 bg-white p-7 text-center transition-all hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-blue-600"
+          className="group flex flex-col items-center gap-4 rounded-2xl border-2 border-line bg-surface p-7 text-center shadow-card transition-colors hover:border-primary hover:shadow-raised cursor-pointer"
         >
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 transition-colors group-hover:bg-blue-100 dark:bg-blue-950/50 dark:group-hover:bg-blue-950">
-            <Plus className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-subtle transition-transform group-hover:scale-110">
+            <Plus className="w-7 h-7 text-primary" />
           </div>
           <div>
-            <p className="font-semibold text-slate-900 dark:text-slate-100">
+            <p className="font-semibold text-content">
               Create organization
             </p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-xs text-content-tertiary">
               Start fresh with your own workspace and invite your team.
             </p>
           </div>
-          <span className="mt-1 rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white transition-colors group-hover:bg-blue-700">
+          <span className="mt-1 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-content transition-colors group-hover:bg-primary-hover">
             Get started →
           </span>
-        </button>
+        </motion.button>
 
         {/* Join */}
-        <button
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.34, ease: [0.25, 1, 0.5, 1] }}
+          whileHover={{ y: -4 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => router.push('/onboarding/join-org')}
-          className="group flex flex-col items-center gap-4 rounded-2xl border-2 border-slate-200 bg-white p-7 text-center transition-all hover:border-slate-400 hover:shadow-lg hover:shadow-slate-200/60 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-600"
+          className="group flex flex-col items-center gap-4 rounded-2xl border-2 border-line bg-surface p-7 text-center shadow-card transition-colors hover:border-line-strong hover:shadow-raised cursor-pointer"
         >
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 transition-colors group-hover:bg-slate-200 dark:bg-slate-800 dark:group-hover:bg-slate-700">
-            <Link2 className="w-7 h-7 text-slate-600 dark:text-slate-400" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-hover transition-transform group-hover:scale-110">
+            <Link2 className="w-7 h-7 text-content-secondary" />
           </div>
           <div>
-            <p className="font-semibold text-slate-900 dark:text-slate-100">
+            <p className="font-semibold text-content">
               Join organization
             </p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-xs text-content-tertiary">
               Have an invite link? Paste it here to join an existing workspace.
             </p>
           </div>
-          <span className="mt-1 rounded-lg border border-slate-300 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors group-hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:group-hover:bg-slate-900">
+          <span className="mt-1 rounded-lg border border-line px-4 py-2 text-xs font-semibold text-content-secondary transition-colors group-hover:bg-surface-hover">
             Use invite link →
           </span>
-        </button>
+        </motion.button>
       </div>
 
       {/* Decorative progress hint */}
-      <p className="mt-8 text-center text-xs text-slate-400 dark:text-slate-600">
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, delay: 0.5 }}
+        className="mt-8 text-center text-xs text-content-tertiary"
+      >
         Step 1 of 3 — Set up your organization
-      </p>
+      </motion.p>
     </div>
   );
 }

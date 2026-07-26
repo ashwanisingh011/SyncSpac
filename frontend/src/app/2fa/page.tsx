@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 import api from '@/api/axios';
 import { useAuth } from '@/context/useAuth';
 import { useToast } from '@/context/useToast';
-import AuthFormLayout from '@/components/AuthFormLayout';
+import AuthShell, { AuthField, AuthSubmit } from '@/components/auth/AuthShell';
+import { cn } from '@/lib/utils';
 import { getPostAuthRouteForUser } from '@/lib/postAuth';
 import {
   clearPostAuthRedirect,
@@ -139,70 +140,66 @@ const TwoFactorAuth = () => {
 
   return (
     <>
-      <AuthFormLayout
+      <AuthShell
         title="Two-factor authentication"
         subtitle="Enter the one-time verification code sent to your email to complete login."
-        footer={
-          <>
-            Can&apos;t access your code?{' '}
-            <Link href="/login" className="font-medium text-[#0052CC] hover:underline dark:text-[#579DFF]">
-              Back to login
-            </Link>
-          </>
-        }
+        altAction={{
+          hint: "Can't access your code?",
+          label: 'Back to login',
+          href: '/login',
+        }}
       >
-        <form onSubmit={handleSubmit} noValidate className="space-y-4">
-          <div>
-            <label htmlFor="code" className="sr-only">
-              Verification code
-            </label>
+        <form onSubmit={handleSubmit} noValidate className="space-y-5">
+          <AuthField id="code" label="Verification code" error={errors.code}>
             <input
               id="code"
               name="code"
               type="text"
               inputMode="numeric"
+              autoComplete="one-time-code"
               value={code}
               onChange={(event) => setCode(event.target.value)}
-              className={`h-11 w-full rounded border bg-white px-3 text-sm text-[#172B4D] outline-none transition-colors placeholder:text-[#6B778C] focus:border-[#4C9AFF] focus:ring-2 focus:ring-[#4C9AFF]/30 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 ${errors.code ? 'border-red-400' : 'border-[#DFE1E6] dark:border-slate-700'
-                }`}
+              maxLength={8}
+              className={cn(
+                'h-13 w-full rounded-lg border bg-surface px-3.5 text-center font-mono text-[22px] font-semibold tracking-[0.45em] text-content outline-none',
+                'transition-[border-color,box-shadow] duration-150',
+                'placeholder:font-sans placeholder:text-sm placeholder:font-normal placeholder:tracking-normal placeholder:text-content-tertiary/70',
+                errors.code
+                  ? 'border-danger shadow-[0_0_0_3px_color-mix(in_srgb,var(--danger)_12%,transparent)]'
+                  : 'border-line hover:border-line-strong focus:border-primary focus:shadow-[0_0_0_3px_var(--primary-subtle)]'
+              )}
               placeholder="Enter code"
             />
-            {errors.code && <p className="mt-2 text-xs text-red-500">{errors.code}</p>}
-          </div>
+          </AuthField>
 
-          <div className="flex items-center justify-between pt-1">
+          <AuthSubmit loading={loading} loadingLabel="Verifying…">
+            Verify code
+          </AuthSubmit>
+
+          <div className="flex items-center justify-between text-[13px]">
+            <span className="text-content-tertiary">Didn&apos;t get it?</span>
             <button
               type="button"
               disabled={!canResend || resendLoading}
               onClick={handleResend}
-              className={`text-xs font-semibold transition-colors disabled:cursor-not-allowed ${canResend
-                ? 'text-[#0052CC] hover:text-[#0747A6] hover:underline dark:text-[#579DFF] dark:hover:text-[#85B8FF]'
-                : 'text-[#6B778C] opacity-70 dark:text-slate-500'
-                }`}
+              className={cn(
+                'font-medium transition-colors disabled:cursor-not-allowed',
+                canResend
+                  ? 'text-primary hover:underline cursor-pointer'
+                  : 'text-content-tertiary tabular-nums'
+              )}
             >
               {resendLoading ? (
-                'Resending code...'
+                'Resending…'
               ) : canResend ? (
                 'Resend code'
               ) : (
-                `Resend code in ${timer}s`
+                `Resend in ${timer}s`
               )}
             </button>
           </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="h-11 w-full rounded bg-[#0052CC] text-sm font-semibold text-white transition-colors hover:bg-[#0747A6] disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {loading ? 'Verifying...' : 'Verify code'}
-          </button>
-
-          <p className="text-sm leading-6 text-[#6B778C] dark:text-slate-400">
-            Check your inbox for the code sent when you logged in.
-          </p>
         </form>
-      </AuthFormLayout>
+      </AuthShell>
     </>
   );
 };

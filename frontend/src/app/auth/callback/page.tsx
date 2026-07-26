@@ -67,18 +67,18 @@ function AuthCallbackHandler(): React.JSX.Element {
   }, [searchParams, login, showToast, router]);
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#F7F8F9] px-4 py-10 text-[#172B4D] dark:bg-slate-950 dark:text-slate-100">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-surface-sunken px-4 py-10 text-content">
       {/* Premium Glassmorphic Loading Spinner container */}
-      <div className="relative z-10 flex flex-col items-center justify-center rounded-2xl border border-white/40 bg-white/60 p-12 shadow-[0_16px_48px_rgba(9,30,66,0.12)] backdrop-blur-xl dark:border-slate-800/40 dark:bg-slate-900/60">
+      <div className="relative z-10 flex flex-col items-center justify-center rounded-2xl border border-line bg-surface-overlay/70 p-12 shadow-overlay backdrop-blur-xl">
         <div className="relative flex h-16 w-16 items-center justify-center">
           {/* Animated gradient spinning rings */}
-          <div className="absolute h-full w-full animate-spin rounded-full border-4 border-slate-200 border-t-blue-600 dark:border-slate-800 dark:border-t-blue-500"></div>
-          <div className="absolute h-10 w-10 animate-ping rounded-full bg-blue-100 opacity-75 dark:bg-blue-950/50"></div>
+          <div className="absolute h-full w-full animate-spin rounded-full border-4 border-line border-t-primary"></div>
+          <div className="absolute h-10 w-10 animate-ping rounded-full bg-primary-subtle opacity-75"></div>
         </div>
         <h3 className="mt-8 text-lg font-semibold tracking-tight text-[#172B4D] dark:text-white">
           Authenticating you...
         </h3>
-        <p className="mt-2 text-xs text-[#6B778C] dark:text-slate-400">
+        <p className="mt-2 text-xs text-content-tertiary">
           Setting up your secure workspace session
         </p>
       </div>
@@ -90,7 +90,7 @@ export default function AuthCallbackPage(): React.JSX.Element {
   return (
     <Suspense
       fallback={
-        <div className="flex min-h-screen items-center justify-center bg-[#F7F8F9] text-sm text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+        <div className="flex min-h-screen items-center justify-center bg-surface-sunken text-sm text-content-tertiary">
           Loading auth callback...
         </div>
       }

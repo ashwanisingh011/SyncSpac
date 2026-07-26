@@ -3,10 +3,9 @@
 import { FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Eye, EyeOff } from 'lucide-react';
 import api from '@/api/axios';
 import { useToast } from '@/context/useToast';
-import AuthFormLayout from '@/components/AuthFormLayout';
+import AuthShell, { AuthField, AuthSubmit, PasswordInput } from '@/components/auth/AuthShell';
 import { validatePassword, PASSWORD_VALIDATION_ERROR_MSG } from '@/lib/passwordValidator';
 import PublicRoute from '@/components/PublicRoute';
 
@@ -17,8 +16,6 @@ const ResetPassword = () => {
   const [form, setForm] = useState({ password: '', confirmPassword: '' });
   const [errors, setErrors] = useState<{ password?: string; confirmPassword?: string }>({});
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { showToast } = useToast();
 
   useEffect(() => {
@@ -71,79 +68,45 @@ const ResetPassword = () => {
 
   return (
     <PublicRoute>
-      <AuthFormLayout
-        title="Reset your password"
-        subtitle="Choose a new secure password and continue to your TaskBridge account."
-        footer={
-          <>
-            Remembered your password?{' '}
-            <Link href="/login" className="font-medium text-[#0052CC] hover:underline dark:text-[#579DFF]">
-              Log in
-            </Link>
-          </>
-        }
+      <AuthShell
+        title="Choose a new password"
+        subtitle="Almost there — pick something strong and you're back in."
+        altAction={{
+          hint: 'Remembered it?',
+          label: 'Log in',
+          href: '/login',
+        }}
       >
-        <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        <form onSubmit={handleSubmit} noValidate className="space-y-5">
+          <AuthField id="password" label="New password" error={errors.password}>
+            <PasswordInput
+              id="password"
+              name="password"
+              value={form.password}
+              onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))}
+              autoComplete="new-password"
+              placeholder="New password"
+              error={Boolean(errors.password)}
+            />
+          </AuthField>
 
-          {/* New Password */}
-          <div>
-            <label htmlFor="password" className="sr-only">New password</label>
-            <div className="relative"> {/* 👈 wrapper */}
-              <input
-                id="password"
-                name="password"
-                type={showPassword ? 'text' : 'password'}
-                value={form.password}
-                onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))}
-                className={`h-11 w-full rounded border bg-white px-3 pr-10 text-sm text-[#172B4D] outline-none transition-colors placeholder:text-[#6B778C] focus:border-[#4C9AFF] focus:ring-2 focus:ring-[#4C9AFF]/30 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 ${errors.password ? 'border-red-400' : 'border-[#DFE1E6] dark:border-slate-700'
-                  }`}
-                placeholder="New password"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(prev => !prev)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
-              >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              </button>
-            </div>
-            {errors.password && <p className="mt-2 text-xs text-red-500">{errors.password}</p>}
-          </div>
+          <AuthField id="confirmPassword" label="Confirm password" error={errors.confirmPassword}>
+            <PasswordInput
+              id="confirmPassword"
+              name="confirmPassword"
+              value={form.confirmPassword}
+              onChange={(event) => setForm((prev) => ({ ...prev, confirmPassword: event.target.value }))}
+              autoComplete="new-password"
+              placeholder="Repeat new password"
+              error={Boolean(errors.confirmPassword)}
+            />
+          </AuthField>
 
-          {/* Confirm Password */}
-          <div>
-            <label htmlFor="confirmPassword" className="sr-only">Confirm password</label>
-            <div className="relative">
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type={showConfirmPassword ? 'text' : 'password'}
-                value={form.confirmPassword}
-                onChange={(event) => setForm((prev) => ({ ...prev, confirmPassword: event.target.value }))}
-                className={`h-11 w-full rounded border bg-white px-3 pr-10 text-sm text-[#172B4D] outline-none transition-colors placeholder:text-[#6B778C] focus:border-[#4C9AFF] focus:ring-2 focus:ring-[#4C9AFF]/30 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 ${errors.confirmPassword ? 'border-red-400' : 'border-[#DFE1E6] dark:border-slate-700'
-                  }`}
-                placeholder="Confirm new password"
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(prev => !prev)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
-              >
-                {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              </button>
-            </div>
-            {errors.confirmPassword && <p className="mt-2 text-xs text-red-500">{errors.confirmPassword}</p>}
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="h-11 w-full rounded bg-[#0052CC] text-sm font-semibold text-white transition-colors hover:bg-[#0747A6] disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {loading ? 'Updating password...' : 'Reset password'}
-          </button>
+          <AuthSubmit loading={loading} loadingLabel="Updating password…">
+            Reset password
+          </AuthSubmit>
         </form>
-      </AuthFormLayout>
+      </AuthShell>
     </PublicRoute>
   );
 };
