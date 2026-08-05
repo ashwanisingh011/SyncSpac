@@ -22,7 +22,7 @@ const actions = [
     id: 'create-project',
     label: 'Create Project',
     icon: FolderPlus,
-    colorClass: 'bg-[#DEEBFF] text-[#0052CC] dark:bg-blue-950/40 dark:text-blue-300',
+    colorClass: 'bg-[#DEEBFF] text-primary',
     type: 'callback' as const,
     callbackKey: 'project',
   },
@@ -30,7 +30,7 @@ const actions = [
     id: 'create-task',
     label: 'Create Task',
     icon: CheckSquare,
-    colorClass: 'bg-[#EAE6FF] text-[#403294] dark:bg-purple-950/40 dark:text-purple-300',
+    colorClass: 'bg-[#EAE6FF] text-[#403294]',
     type: 'callback' as const,
     callbackKey: 'task',
   },
@@ -38,7 +38,7 @@ const actions = [
     id: 'invite-member',
     label: 'Invite Member',
     icon: UserPlus,
-    colorClass: 'bg-[#E3FCEF] text-[#006644] dark:bg-emerald-950/40 dark:text-emerald-300',
+    colorClass: 'bg-success/10 text-[#006644]',
     type: 'link' as const,
     viewId: 'members',
     href: '/dashboard/members',
@@ -47,7 +47,7 @@ const actions = [
     id: 'reports',
     label: 'Reports',
     icon: FileBarChart2,
-    colorClass: 'bg-[#FFF0B3] text-[#172B4D] dark:bg-amber-950/40 dark:text-amber-300',
+    colorClass: 'bg-[#FFF0B3] text-content',
     type: 'link' as const,
     viewId: 'projects',
     href: '/dashboard/projects',
@@ -56,7 +56,7 @@ const actions = [
     id: 'ws-settings',
     label: 'Settings',
     icon: Settings,
-    colorClass: 'bg-[#DFE1E6] text-[#42526E] dark:bg-slate-800 dark:text-slate-400',
+    colorClass: 'bg-[#DFE1E6] text-content-secondary',
     type: 'link' as const,
     viewId: 'ws-settings',
     href: '/dashboard/workspace-settings',
@@ -65,7 +65,7 @@ const actions = [
     id: 'project-files',
     label: 'Project Files',
     icon: FolderOpen,
-    colorClass: 'bg-[#E0F2FE] text-[#0369A1] dark:bg-sky-955/40 dark:text-sky-300',
+    colorClass: 'bg-status-progress/12 text-status-progress',
     type: 'link' as const,
     viewId: 'project-files',
     href: '/dashboard/project-files',
@@ -74,7 +74,7 @@ const actions = [
     id: 'teams',
     label: 'Manage Teams',
     icon: Zap,
-    colorClass: 'bg-[#FFE2E2] text-[#BF2600] dark:bg-red-950/40 dark:text-red-300',
+    colorClass: 'bg-[#FFE2E2] text-[#BF2600]',
     type: 'link' as const,
     viewId: 'teams',
     href: '/dashboard/teams',
@@ -83,10 +83,10 @@ const actions = [
 
 export default function OrgQuickActions({ onCreateProject, onCreateTask, onViewChange }: OrgQuickActionsProps) {
   return (
-    <div className="bg-white dark:bg-slate-900 rounded border border-[#DFE1E6] dark:border-slate-800 p-5">
+    <div className="bg-surface rounded border border-line p-5">
       <div className="mb-4">
-        <h3 className="text-sm font-semibold text-[#091E42] dark:text-slate-105 font-sans">Quick Actions</h3>
-        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-sans">Common workspace operations</p>
+        <h3 className="text-sm font-semibold text-content font-sans">Quick Actions</h3>
+        <p className="text-xs text-content-tertiary mt-0.5 font-sans">Common workspace operations</p>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {actions.map((action) => {
@@ -98,12 +98,12 @@ export default function OrgQuickActions({ onCreateProject, onCreateTask, onViewC
               <button
                 key={action.id}
                 onClick={handler}
-                className="flex flex-col items-center gap-2 p-3.5 rounded border border-[#DFE1E6] dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-[#F4F5F7]/50 dark:hover:bg-slate-800/40 hover:border-slate-350 transition-all duration-150 cursor-pointer"
+                className="flex flex-col items-center gap-2 p-3.5 rounded border border-line bg-surface hover:bg-surface-hover/50 hover:border-line-strong transition-all duration-150 cursor-pointer"
               >
                 <div className={`w-8 h-8 rounded ${action.colorClass} flex items-center justify-center`}>
                   <Icon className="w-4 h-4" />
                 </div>
-                <span className="text-[11px] font-semibold text-[#091E42] dark:text-slate-200 text-center leading-tight font-sans mt-1.5">
+                <span className="text-[11px] font-semibold text-content text-center leading-tight font-sans mt-1.5">
                   {action.label}
                 </span>
               </button>
@@ -115,12 +115,12 @@ export default function OrgQuickActions({ onCreateProject, onCreateTask, onViewC
               <button
                 key={action.id}
                 onClick={() => onViewChange(action.viewId)}
-                className="flex flex-col items-center gap-2 p-3.5 rounded border border-[#DFE1E6] dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-[#F4F5F7]/50 dark:hover:bg-slate-800/40 hover:border-slate-350 transition-all duration-150 cursor-pointer"
+                className="flex flex-col items-center gap-2 p-3.5 rounded border border-line bg-surface hover:bg-surface-hover/50 hover:border-line-strong transition-all duration-150 cursor-pointer"
               >
                 <div className={`w-8 h-8 rounded ${action.colorClass} flex items-center justify-center`}>
                   <Icon className="w-4 h-4" />
                 </div>
-                <span className="text-[11px] font-semibold text-[#091E42] dark:text-slate-200 text-center leading-tight font-sans mt-1.5">
+                <span className="text-[11px] font-semibold text-content text-center leading-tight font-sans mt-1.5">
                   {action.label}
                 </span>
               </button>
@@ -131,12 +131,12 @@ export default function OrgQuickActions({ onCreateProject, onCreateTask, onViewC
             <Link
               key={action.id}
               href={action.href!}
-              className="flex flex-col items-center gap-2 p-3.5 rounded border border-[#DFE1E6] dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-[#F4F5F7]/50 dark:hover:bg-slate-800/40 hover:border-slate-350 transition-all duration-150"
+              className="flex flex-col items-center gap-2 p-3.5 rounded border border-line bg-surface hover:bg-surface-hover/50 hover:border-line-strong transition-all duration-150"
             >
               <div className={`w-8 h-8 rounded ${action.colorClass} flex items-center justify-center`}>
                 <Icon className="w-4 h-4" />
               </div>
-              <span className="text-[11px] font-semibold text-[#091E42] dark:text-slate-200 text-center leading-tight font-sans mt-1.5">
+              <span className="text-[11px] font-semibold text-content text-center leading-tight font-sans mt-1.5">
                 {action.label}
               </span>
             </Link>

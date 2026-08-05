@@ -62,7 +62,7 @@ export default function ClientWorkspaceView({
       {/* Workspace Summary details */}
       <div className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm">
         <div className="flex flex-col sm:flex-row gap-5 items-start">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-650 border border-slate-100">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-slate-100">
             <Building2 className="h-6 w-6" />
           </div>
           <div>
@@ -81,20 +81,20 @@ export default function ClientWorkspaceView({
 
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <Loader2 className="h-7 w-7 animate-spin text-blue-650" />
+          <Loader2 className="h-7 w-7 animate-spin text-blue-600" />
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {/* Members list - takes 2 columns */}
           <div className="lg:col-span-2 bg-white rounded-xl border border-slate-100 p-5 shadow-sm space-y-4">
             <div className="flex items-center gap-2 pb-1.5 border-b border-slate-50">
-              <Users className="h-4.5 w-4.5 text-blue-650" />
+              <Users className="h-4.5 w-4.5 text-blue-600" />
               <h3 className="text-sm font-bold text-slate-800">Members Directory</h3>
             </div>
 
             <div className="divide-y divide-slate-50 overflow-y-auto max-h-[480px] scrollbar-thin">
               {members.length === 0 ? (
-                <p className="py-8 text-center text-xs text-slate-450">No members found.</p>
+                <p className="py-8 text-center text-xs text-slate-500">No members found.</p>
               ) : (
                 members.map((member) => (
                   <div key={member.id} className="flex items-center justify-between py-3">
@@ -108,7 +108,7 @@ export default function ClientWorkspaceView({
                       </div>
                       <div className="min-w-0">
                         <p className="truncate text-xs font-bold text-slate-800">{member.name}</p>
-                        <p className="truncate text-[10px] text-slate-450">{member.email}</p>
+                        <p className="truncate text-[10px] text-slate-500">{member.email}</p>
                       </div>
                     </div>
                     <span className="rounded bg-slate-50 border border-slate-100 px-2 py-0.5 text-[9px] font-bold text-slate-600 uppercase">
@@ -125,7 +125,7 @@ export default function ClientWorkspaceView({
             {/* Teams panel */}
             <div className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm space-y-4">
               <div className="flex items-center gap-2 pb-1 border-b border-slate-50">
-                <Briefcase className="h-4 w-4 text-blue-650" />
+                <Briefcase className="h-4 w-4 text-blue-600" />
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">Teams</h3>
               </div>
 
@@ -136,7 +136,7 @@ export default function ClientWorkspaceView({
                   teams.map((team) => (
                     <div key={team._id} className="border border-slate-50 rounded-xl p-3 bg-slate-50/30">
                       <p className="text-xs font-bold text-slate-800">{team.name}</p>
-                      <p className="text-[10px] text-slate-450 truncate mt-0.5">{team.description || 'No description.'}</p>
+                      <p className="text-[10px] text-slate-500 truncate mt-0.5">{team.description || 'No description.'}</p>
                       <div className="flex items-center justify-between text-[9px] text-slate-400 mt-2 font-semibold">
                         <span>Lead: {typeof team.lead === 'object' ? team.lead?.name : 'None'}</span>
                         <span className="bg-slate-100 rounded px-1.5 py-0.5 text-[8px]">{team.members?.length || 0} Members</span>
@@ -150,7 +150,7 @@ export default function ClientWorkspaceView({
             {/* Departments panel */}
             <div className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm space-y-4">
               <div className="flex items-center gap-2 pb-1 border-b border-slate-50">
-                <Layers className="h-4 w-4 text-blue-650" />
+                <Layers className="h-4 w-4 text-blue-600" />
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">Departments</h3>
               </div>
 

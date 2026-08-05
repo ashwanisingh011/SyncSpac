@@ -117,8 +117,8 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
   if (loading || (!project && storeLoading)) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
-        <p className="text-sm text-slate-500 mt-2">Resolving project details...</p>
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <p className="text-sm text-content-tertiary mt-2">Resolving project details...</p>
       </div>
     );
   }
@@ -126,14 +126,14 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
   if (!project) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-6">
-        <FolderOpen className="w-12 h-12 text-slate-300 dark:text-slate-700 mb-3 animate-pulse" />
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">Project Not Found</h3>
-        <p className="text-sm text-slate-550 dark:text-slate-450 mt-1 max-w-sm">
-          Could not find a project with key <strong className="text-slate-700 dark:text-slate-350">{projectKey}</strong> in this organization.
+        <FolderOpen className="w-12 h-12 text-content-tertiary mb-3 animate-pulse" />
+        <h3 className="text-lg font-bold text-content">Project Not Found</h3>
+        <p className="text-sm text-content-tertiary mt-1 max-w-sm">
+          Could not find a project with key <strong className="text-content-secondary">{projectKey}</strong> in this organization.
         </p>
         <Link
           href="/projects"
-          className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+          className="mt-4 px-4 py-2 bg-primary hover:bg-primary-hover text-primary-content rounded-lg text-sm font-medium transition-colors"
         >
           Back to Projects
         </Link>
@@ -152,26 +152,26 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
 
 
   return (
-    <div className="p-6 md:p-8 max-w-6xl mx-auto w-full space-y-8 bg-white dark:bg-slate-950 min-h-screen">
+    <div className="p-6 md:p-8 max-w-6xl mx-auto w-full space-y-8 bg-surface min-h-screen">
       
       {/* Breadcrumbs & Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
-            <Link href="/projects" className="hover:underline hover:text-blue-600 transition-colors">Projects</Link>
+          <div className="flex items-center gap-2 text-xs font-semibold text-content-tertiary">
+            <Link href="/projects" className="hover:underline hover:text-primary transition-colors">Projects</Link>
             <span>/</span>
-            <span className="text-slate-800 dark:text-slate-200">{project.name}</span>
+            <span className="text-content">{project.name}</span>
           </div>
           
           <div className="flex items-center gap-3 mt-2">
-            <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 flex items-center justify-center rounded-lg font-black text-lg shrink-0">
+            <div className="w-10 h-10 bg-indigo-50 text-indigo-700 flex items-center justify-center rounded-lg font-black text-lg shrink-0">
               {project.key.substring(0, 2).toUpperCase()}
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              <h1 className="text-2xl font-extrabold tracking-tight text-content">
                 {project.name}
               </h1>
-              <p className="text-xs text-slate-450 uppercase font-black tracking-wider mt-0.5">
+              <p className="text-xs text-content-tertiary uppercase font-black tracking-wider mt-0.5">
                 Key: {project.key}
               </p>
             </div>
@@ -182,7 +182,7 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
           {canManageMembers && project && (
             <button
               onClick={() => setIsAddMemberModalOpen(true)}
-              className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors"
+              className="inline-flex items-center gap-1.5 bg-surface-hover hover:bg-surface-hover text-content-secondary px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors"
             >
               <UserPlus className="w-4 h-4" /> Add Member
             </button>
@@ -190,7 +190,7 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
           {canCreateTask && (
             <button
               onClick={() => setIsTaskModalOpen(true)}
-              className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md shadow-blue-500/10 transition-colors"
+              className="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-lg text-sm font-semibold shadow-md shadow-blue-500/10 transition-colors"
             >
               <Plus className="w-4.5 h-4.5" /> Create Task
             </button>
@@ -205,28 +205,28 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
         <div className="lg:col-span-2 space-y-6">
           
           {/* Project Details Panel */}
-          <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 space-y-4">
-            <h2 className="text-base font-bold text-slate-800 dark:text-slate-200">About this Project</h2>
-            <p className="text-sm text-slate-650 dark:text-slate-400 leading-relaxed">
+          <div className="rounded-xl border border-slate-200/80 p-5 space-y-4">
+            <h2 className="text-base font-bold text-content">About this Project</h2>
+            <p className="text-sm text-content-secondary leading-relaxed">
               {project.description || 'No description provided for this project.'}
             </p>
             
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-3 border-t border-line text-xs">
               <div>
-                <span className="text-slate-400 font-semibold block mb-0.5">Project Type</span>
-                <span className="capitalize font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                <span className="text-content-tertiary font-semibold block mb-0.5">Project Type</span>
+                <span className="capitalize font-bold text-content-secondary bg-surface-hover px-2 py-0.5 rounded">
                   {project.projectType}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 font-semibold block mb-0.5">Visibility</span>
-                <span className="capitalize font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                <span className="text-content-tertiary font-semibold block mb-0.5">Visibility</span>
+                <span className="capitalize font-bold text-content-secondary bg-surface-hover px-2 py-0.5 rounded">
                   {project.visibility}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 font-semibold block mb-0.5">Default Layout</span>
-                <span className="capitalize font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                <span className="text-content-tertiary font-semibold block mb-0.5">Default Layout</span>
+                <span className="capitalize font-bold text-content-secondary bg-surface-hover px-2 py-0.5 rounded">
                   {project.defaultLayout}
                 </span>
               </div>
@@ -234,25 +234,25 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
           </div>
 
           {/* Task Metrics & Progress */}
-          <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 space-y-6">
+          <div className="rounded-xl border border-slate-200/80 p-5 space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-base font-bold text-slate-800 dark:text-slate-200">Tasks Progress</h2>
-              <span className="text-xs font-bold text-slate-450">
+              <h2 className="text-base font-bold text-content">Tasks Progress</h2>
+              <span className="text-xs font-bold text-content-tertiary">
                 {doneTasks} of {totalTasks} Completed ({completionRate}%)
               </span>
             </div>
 
             {/* Progress bar */}
-            <div className="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex shadow-inner">
+            <div className="w-full h-3 bg-surface-hover rounded-full overflow-hidden flex shadow-inner">
               <div
                 style={{ width: `${completionRate}%` }}
-                className="bg-emerald-500 rounded-full transition-all duration-500"
+                className="bg-success rounded-full transition-all duration-500"
               />
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">Task Status Overview</h3>
+                <h3 className="text-sm font-bold text-content">Task Status Overview</h3>
 
               </div>
 
@@ -264,7 +264,7 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
                   >
 
                     <p className="text-lg font-black">{item.count}</p>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-0.5">
+                    <p className="text-[10px] text-content-tertiary font-semibold uppercase tracking-wider mt-0.5">
                       {item.label}
                     </p>
                   </div>
@@ -277,27 +277,27 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
         {/* Right Column: Settings, Metadata, Quick actions */}
         <div className="space-y-6">
           {/* Metadata details */}
-          <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 space-y-4">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 pb-2 border-b border-slate-105 dark:border-slate-800">
+          <div className="rounded-xl border border-slate-200/80 p-5 space-y-4">
+            <h3 className="text-sm font-bold text-content pb-2 border-b border-line">
               Project Meta
             </h3>
             
             <div className="space-y-3.5 text-xs">
               <div className="flex justify-between">
-                <span className="text-slate-400 font-medium">Project Owner</span>
-                <span className="font-bold text-slate-700 dark:text-slate-300">
+                <span className="text-content-tertiary font-medium">Project Owner</span>
+                <span className="font-bold text-content-secondary">
                   {typeof project.owner === 'object' ? project.owner.name : 'Workspace Admin'}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400 font-medium">Created On</span>
-                <span className="font-semibold text-slate-650 dark:text-slate-400">
+                <span className="text-content-tertiary font-medium">Created On</span>
+                <span className="font-semibold text-content-secondary">
                   {new Date(project.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400 font-medium">Total Tasks Count</span>
-                <span className="font-bold text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-900 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
+                <span className="text-content-tertiary font-medium">Total Tasks Count</span>
+                <span className="font-bold text-content bg-surface-sunken px-2 py-0.5 rounded border border-line">
                   {totalTasks}
                 </span>
               </div>
@@ -305,15 +305,15 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
           </div>
 
           {/* Quick Nav Card */}
-          <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 space-y-3 bg-slate-50/50 dark:bg-slate-900/20">
-            <h3 className="text-sm font-bold text-slate-850 dark:text-slate-200">
+          <div className="rounded-xl border border-slate-200/80 p-5 space-y-3 bg-slate-50/50">
+            <h3 className="text-sm font-bold text-content">
               Quick Links
             </h3>
             
             <div className="space-y-2">
               <Link
                 href={`/projects/${project.key}/board`}
-                className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-100 hover:border-blue-200 text-xs font-semibold text-slate-700 hover:text-blue-600 transition-all dark:bg-slate-900 dark:border-slate-800 dark:text-slate-350 dark:hover:text-blue-400"
+                className="flex items-center justify-between p-2.5 rounded-lg bg-surface border border-line hover:border-blue-200 text-xs font-semibold text-content-secondary hover:text-primary transition-all"
               >
                 Go to Kanban Board
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -321,7 +321,7 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
               
               <Link
                 href={`/projects/${project.key}/backlog`}
-                className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-100 hover:border-blue-200 text-xs font-semibold text-slate-700 hover:text-blue-600 transition-all dark:bg-slate-900 dark:border-slate-800 dark:text-slate-350 dark:hover:text-blue-400"
+                className="flex items-center justify-between p-2.5 rounded-lg bg-surface border border-line hover:border-blue-200 text-xs font-semibold text-content-secondary hover:text-primary transition-all"
               >
                 Go to Project Backlog
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -329,7 +329,7 @@ export default function ProjectOverviewPage({ params }: ProjectPageProps) {
 
               <Link
                 href={`/projects/${project.key}/settings`}
-                className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-100 hover:border-blue-200 text-xs font-semibold text-slate-700 hover:text-blue-600 transition-all dark:bg-slate-900 dark:border-slate-800 dark:text-slate-350 dark:hover:text-blue-400"
+                className="flex items-center justify-between p-2.5 rounded-lg bg-surface border border-line hover:border-blue-200 text-xs font-semibold text-content-secondary hover:text-primary transition-all"
               >
                 Settings & Archiving
                 <ArrowRight className="w-3.5 h-3.5" />

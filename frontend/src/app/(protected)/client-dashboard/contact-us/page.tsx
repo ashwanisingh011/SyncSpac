@@ -67,7 +67,7 @@ export default function ContactUsPage(): React.JSX.Element {
     }
     return {
       label: 'Stakeholder',
-      classes: 'bg-slate-50 dark:bg-slate-850 text-slate-600 dark:text-slate-400 border border-slate-200/50',
+      classes: 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200/50',
     };
   };
 

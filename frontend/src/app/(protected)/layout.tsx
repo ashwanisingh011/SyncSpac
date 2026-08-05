@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Outlet } from 'react-router-dom';
+import { motion } from 'motion/react';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import OrgGate from '@/components/OrgGate';
 import ClientRouteGuard from '@/components/ClientRouteGuard';
@@ -49,7 +50,7 @@ export default function ProtectedLayout({ children }: ProtectedLayoutProps): Rea
 
   if (isGlobalSuperAdmin) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white text-sm text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+      <div className="flex min-h-screen items-center justify-center bg-surface text-sm text-content-tertiary">
         Redirecting to Admin Dashboard...
       </div>
     );
@@ -57,7 +58,7 @@ export default function ProtectedLayout({ children }: ProtectedLayoutProps): Rea
 
   if (isOrgAdmin && !isOrgDashboard && !isWorkspaceCreate && !isCheckout) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white text-sm text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+      <div className="flex min-h-screen items-center justify-center bg-surface text-sm text-content-tertiary">
         Redirecting to dashboard...
       </div>
     );
@@ -68,10 +69,18 @@ export default function ProtectedLayout({ children }: ProtectedLayoutProps): Rea
       <OrgGate>
         <ClientRouteGuard>
           <NotificationProvider>
-            <div className="min-h-screen flex flex-col bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+            <div className="min-h-screen flex flex-col bg-surface text-content">
               {showTopNavbar && <TopNavbar />}
               <main className="flex-1 flex overflow-hidden">
-                {children || <Outlet />}
+                <motion.div
+                  key={pathname}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.18, ease: [0.25, 1, 0.5, 1] }}
+                  className="flex-1 flex min-w-0"
+                >
+                  {children || <Outlet />}
+                </motion.div>
               </main>
             </div>
           </NotificationProvider>

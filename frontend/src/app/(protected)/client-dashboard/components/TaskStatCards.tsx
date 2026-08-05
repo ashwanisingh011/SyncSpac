@@ -40,7 +40,7 @@ export default function TaskStatCards({ stats }: TaskStatCardsProps): React.JSX.
       value: stats.active,
       sub: `${pct(stats.active, stats.total)} of total`,
       icon: Clock,
-      color: { bg: 'bg-amber-50 dark:bg-amber-950/20', icon: 'text-amber-600 dark:text-amber-450' },
+      color: { bg: 'bg-amber-50 dark:bg-amber-950/20', icon: 'text-amber-600 dark:text-amber-400' },
       change: pct(stats.active, stats.total),
     },
   ];
@@ -52,7 +52,7 @@ export default function TaskStatCards({ stats }: TaskStatCardsProps): React.JSX.
         return (
           <div
             key={card.label}
-            className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 hover:shadow-md hover:border-slate-200 dark:hover:border-slate-750 transition-all duration-200 cursor-default group"
+            className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 hover:shadow-md hover:border-slate-200 dark:hover:border-slate-700 transition-all duration-200 cursor-default group"
           >
             <div className="flex items-start justify-between mb-5">
               <div className={`w-10 h-10 rounded-xl ${card.color.bg} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>

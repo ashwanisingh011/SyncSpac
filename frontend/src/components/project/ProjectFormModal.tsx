@@ -128,18 +128,18 @@ export default function ProjectFormModal({ isOpen, onClose, project }: ProjectFo
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 font-sans">
+    <div className="fixed inset-0 bg-black/45 backdrop-blur-sm flex items-center justify-center z-50 p-4 font-sans">
       <AccessRestrictedModal isOpen={showAccessRestricted} onClose={() => setShowAccessRestricted(false)} />
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      <div className="bg-surface border border-line rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         
         {/* Header */}
-        <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
-          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">
+        <div className="flex justify-between items-center px-6 py-4 border-b border-line shrink-0">
+          <h2 className="text-lg font-bold text-content">
             {isEdit ? 'Update Project Settings' : 'Create New Project'}
           </h2>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-md transition-colors"
+            className="text-content-tertiary hover:text-content p-1 rounded-md transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -150,32 +150,32 @@ export default function ProjectFormModal({ isOpen, onClose, project }: ProjectFo
           {/* Scrollable inputs wrapper */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4 min-h-0">
             {errors.server && (
-              <div className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900 rounded-lg text-xs text-red-655 dark:text-red-400">
+              <div className="p-3 bg-danger/10 border border-red-100 rounded-lg text-xs text-danger">
                 {errors.server}
               </div>
             )}
 
             {/* Project Name */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Project Name *
               </label>
               <input
                 type="text"
                 value={form.name}
                 onChange={handleNameChange}
-                className={`w-full h-10 px-3 text-sm rounded-lg border bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all ${
-                  errors.name ? 'border-red-500 focus:ring-red-500/10' : 'border-slate-200 dark:border-slate-800'
+                className={`w-full h-10 px-3 text-sm rounded-lg border bg-surface text-content placeholder:text-content-tertiary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-line-focus outline-none transition-all ${
+                  errors.name ? 'border-red-500 focus:ring-red-500/10' : 'border-line'
                 }`}
                 placeholder="e.g. Acme Landing Redesign"
                 required
               />
-              {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
+              {errors.name && <p className="text-xs text-danger mt-1">{errors.name}</p>}
             </div>
 
             {/* Project Key */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Project Key *
               </label>
               <input
@@ -183,27 +183,27 @@ export default function ProjectFormModal({ isOpen, onClose, project }: ProjectFo
                 value={form.key}
                 onChange={(e) => setForm((prev) => ({ ...prev, key: e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '') }))}
                 disabled={isEdit}
-                className={`w-full h-10 px-3 text-sm rounded-lg border bg-white dark:bg-slate-955 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
-                  errors.key ? 'border-red-500 focus:ring-red-500/10' : 'border-slate-200 dark:border-slate-800'
+                className={`w-full h-10 px-3 text-sm rounded-lg border bg-surface text-content placeholder:text-content-tertiary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-line-focus outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                  errors.key ? 'border-red-500 focus:ring-red-500/10' : 'border-line'
                 }`}
                 placeholder="e.g. ACM"
                 required
               />
-              <p className="text-[10px] text-slate-400 mt-1">
+              <p className="text-[10px] text-content-tertiary mt-1">
                 Short, unique uppercase code. Used as prefix for task identifiers (e.g. ACM-10).
               </p>
-              {errors.key && <p className="text-xs text-red-500 mt-1">{errors.key}</p>}
+              {errors.key && <p className="text-xs text-danger mt-1">{errors.key}</p>}
             </div>
 
             {/* Project Description */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Description
               </label>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
-                className="w-full min-h-[80px] p-3 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-y"
+                className="w-full min-h-[80px] p-3 text-sm rounded-lg border border-line bg-surface text-content placeholder:text-content-tertiary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-line-focus outline-none transition-all resize-y"
                 placeholder="Describe the project goal or scope..."
               />
             </div>
@@ -212,13 +212,13 @@ export default function ProjectFormModal({ isOpen, onClose, project }: ProjectFo
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Project Type */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Type
                 </label>
                 <select
                   value={form.projectType}
                   onChange={(e) => setForm((prev) => ({ ...prev, projectType: e.target.value as any }))}
-                  className="w-full h-10 px-2 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none transition-all focus:border-blue-500"
+                  className="w-full h-10 px-2 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none transition-all focus:border-line-focus"
                 >
                   <option value="software">Software</option>
                   <option value="marketing">Marketing</option>
@@ -229,13 +229,13 @@ export default function ProjectFormModal({ isOpen, onClose, project }: ProjectFo
 
               {/* Visibility */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Visibility
                 </label>
                 <select
                   value={form.visibility}
                   onChange={(e) => setForm((prev) => ({ ...prev, visibility: e.target.value as any }))}
-                  className="w-full h-10 px-2 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 text-slate-700 dark:text-slate-205 outline-none transition-all focus:border-blue-500"
+                  className="w-full h-10 px-2 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none transition-all focus:border-line-focus"
                 >
                   <option value="private">Private</option>
                   <option value="public">Public</option>
@@ -244,13 +244,13 @@ export default function ProjectFormModal({ isOpen, onClose, project }: ProjectFo
 
               {/* Default Layout */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Layout
                 </label>
                 <select
                   value={form.defaultLayout}
                   onChange={(e) => setForm((prev) => ({ ...prev, defaultLayout: e.target.value as any }))}
-                  className="w-full h-10 px-2 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none transition-all focus:border-blue-500"
+                  className="w-full h-10 px-2 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none transition-all focus:border-line-focus"
                 >
                   <option value="kanban">Kanban Board</option>
                   <option value="list">List View</option>
@@ -262,19 +262,19 @@ export default function ProjectFormModal({ isOpen, onClose, project }: ProjectFo
           </div>
 
           {/* Footer Actions */}
-          <div className="flex justify-end gap-3 px-6 py-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 shrink-0">
+          <div className="flex justify-end gap-3 px-6 py-4 border-t border-line bg-surface-sunken/50 shrink-0">
             <button
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="px-4 py-2 text-sm font-medium text-slate-650 hover:bg-slate-100 rounded-lg transition-colors dark:text-slate-400 dark:hover:bg-slate-800"
+              className="px-4 py-2 text-sm font-medium text-content-secondary hover:bg-surface-hover rounded-lg transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors"
+              className="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed text-primary-content px-5 py-2 rounded-lg text-sm font-semibold transition-colors"
             >
               {loading && <Loader2 className="w-4 h-4 animate-spin" />}
               {isEdit ? 'Save Changes' : 'Create Project'}

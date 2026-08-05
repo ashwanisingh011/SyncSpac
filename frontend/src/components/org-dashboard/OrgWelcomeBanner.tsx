@@ -65,12 +65,12 @@ export default function OrgWelcomeBanner({ allTasks, sprints, onViewChange }: Or
       ` }} />
 
       {/* Light-theme welcome banner */}
-      <div className="animate-welcome relative overflow-hidden rounded-2xl border border-slate-200/70 bg-gradient-to-br from-white via-slate-50/60 to-indigo-50/40 p-6 shadow-[0_4px_24px_rgba(99,102,241,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(99,102,241,0.10)]">
+      <div className="animate-welcome relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-surface via-surface-sunken/60 to-primary-subtle/30 p-6 shadow-[0_4px_24px_rgba(99,102,241,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(99,102,241,0.10)]">
 
         {/* Decorative blobs */}
         <div className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-indigo-100/40 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-10 left-1/4 h-36 w-36 rounded-full bg-violet-100/50 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 right-1/3 h-24 w-24 rounded-full bg-blue-100/30 blur-2xl" />
+        <div className="pointer-events-none absolute bottom-0 right-1/3 h-24 w-24 rounded-full bg-primary-subtle/40 blur-2xl" />
 
         {/* Top section */}
         <div className="relative flex items-start justify-between gap-4 flex-wrap">
@@ -88,7 +88,7 @@ export default function OrgWelcomeBanner({ allTasks, sprints, onViewChange }: Or
             </div>
 
             {/* Greeting */}
-            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+            <h2 className="text-2xl font-extrabold tracking-tight text-content sm:text-3xl">
               {greeting},{' '}
               <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
                 {firstName}!
@@ -96,7 +96,7 @@ export default function OrgWelcomeBanner({ allTasks, sprints, onViewChange }: Or
             </h2>
 
             {/* Subtitle */}
-            <p className="mt-2 text-sm text-slate-500 max-w-lg leading-relaxed">
+            <p className="mt-2 text-sm text-content-tertiary max-w-lg leading-relaxed">
               Your team completed{' '}
               <span className="font-semibold text-indigo-600 border-b border-indigo-200 pb-0.5">
                 {completedThisWeek} tasks
@@ -105,7 +105,7 @@ export default function OrgWelcomeBanner({ allTasks, sprints, onViewChange }: Or
               {activeSprint ? (
                 <>
                   Active sprint{' '}
-                  <span className="font-semibold text-slate-700">{sprintName}</span>{' '}
+                  <span className="font-semibold text-content-secondary">{sprintName}</span>{' '}
                   is at{' '}
                   <span className="font-semibold text-violet-600">{sprintProgress} velocity</span>{' '}
                   &mdash; great momentum!
@@ -124,25 +124,25 @@ export default function OrgWelcomeBanner({ allTasks, sprints, onViewChange }: Or
             ].map(({ icon: Icon, label, value }) => (
               <div
                 key={label}
-                className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium shadow-sm transition-all duration-200 hover:border-indigo-200 hover:bg-indigo-50/50 hover:scale-[1.02]"
+                className="flex items-center gap-2 rounded-lg border border-line bg-surface px-3.5 py-2 text-xs font-medium shadow-sm transition-all duration-200 hover:border-indigo-200 hover:bg-indigo-50/50 hover:scale-[1.02]"
               >
                 <Icon className="w-3.5 h-3.5 text-indigo-500" />
-                <span className="text-slate-400">{label}:</span>
-                <span className="text-slate-700 font-semibold">{value}</span>
+                <span className="text-content-tertiary">{label}:</span>
+                <span className="text-content-secondary font-semibold">{value}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Divider */}
-        <div className="relative mt-5 border-t border-slate-100 pt-5">
+        <div className="relative mt-5 border-t border-line pt-5">
           {/* Stat cards grid */}
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
               {
                 label: 'Completion Rate',
                 value: `${completionRate}%`,
-                valueColor: 'text-emerald-600',
+                valueColor: 'text-success',
                 bg: 'bg-emerald-50/60',
                 border: 'border-emerald-100',
                 hoverBorder: 'hover:border-emerald-200 hover:bg-emerald-50',
@@ -172,10 +172,10 @@ export default function OrgWelcomeBanner({ allTasks, sprints, onViewChange }: Or
               {
                 label: 'Total Tasks',
                 value: String(totalTasks),
-                valueColor: 'text-slate-700',
-                bg: 'bg-slate-50/60',
-                border: 'border-slate-200',
-                hoverBorder: 'hover:border-slate-300 hover:bg-slate-50 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]',
+                valueColor: 'text-content-secondary',
+                bg: 'bg-surface-sunken',
+                border: 'border-line',
+                hoverBorder: 'hover:border-line-strong hover:bg-surface-hover hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]',
                 clickable: true,
                 onClick: () => onViewChange?.('tasks'),
               },
@@ -188,7 +188,7 @@ export default function OrgWelcomeBanner({ allTasks, sprints, onViewChange }: Or
                   className={`flex flex-col items-center justify-center p-4 rounded-xl border ${s.border} ${s.bg} ${s.hoverBorder} ${s.hide ? 'hidden sm:flex' : 'flex'} ${s.clickable ? 'cursor-pointer hover:scale-[1.03]' : ''} transition-all duration-300 text-center w-full outline-none focus-visible:ring-2 focus-visible:ring-indigo-300/60`}
                 >
                   <p className={`text-xl font-extrabold tracking-tight sm:text-2xl ${s.valueColor}`}>{s.value}</p>
-                  <p className="text-[9px] text-slate-400 font-bold tracking-wider mt-1.5 uppercase font-mono">{s.label}</p>
+                  <p className="text-[9px] text-content-tertiary font-bold tracking-wider mt-1.5 uppercase font-mono">{s.label}</p>
                 </Component>
               );
             })}

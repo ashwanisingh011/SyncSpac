@@ -11,11 +11,11 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 shadow-lg">
-        <p className="text-xs font-semibold text-slate-500 dark:text-slate-450 mb-1">{label}</p>
+        <p className="text-xs font-semibold text-slate-500 dark:text-slate-500 mb-1">{label}</p>
         {payload.map((p: any) => (
           <div key={p.dataKey} className="flex items-center gap-2 text-xs">
             <span className="w-2.5 h-2.5 rounded-full" style={{ background: p.color }} />
-            <span className="text-slate-655 dark:text-slate-400">{p.name}:</span>
+            <span className="text-slate-700 dark:text-slate-400">{p.name}:</span>
             <span className="font-semibold text-slate-800 dark:text-white">
               {p.value} signups
             </span>
@@ -54,7 +54,7 @@ export default function UserGrowthChart() {
       <div className="flex items-start justify-between mb-6">
         <div>
           <h3 className="text-sm font-semibold text-slate-800 dark:text-white">User Growth</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-450 mt-0.5">Daily signups for the last 30 days</p>
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Daily signups for the last 30 days</p>
         </div>
         <div className="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold px-2.5 py-1 rounded-full">
           <TrendingUp className="w-3 h-3" />
@@ -70,8 +70,8 @@ export default function UserGrowthChart() {
           { label: 'Growth Status', value: 'Healthy', sub: 'Active' },
         ].map((s) => (
           <div key={s.label} className="text-center">
-            <div className="text-lg font-bold text-slate-805 dark:text-white">{s.value}</div>
-            <div className="text-[10px] text-slate-400 dark:text-slate-450 font-medium">{s.label}</div>
+            <div className="text-lg font-bold text-slate-800 dark:text-white">{s.value}</div>
+            <div className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">{s.label}</div>
           </div>
         ))}
       </div>

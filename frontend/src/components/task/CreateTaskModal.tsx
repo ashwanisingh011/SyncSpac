@@ -161,16 +161,16 @@ export default function CreateTaskModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 font-sans">
+    <div className="fixed inset-0 bg-black/45 backdrop-blur-sm flex items-center justify-center z-50 p-4 font-sans">
       <AccessRestrictedModal isOpen={showAccessRestricted} onClose={() => setShowAccessRestricted(false)} />
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      <div className="bg-surface border border-line rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         
         {/* Header */}
-        <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
-          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Create Task</h2>
+        <div className="flex justify-between items-center px-6 py-4 border-b border-line shrink-0">
+          <h2 className="text-lg font-bold text-content">Create Task</h2>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-md transition-colors"
+            className="text-content-tertiary hover:text-content p-1 rounded-md transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -181,21 +181,21 @@ export default function CreateTaskModal({
           {/* Scrollable inputs wrapper */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4 min-h-0">
             {errors.server && (
-              <div className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-150 rounded-lg text-xs text-red-650 dark:text-red-400">
+              <div className="p-3 bg-danger/10 border border-red-100 rounded-lg text-xs text-danger">
                 {errors.server}
               </div>
             )}
 
             {/* Project selection */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Project *
               </label>
               <select
                 value={form.projectId}
                 onChange={(e) => setForm((prev) => ({ ...prev, projectId: e.target.value }))}
-                className={`w-full h-10 px-3 text-sm rounded-lg border bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none transition-all focus:border-blue-500 ${
-                  errors.projectId ? 'border-red-500' : 'border-slate-200 dark:border-slate-800'
+                className={`w-full h-10 px-3 text-sm rounded-lg border bg-surface text-content-secondary outline-none transition-all focus:border-line-focus ${
+                  errors.projectId ? 'border-red-500' : 'border-line'
                 }`}
                 required
               >
@@ -206,18 +206,18 @@ export default function CreateTaskModal({
                   </option>
                 ))}
               </select>
-              {errors.projectId && <p className="text-xs text-red-500 mt-1">{errors.projectId}</p>}
+              {errors.projectId && <p className="text-xs text-danger mt-1">{errors.projectId}</p>}
             </div>
 
             {/* Task Type */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Task Type
               </label>
               <select
                 value={form.type || 'task'}
                 onChange={(e) => setForm((prev) => ({ ...prev, type: e.target.value as TaskTypeType }))}
-                className="w-full h-10 px-3 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none transition-all focus:border-blue-500"
+                className="w-full h-10 px-3 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none transition-all focus:border-line-focus"
               >
                 <option value="task">📄 Task</option>
                 <option value="bug">🐛 Bug</option>
@@ -230,31 +230,31 @@ export default function CreateTaskModal({
 
             {/* Title */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Task Title *
               </label>
               <input
                 type="text"
                 value={form.title}
                 onChange={(e) => setForm((prev) => ({ ...prev, title: e.target.value }))}
-                className={`w-full h-10 px-3 text-sm rounded-lg border bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all ${
-                  errors.title ? 'border-red-500 focus:ring-red-500/10' : 'border-slate-200 dark:border-slate-800'
+                className={`w-full h-10 px-3 text-sm rounded-lg border bg-surface text-content placeholder:text-content-tertiary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-line-focus outline-none transition-all ${
+                  errors.title ? 'border-red-500 focus:ring-red-500/10' : 'border-line'
                 }`}
                 placeholder="e.g. Design workspace header"
                 required
               />
-              {errors.title && <p className="text-xs text-red-500 mt-1">{errors.title}</p>}
+              {errors.title && <p className="text-xs text-danger mt-1">{errors.title}</p>}
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Description
               </label>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
-                className="w-full min-h-[100px] p-3 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-y"
+                className="w-full min-h-[100px] p-3 text-sm rounded-lg border border-line bg-surface text-content placeholder:text-content-tertiary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-line-focus outline-none transition-all resize-y"
                 placeholder="Detail the tasks specifications, steps to reproduce, or notes..."
               />
             </div>
@@ -262,13 +262,13 @@ export default function CreateTaskModal({
             {/* Grid: Status, Priority, Due date */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Status
                 </label>
                 <select
                   value={form.status}
                   onChange={(e) => setForm((prev) => ({ ...prev, status: e.target.value as TaskStatusType }))}
-                  className="w-full h-10 px-2 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none transition-all focus:border-blue-500"
+                  className="w-full h-10 px-2 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none transition-all focus:border-line-focus"
                 >
                   {statusOptions.map((option) => (
                     <option key={option.status} value={option.status}>
@@ -279,13 +279,13 @@ export default function CreateTaskModal({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Priority
                 </label>
                 <select
                   value={form.priority}
                   onChange={(e) => setForm((prev) => ({ ...prev, priority: e.target.value as TaskPriorityType }))}
-                  className="w-full h-10 px-2 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none transition-all focus:border-blue-500"
+                  className="w-full h-10 px-2 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none transition-all focus:border-line-focus"
                 >
                   <option value="low">Low</option>
                   <option value="medium">Medium</option>
@@ -294,14 +294,14 @@ export default function CreateTaskModal({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Due Date
                 </label>
                 <input
                   type="date"
                   value={form.dueDate}
                   onChange={(e) => setForm((prev) => ({ ...prev, dueDate: e.target.value }))}
-                  className="w-full h-10 px-3 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none transition-all focus:border-blue-500"
+                  className="w-full h-10 px-3 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none transition-all focus:border-line-focus"
                 />
               </div>
             </div>
@@ -309,25 +309,25 @@ export default function CreateTaskModal({
             {/* Assignee */}
             {isSelfAssignOnly ? (
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Assignee
                 </label>
                 <input
                   type="text"
                   disabled
                   value="Assigned to Me"
-                  className="w-full h-10 px-3 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 outline-none"
+                  className="w-full h-10 px-3 text-sm rounded-lg border border-line bg-surface-hover text-content-tertiary outline-none"
                 />
               </div>
             ) : (
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Assignee
                 </label>
                 <select
                   value={form.assignedTo}
                   onChange={(e) => setForm((prev) => ({ ...prev, assignedTo: e.target.value }))}
-                  className="w-full h-10 px-3 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none transition-all focus:border-blue-500"
+                  className="w-full h-10 px-3 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none transition-all focus:border-line-focus"
                 >
                   <option value="">Unassigned</option>
                   {assignableMembers.map((member) => (
@@ -341,19 +341,19 @@ export default function CreateTaskModal({
           </div>
 
           {/* Footer Actions */}
-          <div className="flex justify-end gap-3 px-6 py-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 shrink-0">
+          <div className="flex justify-end gap-3 px-6 py-4 border-t border-line bg-surface-sunken/50 shrink-0">
             <button
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="px-4 py-2 text-sm font-medium text-slate-650 hover:bg-slate-100 rounded-lg transition-colors dark:text-slate-400 dark:hover:bg-slate-800"
+              className="px-4 py-2 text-sm font-medium text-content-secondary hover:bg-surface-hover rounded-lg transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors"
+              className="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed text-primary-content px-5 py-2 rounded-lg text-sm font-semibold transition-colors"
             >
               {loading && <Loader2 className="w-4 h-4 animate-spin" />}
               Create Task

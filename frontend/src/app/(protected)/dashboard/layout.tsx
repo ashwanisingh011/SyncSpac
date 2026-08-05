@@ -62,15 +62,15 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
 
   if (loading) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] bg-slate-50 dark:bg-slate-950 font-sans">
+      <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] bg-surface-sunken font-sans">
         <Loader2 className="w-8 h-8 animate-spin text-indigo-600 mb-2" />
-        <p className="text-sm text-slate-500">Loading workspace dashboard…</p>
+        <p className="text-sm text-content-tertiary">Loading workspace dashboard…</p>
       </div>
     );
   }
 
   return (
-    <div className="flex-1 flex h-screen overflow-hidden bg-slate-50 font-sans dark:bg-slate-950">
+    <div className="flex-1 flex h-screen overflow-hidden bg-surface-sunken font-sans">
       {/* Sidebar — active state driven by usePathname inside OrgSidebar */}
       <OrgSidebar
         isOpen={sidebarOpen}

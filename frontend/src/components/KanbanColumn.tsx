@@ -3,6 +3,7 @@
 import { Droppable } from '@hello-pangea/dnd';
 import IssueCard from './IssueCard';
 import type { ITaskData } from '@/types/workspace';
+import { cn } from '@/lib/utils';
 
 interface KanbanColumnProps {
   columnId: string;
@@ -12,12 +13,28 @@ interface KanbanColumnProps {
   issueUrlPrefix?: string;
 }
 
+/** Column accent by common status names; falls back to neutral. */
+function columnAccent(title: string): string {
+  const t = title.toLowerCase();
+  if (/(progress|doing|develop|review)/.test(t)) return 'bg-status-progress';
+  if (/(done|complete|closed|shipped)/.test(t)) return 'bg-status-done';
+  if (/(block|stuck|hold)/.test(t)) return 'bg-status-blocked';
+  return 'bg-status-todo';
+}
+
 export default function KanbanColumn({ columnId, title, issues, projectKey, issueUrlPrefix }: KanbanColumnProps): React.JSX.Element {
   return (
-    <div className="flex flex-col bg-slate-50 rounded-md w-full md:w-[280px] md:shrink-0 max-h-[450px] md:max-h-full border border-transparent dark:bg-slate-900 dark:border-slate-800">
-      <div className="p-3 pb-2 flex items-center justify-between sticky top-0 bg-slate-50 rounded-t-md z-10 dark:bg-slate-900">
-        <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider truncate mr-2 dark:text-slate-400">
-          {title} <span className="text-slate-400 font-normal ml-1 dark:text-slate-500">{issues.length}</span>
+    <div className="flex max-h-[450px] w-full flex-col rounded-xl border border-line/60 bg-surface-sunken md:max-h-full md:w-[284px] md:shrink-0">
+      {/* Column header */}
+      <div className="sticky top-0 z-10 flex items-center justify-between rounded-t-xl bg-surface-sunken px-3 pb-2 pt-3">
+        <h3 className="mr-2 flex min-w-0 items-center gap-2 truncate">
+          <span className={cn('h-2 w-2 shrink-0 rounded-full', columnAccent(title))} />
+          <span className="truncate text-xs font-semibold uppercase tracking-wider text-content-secondary">
+            {title}
+          </span>
+          <span className="shrink-0 rounded-full bg-surface-hover px-1.5 py-px text-[10.5px] font-semibold tabular-nums text-content-tertiary">
+            {issues.length}
+          </span>
         </h3>
       </div>
 
@@ -26,7 +43,10 @@ export default function KanbanColumn({ columnId, title, issues, projectKey, issu
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`flex-1 p-2 min-h-[150px] overflow-y-auto rounded-b-md ${snapshot.isDraggingOver ? 'bg-slate-100 dark:bg-blue-950/30' : ''}`}
+            className={cn(
+              'min-h-[150px] flex-1 overflow-y-auto rounded-b-xl px-2 pb-2 transition-colors duration-150',
+              snapshot.isDraggingOver && 'bg-primary-subtle/60 ring-1 ring-inset ring-primary/25'
+            )}
           >
             {issues.map((issue, index) => (
               <IssueCard

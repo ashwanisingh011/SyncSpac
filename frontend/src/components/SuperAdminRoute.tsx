@@ -31,7 +31,7 @@ const SuperAdminRoute = ({ children }: SuperAdminRouteProps): React.JSX.Element 
 
   if (!isMounted || !isAuthReady) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white text-sm text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+      <div className="flex min-h-screen items-center justify-center bg-surface text-sm text-content-tertiary">
         Loading...
       </div>
     );
@@ -39,7 +39,7 @@ const SuperAdminRoute = ({ children }: SuperAdminRouteProps): React.JSX.Element 
 
   if (!user || !isSuperAdmin(user.role)) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white text-sm text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+      <div className="flex min-h-screen items-center justify-center bg-surface text-sm text-content-tertiary">
         Redirecting...
       </div>
     );

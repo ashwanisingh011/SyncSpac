@@ -1,14 +1,253 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* ───────────────────────────────────────────────────────────────
+   SyncSpac Design Tokens — "Jira × Linear" hybrid
+   Semantic variables flip between light and dark below;
+   @theme inline exposes them as Tailwind utilities.
+   ─────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Brand — Jira blue ramp */
+  --brand-50:  #E9F2FF;
+  --brand-100: #CCE0FF;
+  --brand-200: #85B8FF;
+  --brand-300: #579DFF;
+  --brand-400: #388BFF;
+  --brand-500: #1D7AFC;
+  --brand-600: #0C66E4;
+  --brand-700: #0055CC;
+  --brand-800: #09326C;
+  --brand-900: #082145;
+
+  /* Linear-flavored accent (violet) for gradients / highlights */
+  --accent-400: #8B7CF6;
+  --accent-500: #7C6CF0;
+  --accent-600: #6A5AE0;
+
+  /* Semantic surfaces — light */
+  --surface:          #FFFFFF;
+  --surface-sunken:   #F7F8FA;
+  --surface-raised:   #FFFFFF;
+  --surface-overlay:  #FFFFFF;
+  --surface-hover:    #F1F2F4;
+  --surface-active:   #E9F2FF;
+
+  --border-default:   #E4E6EA;
+  --border-strong:    #D5D8DE;
+  --border-focus:     var(--brand-500);
+
+  --content:          #1E2530;
+  --content-secondary:#44546F;
+  --content-tertiary: #626F86;
+  --content-inverse:  #FFFFFF;
+
+  --primary:          var(--brand-600);
+  --primary-hover:    var(--brand-700);
+  --primary-subtle:   var(--brand-50);
+  --primary-content:  #FFFFFF;
+
+  /* Status */
+  --status-todo:       #626F86;
+  --status-progress:   #1D7AFC;
+  --status-review:     #8B7CF6;
+  --status-done:       #22A06B;
+  --status-blocked:    #E2483D;
+
+  --priority-high:    #E2483D;
+  --priority-medium:  #E56910;
+  --priority-low:     #1D7AFC;
+
+  --success: #22A06B;
+  --warning: #E56910;
+  --danger:  #E2483D;
+
+  /* Elevation — soft ambient (light) */
+  --shadow-card:    0 1px 2px rgba(9, 30, 66, 0.06), 0 0 1px rgba(9, 30, 66, 0.12);
+  --shadow-raised:  0 4px 12px rgba(9, 30, 66, 0.10), 0 0 1px rgba(9, 30, 66, 0.10);
+  --shadow-overlay: 0 12px 32px rgba(9, 30, 66, 0.16), 0 0 1px rgba(9, 30, 66, 0.10);
+  --shadow-glow:    0 0 0 1px var(--border-default);
+}
+
+.dark {
+  /* Rich near-black, Linear-style */
+  --surface:          #0D1017;
+  --surface-sunken:   #090B10;
+  --surface-raised:   #151922;
+  --surface-overlay:  #1A1F2B;
+  --surface-hover:    #1C212C;
+  --surface-active:   #1A2438;
+
+  --border-default:   #232936;
+  --border-strong:    #303848;
+  --border-focus:     var(--brand-300);
+
+  --content:          #E6EAF2;
+  --content-secondary:#9BA6B8;
+  --content-tertiary: #6E7A8F;
+  --content-inverse:  #0D1017;
+
+  --primary:          var(--brand-300);
+  --primary-hover:    var(--brand-200);
+  --primary-subtle:   rgba(87, 157, 255, 0.12);
+  --primary-content:  #09326C;
+
+  --status-todo:       #8A94A6;
+  --status-progress:   #579DFF;
+  --status-review:     #A599FF;
+  --status-done:       #4BCE97;
+  --status-blocked:    #F87168;
+
+  --priority-high:    #F87168;
+  --priority-medium:  #FCA700;
+  --priority-low:     #579DFF;
+
+  --success: #4BCE97;
+  --warning: #FCA700;
+  --danger:  #F87168;
+
+  /* Elevation — border-glow style (dark) */
+  --shadow-card:    0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-raised:  0 0 0 1px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-overlay: 0 0 0 1px rgba(255, 255, 255, 0.10), 0 16px 48px rgba(0, 0, 0, 0.60);
+  --shadow-glow:    0 0 0 1px var(--border-default);
+}
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Brand ramp */
+  --color-brand-50:  var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+
+  /* Semantic — usable as bg-surface, text-content, border-line, etc. */
+  --color-surface:         var(--surface);
+  --color-surface-sunken:  var(--surface-sunken);
+  --color-surface-raised:  var(--surface-raised);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-surface-hover:   var(--surface-hover);
+  --color-surface-active:  var(--surface-active);
+
+  --color-line:        var(--border-default);
+  --color-line-strong: var(--border-strong);
+  --color-line-focus:  var(--border-focus);
+
+  --color-content:           var(--content);
+  --color-content-secondary: var(--content-secondary);
+  --color-content-tertiary:  var(--content-tertiary);
+  --color-content-inverse:   var(--content-inverse);
+
+  --color-primary:         var(--primary);
+  --color-primary-hover:   var(--primary-hover);
+  --color-primary-subtle:  var(--primary-subtle);
+  --color-primary-content: var(--primary-content);
+
+  --color-status-todo:     var(--status-todo);
+  --color-status-progress: var(--status-progress);
+  --color-status-review:   var(--status-review);
+  --color-status-done:     var(--status-done);
+  --color-status-blocked:  var(--status-blocked);
+
+  --color-priority-high:   var(--priority-high);
+  --color-priority-medium: var(--priority-medium);
+  --color-priority-low:    var(--priority-low);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger:  var(--danger);
+
+  /* Elevation */
+  --shadow-card:    var(--shadow-card);
+  --shadow-raised:  var(--shadow-raised);
+  --shadow-overlay: var(--shadow-overlay);
+}
+
+@theme {
+  /* Radius scale */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-fade-up: fade-up 0.35s var(--ease-out-quart) both;
+  --animate-scale-in: scale-in 0.2s var(--ease-out-quart) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+  }
+}
+
+/* ─── Base ─────────────────────────────────────────────────────── */
 
 body {
   margin: 0;
   min-height: 100vh;
+  font-family: var(--font-sans);
+  background-color: var(--surface);
+  color: var(--content);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
 }
 
 #root {
   min-height: 100vh;
+}
+
+/* Smooth theme switching */
+html.theme-transition,
+html.theme-transition * {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease !important;
+}
+
+/* Consistent focus ring */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Refined scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 @utility no-scrollbar {
@@ -16,5 +255,21 @@ body {
   scrollbar-width: none;  /* Firefox */
   &::-webkit-scrollbar {
     display: none;        /* Chrome, Safari and Opera */
+  }
+}
+
+/* Glass surface used by navbar / overlays */
+@utility glass {
+  background-color: color-mix(in srgb, var(--surface) 78%, transparent);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

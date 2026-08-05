@@ -17,8 +17,8 @@ export function usePathname() {
   return location.pathname;
 }
 
-export function useParams() {
-  return useReactParams();
+export function useParams<T extends Record<string, string | string[]> = Record<string, string>>(): T {
+  return useReactParams() as T;
 }
 
 export function useSearchParams() {

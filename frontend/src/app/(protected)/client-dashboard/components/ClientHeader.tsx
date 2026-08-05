@@ -64,7 +64,7 @@ export default function ClientHeader({
                 onClick={() => {
                   setProjOpen(!projOpen);
                 }}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 hover:border-slate-350 hover:bg-slate-50 transition-all font-semibold text-slate-700 text-xs shadow-sm cursor-pointer"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 hover:border-slate-400 hover:bg-slate-50 transition-all font-semibold text-slate-700 text-xs shadow-sm cursor-pointer"
               >
                 {selectedProject?.logo ? (
                   <img
@@ -81,7 +81,7 @@ export default function ClientHeader({
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
               </button>
             ) : (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-100 bg-slate-50/50 font-semibold text-slate-705 text-xs">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-100 bg-slate-50/50 font-semibold text-slate-700 text-xs">
                 {selectedProject?.logo ? (
                   <img
                     src={selectedProject.logo}
@@ -98,7 +98,7 @@ export default function ClientHeader({
             )}
 
             {projOpen && (
-              <div className="absolute left-0 top-10 w-64 bg-white rounded-xl shadow-xl border border-slate-150 overflow-hidden z-50 animate-in fade-in slide-in-from-top-1.5 duration-100">
+              <div className="absolute left-0 top-10 w-64 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-1.5 duration-100">
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 pt-3 pb-1.5">
                   Your Assigned Projects
                 </p>
@@ -128,7 +128,7 @@ export default function ClientHeader({
                         )}
                         <div className="min-w-0 flex-1">
                           <p className="truncate">{proj.name}</p>
-                          <p className="text-[9px] text-slate-455 font-mono mt-0.5">{proj.key}</p>
+                          <p className="text-[9px] text-slate-500 font-mono mt-0.5">{proj.key}</p>
                         </div>
                         {isActive && (
                           <Check className="w-3.5 h-3.5 text-blue-600 shrink-0" />
@@ -141,7 +141,7 @@ export default function ClientHeader({
             )}
           </div>
         ) : (
-          <h1 className="text-xs font-bold text-slate-705 flex items-center gap-1.5 shrink-0">
+          <h1 className="text-xs font-bold text-slate-700 flex items-center gap-1.5 shrink-0">
             <Folder className="w-4 h-4 text-slate-400" /> Client Dashboard
           </h1>
         )}

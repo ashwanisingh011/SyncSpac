@@ -10,9 +10,9 @@ export default function AiUsageChart() {
       <div className="flex items-start justify-between mb-5">
         <div>
           <h3 className="text-sm font-semibold text-slate-800 dark:text-white">AI Usage</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-450 mt-0.5">Weekly requests & token consumption</p>
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Weekly requests & token consumption</p>
         </div>
-        <div className="flex items-center gap-1.5 bg-pink-50 dark:bg-pink-950/20 text-pink-655 dark:text-pink-400 text-xs font-semibold px-2.5 py-1 rounded-full">
+        <div className="flex items-center gap-1.5 bg-pink-50 dark:bg-pink-950/20 text-pink-700 dark:text-pink-400 text-xs font-semibold px-2.5 py-1 rounded-full">
           <Zap className="w-3 h-3" />
           1.2M reqs/mo
         </div>
@@ -34,10 +34,10 @@ export default function AiUsageChart() {
 
       {/* Top tools */}
       <div className="mt-5 space-y-2.5">
-        <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Top AI Tools</p>
+        <p className="text-[10px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Top AI Tools</p>
         {topAiTools.map((tool) => (
           <div key={tool.name} className="flex items-center gap-3">
-            <span className="text-xs text-slate-655 dark:text-slate-350 w-36 truncate">{tool.name}</span>
+            <span className="text-xs text-slate-700 dark:text-slate-400 w-36 truncate">{tool.name}</span>
             <div className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-pink-500 to-rose-400 rounded-full transition-all"
@@ -58,7 +58,7 @@ export default function AiUsageChart() {
         ].map((s) => (
           <div key={s.label} className="text-center">
             <div className="text-sm font-bold text-slate-800 dark:text-white">{s.value}</div>
-            <div className="text-[10px] text-slate-400 dark:text-slate-450">{s.label}</div>
+            <div className="text-[10px] text-slate-400 dark:text-slate-500">{s.label}</div>
           </div>
         ))}
       </div>

@@ -125,8 +125,8 @@ export default function BillingPage() {
           title="Billing & Subscription"
           subtitle="Manage your plan, payment method, and usage."
         />
-        <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center dark:border-slate-800 dark:bg-slate-950">
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+        <div className="rounded-2xl border border-line bg-surface p-8 text-center">
+          <p className="text-sm text-content-tertiary">
             You do not have permission to view or manage billing for this workspace.
           </p>
         </div>
@@ -182,7 +182,7 @@ export default function BillingPage() {
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-24 rounded-xl bg-slate-100 animate-pulse dark:bg-slate-900" />
+            <div key={i} className="h-24 rounded-xl bg-surface-hover animate-pulse" />
           ))}
         </div>
       ) : billing ? (
@@ -192,10 +192,10 @@ export default function BillingPage() {
       {/* Plan selector */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+          <h2 className="text-base font-semibold text-content">
             Available plans
           </h2>
-          <span className="text-xs text-slate-500 dark:text-slate-400">
+          <span className="text-xs text-content-tertiary">
             Billed monthly · Cancel anytime
           </span>
         </div>
@@ -214,11 +214,11 @@ export default function BillingPage() {
       </div>
 
       {/* FAQ / notes */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-        <h2 className="text-base font-semibold text-slate-900 mb-4 dark:text-slate-100">
+      <div className="rounded-2xl border border-line bg-surface p-6">
+        <h2 className="text-base font-semibold text-content mb-4">
           Frequently asked questions
         </h2>
-        <div className="space-y-4 text-sm text-slate-600 dark:text-slate-400">
+        <div className="space-y-4 text-sm text-content-secondary">
           {[
             {
               q: 'Can I upgrade or downgrade at any time?',
@@ -233,8 +233,8 @@ export default function BillingPage() {
               a: 'Annual billing with a 20% discount is available for Pro and Business plans. Contact us to switch.',
             },
           ].map((faq) => (
-            <div key={faq.q} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0 dark:border-slate-800">
-              <p className="font-medium text-slate-800 mb-1 dark:text-slate-200">{faq.q}</p>
+            <div key={faq.q} className="border-b border-line pb-4 last:border-0 last:pb-0">
+              <p className="font-medium text-content mb-1">{faq.q}</p>
               <p>{faq.a}</p>
             </div>
           ))}
@@ -243,18 +243,18 @@ export default function BillingPage() {
 
       {/* Downgrade Confirmation Modal */}
       {pendingDowngradePlan && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800/80 animate-in zoom-in-95 slide-in-from-bottom-8 duration-300 p-6 space-y-6">
+        <div className="fixed inset-0 bg-black/45 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-surface rounded-3xl w-full max-w-md overflow-hidden shadow-2xl border border-line/80 animate-in zoom-in-95 slide-in-from-bottom-8 duration-300 p-6 space-y-6">
             <div className="space-y-2">
-              <div className="w-12 h-12 bg-amber-100 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center text-xl shrink-0">
+              <div className="w-12 h-12 bg-amber-100 text-warning rounded-2xl flex items-center justify-center text-xl shrink-0">
                 ⚠️
               </div>
-              <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mt-4">Confirm Subscription Downgrade</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                You are currently on the <span className="font-bold text-slate-700 dark:text-slate-200">{billing?.plan.toUpperCase()}</span> plan. 
-                Downgrading to the <span className="font-bold text-slate-700 dark:text-slate-200">{pendingDowngradePlan.toUpperCase()}</span> plan will apply immediately.
+              <h3 className="text-lg font-extrabold text-content mt-4">Confirm Subscription Downgrade</h3>
+              <p className="text-xs text-content-tertiary leading-relaxed">
+                You are currently on the <span className="font-bold text-content-secondary">{billing?.plan.toUpperCase()}</span> plan. 
+                Downgrading to the <span className="font-bold text-content-secondary">{pendingDowngradePlan.toUpperCase()}</span> plan will apply immediately.
               </p>
-              <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200/20 rounded-xl p-3 text-[11px] text-amber-800 dark:text-amber-300 leading-normal">
+              <div className="bg-warning/10 border border-amber-200/20 rounded-xl p-3 text-[11px] text-amber-800 leading-normal">
                 <strong>Warning:</strong> Downgrading may reduce your workspace feature access, seat counts, and limit counts. Any active features beyond the new plan limits will be adjusted immediately.
               </div>
             </div>
@@ -263,7 +263,7 @@ export default function BillingPage() {
               <button
                 type="button"
                 onClick={() => setPendingDowngradePlan(null)}
-                className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-xs transition-all"
+                className="flex-1 py-2.5 bg-surface-hover hover:bg-surface-hover text-content-secondary rounded-xl font-bold text-xs transition-all"
               >
                 Cancel
               </button>

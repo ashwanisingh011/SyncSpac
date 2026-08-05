@@ -121,7 +121,7 @@ export default function ClientTasksPage(): React.JSX.Element {
   if (!selectedProject) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
-        <FolderOpen className="h-12 w-12 text-slate-350 mb-3 animate-pulse" />
+        <FolderOpen className="h-12 w-12 text-slate-400 mb-3 animate-pulse" />
         <h3 className="text-sm font-bold text-slate-800">No Active Projects</h3>
         <p className="text-xs text-slate-500 mt-1 max-w-sm">
           Select an active project first to view tasks.
@@ -135,7 +135,7 @@ export default function ClientTasksPage(): React.JSX.Element {
       {/* Page Header */}
       <div>
         <h2 className="text-lg font-bold text-slate-800 flex items-center gap-1.5">
-          <ListTodo className="h-5 w-5 text-blue-650" /> Project Tasks Overview
+          <ListTodo className="h-5 w-5 text-blue-600" /> Project Tasks Overview
         </h2>
         <p className="text-xs text-slate-400 mt-1">
           Review tasks progress, priority ratings, and timelines.
@@ -149,7 +149,7 @@ export default function ClientTasksPage(): React.JSX.Element {
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 shadow-sm">
         <div className="mb-4">
           <h3 className="text-sm font-semibold text-slate-800 dark:text-white">Task Status Overview</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-455 mt-0.5">Summary of task progress in the current cycle</p>
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Summary of task progress in the current cycle</p>
         </div>
         <div className="grid grid-cols-2 gap-3.5 md:grid-cols-3 xl:grid-cols-6">
           {stats.statusOverview.map((item) => (
@@ -222,7 +222,7 @@ export default function ClientTasksPage(): React.JSX.Element {
               <div className="hidden sm:block">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-slate-100 bg-slate-50/50 text-[10px] font-bold uppercase tracking-wider text-slate-450">
+                    <tr className="border-b border-slate-100 bg-slate-50/50 text-[10px] font-bold uppercase tracking-wider text-slate-500">
                       <th className="px-5 py-3 select-none">Key</th>
                       <th
                         className="px-5 py-3 cursor-pointer select-none hover:bg-slate-100/50"
@@ -270,7 +270,7 @@ export default function ClientTasksPage(): React.JSX.Element {
                             <span className="font-bold text-slate-800">{task.title}</span>
                           </td>
                           <td className="px-5 py-3.5">
-                            <span className="font-semibold capitalize text-slate-655">{task.priority}</span>
+                            <span className="font-semibold capitalize text-slate-700">{task.priority}</span>
                           </td>
                           <td className="px-5 py-3.5">
                             <span className="font-bold capitalize text-slate-700">{task.status.replace('-', ' ')}</span>
@@ -288,7 +288,7 @@ export default function ClientTasksPage(): React.JSX.Element {
                                   : 'No due date'}
                               </span>
                               {isOverdue && (
-                                <span className="flex items-center gap-0.5 text-[9px] font-bold text-red-650 uppercase">
+                                <span className="flex items-center gap-0.5 text-[9px] font-bold text-red-600 uppercase">
                                   <AlertCircle className="h-2.5 w-2.5" /> Overdue
                                 </span>
                               )}
@@ -297,7 +297,7 @@ export default function ClientTasksPage(): React.JSX.Element {
                           <td className="px-5 py-3.5">
                             {task.assignedTo && typeof task.assignedTo === 'object' ? (
                               <div className="flex items-center gap-2">
-                                <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-755 overflow-hidden shrink-0">
+                                <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-800 overflow-hidden shrink-0">
                                   {(task.assignedTo as any).avatar ? (
                                     <img
                                       src={(task.assignedTo as any).avatar}
@@ -313,7 +313,7 @@ export default function ClientTasksPage(): React.JSX.Element {
                                 </span>
                               </div>
                             ) : typeof task.assignedTo === 'string' ? (
-                              <span className="font-semibold text-slate-705">{task.assignedTo}</span>
+                              <span className="font-semibold text-slate-700">{task.assignedTo}</span>
                             ) : (
                               <span className="italic text-slate-400">Unassigned</span>
                             )}
@@ -335,7 +335,7 @@ export default function ClientTasksPage(): React.JSX.Element {
 
                   const assigneeBlock = task.assignedTo && typeof task.assignedTo === 'object' ? (
                     <div className="flex items-center gap-1.5 mt-0.5">
-                      <div className="h-5 w-5 rounded-full bg-blue-100 flex items-center justify-center text-[9px] font-bold text-blue-755 overflow-hidden shrink-0">
+                      <div className="h-5 w-5 rounded-full bg-blue-100 flex items-center justify-center text-[9px] font-bold text-blue-800 overflow-hidden shrink-0">
                         {(task.assignedTo as any).avatar ? (
                           <img
                             src={(task.assignedTo as any).avatar}
@@ -346,12 +346,12 @@ export default function ClientTasksPage(): React.JSX.Element {
                           (task.assignedTo as any).name[0]
                         )}
                       </div>
-                      <span className="font-semibold text-slate-705 dark:text-slate-300 truncate text-[11px]">
+                      <span className="font-semibold text-slate-700 dark:text-slate-300 truncate text-[11px]">
                         {(task.assignedTo as any).name}
                       </span>
                     </div>
                   ) : typeof task.assignedTo === 'string' ? (
-                    <span className="font-semibold text-slate-705 dark:text-slate-300 text-[11px] block mt-0.5">{task.assignedTo}</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300 text-[11px] block mt-0.5">{task.assignedTo}</span>
                   ) : (
                     <span className="italic text-slate-400 text-[11px] block mt-0.5">Unassigned</span>
                   );
@@ -379,7 +379,7 @@ export default function ClientTasksPage(): React.JSX.Element {
 
                         <div>
                           <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider mb-0.5">Priority</span>
-                          <span className="font-semibold capitalize text-slate-655 dark:text-slate-350 text-[11px]">
+                          <span className="font-semibold capitalize text-slate-700 dark:text-slate-400 text-[11px]">
                             {task.priority}
                           </span>
                         </div>
@@ -387,7 +387,7 @@ export default function ClientTasksPage(): React.JSX.Element {
                         <div>
                           <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Due Date</span>
                           <div className="flex flex-col gap-0.5 mt-0.5">
-                            <span className="flex items-center gap-1 text-slate-600 dark:text-slate-355 font-medium text-[11px]">
+                            <span className="flex items-center gap-1 text-slate-600 dark:text-slate-400 font-medium text-[11px]">
                               <Calendar className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                               {task.dueDate
                                 ? new Date(task.dueDate).toLocaleDateString('en-GB', {
@@ -398,7 +398,7 @@ export default function ClientTasksPage(): React.JSX.Element {
                                 : 'No due date'}
                             </span>
                             {isOverdue && (
-                              <span className="flex items-center gap-0.5 text-[8px] font-bold text-red-655 uppercase">
+                              <span className="flex items-center gap-0.5 text-[8px] font-bold text-red-700 uppercase">
                                 <AlertCircle className="h-2.5 w-2.5" /> Overdue
                               </span>
                             )}

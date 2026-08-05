@@ -48,7 +48,7 @@ export default function SubscriptionChart({ stats }: SubscriptionChartProps) {
     <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 p-6">
       <div className="mb-4">
         <h3 className="text-sm font-semibold text-slate-800 dark:text-white">Subscription Plans</h3>
-        <p className="text-xs text-slate-400 dark:text-slate-450 mt-0.5">Distribution across {hasRealData ? totalVal.toLocaleString() : activeSubsLabel} active subscriptions</p>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Distribution across {hasRealData ? totalVal.toLocaleString() : activeSubsLabel} active subscriptions</p>
       </div>
 
       <ResponsiveContainer width="100%" height={200}>
@@ -80,7 +80,7 @@ export default function SubscriptionChart({ stats }: SubscriptionChartProps) {
         {data.map((item) => (
           <div key={item.name} className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ background: item.fill }} />
-            <span className="text-xs text-slate-600 dark:text-slate-350 font-medium">{item.name}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">{item.name}</span>
             <span className="text-xs text-slate-400 dark:text-slate-500 ml-auto">{item.pct}%</span>
           </div>
         ))}

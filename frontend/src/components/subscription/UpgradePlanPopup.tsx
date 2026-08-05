@@ -55,8 +55,8 @@ export default function UpgradePlanPopup({ status, onClose, onNavigateToBilling 
   }
 
   return (
-    <div className="fixed inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-in fade-in duration-350">
-      <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800/80 animate-in zoom-in-95 slide-in-from-bottom-8 duration-300">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-in fade-in duration-350">
+      <div className="bg-surface rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl border border-line/80 animate-in zoom-in-95 slide-in-from-bottom-8 duration-300">
         
         {/* Colorful top decoration */}
         <div className="h-2 bg-gradient-to-r from-red-500 via-amber-500 to-indigo-600"></div>
@@ -65,26 +65,26 @@ export default function UpgradePlanPopup({ status, onClose, onNavigateToBilling 
         <div className="p-8 space-y-6">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 font-semibold text-[10px] tracking-wide uppercase font-sans">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-danger/10 text-danger font-semibold text-[10px] tracking-wide uppercase font-sans">
                 <AlertTriangle className="w-3.5 h-3.5" />
                 Action Required
               </div>
-              <h3 className="text-xl font-extrabold text-slate-900 dark:text-white font-sans mt-2">
+              <h3 className="text-xl font-extrabold text-content font-sans mt-2">
                 Subscription Limit Exceeded
               </h3>
             </div>
             {onClose && (
               <button 
                 onClick={onClose}
-                className="p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-650 transition-colors"
+                className="p-1.5 rounded-xl hover:bg-surface-hover text-content-tertiary hover:text-content transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             )}
           </div>
 
-          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
-            Your organization is currently on the <span className="font-bold text-slate-700 dark:text-slate-200">{status.planName}</span> plan and has exceeded its subscription limits. Some workspace operations may be temporarily restricted.
+          <p className="text-xs text-content-tertiary leading-relaxed font-sans">
+            Your organization is currently on the <span className="font-bold text-content-secondary">{status.planName}</span> plan and has exceeded its subscription limits. Some workspace operations may be temporarily restricted.
           </p>
 
           {/* Exceeded Features Display */}
@@ -92,16 +92,16 @@ export default function UpgradePlanPopup({ status, onClose, onNavigateToBilling 
             {exceededItems.map((item) => (
               <div 
                 key={item.name}
-                className="flex items-center justify-between p-4 bg-red-50/40 dark:bg-red-950/10 rounded-2xl border border-red-100/50 dark:border-red-950/20 font-sans"
+                className="flex items-center justify-between p-4 bg-red-50/40 rounded-2xl border border-red-100/50 font-sans"
               >
                 <div className="space-y-0.5">
-                  <p className="text-xs font-bold text-red-900 dark:text-red-300">{item.name}</p>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400">
+                  <p className="text-xs font-bold text-red-900">{item.name}</p>
+                  <p className="text-[10px] text-content-tertiary">
                     Current plan limit: {item.allowed}
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-extrabold bg-red-100/50 dark:bg-red-950/30 text-red-650 dark:text-red-450 border border-red-200/20">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-extrabold bg-red-100/50 text-danger border border-red-200/20">
                     {item.current}
                   </span>
                 </div>
@@ -109,11 +109,11 @@ export default function UpgradePlanPopup({ status, onClose, onNavigateToBilling 
             ))}
           </div>
 
-          <div className="bg-indigo-50/50 dark:bg-indigo-950/15 border border-indigo-100/10 rounded-2xl p-4 flex gap-3 font-sans items-start">
-            <Sparkles className="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
+          <div className="bg-indigo-50/50 border border-indigo-100/10 rounded-2xl p-4 flex gap-3 font-sans items-start">
+            <Sparkles className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
             <div className="space-y-1">
-              <p className="text-xs font-bold text-indigo-900 dark:text-indigo-300">Upgrade Recommendation</p>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-normal">
+              <p className="text-xs font-bold text-indigo-900">Upgrade Recommendation</p>
+              <p className="text-[11px] text-content-secondary leading-normal">
                 Unlock higher limits, advanced analytics, priority support, and custom roles. Scale your workspace operations seamlessly.
               </p>
             </div>
@@ -130,7 +130,7 @@ export default function UpgradePlanPopup({ status, onClose, onNavigateToBilling 
             </button>
             <button
               onClick={handleUpgradeClick}
-              className="py-3 px-6 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-xs transition-all cursor-pointer font-sans"
+              className="py-3 px-6 bg-surface-hover hover:bg-surface-hover text-content-secondary rounded-xl font-bold text-xs transition-all cursor-pointer font-sans"
             >
               View Billing &amp; Plans
             </button>

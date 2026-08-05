@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { CheckCircle2, AlertCircle, Loader2, Grid, LogIn, UserPlus } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Loader2, LogIn, UserPlus } from 'lucide-react';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import { acceptInviteByToken, validateInviteByToken } from '@/api/workspace';
 import { useOrganization } from '@/context/useOrganization';
 import { DASHBOARD_ROUTE, getDefaultPostAuthRoute } from '@/lib/postAuth';
@@ -149,29 +150,25 @@ export default function AcceptInvitePage() {
   const orgLabel = organizationName ? `"${organizationName}"` : 'the organization';
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
-      <header className="h-14 flex items-center px-6 border-b border-slate-200/60 bg-white/80 backdrop-blur-sm dark:border-slate-800/60 dark:bg-slate-950/80">
-        <Link
-          href={getDefaultPostAuthRoute()}
-          className="flex items-center gap-2 text-[#0052CC] font-bold hover:text-[#0747A6] dark:text-[#579DFF]"
-        >
-          <Grid className="w-5 h-5" />
-          <span className="text-lg">SyncSpac</span>
+    <div className="min-h-screen flex flex-col bg-surface-sunken">
+      <header className="glass h-14 flex items-center px-6 border-b border-line">
+        <Link href={getDefaultPostAuthRoute()} className="transition-opacity hover:opacity-80">
+          <Logo size={24} />
         </Link>
       </header>
 
       <main className="flex-1 flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-950 text-center">
+        <div className="w-full max-w-md rounded-2xl border border-line bg-surface p-8 shadow-raised text-center">
           {state === 'loading' && (
             <div className="flex flex-col items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 dark:bg-blue-950/40 mx-auto">
-                <Loader2 className="w-8 h-8 text-blue-600 dark:text-blue-400 animate-spin" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-subtle mx-auto">
+                <Loader2 className="w-8 h-8 text-primary animate-spin" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                <h1 className="text-xl font-semibold text-content">
                   Verifying invitation…
                 </h1>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                <p className="mt-1 text-sm text-content-tertiary">
                   Please wait while we validate your invite link.
                 </p>
               </div>
@@ -180,18 +177,18 @@ export default function AcceptInvitePage() {
 
           {state === 'choose-auth' && (
             <div className="flex flex-col items-center gap-5">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 dark:bg-blue-950/40 mx-auto">
-                <UserPlus className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-subtle mx-auto">
+                <UserPlus className="w-8 h-8 text-primary" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                <h1 className="text-xl font-semibold text-content">
                   Join {orgLabel}
                 </h1>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                <p className="mt-1 text-sm text-content-tertiary">
                   {inviteEmail ? (
                     <>
                       You&apos;ve been invited as{' '}
-                      <span className="font-medium text-slate-700 dark:text-slate-300">
+                      <span className="font-medium text-content-secondary">
                         {inviteEmail}
                       </span>
                       .{' '}
@@ -207,7 +204,7 @@ export default function AcceptInvitePage() {
                   <button
                     type="button"
                     onClick={handleLogin}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-content hover:bg-primary-hover transition-colors"
                   >
                     <LogIn className="w-4 h-4" />
                     Log in to accept invite
@@ -219,8 +216,8 @@ export default function AcceptInvitePage() {
                     onClick={handleRegister}
                     className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium transition-colors ${
                       userExists === false
-                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                        : 'border border-slate-300 text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800'
+                        ? 'bg-primary text-primary-content hover:bg-primary-hover'
+                        : 'border border-line text-content-secondary hover:bg-surface-hover'
                     }`}
                   >
                     <UserPlus className="w-4 h-4" />
@@ -233,20 +230,20 @@ export default function AcceptInvitePage() {
 
           {state === 'success' && (
             <div className="flex flex-col items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 mx-auto">
-                <CheckCircle2 className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-success/12 mx-auto">
+                <CheckCircle2 className="w-8 h-8 text-success" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                <h1 className="text-xl font-semibold text-content">
                   You&apos;re in!
                 </h1>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                <p className="mt-1 text-sm text-content-tertiary">
                   Successfully joined the organization. Redirecting to your dashboard…
                 </p>
               </div>
               <Link
                 href={DASHBOARD_ROUTE}
-                className="mt-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+                className="mt-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-content hover:bg-primary-hover transition-colors"
               >
                 Go to Dashboard →
               </Link>
@@ -255,27 +252,27 @@ export default function AcceptInvitePage() {
 
           {state === 'error' && (
             <div className="flex flex-col items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-50 dark:bg-red-950/40 mx-auto">
-                <AlertCircle className="w-8 h-8 text-red-500 dark:text-red-400" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-danger/10 mx-auto">
+                <AlertCircle className="w-8 h-8 text-danger" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                <h1 className="text-xl font-semibold text-content">
                   Invite link invalid
                 </h1>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                <p className="mt-1 text-sm text-content-tertiary">
                   {errorMsg}
                 </p>
               </div>
               <div className="flex gap-3 mt-2">
                 <Link
                   href="/onboarding/join-org"
-                  className="rounded-xl border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                  className="rounded-xl border border-line px-5 py-2.5 text-sm font-medium text-content-secondary hover:bg-surface-hover transition-colors"
                 >
                   Paste token manually
                 </Link>
                 <Link
                   href={DASHBOARD_ROUTE}
-                  className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+                  className="rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-content hover:bg-primary-hover transition-colors"
                 >
                   Go to Dashboard
                 </Link>
@@ -285,8 +282,8 @@ export default function AcceptInvitePage() {
         </div>
       </main>
 
-      <footer className="py-4 text-center text-xs text-slate-400 dark:text-slate-600">
-        © {new Date().getFullYear()} TaskBridge · All rights reserved
+      <footer className="py-4 text-center text-xs text-content-tertiary">
+        © {new Date().getFullYear()} SyncSpac · All rights reserved
       </footer>
     </div>
   );

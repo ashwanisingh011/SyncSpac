@@ -49,22 +49,22 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   return (
     <div className="space-y-4">
       {/* Sub Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 flex-wrap gap-4">
+      <div className="flex items-center justify-between pb-3 border-b border-line flex-wrap gap-4">
         <div className="flex items-center gap-3">
           <button
             onClick={() => router.push('/dashboard/projects')}
-            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-all cursor-pointer"
+            className="p-1.5 rounded-lg border border-line hover:bg-surface-hover text-content-tertiary hover:text-content transition-all cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">{projectKey} Project Space</h2>
-            <p className="text-xs text-slate-400">Full project management — board, backlog, files, reports, recurring tasks &amp; settings.</p>
+            <h2 className="text-xl font-bold text-content">{projectKey} Project Space</h2>
+            <p className="text-xs text-content-tertiary">Full project management — board, backlog, files, reports, recurring tasks &amp; settings.</p>
           </div>
         </div>
 
         {/* Tab switchers */}
-        <div className="flex flex-wrap items-center gap-1 bg-slate-100/80 dark:bg-slate-900 p-1 rounded-xl">
+        <div className="flex flex-wrap items-center gap-1 bg-slate-100/80 p-1 rounded-xl">
           {tabs.map((t) => {
             const Icon = t.icon;
             const isActive = activeTab === t.id;
@@ -74,8 +74,8 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                 onClick={() => setActiveTab(t.id as ProjectTab)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-white text-indigo-700 shadow-sm dark:bg-slate-800 dark:text-indigo-400'
-                    : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+                    ? 'bg-surface text-indigo-700 shadow-sm'
+                    : 'text-content-tertiary hover:text-content'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -87,7 +87,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
       </div>
 
       {/* Main tab panel */}
-      <div className="mt-2 bg-white dark:bg-slate-950 rounded-2xl p-4 border border-slate-100 dark:border-slate-800">
+      <div className="mt-2 bg-surface rounded-2xl p-4 border border-line">
         <ProjectDataProvider projectKey={projectKey}>
           {activeTab === 'board'     && <BoardPageContent projectKey={projectKey} issueUrlPrefix="/dashboard/projects" />}
           {activeTab === 'backlog'   && <BacklogPageContent projectKey={projectKey} issueUrlPrefix="/dashboard/projects" />}

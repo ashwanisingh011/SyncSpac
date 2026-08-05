@@ -68,7 +68,7 @@ export default function ClientProfilePage(): React.JSX.Element {
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-200">
       <div>
         <h2 className="text-lg font-bold text-slate-800 flex items-center gap-1.5">
-          <UserIcon className="h-5 w-5 text-blue-650" /> My Profile
+          <UserIcon className="h-5 w-5 text-blue-600" /> My Profile
         </h2>
         <p className="text-xs text-slate-400 mt-1">
           Manage your personal details and account profile picture.
@@ -79,7 +79,7 @@ export default function ClientProfilePage(): React.JSX.Element {
         <div className="flex flex-col sm:flex-row gap-6 items-center border-b border-slate-50 pb-6">
           {/* Avatar Upload */}
           <div className="flex flex-col items-center gap-2.5 shrink-0">
-            <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-650 flex items-center justify-center text-white text-3xl font-bold shadow-md overflow-hidden">
+            <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-md overflow-hidden">
               {user?.avatar ? (
                 <img
                   src={user.avatar}

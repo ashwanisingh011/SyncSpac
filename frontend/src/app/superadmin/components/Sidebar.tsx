@@ -85,7 +85,7 @@ export default function Sidebar({ isOpen, onClose, activeItem, onActiveItemChang
 
         {/* Nav */}
         <nav className="flex-1 px-3 py-4 overflow-y-auto">
-          <p className="text-[10px] font-semibold text-slate-450 dark:text-slate-500 uppercase tracking-widest px-2 mb-2">Platform</p>
+          <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-500 uppercase tracking-widest px-2 mb-2">Platform</p>
           <ul className="space-y-0.5">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -110,7 +110,7 @@ export default function Sidebar({ isOpen, onClose, activeItem, onActiveItemChang
                     <span className="flex items-center gap-3">
                       <Icon
                         className={`w-4 h-4 shrink-0 ${
-                          isActive ? 'text-blue-600 dark:text-blue-450' : 'text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-350'
+                          isActive ? 'text-blue-600 dark:text-blue-500' : 'text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-400'
                         }`}
                       />
                       {item.label}
@@ -125,7 +125,7 @@ export default function Sidebar({ isOpen, onClose, activeItem, onActiveItemChang
                         {item.badge}
                       </span>
                     ) : isActive ? (
-                      <ChevronRight className="w-3.5 h-3.5 text-blue-405 dark:text-blue-500" />
+                      <ChevronRight className="w-3.5 h-3.5 text-blue-400 dark:text-blue-500" />
                     ) : null}
                   </button>
                 </li>
@@ -146,7 +146,7 @@ export default function Sidebar({ isOpen, onClose, activeItem, onActiveItemChang
             </div>
             <div className="min-w-0">
               <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate">{user?.name || 'Super Admin'}</p>
-              <p className="text-[10px] text-slate-500 dark:text-slate-450 truncate">{user?.email || 'admin@taskbridge.io'}</p>
+              <p className="text-[10px] text-slate-500 dark:text-slate-500 truncate">{user?.email || 'admin@taskbridge.io'}</p>
             </div>
           </div>
         </div>

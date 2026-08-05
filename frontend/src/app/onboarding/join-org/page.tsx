@@ -16,6 +16,7 @@ import {
 import { extractInviteToken } from '@/lib/inviteToken';
 import { ArrowLeft, Link2, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
 
 type SubmitState = 'idle' | 'loading' | 'success' | 'error';
@@ -102,24 +103,34 @@ export default function JoinOrgPage() {
       {/* Back */}
       <Link
         href="/onboarding/no-org"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm text-content-tertiary hover:text-content transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
       </Link>
 
       {/* Card */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      <motion.div
+        initial={{ opacity: 0, y: 16, scale: 0.99 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+        className="rounded-2xl border border-line bg-surface p-7 shadow-raised"
+      >
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800">
-            <Link2 className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-          </div>
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 22, delay: 0.12 }}
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-hover"
+          >
+            <Link2 className="w-5 h-5 text-content-secondary" />
+          </motion.div>
           <div>
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <h1 className="text-lg font-semibold text-content">
               Join an organization
             </h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-content-tertiary">
               Paste your invite link or token. You must be logged in as the invited email.
             </p>
           </div>
@@ -130,54 +141,66 @@ export default function JoinOrgPage() {
           <div>
             <label
               htmlFor="invite-token"
-              className="block text-sm font-medium text-slate-700 mb-1.5 dark:text-slate-300"
+              className="block text-sm font-medium text-content-secondary mb-1.5"
             >
               Invite link or token
             </label>
             <div className="relative">
-              <Link2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              <Link2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-content-tertiary pointer-events-none" />
               <input
                 id="invite-token"
                 type="text"
                 value={token}
                 onChange={handleInputChange}
-                placeholder="https://taskbridge.io/accept-invite/abc123 or just abc123"
+                placeholder="https://syncspac.io/accept-invite/abc123 or just abc123"
                 disabled={submitState === 'loading' || submitState === 'success'}
                 className={clsx(
-                  'w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border outline-none transition-all',
-                  'dark:bg-slate-900 dark:text-slate-100',
+                  'w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border bg-surface text-content outline-none transition-all placeholder:text-content-tertiary',
                   submitState === 'error'
-                    ? 'border-red-400 bg-red-50 focus:ring-2 focus:ring-red-200 dark:bg-red-950/20 dark:border-red-700'
+                    ? 'border-danger bg-danger/5 focus:ring-2 focus:ring-danger/20'
                     : submitState === 'success'
-                      ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20 dark:border-emerald-700'
-                      : 'border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-700 dark:focus:ring-blue-900/30',
+                      ? 'border-success bg-success/8'
+                      : 'border-line hover:border-line-strong focus:border-line-focus focus:ring-2 focus:ring-primary/20',
                 )}
               />
             </div>
           </div>
 
-          {/* Error */}
-          {submitState === 'error' && (
-            <div className="flex items-start gap-2.5 rounded-xl bg-red-50 border border-red-200 px-4 py-3 dark:bg-red-950/20 dark:border-red-800">
-              <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-              <p className="text-sm text-red-700 dark:text-red-300">{errorMessage}</p>
-            </div>
-          )}
+          {/* Error / Success feedback */}
+          <AnimatePresence mode="wait">
+            {submitState === 'error' && (
+              <motion.div
+                key="error"
+                initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -6 }}
+                className="flex items-start gap-2.5 rounded-xl bg-danger/8 border border-danger/30 px-4 py-3"
+              >
+                <AlertCircle className="w-4 h-4 text-danger shrink-0 mt-0.5" />
+                <p className="text-sm text-danger">{errorMessage}</p>
+              </motion.div>
+            )}
 
-          {/* Success */}
-          {submitState === 'success' && (
-            <div className="flex items-center gap-2.5 rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3 dark:bg-emerald-950/20 dark:border-emerald-800">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <p className="text-sm text-emerald-700 dark:text-emerald-300">
-                Joined! Redirecting to workspace…
-              </p>
-            </div>
-          )}
+            {submitState === 'success' && (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -6 }}
+                className="flex items-center gap-2.5 rounded-xl bg-success/10 border border-success/30 px-4 py-3"
+              >
+                <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                <p className="text-sm text-success">
+                  Joined! Redirecting to workspace…
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <button
             type="submit"
             disabled={!token.trim() || submitState === 'loading' || submitState === 'success'}
-            className="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+            className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-primary-content hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed transition-colors cursor-pointer"
           >
             {submitState === 'loading' ? (
               <span className="flex items-center justify-center gap-2">
@@ -194,14 +217,14 @@ export default function JoinOrgPage() {
             )}
           </button>
         </form>
-      </div>
+      </motion.div>
 
       {/* Help hint */}
-      <p className="mt-4 text-center text-xs text-slate-400 dark:text-slate-600">
+      <p className="mt-4 text-center text-xs text-content-tertiary">
         Don&apos;t have a link?{' '}
         <Link
           href="/onboarding/create-org"
-          className="text-blue-600 hover:underline dark:text-blue-400"
+          className="text-primary hover:underline"
         >
           Create your own organization instead.
         </Link>

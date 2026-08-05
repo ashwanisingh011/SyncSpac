@@ -167,7 +167,7 @@ export default function DepartmentsPage() {
           canManageDepts && (
             <button
               onClick={() => openModal()}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition-all shadow-sm cursor-pointer"
+              className="bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition-all shadow-sm cursor-pointer"
             >
               <Plus className="w-4 h-4" /> Create Department
             </button>
@@ -182,20 +182,20 @@ export default function DepartmentsPage() {
           placeholder="Search departments..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-10 pl-10 pr-4 text-sm border border-slate-200 rounded-lg bg-white text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+          className="w-full h-10 pl-10 pr-4 text-sm border border-line rounded-lg bg-surface text-content placeholder:text-content-tertiary focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
         />
-        <Search className="w-4.5 h-4.5 absolute left-3 top-2.5 text-slate-400" />
+        <Search className="w-4.5 h-4.5 absolute left-3 top-2.5 text-content-tertiary" />
       </div>
 
       {isLoading ? (
         <div className="flex items-center justify-center py-20">
-          <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
         </div>
       ) : filteredDepts.length === 0 ? (
-        <div className="text-center py-16 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-950/20">
-          <Building2 className="w-12 h-12 text-slate-400 mx-auto mb-3" />
-          <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200">No departments found</h3>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+        <div className="text-center py-16 border-2 border-dashed border-line rounded-2xl bg-slate-50/50">
+          <Building2 className="w-12 h-12 text-content-tertiary mx-auto mb-3" />
+          <h3 className="text-base font-semibold text-content">No departments found</h3>
+          <p className="text-sm text-content-tertiary mt-1 max-w-sm mx-auto">
             {searchQuery ? 'Try adjusting your search keywords.' : 'Create your first department to organize your company.'}
           </p>
         </div>
@@ -210,17 +210,17 @@ export default function DepartmentsPage() {
             return (
               <div
                 key={dept._id}
-                className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group"
+                className="bg-surface border border-line/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group"
               >
                 <div>
                   {/* Card Header */}
                   <div className="flex justify-between items-start gap-4 mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-400 flex items-center justify-center font-bold">
+                      <div className="w-10 h-10 rounded-xl bg-primary-subtle text-primary flex items-center justify-center font-bold">
                         <Building2 className="w-5 h-5" />
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors">
+                        <h2 className="text-lg font-semibold text-content group-hover:text-blue-600 transition-colors">
                           {dept.name}
                         </h2>
                       </div>
@@ -230,14 +230,14 @@ export default function DepartmentsPage() {
                       <div className="flex items-center gap-1.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
                           onClick={() => openModal(dept)}
-                          className="p-1.5 text-slate-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/20 rounded-md transition-all cursor-pointer"
+                          className="p-1.5 text-content-tertiary hover:text-primary hover:bg-primary-subtle rounded-md transition-all cursor-pointer"
                           title="Edit Department"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteDept(dept._id, dept.name)}
-                          className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-md transition-all cursor-pointer"
+                          className="p-1.5 text-content-tertiary hover:text-danger hover:bg-danger/10 rounded-md transition-all cursor-pointer"
                           title="Delete Department"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -247,8 +247,8 @@ export default function DepartmentsPage() {
                   </div>
 
                   {/* Department Head */}
-                  <div className="flex items-center gap-2.5 py-3 border-t border-slate-100 dark:border-slate-900/60 mb-2">
-                    <div className="w-9 h-9 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-355 flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden border border-slate-200/40 dark:border-slate-850">
+                  <div className="flex items-center gap-2.5 py-3 border-t border-line mb-2">
+                    <div className="w-9 h-9 rounded-full bg-surface-hover text-content-secondary flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden border border-slate-200/40">
                       {headAvatar ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={headAvatar} alt={headName} className="w-full h-full object-cover" />
@@ -257,17 +257,17 @@ export default function DepartmentsPage() {
                       )}
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Department Head</p>
-                      <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">{headName}</p>
-                      {headEmail && <p className="text-[10px] text-slate-400">{headEmail}</p>}
+                      <p className="text-[10px] uppercase font-bold tracking-wider text-content-tertiary">Department Head</p>
+                      <p className="text-xs font-semibold text-content-secondary">{headName}</p>
+                      {headEmail && <p className="text-[10px] text-content-tertiary">{headEmail}</p>}
                     </div>
                   </div>
                 </div>
 
                 {/* Footcount Allocation */}
-                <div className="pt-3 border-t border-slate-100 dark:border-slate-900/60 flex justify-between items-center mt-3">
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Headcount Allocation</span>
-                  <span className="text-xs font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-0.5 rounded-full">
+                <div className="pt-3 border-t border-line flex justify-between items-center mt-3">
+                  <span className="text-xs text-content-tertiary font-medium">Headcount Allocation</span>
+                  <span className="text-xs font-bold text-content bg-surface-hover/80 px-2.5 py-0.5 rounded-full">
                     {dept.memberCount || 0} member{(dept.memberCount || 0) !== 1 ? 's' : ''}
                   </span>
                 </div>
@@ -280,15 +280,15 @@ export default function DepartmentsPage() {
       {/* Create / Edit Department Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-md shadow-xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-surface border border-line rounded-2xl w-full max-w-md shadow-xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-slate-250/60 dark:border-slate-800/80 flex justify-between items-center bg-slate-50/50 dark:bg-slate-950/20">
-              <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+            <div className="px-6 py-4 border-b border-slate-200/60 flex justify-between items-center bg-slate-50/50">
+              <h2 className="text-base font-semibold text-content">
                 {editingDept ? 'Edit Department Details' : 'Create Department'}
               </h2>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-slate-500 hover:text-slate-700 dark:hover:text-slate-350 p-1 hover:bg-slate-100 dark:hover:bg-slate-850 rounded-lg transition-all cursor-pointer"
+                className="text-content-tertiary hover:text-content p-1 hover:bg-surface-hover rounded-lg transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -298,24 +298,24 @@ export default function DepartmentsPage() {
             <form onSubmit={handleModalSubmit} className="p-6 space-y-4">
               {/* Department Name */}
               <div className="space-y-1">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Department Name *</label>
+                <label className="text-xs font-bold uppercase tracking-wider text-content-tertiary">Department Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Engineering, Human Resources"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full h-10 px-3 text-sm border border-slate-200 rounded-lg bg-white text-slate-905 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+                  className="w-full h-10 px-3 text-sm border border-line rounded-lg bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
                 />
               </div>
 
               {/* Department Head */}
               <div className="space-y-1">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Department Head</label>
+                <label className="text-xs font-bold uppercase tracking-wider text-content-tertiary">Department Head</label>
                 <select
                   value={head}
                   onChange={(e) => setHead(e.target.value)}
-                  className="w-full h-10 px-3 text-sm border border-slate-200 rounded-lg bg-white text-slate-905 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+                  className="w-full h-10 px-3 text-sm border border-line rounded-lg bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
                 >
                   <option value="">Select a Department Head...</option>
                   {members.map((m) => (
@@ -328,30 +328,30 @@ export default function DepartmentsPage() {
 
               {/* Headcount Allocation */}
               <div className="space-y-1">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Headcount Allocation</label>
+                <label className="text-xs font-bold uppercase tracking-wider text-content-tertiary">Headcount Allocation</label>
                 <input
                   type="number"
                   min="0"
                   placeholder="e.g. 15"
                   value={memberCount}
                   onChange={(e) => setMemberCount(parseInt(e.target.value, 10) || 0)}
-                  className="w-full h-10 px-3 text-sm border border-slate-200 rounded-lg bg-white text-slate-905 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+                  className="w-full h-10 px-3 text-sm border border-line rounded-lg bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-4 flex justify-end gap-3 border-t border-slate-200/50 dark:border-slate-850">
+              <div className="pt-4 flex justify-end gap-3 border-t border-slate-200/50">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-705 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-855 rounded-lg text-sm font-medium transition-all cursor-pointer"
+                  className="px-4 py-2 border border-line text-content-secondary hover:bg-surface-hover rounded-lg text-sm font-medium transition-all cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-sm"
+                  className="px-4 py-2 bg-primary hover:bg-primary-hover text-primary-content rounded-lg text-sm font-medium transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-sm"
                 >
                   {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
                   {editingDept ? 'Save Changes' : 'Create Department'}

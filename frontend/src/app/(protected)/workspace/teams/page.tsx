@@ -37,10 +37,10 @@ import {
 function PerformanceBadge({ value }: { value: number }) {
   const color =
     value >= 75
-      ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300'
+      ? 'bg-success/10 text-success'
       : value >= 50
-        ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300'
-        : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400';
+        ? 'bg-warning/10 text-warning'
+        : 'bg-surface-hover text-content-secondary';
 
   return (
     <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-md ${color}`}>
@@ -164,7 +164,7 @@ export default function TeamsPage({ onTeamSelect }: TeamsPageProps = {}) {
           canManageTeams && (
             <button
               onClick={() => openModal()}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition-all shadow-sm cursor-pointer"
+              className="bg-primary hover:bg-primary-hover text-primary-content px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition-all shadow-sm cursor-pointer"
             >
               <Plus className="w-4 h-4" /> Create Team
             </button>
@@ -178,20 +178,20 @@ export default function TeamsPage({ onTeamSelect }: TeamsPageProps = {}) {
           placeholder="Search teams..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-10 pl-10 pr-4 text-sm border border-slate-200 rounded-lg bg-white text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+          className="w-full h-10 pl-10 pr-4 text-sm border border-line rounded-lg bg-surface text-content placeholder:text-content-tertiary focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
         />
-        <Search className="w-4.5 h-4.5 absolute left-3 top-2.5 text-slate-400" />
+        <Search className="w-4.5 h-4.5 absolute left-3 top-2.5 text-content-tertiary" />
       </div>
 
       {isLoading ? (
         <div className="flex items-center justify-center py-20">
-          <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
         </div>
       ) : filteredTeams.length === 0 ? (
-        <div className="text-center py-16 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-950/20">
-          <Users className="w-12 h-12 text-slate-400 mx-auto mb-3" />
-          <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200">No teams found</h3>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+        <div className="text-center py-16 border-2 border-dashed border-line rounded-2xl bg-slate-50/50">
+          <Users className="w-12 h-12 text-content-tertiary mx-auto mb-3" />
+          <h3 className="text-base font-semibold text-content">No teams found</h3>
+          <p className="text-sm text-content-tertiary mt-1 max-w-sm mx-auto">
             {searchQuery ? 'Try adjusting your search keywords.' : 'Create your first team to start collaborating.'}
           </p>
         </div>
@@ -218,11 +218,11 @@ export default function TeamsPage({ onTeamSelect }: TeamsPageProps = {}) {
                 <>
                   <div className="flex justify-between items-start gap-4 mb-3">
                     <div>
-                      <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors">
+                      <h2 className="text-lg font-semibold text-content group-hover:text-blue-600 transition-colors">
                         {team.name}
                       </h2>
                       {team.description && (
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                        <p className="text-xs text-content-tertiary mt-1 line-clamp-2">
                           {team.description}
                         </p>
                       )}
@@ -230,8 +230,8 @@ export default function TeamsPage({ onTeamSelect }: TeamsPageProps = {}) {
                     <PerformanceBadge value={metrics.performance} />
                   </div>
 
-                  <div className="flex items-center gap-2.5 py-3 border-t border-slate-100 dark:border-slate-900/60">
-                    <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden border border-slate-200/40 dark:border-slate-800">
+                  <div className="flex items-center gap-2.5 py-3 border-t border-line">
+                    <div className="w-8 h-8 rounded-full bg-surface-hover text-content-secondary flex items-center justify-center text-xs font-semibold shrink-0 overflow-hidden border border-slate-200/40">
                       {leadAvatar ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={leadAvatar} alt={leadName} className="w-full h-full object-cover" />
@@ -240,12 +240,12 @@ export default function TeamsPage({ onTeamSelect }: TeamsPageProps = {}) {
                       )}
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Team Lead</p>
-                      <p className="text-xs font-medium text-slate-700 dark:text-slate-300">{leadName}</p>
+                      <p className="text-[10px] uppercase font-bold tracking-wider text-content-tertiary">Team Lead</p>
+                      <p className="text-xs font-medium text-content-secondary">{leadName}</p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2 py-3 border-t border-slate-100 dark:border-slate-900/60">
+                  <div className="grid grid-cols-3 gap-2 py-3 border-t border-line">
                     {[
                       { label: 'Members', value: metrics.totalMembers },
                       { label: 'Active', value: metrics.activeMembers },
@@ -255,17 +255,17 @@ export default function TeamsPage({ onTeamSelect }: TeamsPageProps = {}) {
                       { label: 'Pending', value: metrics.pendingTasks },
                     ].map((stat) => (
                       <div key={stat.label} className="text-center">
-                        <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{stat.value}</p>
-                        <p className="text-[10px] text-slate-400 uppercase tracking-wider">{stat.label}</p>
+                        <p className="text-sm font-bold text-content">{stat.value}</p>
+                        <p className="text-[10px] text-content-tertiary uppercase tracking-wider">{stat.label}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 dark:border-slate-900/60 flex justify-between items-center">
-                    <span className="text-xs text-slate-500 dark:text-slate-400">
+                  <div className="pt-3 border-t border-line flex justify-between items-center">
+                    <span className="text-xs text-content-tertiary">
                       Created {formatTeamDate(team.createdAt)}
                     </span>
-                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                    <ChevronRight className="w-4 h-4 text-content-tertiary group-hover:text-blue-600 transition-colors" />
                   </div>
                 </>
               );
@@ -275,7 +275,7 @@ export default function TeamsPage({ onTeamSelect }: TeamsPageProps = {}) {
                   <button
                     key={team._id}
                     onClick={() => onTeamSelect(team._id)}
-                    className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all block group w-full text-left cursor-pointer"
+                    className="bg-surface border border-line/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all block group w-full text-left cursor-pointer"
                   >
                     {cardContent}
                   </button>
@@ -286,7 +286,7 @@ export default function TeamsPage({ onTeamSelect }: TeamsPageProps = {}) {
                 <Link
                   key={team._id}
                   href={`/workspace/teams/${team._id}`}
-                  className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all block group"
+                  className="bg-surface border border-line/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all block group"
                 >
                   {cardContent}
                 </Link>

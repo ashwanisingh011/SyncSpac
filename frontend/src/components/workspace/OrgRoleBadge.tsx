@@ -14,24 +14,24 @@ interface OrgRoleBadgeProps {
 const pickRoleAccent = (role: string): string => {
   const normalized = role.toLowerCase();
   if (normalized === 'owner') {
-    return 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800';
+    return 'bg-warning/10 text-warning border-warning/25';
   }
   if (normalized.includes('admin')) {
-    return 'bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-950/30 dark:text-violet-300 dark:border-violet-800';
+    return 'bg-violet-50 text-violet-700 border-violet-200';
   }
   if (normalized.includes('guest') || normalized.includes('client')) {
-    return 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700';
+    return 'bg-surface-hover text-content-secondary border-line';
   }
   if (normalized.includes('lead') || normalized.includes('manager')) {
-    return 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-300 dark:border-emerald-800';
+    return 'bg-success/10 text-success border-success/25';
   }
   if (normalized === 'hr') {
-    return 'bg-pink-50 text-pink-700 border-pink-200 dark:bg-pink-950/30 dark:text-pink-300 dark:border-pink-800';
+    return 'bg-pink-50 text-pink-700 border-pink-200';
   }
   if (normalized.includes('qa') || normalized.includes('developer')) {
-    return 'bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyan-950/30 dark:text-cyan-300 dark:border-cyan-800';
+    return 'bg-cyan-50 text-cyan-700 border-cyan-200';
   }
-  return 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800';
+  return 'bg-primary-subtle text-primary border-primary/25';
 };
 
 const pickRoleIcon = (role: string): React.ElementType => {

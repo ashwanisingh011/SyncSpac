@@ -66,17 +66,17 @@ export default function WorkspaceLayout({ children }: { children?: ReactNode }) 
     : 'TB';
 
   return (
-    <div className="flex flex-col lg:flex-row w-full min-h-screen bg-slate-50 dark:bg-slate-950">
+    <div className="flex flex-col lg:flex-row w-full min-h-screen bg-surface-sunken">
       {/* Sidebar - Desktop only */}
       <div className="hidden lg:block lg:flex-shrink-0">
         <WorkspaceSidebar />
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 bg-white dark:bg-slate-950">
+      <div className="flex-1 flex flex-col min-w-0 bg-surface">
         {/* Workspace Sub-Navbar - Mobile/Tablet only */}
-        <div className="lg:hidden border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-10">
-          <div className="flex items-center gap-2 px-4 py-2 border-b border-slate-100 dark:border-slate-800/50">
+        <div className="lg:hidden border-b border-line bg-slate-50/80 backdrop-blur-md sticky top-0 z-10">
+          <div className="flex items-center gap-2 px-4 py-2 border-b border-line/50">
             {currentOrg?.logoUrl ? (
               <img
                 src={currentOrg.logoUrl}
@@ -84,11 +84,11 @@ export default function WorkspaceLayout({ children }: { children?: ReactNode }) 
                 className="w-6 h-6 rounded object-cover shrink-0"
               />
             ) : (
-              <div className="w-6 h-6 rounded bg-blue-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
+              <div className="w-6 h-6 rounded bg-primary text-primary-content flex items-center justify-center font-bold text-xs shrink-0">
                 {orgInitials}
               </div>
             )}
-            <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+            <span className="text-sm font-semibold text-content">
               {currentOrg?.name ?? 'Workspace'}
             </span>
           </div>
@@ -107,8 +107,8 @@ export default function WorkspaceLayout({ children }: { children?: ReactNode }) 
                   className={clsx(
                     "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-200",
                     isActive
-                      ? "bg-blue-600 text-white shadow-xs dark:bg-blue-500"
-                      : "text-slate-600 hover:bg-slate-200/50 dark:text-slate-400 dark:hover:bg-slate-800/50"
+                      ? "bg-primary text-white shadow-xs"
+                      : "text-content-secondary hover:bg-slate-200/50"
                   )}
                 >
                   <Icon className="w-3.5 h-3.5" />

@@ -153,10 +153,10 @@ const VerifyEmailSentContent = () => {
         subtitle="Your account is now active. You're being redirected."
         footer={null}
       >
-        <div className="rounded-3xl border border-[#DFE1E6] bg-[#F6F8FB] p-6 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200">
+        <div className="rounded-2xl border border-line bg-surface-sunken p-6 text-sm text-content-secondary">
           {/* Success badge */}
           <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#E3FCEF] text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-success/12 text-success">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
@@ -171,23 +171,23 @@ const VerifyEmailSentContent = () => {
               </svg>
             </div>
             <div>
-              <p className="text-sm font-semibold text-[#172B4D] dark:text-white">
+              <p className="text-sm font-semibold text-content">
                 Verification successful
               </p>
-              <p className="text-xs text-[#6B778C] dark:text-slate-400">
+              <p className="text-xs text-content-tertiary">
                 Completed in another tab
               </p>
             </div>
           </div>
 
-          <p className="mb-4 text-sm leading-6 text-[#6B778C] dark:text-slate-400">
+          <p className="mb-4 text-sm leading-6 text-content-tertiary">
             Your email address has been confirmed. This tab will redirect automatically.
           </p>
 
           {/* Animated countdown */}
-          <p className="mb-5 text-xs text-[#6B778C] dark:text-slate-500">
+          <p className="mb-5 text-xs text-content-tertiary">
             Redirecting in{' '}
-            <span className="font-semibold tabular-nums text-[#0052CC] dark:text-[#579DFF]">
+            <span className="font-semibold tabular-nums text-primary">
               {countdown}s
             </span>
             …
@@ -195,7 +195,7 @@ const VerifyEmailSentContent = () => {
 
           <Link
             href={verifiedDestination}
-            className="inline-flex rounded bg-[#0052CC] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0747A6]"
+            className="inline-flex rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-content transition hover:bg-primary-hover"
           >
             Continue now →
           </Link>
@@ -216,13 +216,13 @@ const VerifyEmailSentContent = () => {
       <div className="flex flex-col gap-2">
         <p>
           Remembered your password?{' '}
-          <Link href="/login" className="font-medium text-[#0052CC] hover:underline dark:text-[#579DFF]">
+          <Link href="/login" className="font-medium text-primary hover:underline">
             Log in
           </Link>
         </p>
         <p>
           Wrong E-mail?{' '}
-          <Link href="/forgot-password" className="font-medium text-[#0052CC] hover:underline dark:text-[#579DFF]">
+          <Link href="/forgot-password" className="font-medium text-primary hover:underline">
             Re-enter
           </Link>
         </p>
@@ -230,7 +230,7 @@ const VerifyEmailSentContent = () => {
     ) : (
       <>
         Already verified?{' '}
-        <Link href="/login" className="font-medium text-[#0052CC] hover:underline dark:text-[#579DFF]">
+        <Link href="/login" className="font-medium text-primary hover:underline">
           Log in
         </Link>
       </>
@@ -239,11 +239,11 @@ const VerifyEmailSentContent = () => {
   return (
     <>
       <AuthFormLayout title={title} subtitle={subtitle} footer={footer}>
-        <div className="rounded-3xl border border-[#DFE1E6] bg-[#F6F8FB] p-6 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200">
-          <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#6B778C] dark:text-slate-500">
+        <div className="rounded-2xl border border-line bg-surface-sunken p-6 text-sm text-content-secondary">
+          <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-content-tertiary">
             Email sent to
           </div>
-          <p className="mb-4 font-medium text-[#172B4D] dark:text-white">{email}</p>
+          <p className="mb-4 font-medium text-content">{email}</p>
           <p className="mb-4 text-sm leading-6">
             Didn&apos;t receive the email? Check your spam folder or click below to resend.
             {mode === 'verify' &&
@@ -252,7 +252,7 @@ const VerifyEmailSentContent = () => {
           <button
             onClick={handleResend}
             disabled={resendLoading || resendTimer > 0}
-            className="inline-flex rounded bg-[#0052CC] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0747A6] disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex cursor-pointer rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-content transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
           >
             {resendLoading
               ? 'Sending...'
@@ -265,7 +265,7 @@ const VerifyEmailSentContent = () => {
         <div className="mt-6 text-center">
           <Link
             href={mode === 'reset' ? '/login' : '/register'}
-            className="text-sm font-medium text-[#0052CC] hover:underline dark:text-[#579DFF]"
+            className="text-sm font-medium text-primary hover:underline"
           >
             ← {mode === 'reset' ? 'Back to log in' : 'Back to sign up'}
           </Link>

@@ -130,23 +130,23 @@ export default function InviteMemberModal({
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/45 backdrop-blur-sm"
         onClick={resetAndClose}
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl dark:bg-slate-900 dark:border dark:border-slate-800">
+      <div className="relative w-full max-w-md bg-surface rounded-2xl shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-line">
           <h2
             id="invite-modal-title"
-            className="text-base font-semibold text-slate-900 dark:text-slate-100"
+            className="text-base font-semibold text-content"
           >
             Add team member
           </h2>
           <button
             onClick={resetAndClose}
-            className="p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-md transition-colors dark:hover:bg-slate-800 dark:hover:text-slate-200"
+            className="p-1 text-content-tertiary hover:text-content hover:bg-surface-hover rounded-md transition-colors"
             aria-label="Close modal"
           >
             <X className="w-4 h-4" />
@@ -154,7 +154,7 @@ export default function InviteMemberModal({
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-slate-200 dark:border-slate-800 px-6">
+        <div className="flex border-b border-line px-6">
           {([
             { id: 'email', label: 'Email invite', icon: Mail },
             // comment out if invite link feature develope
@@ -165,8 +165,8 @@ export default function InviteMemberModal({
               onClick={() => { setTab(id); setError(''); }}
               className={`flex items-center gap-1.5 py-3 px-1 mr-5 text-sm font-medium border-b-2 transition-colors ${
                 tab === id
-                  ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-                  : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-content-tertiary hover:text-content'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -178,7 +178,7 @@ export default function InviteMemberModal({
         <div className="px-6 py-5">
           {/* ── Role selector (shared between both tabs) ── */}
           <div className="mb-5">
-            <p className="text-sm font-medium text-slate-700 mb-2 dark:text-slate-300">
+            <p className="text-sm font-medium text-content-secondary mb-2">
               Role
             </p>
             <RoleSelect
@@ -195,19 +195,19 @@ export default function InviteMemberModal({
               <div>
                 <label
                   htmlFor="invite-email"
-                  className="block text-sm font-medium text-slate-700 mb-1.5 dark:text-slate-300"
+                  className="block text-sm font-medium text-content-secondary mb-1.5"
                 >
                   Email address
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-content-tertiary pointer-events-none" />
                   <input
                     id="invite-email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="colleague@company.com"
-                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-blue-900/30"
+                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-line-strong text-sm outline-none focus:border-line-focus focus:ring-2 focus:ring-primary/20 transition-all"
                   />
                 </div>
               </div>
@@ -216,17 +216,17 @@ export default function InviteMemberModal({
                 <div>
                   <label
                     htmlFor="invite-team"
-                    className="block text-sm font-medium text-slate-700 mb-1.5 dark:text-slate-300"
+                    className="block text-sm font-medium text-content-secondary mb-1.5"
                   >
-                    Team <span className="font-normal text-slate-400">(optional)</span>
+                    Team <span className="font-normal text-content-tertiary">(optional)</span>
                   </label>
                   <div className="relative">
-                    <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-content-tertiary pointer-events-none" />
                     <select
                       id="invite-team"
                       value={teamId}
                       onChange={(e) => setTeamId(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all appearance-none bg-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-blue-900/30"
+                      className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-line-strong text-sm outline-none focus:border-line-focus focus:ring-2 focus:ring-primary/20 transition-all appearance-none bg-surface"
                     >
                       <option value="">No specific team</option>
                       {teams.map((t) => (
@@ -244,14 +244,14 @@ export default function InviteMemberModal({
                 <button
                   type="button"
                   onClick={resetAndClose}
-                  className="flex-1 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                  className="flex-1 rounded-xl border border-line-strong px-4 py-2.5 text-sm font-medium text-content-secondary hover:bg-surface-hover transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-primary-content hover:bg-primary-hover focus:ring-2 focus:ring-primary/30 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                 >
                   {isLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Send invitation
@@ -265,14 +265,14 @@ export default function InviteMemberModal({
             <div className="space-y-4">
               {!generatedLink ? (
                 <div className="text-center py-2">
-                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                  <p className="text-sm text-content-tertiary mb-4">
                     Generate a shareable invite link with the selected role. Anyone
                     with the link can join your organization.
                   </p>
                   <button
                     onClick={handleGenerateLink}
                     disabled={isGenerating || !onGenerateLink || !role}
-                    className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-content hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     {isGenerating ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
@@ -282,27 +282,27 @@ export default function InviteMemberModal({
                     {isGenerating ? 'Generating…' : 'Generate invite link'}
                   </button>
                   {!onGenerateLink && (
-                    <p className="mt-2 text-xs text-slate-400">
+                    <p className="mt-2 text-xs text-content-tertiary">
                       Invite link generation requires admin permissions.
                     </p>
                   )}
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <p className="text-xs text-content-tertiary">
                     Share this link — it expires in 72 hours.
                   </p>
-                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800">
-                    <span className="flex-1 text-xs text-slate-700 dark:text-slate-300 truncate font-mono">
+                  <div className="flex items-center gap-2 rounded-xl border border-line bg-surface-sunken px-3 py-2">
+                    <span className="flex-1 text-xs text-content-secondary truncate font-mono">
                       {generatedLink}
                     </span>
                     <button
                       onClick={handleCopy}
-                      className="shrink-0 p-1 rounded-md text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors dark:hover:bg-blue-950/30"
+                      className="shrink-0 p-1 rounded-md text-content-tertiary hover:text-primary hover:bg-primary-subtle transition-colors"
                       aria-label="Copy link"
                     >
                       {copied ? (
-                        <CheckCheck className="w-4 h-4 text-emerald-600" />
+                        <CheckCheck className="w-4 h-4 text-success" />
                       ) : (
                         <Copy className="w-4 h-4" />
                       )}
@@ -310,13 +310,13 @@ export default function InviteMemberModal({
                   </div>
                   <button
                     onClick={() => setGeneratedLink('')}
-                    className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                    className="text-xs text-content-tertiary hover:text-content"
                   >
                     Generate a new link
                   </button>
                 </div>
               )}
-              {error && <p className="text-xs text-red-500">{error}</p>}
+              {error && <p className="text-xs text-danger">{error}</p>}
             </div>
           )}
         </div>

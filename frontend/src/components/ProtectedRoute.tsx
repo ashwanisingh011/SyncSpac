@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps): React.JSX.Element =>
 
   if (!isMounted || !isAuthReady) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white text-sm text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+      <div className="flex min-h-screen items-center justify-center bg-surface text-sm text-content-tertiary">
         Loading...
       </div>
     );
@@ -33,7 +33,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps): React.JSX.Element =>
 
   if (user === null) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white text-sm text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+      <div className="flex min-h-screen items-center justify-center bg-surface text-sm text-content-tertiary">
         Redirecting...
       </div>
     );

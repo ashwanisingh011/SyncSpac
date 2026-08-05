@@ -95,14 +95,14 @@ export default function TeamFormModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-lg shadow-xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
-        <div className="px-6 py-4 border-b border-slate-250/60 dark:border-slate-800/80 flex justify-between items-center bg-slate-50/50 dark:bg-slate-950/20">
-          <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+      <div className="bg-surface border border-line rounded-2xl w-full max-w-lg shadow-xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
+        <div className="px-6 py-4 border-b border-line flex justify-between items-center bg-surface-sunken">
+          <h2 className="text-base font-semibold text-content">
             {editingTeam ? 'Edit Team Details' : 'Create Collaborative Team'}
           </h2>
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-slate-700 dark:hover:text-slate-350 p-1 hover:bg-slate-100 dark:hover:bg-slate-850 rounded-lg transition-all cursor-pointer"
+            className="text-content-tertiary hover:text-content p-1 hover:bg-surface-hover rounded-lg transition-all cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -110,33 +110,33 @@ export default function TeamFormModal({
 
         <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-4 max-h-[70vh]">
           <div className="space-y-1">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Team Name *</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-content-tertiary">Team Name *</label>
             <input
               type="text"
               required
               placeholder="e.g. Frontend Core, QA Squad"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full h-10 px-3 text-sm border border-slate-200 rounded-lg bg-white text-slate-905 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+              className="w-full h-10 px-3 text-sm border border-line rounded-lg bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Description</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-content-tertiary">Description</label>
             <textarea
               placeholder="Describe the focus or purpose of this team..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full min-h-[80px] p-3 text-sm border border-slate-200 rounded-lg bg-white text-slate-905 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+              className="w-full min-h-[80px] p-3 text-sm border border-line rounded-lg bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Team Lead</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-content-tertiary">Team Lead</label>
             <select
               value={lead}
               onChange={(e) => setLead(e.target.value)}
-              className="w-full h-10 px-3 text-sm border border-slate-200 rounded-lg bg-white text-slate-905 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+              className="w-full h-10 px-3 text-sm border border-line rounded-lg bg-surface text-content focus:border-line-focus focus:ring-1 focus:ring-primary/30 outline-none transition-all"
             >
               <option value="">Select a Team Lead...</option>
               {members.map((m) => (
@@ -148,18 +148,18 @@ export default function TeamFormModal({
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Add Team Members</label>
-            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-3 max-h-[140px] overflow-y-auto space-y-1.5 bg-slate-50/30 dark:bg-slate-950/10">
+            <label className="text-xs font-bold uppercase tracking-wider text-content-tertiary">Add Team Members</label>
+            <div className="border border-line rounded-lg p-3 max-h-[140px] overflow-y-auto space-y-1.5 bg-surface-sunken/50">
               {members.map((m) => {
                 const isChecked = selectedMembers.includes(m.userId);
                 return (
                   <div
                     key={m.userId}
                     onClick={() => handleToggleMember(m.userId)}
-                    className="flex items-center justify-between p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all cursor-pointer text-xs"
+                    className="flex items-center justify-between p-2 rounded-md hover:bg-surface-hover/60 transition-all cursor-pointer text-xs"
                   >
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300 flex items-center justify-center font-semibold overflow-hidden">
+                      <div className="w-6 h-6 rounded-full bg-surface-hover text-content-secondary flex items-center justify-center font-semibold overflow-hidden">
                         {m.avatarUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img src={m.avatarUrl} alt={m.name} className="w-full h-full object-cover" />
@@ -167,9 +167,9 @@ export default function TeamFormModal({
                           m.name.charAt(0).toUpperCase()
                         )}
                       </div>
-                      <span className="font-medium text-slate-800 dark:text-slate-200">{m.name}</span>
+                      <span className="font-medium text-content">{m.name}</span>
                     </div>
-                    {isChecked && <Check className="w-4 h-4 text-blue-600" />}
+                    {isChecked && <Check className="w-4 h-4 text-primary" />}
                   </div>
                 );
               })}
@@ -177,36 +177,36 @@ export default function TeamFormModal({
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Assign Projects</label>
-            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-3 max-h-[140px] overflow-y-auto space-y-1.5 bg-slate-50/30 dark:bg-slate-950/10">
+            <label className="text-xs font-bold uppercase tracking-wider text-content-tertiary">Assign Projects</label>
+            <div className="border border-line rounded-lg p-3 max-h-[140px] overflow-y-auto space-y-1.5 bg-surface-sunken/50">
               {projects.map((p) => {
                 const isChecked = selectedProjects.includes(p._id);
                 return (
                   <div
                     key={p._id}
                     onClick={() => handleToggleProject(p._id)}
-                    className="flex items-center justify-between p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all cursor-pointer text-xs"
+                    className="flex items-center justify-between p-2 rounded-md hover:bg-surface-hover/60 transition-all cursor-pointer text-xs"
                   >
-                    <span className="font-medium text-slate-800 dark:text-slate-200">{p.name}</span>
-                    {isChecked && <Check className="w-4 h-4 text-blue-600" />}
+                    <span className="font-medium text-content">{p.name}</span>
+                    {isChecked && <Check className="w-4 h-4 text-primary" />}
                   </div>
                 );
               })}
             </div>
           </div>
 
-          <div className="pt-4 flex justify-end gap-3 border-t border-slate-200/50 dark:border-slate-850">
+          <div className="pt-4 flex justify-end gap-3 border-t border-line">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-850 rounded-lg text-sm font-medium transition-all cursor-pointer"
+              className="px-4 py-2 border border-line text-content-secondary hover:bg-surface-hover rounded-lg text-sm font-medium transition-all cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-sm"
+              className="px-4 py-2 bg-primary hover:bg-primary-hover text-primary-content rounded-lg text-sm font-medium transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-sm"
             >
               {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
               {editingTeam ? 'Save Changes' : 'Create Team'}

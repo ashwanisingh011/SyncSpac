@@ -27,8 +27,8 @@ export default function OnboardingAuthGuard({ children }: { children: ReactNode 
 
   if (!isAuthReady) {
     return (
-      <div className="flex flex-col items-center gap-4 text-slate-500 dark:text-slate-400">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+      <div className="flex flex-col items-center gap-4 text-content-tertiary">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
         <p className="text-sm">Loading…</p>
       </div>
     );
@@ -36,8 +36,8 @@ export default function OnboardingAuthGuard({ children }: { children: ReactNode 
 
   if (!user || isSuperAdmin(user.role)) {
     return (
-      <div className="flex flex-col items-center gap-4 text-slate-500 dark:text-slate-400">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+      <div className="flex flex-col items-center gap-4 text-content-tertiary">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
         <p className="text-sm">{!user ? 'Redirecting to login…' : 'Redirecting to admin dashboard…'}</p>
       </div>
     );

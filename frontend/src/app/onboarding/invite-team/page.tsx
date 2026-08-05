@@ -8,6 +8,8 @@ import { getWorkspaceRoles, inviteMember } from '@/api/workspace';
 import { DASHBOARD_ROUTE } from '@/lib/postAuth';
 import type { OrgRole, WorkspaceRoleOption } from '@/types/workspace';
 import RoleSelect from '@/components/workspace/RoleSelect';
+import StepIndicator from '@/components/onboarding/StepIndicator';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowRight,
   Users,
@@ -18,8 +20,6 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import Link from 'next/link';
-
-const ONBOARDING_STEPS = ['Organization details', 'Invite members', 'Start building'];
 
 interface InviteRow {
   id: string;
@@ -129,54 +129,30 @@ export default function InviteTeamPage() {
   return (
     <div className="w-full max-w-xl">
       {/* Step indicator */}
-      <div className="flex items-center gap-2 mb-8">
-        {ONBOARDING_STEPS.map((step, i) => (
-          <div key={step} className="flex items-center gap-2">
-            <div
-              className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold transition-colors ${
-                i < 1
-                  ? 'bg-blue-600 text-white'
-                  : i === 1
-                    ? 'bg-blue-600 text-white ring-4 ring-blue-100 dark:ring-blue-900/40'
-                    : 'bg-slate-100 text-slate-400 dark:bg-slate-800'
-              }`}
-            >
-              {i < 1 ? <CheckCircle2 className="w-3.5 h-3.5" /> : i + 1}
-            </div>
-            <span
-              className={`hidden sm:inline text-xs font-medium ${
-                i === 1
-                  ? 'text-blue-600 dark:text-blue-400'
-                  : i < 1
-                    ? 'text-slate-400 line-through dark:text-slate-600'
-                    : 'text-slate-400 dark:text-slate-600'
-              }`}
-            >
-              {step}
-            </span>
-            {i < ONBOARDING_STEPS.length - 1 && (
-              <div
-                className={`w-8 h-px ${
-                  i < 1 ? 'bg-blue-400' : 'bg-slate-200 dark:bg-slate-800'
-                }`}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+      <StepIndicator current={1} className="mb-8" />
 
       {/* Card */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      <motion.div
+        initial={{ opacity: 0, y: 16, scale: 0.99 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+        className="rounded-2xl border border-line bg-surface p-7 shadow-raised"
+      >
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/40">
-            <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          </div>
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 22, delay: 0.12 }}
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-subtle"
+          >
+            <Users className="w-5 h-5 text-primary" />
+          </motion.div>
           <div>
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <h1 className="text-lg font-semibold text-content">
               Invite your team
             </h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-content-tertiary">
               {currentOrg?.name
                 ? `Add members to "${currentOrg.name}"`
                 : 'Add teammates to your organization.'}
@@ -186,11 +162,19 @@ export default function InviteTeamPage() {
 
         {/* Invite form */}
         <form onSubmit={handleSendInvites} className="space-y-3">
+          <AnimatePresence initial={false}>
           {rows.map((row) => (
-            <div key={row.id} className="flex items-center gap-2">
+            <motion.div
+              key={row.id}
+              initial={{ opacity: 0, height: 0, y: -8 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -8 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+              className="flex items-center gap-2 overflow-visible"
+            >
               {/* Email */}
               <div className="relative flex-1">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-content-tertiary pointer-events-none" />
                 <input
                   type="email"
                   value={row.email}
@@ -199,13 +183,12 @@ export default function InviteTeamPage() {
                   }
                   placeholder="colleague@company.com"
                   disabled={row.status === 'sent'}
-                  className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border outline-none transition-all
-                    dark:bg-slate-900 dark:text-slate-100
+                  className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border bg-surface text-content outline-none transition-all placeholder:text-content-tertiary
                     ${row.status === 'error'
-                      ? 'border-red-400 focus:ring-2 focus:ring-red-100 dark:border-red-700'
+                      ? 'border-danger focus:ring-2 focus:ring-danger/20'
                       : row.status === 'sent'
-                        ? 'border-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 dark:border-emerald-700'
-                        : 'border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-700 dark:focus:ring-blue-900/30'
+                        ? 'border-success bg-success/8'
+                        : 'border-line hover:border-line-strong focus:border-line-focus focus:ring-2 focus:ring-primary/20'
                     }`}
                 />
               </div>
@@ -225,22 +208,23 @@ export default function InviteTeamPage() {
               {/* Status icon or remove */}
               <div className="w-7 flex items-center justify-center">
                 {row.status === 'sent' ? (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                  <CheckCircle2 className="w-5 h-5 text-success" />
                 ) : row.status === 'sending' ? (
-                  <Loader2 className="w-5 h-5 animate-spin text-slate-400" />
+                  <Loader2 className="w-5 h-5 animate-spin text-content-tertiary" />
                 ) : (
                   <button
                     type="button"
                     onClick={() => removeRow(row.id)}
-                    className="p-1 text-slate-400 hover:text-red-500 transition-colors rounded"
+                    className="p-1 text-content-tertiary hover:text-danger transition-colors rounded cursor-pointer"
                     aria-label="Remove row"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
+          </AnimatePresence>
 
           {/* Error messages */}
           {rows.some((r) => r.status === 'error') && (
@@ -248,7 +232,7 @@ export default function InviteTeamPage() {
               {rows
                 .filter((r) => r.status === 'error')
                 .map((r) => (
-                  <p key={r.id} className="text-xs text-red-500">
+                  <p key={r.id} className="text-xs text-danger">
                     {r.email}: {r.error}
                   </p>
                 ))}
@@ -259,7 +243,7 @@ export default function InviteTeamPage() {
           <button
             type="button"
             onClick={addRow}
-            className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-hover transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Add another
@@ -270,7 +254,7 @@ export default function InviteTeamPage() {
             <button
               type="submit"
               disabled={isSending}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-primary py-2.5 text-sm font-semibold text-primary-content hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed transition-colors cursor-pointer"
             >
               {isSending ? (
                 <>
@@ -288,17 +272,17 @@ export default function InviteTeamPage() {
             {/* Skip */}
             <Link
               href={currentOrg?.myRole === 'owner' || currentOrg?.myRole === 'admin' || currentOrg?.myRole === 'org_admin' ? '/dashboard' : DASHBOARD_ROUTE}
-              className="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="px-4 py-2.5 text-sm font-medium text-content-tertiary hover:text-content transition-colors rounded-xl hover:bg-surface-hover"
             >
               Skip for now
             </Link>
           </div>
         </form>
-      </div>
+      </motion.div>
 
-      <p className="mt-4 text-center text-xs text-slate-400 dark:text-slate-600">
+      <p className="mt-4 text-center text-xs text-content-tertiary">
         You can always invite teammates later from{' '}
-        <Link href="/workspace/members" className="text-blue-600 hover:underline dark:text-blue-400">
+        <Link href="/workspace/members" className="text-primary hover:underline">
           Workspace → Members
         </Link>
         .

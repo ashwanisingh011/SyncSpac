@@ -70,7 +70,7 @@ export default function PlatformHealth() {
       <div className="flex items-start justify-between mb-5">
         <div>
           <h3 className="text-sm font-semibold text-slate-800 dark:text-white">System Health</h3>
-          <p className="text-xs text-slate-400 dark:text-slate-450 mt-0.5">Live platform & database monitors</p>
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Live platform & database monitors</p>
         </div>
         <div className="flex items-center gap-1.5 text-xs font-semibold">
           <Activity className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
@@ -90,7 +90,7 @@ export default function PlatformHealth() {
             return (
               <div
                 key={service.id}
-                className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-950 hover:bg-slate-100/70 dark:hover:bg-slate-850/40 transition-colors border border-transparent dark:border-slate-850"
+                className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-950 hover:bg-slate-100/70 dark:hover:bg-slate-800/40 transition-colors border border-transparent dark:border-slate-800"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-slate-800 flex items-center justify-center shrink-0">
@@ -102,8 +102,8 @@ export default function PlatformHealth() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-right">
-                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-350">{service.value}</span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-450">
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-400">{service.value}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400">
                     OK
                   </span>
                 </div>

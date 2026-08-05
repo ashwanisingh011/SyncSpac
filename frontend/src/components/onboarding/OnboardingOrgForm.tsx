@@ -84,9 +84,9 @@ export default function OnboardingOrgForm({
       <div>
         <label
           htmlFor="org-name"
-          className="block text-sm font-medium text-slate-700 mb-1.5 dark:text-slate-300"
+          className="block text-sm font-medium text-content-secondary mb-1.5"
         >
-          Organization name <span className="text-red-500">*</span>
+          Organization name <span className="text-danger">*</span>
         </label>
         <input
           id="org-name"
@@ -94,24 +94,24 @@ export default function OnboardingOrgForm({
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Acme Corp"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+          className="w-full rounded-lg border border-line bg-surface px-3 py-2.5 text-sm text-content outline-none transition-all placeholder:text-content-tertiary hover:border-line-strong focus:border-line-focus focus:ring-2 focus:ring-primary/20"
         />
-        {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+        {errors.name && <p className="mt-1 text-xs text-danger">{errors.name}</p>}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label
             htmlFor="org-industry"
-            className="block text-sm font-medium text-slate-700 mb-1.5 dark:text-slate-300"
+            className="block text-sm font-medium text-content-secondary mb-1.5"
           >
-            Industry <span className="text-slate-400 font-normal">(optional)</span>
+            Industry <span className="text-content-tertiary font-normal">(optional)</span>
           </label>
           <select
             id="org-industry"
             value={industry}
             onChange={(e) => setIndustry(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+            className="w-full rounded-lg border border-line bg-surface px-3 py-2.5 text-sm text-content outline-none transition-all hover:border-line-strong focus:border-line-focus focus:ring-2 focus:ring-primary/20 cursor-pointer"
           >
             <option value="">Select industry</option>
             {INDUSTRIES.map((item) => (
@@ -125,15 +125,15 @@ export default function OnboardingOrgForm({
         <div>
           <label
             htmlFor="org-team-size"
-            className="block text-sm font-medium text-slate-700 mb-1.5 dark:text-slate-300"
+            className="block text-sm font-medium text-content-secondary mb-1.5"
           >
-            Team size <span className="text-slate-400 font-normal">(optional)</span>
+            Team size <span className="text-content-tertiary font-normal">(optional)</span>
           </label>
           <select
             id="org-team-size"
             value={teamSize}
             onChange={(e) => setTeamSize(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+            className="w-full rounded-lg border border-line bg-surface px-3 py-2.5 text-sm text-content outline-none transition-all hover:border-line-strong focus:border-line-focus focus:ring-2 focus:ring-primary/20 cursor-pointer"
           >
             <option value="">Select team size</option>
             {TEAM_SIZES.map((item) => (
@@ -148,16 +148,16 @@ export default function OnboardingOrgForm({
       <div>
         <label
           htmlFor="org-timezone"
-          className="block text-sm font-medium text-slate-700 mb-1.5 dark:text-slate-300"
+          className="block text-sm font-medium text-content-secondary mb-1.5"
         >
-          Timezone <span className="text-red-500">*</span>
+          Timezone <span className="text-danger">*</span>
         </label>
         <select
           id="org-timezone"
           value={timezone}
           onChange={(e) => setTimezone(e.target.value)}
           required
-          className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+          className="w-full rounded-lg border border-line bg-surface px-3 py-2.5 text-sm text-content outline-none transition-all hover:border-line-strong focus:border-line-focus focus:ring-2 focus:ring-primary/20 cursor-pointer"
         >
           {TIMEZONES.map((tz) => (
             <option key={tz} value={tz}>
@@ -168,19 +168,19 @@ export default function OnboardingOrgForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-2 dark:text-slate-300">
-          Logo <span className="text-slate-400 font-normal">(optional)</span>
+        <label className="block text-sm font-medium text-content-secondary mb-2">
+          Logo <span className="text-content-tertiary font-normal">(optional)</span>
         </label>
         <div className="flex items-center gap-4">
           <div
             onClick={() => fileRef.current?.click()}
-            className="w-16 h-16 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center cursor-pointer hover:border-blue-500 transition-colors overflow-hidden"
+            className="w-16 h-16 rounded-xl border-2 border-dashed border-line-strong flex items-center justify-center cursor-pointer hover:border-primary hover:bg-primary-subtle/30 transition-colors overflow-hidden"
           >
             {preview ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={preview} alt="Logo preview" className="w-full h-full object-cover" />
             ) : (
-              <Upload className="w-6 h-6 text-slate-400" />
+              <Upload className="w-6 h-6 text-content-tertiary" />
             )}
           </div>
           <input
@@ -190,7 +190,7 @@ export default function OnboardingOrgForm({
             className="hidden"
             onChange={handleLogoChange}
           />
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-content-tertiary">
             PNG, JPG, GIF up to 2 MB.
           </p>
 
@@ -201,7 +201,7 @@ export default function OnboardingOrgForm({
                 setLogo(null);
                 setPreview(null);
               }}
-              className="text-red-500 hover:text-red-600"
+              className="text-danger hover:opacity-80 cursor-pointer"
               aria-label="Remove logo"
             >
               <X className="w-4 h-4" />
@@ -213,7 +213,7 @@ export default function OnboardingOrgForm({
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+        className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-primary-content hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
         {isLoading ? 'Creating organization…' : submitLabel}
       </button>

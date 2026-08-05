@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import { AlertTriangle, AlertCircle, Info, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { cn } from '@/lib/utils';
+import Button from '@/components/ui/Button';
 
 export type ConfirmVariant = 'danger' | 'warning' | 'info';
 
@@ -15,6 +18,24 @@ interface ConfirmDialogProps {
   onConfirm: () => void;
   onCancel: () => void;
 }
+
+const VARIANT_STYLES: Record<ConfirmVariant, { icon: React.JSX.Element; iconBg: string; confirmClass: string }> = {
+  danger: {
+    icon: <AlertTriangle className="h-6 w-6 text-danger" />,
+    iconBg: 'bg-danger/10',
+    confirmClass: 'bg-danger text-white hover:opacity-90',
+  },
+  warning: {
+    icon: <AlertCircle className="h-6 w-6 text-warning" />,
+    iconBg: 'bg-warning/10',
+    confirmClass: 'bg-warning text-white hover:opacity-90',
+  },
+  info: {
+    icon: <Info className="h-6 w-6 text-primary" />,
+    iconBg: 'bg-primary-subtle',
+    confirmClass: 'bg-primary text-primary-content hover:bg-primary-hover',
+  },
+};
 
 export default function ConfirmDialog({
   isOpen,
@@ -56,108 +77,75 @@ export default function ConfirmDialog({
     }
   }, [isOpen, onConfirm, onCancel]);
 
-  if (!isOpen) return null;
-
-  // Icon mapping based on variant
-  const getIcon = () => {
-    switch (variant) {
-      case 'danger':
-        return <AlertTriangle className="h-6 w-6 text-rose-600 dark:text-rose-400" />;
-      case 'warning':
-        return <AlertCircle className="h-6 w-6 text-amber-600 dark:text-amber-400" />;
-      case 'info':
-      default:
-        return <Info className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />;
-    }
-  };
-
-  // Icon background mapping
-  const getIconBg = () => {
-    switch (variant) {
-      case 'danger':
-        return 'bg-rose-50 dark:bg-rose-950/30';
-      case 'warning':
-        return 'bg-amber-50 dark:bg-amber-950/30';
-      case 'info':
-      default:
-        return 'bg-indigo-50 dark:bg-indigo-950/30';
-    }
-  };
-
-  // Confirm button class mapping
-  const getConfirmButtonClass = () => {
-    switch (variant) {
-      case 'danger':
-        return 'bg-rose-600 hover:bg-rose-500 text-white shadow-md shadow-rose-600/10 focus:ring-rose-500';
-      case 'warning':
-        return 'bg-amber-600 hover:bg-amber-500 text-white shadow-md shadow-amber-600/10 focus:ring-amber-500';
-      case 'info':
-      default:
-        return 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/10 focus:ring-indigo-500';
-    }
-  };
+  const styles = VARIANT_STYLES[variant];
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm transition-opacity duration-300"
-      onClick={onCancel}
-    >
-      <div
-        role="alertdialog"
-        aria-modal="true"
-        aria-labelledby="confirm-title"
-        aria-describedby="confirm-message"
-        className="relative w-full max-w-md transform overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 p-6 shadow-2xl transition-all dark:border-slate-800/80 dark:bg-slate-900/95 backdrop-blur-md animate-in fade-in zoom-in-95 duration-200"
-        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking dialog body
-      >
-        {/* Close Button */}
-        <button
-          type="button"
-          onClick={onCancel}
-          className="absolute right-4 top-4 rounded-xl p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-500 dark:hover:bg-slate-800 dark:hover:text-slate-200"
-          aria-label="Close dialog"
-        >
-          <X className="h-4 w-4" />
-        </button>
-
-        <div className="flex items-start gap-4 mt-2">
-          {/* Icon Container */}
-          <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${getIconBg()}`}>
-            {getIcon()}
-          </div>
-
-          <div className="flex-1">
-            {/* Title */}
-            <h2 id="confirm-title" className="text-lg font-bold text-slate-900 dark:text-white">
-              {title}
-            </h2>
-            {/* Message */}
-            <p id="confirm-message" className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              {message}
-            </p>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="mt-6 flex justify-end gap-3">
-          <button
-            type="button"
-            data-action="cancel"
-            onClick={onCancel}
-            className="inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500/20 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white"
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onCancel}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="absolute inset-0 bg-black/45 backdrop-blur-[3px]"
+            aria-hidden="true"
+          />
+          <motion.div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="confirm-title"
+            aria-describedby="confirm-message"
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.97, y: 6 }}
+            transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+            className="relative w-full max-w-md overflow-hidden rounded-xl border border-line bg-surface-overlay p-6 shadow-overlay"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking dialog body
           >
-            {cancelText}
-          </button>
-          <button
-            type="button"
-            ref={confirmButtonRef}
-            onClick={onConfirm}
-            className={`inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-900 ${getConfirmButtonClass()}`}
-          >
-            {confirmText}
-          </button>
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={onCancel}
+              className="absolute right-4 top-4 rounded-md p-1.5 text-content-tertiary transition-colors hover:bg-surface-hover hover:text-content cursor-pointer"
+              aria-label="Close dialog"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <div className="mt-2 flex items-start gap-4">
+              {/* Icon Container */}
+              <motion.div
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 350, damping: 22, delay: 0.06 }}
+                className={cn('flex h-12 w-12 shrink-0 items-center justify-center rounded-xl', styles.iconBg)}
+              >
+                {styles.icon}
+              </motion.div>
+
+              <div className="flex-1">
+                <h2 id="confirm-title" className="text-lg font-bold text-content">
+                  {title}
+                </h2>
+                <p id="confirm-message" className="mt-2 text-sm leading-relaxed text-content-secondary">
+                  {message}
+                </p>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-6 flex justify-end gap-3">
+              <Button variant="secondary" data-action="cancel" onClick={onCancel}>
+                {cancelText}
+              </Button>
+              <Button ref={confirmButtonRef} onClick={onConfirm} className={styles.confirmClass}>
+                {confirmText}
+              </Button>
+            </div>
+          </motion.div>
         </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 }

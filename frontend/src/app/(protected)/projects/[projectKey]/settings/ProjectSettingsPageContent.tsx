@@ -103,8 +103,8 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
   if (loading || (!project && storeLoading)) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
-        <p className="text-sm text-slate-500 mt-2">Loading settings...</p>
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <p className="text-sm text-content-tertiary mt-2">Loading settings...</p>
       </div>
     );
   }
@@ -112,10 +112,10 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
   if (!project) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-6">
-        <FolderOpen className="w-12 h-12 text-slate-350 dark:text-slate-700 mb-3 animate-pulse" />
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">Project Not Found</h3>
-        <p className="text-sm text-slate-500 mt-1 max-w-sm">
-          Could not find project settings for key <strong className="text-slate-700 dark:text-slate-355">{projectKey}</strong>.
+        <FolderOpen className="w-12 h-12 text-content-tertiary mb-3 animate-pulse" />
+        <h3 className="text-lg font-bold text-content">Project Not Found</h3>
+        <p className="text-sm text-content-tertiary mt-1 max-w-sm">
+          Could not find project settings for key <strong className="text-content-secondary">{projectKey}</strong>.
         </p>
       </div>
     );
@@ -186,14 +186,14 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
   };
 
   return (
-    <div className="p-6 md:p-8 max-w-4xl mx-auto w-full space-y-6 bg-white dark:bg-slate-950 min-h-screen">
+    <div className="p-6 md:p-8 max-w-4xl mx-auto w-full space-y-6 bg-surface min-h-screen">
       <AccessRestrictedModal isOpen={showAccessRestricted} onClose={() => setShowAccessRestricted(false)} />
       
       {/* Back to Project */}
       <div className="flex items-center gap-2">
         <Link
           href={`/projects/${projectKey}`}
-          className="text-xs font-semibold text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-1"
+          className="text-xs font-semibold text-content-tertiary hover:text-primary transition-colors flex items-center gap-1"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> Back to overview
         </Link>
@@ -201,17 +201,17 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
 
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-          <Settings className="w-6 h-6 text-slate-500" /> Project Settings
+        <h1 className="text-2xl font-extrabold tracking-tight text-content flex items-center gap-2">
+          <Settings className="w-6 h-6 text-content-tertiary" /> Project Settings
         </h1>
-        <p className="text-xs text-slate-450 uppercase font-black tracking-wider mt-1">
+        <p className="text-xs text-content-tertiary uppercase font-black tracking-wider mt-1">
           {project.name} ({project.key})
         </p>
       </div>
 
       {/* Permission warning banner */}
       {!hasAccess && (
-        <div className="flex items-start gap-3 p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-xl text-xs text-amber-800 dark:text-amber-300">
+        <div className="flex items-start gap-3 p-4 bg-warning/10 border border-warning/25 rounded-xl text-xs text-amber-800">
           <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
           <div>
             <p className="font-bold">Read-Only Mode Enabled</p>
@@ -227,15 +227,15 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
         {/* Left Form */}
         <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-6">
           {errors.server && (
-            <div className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-150 rounded-lg text-xs text-red-600 dark:text-red-400">
+            <div className="p-3 bg-danger/10 border border-red-100 rounded-lg text-xs text-danger">
               {errors.server}
             </div>
           )}
 
-          <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 space-y-4">
+          <div className="rounded-xl border border-slate-200/80 p-5 space-y-4">
             {/* Project Name */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Project Name *
               </label>
               <input
@@ -243,23 +243,23 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
                 value={form.name}
                 onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
                 disabled={!hasAccess || saving}
-                className="w-full h-10 px-3 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white outline-none focus:border-blue-500 disabled:opacity-50"
+                className="w-full h-10 px-3 text-sm rounded-lg border border-line bg-surface text-content outline-none focus:border-line-focus disabled:opacity-50"
                 placeholder="Name"
                 required
               />
-              {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
+              {errors.name && <p className="text-xs text-danger mt-1">{errors.name}</p>}
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Description
               </label>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
                 disabled={!hasAccess || saving}
-                className="w-full min-h-25 p-3 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white outline-none focus:border-blue-500 disabled:opacity-50"
+                className="w-full min-h-25 p-3 text-sm rounded-lg border border-line bg-surface text-content outline-none focus:border-line-focus disabled:opacity-50"
                 placeholder="Description"
               />
             </div>
@@ -267,14 +267,14 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
             {/* Layout & Type Selectors */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Project Type
                 </label>
                 <select
                   value={form.projectType}
                   onChange={(e) => setForm((prev) => ({ ...prev, projectType: e.target.value as any }))}
                   disabled={!hasAccess || saving}
-                  className="w-full h-10 px-2 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none disabled:opacity-50"
+                  className="w-full h-10 px-2 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none disabled:opacity-50"
                 >
                   <option value="software">Software</option>
                   <option value="marketing">Marketing</option>
@@ -284,14 +284,14 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                   Default Layout
                 </label>
                 <select
                   value={form.defaultLayout}
                   onChange={(e) => setForm((prev) => ({ ...prev, defaultLayout: e.target.value as any }))}
                   disabled={!hasAccess || saving}
-                  className="w-full h-10 px-2 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none disabled:opacity-50"
+                  className="w-full h-10 px-2 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none disabled:opacity-50"
                 >
                   <option value="kanban">Kanban Board</option>
                   <option value="list">List View</option>
@@ -303,14 +303,14 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
 
             {/* Visibility Selector */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-content-tertiary mb-1.5">
                 Visibility
               </label>
               <select
                 value={form.visibility}
                 onChange={(e) => setForm((prev) => ({ ...prev, visibility: e.target.value as any }))}
                 disabled={!hasAccess || saving}
-                className="w-full h-10 px-2 text-sm rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none disabled:opacity-50"
+                className="w-full h-10 px-2 text-sm rounded-lg border border-line bg-surface text-content-secondary outline-none disabled:opacity-50"
               >
                 <option value="private">Private (Invite Only)</option>
                 <option value="public">Public (Workspace Visible)</option>
@@ -323,7 +323,7 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-md shadow-blue-500/10 transition-colors"
+              className="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-primary-content px-5 py-2.5 rounded-lg text-sm font-semibold shadow-md shadow-blue-500/10 transition-colors"
             >
               {saving ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -338,18 +338,18 @@ export default function ProjectSettingsPageContent({ projectKey }: { projectKey:
         {/* Right side: Danger Zone */}
         {canDeleteProject && (
         <div className="space-y-6">
-          <div className="rounded-xl border border-red-200 dark:border-red-900/50 p-5 space-y-4 bg-red-50/10">
-            <h3 className="text-sm font-bold text-red-650 dark:text-red-400 flex items-center gap-1.5">
+          <div className="rounded-xl border border-danger/25 p-5 space-y-4 bg-red-50/10">
+            <h3 className="text-sm font-bold text-danger flex items-center gap-1.5">
               <AlertTriangle className="w-4 h-4" /> Danger Zone
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-content-tertiary">
               Archiving a project hides it from all active boards, listings, and user dashboards. It can only be restored by an organization administrator.
             </p>
 
             <button
               onClick={handleArchive}
               disabled={!canDeleteProject || saving}
-              className="w-full inline-flex items-center justify-center gap-1.5 bg-red-650 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg text-xs font-semibold transition-colors shadow-md shadow-red-500/5"
+              className="w-full inline-flex items-center justify-center gap-1.5 bg-danger hover:bg-danger/90 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg text-xs font-semibold transition-colors shadow-md shadow-red-500/5"
             >
               <Archive className="w-3.5 h-3.5" /> Archive Project
             </button>

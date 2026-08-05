@@ -278,7 +278,7 @@ export default function ClientDocumentsView({
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => setIsFolderModalOpen(true)}
-            className="inline-flex items-center gap-1.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-755 dark:text-slate-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors"
+            className="inline-flex items-center gap-1.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors"
           >
             <Plus className="w-4 h-4" /> Create Folder
           </button>
@@ -298,7 +298,7 @@ export default function ClientDocumentsView({
       {/* Upload Progress Bar */}
       {uploadProgress !== null && (
         <div className="bg-blue-50 border border-blue-100 dark:bg-blue-950/20 dark:border-blue-900 rounded-lg p-4 space-y-2">
-          <div className="flex justify-between items-center text-xs text-blue-700 dark:text-blue-350 font-semibold">
+          <div className="flex justify-between items-center text-xs text-blue-700 dark:text-blue-300 font-semibold">
             <span className="flex items-center gap-1.5">
               <Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading file...
             </span>
@@ -343,7 +343,7 @@ export default function ClientDocumentsView({
         ) : filesList.length === 0 ? (
           <div className="flex flex-col items-center justify-center p-16 text-center text-slate-400">
             <FolderOpen className="w-12 h-12 text-slate-300 mb-3" />
-            <h3 className="text-sm font-bold text-slate-700 dark:text-slate-355">This directory is empty</h3>
+            <h3 className="text-sm font-bold text-slate-700 dark:text-slate-400">This directory is empty</h3>
             <p className="text-xs text-slate-500 mt-0.5">Upload a file or create a subfolder to get started.</p>
           </div>
         ) : (
@@ -352,7 +352,7 @@ export default function ClientDocumentsView({
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900 text-[11px] font-black text-slate-450 dark:text-slate-400 uppercase tracking-wider">
+                  <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900 text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     <th className="px-6 py-3.5">Name</th>
                     <th className="px-6 py-3.5">Version</th>
                     <th className="px-6 py-3.5">Size</th>
@@ -372,7 +372,7 @@ export default function ClientDocumentsView({
                         {file.isFolder ? (
                           <button
                             onClick={() => navigateToFolder(file._id, file.name)}
-                            className="flex items-center gap-2.5 font-semibold text-slate-850 hover:text-blue-600 dark:text-slate-100 transition-colors text-left"
+                            className="flex items-center gap-2.5 font-semibold text-slate-800 hover:text-blue-600 dark:text-slate-100 transition-colors text-left"
                           >
                             <Folder className="w-5 h-5 text-blue-500 fill-blue-500/10 shrink-0" />
                             <span>{file.name}</span>
@@ -489,7 +489,7 @@ export default function ClientDocumentsView({
                             <button
                               onClick={() => handleDelete(file._id)}
                               disabled={deletingId === file._id}
-                              className="p-1.5 text-slate-400 hover:text-red-650 rounded-md hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors cursor-pointer"
+                              className="p-1.5 text-slate-400 hover:text-red-600 rounded-md hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors cursor-pointer"
                               title="Delete"
                             >
                               {deletingId === file._id ? (
@@ -526,7 +526,7 @@ export default function ClientDocumentsView({
                           <span className="truncate">{file.name}</span>
                         </button>
                       ) : (
-                        <div className="flex items-center gap-2 font-semibold text-slate-850 dark:text-slate-202 text-sm">
+                        <div className="flex items-center gap-2 font-semibold text-slate-800 dark:text-slate-200 text-sm">
                           {getFileIcon(file.mimeType, file.name)}
                           <span className="truncate max-w-[200px]" title={file.name}>
                             {file.name}
@@ -547,7 +547,7 @@ export default function ClientDocumentsView({
                               setSelectedFile(file);
                               setIsVersionModalOpen(true);
                             }}
-                            className="p-1.5 text-slate-400 hover:text-slate-650 dark:hover:text-slate-200 rounded-md hover:bg-slate-105 dark:hover:bg-slate-800 cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                             title="File History"
                           >
                             <History className="w-4 h-4" />
@@ -556,7 +556,7 @@ export default function ClientDocumentsView({
                             href={file.fileUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="p-1.5 text-slate-400 hover:text-slate-650 dark:hover:text-slate-200 rounded-md hover:bg-slate-105 dark:hover:bg-slate-800 cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                             title="View File"
                           >
                             <Eye className="w-4 h-4" />
@@ -566,7 +566,7 @@ export default function ClientDocumentsView({
                             target="_blank"
                             rel="noreferrer"
                             download={file.name}
-                            className="p-1.5 text-slate-400 hover:text-slate-655 dark:hover:text-slate-200 rounded-md hover:bg-slate-105 dark:hover:bg-slate-800 cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                             title="Download File"
                           >
                             <Download className="w-4 h-4" />
@@ -578,7 +578,7 @@ export default function ClientDocumentsView({
                             <button
                               onClick={() => handleDownloadFolder(file._id, file.name)}
                               disabled={downloadingFolderId === file._id}
-                              className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-205 rounded-md hover:bg-[#F4F5F7]/50 dark:hover:bg-slate-800 cursor-pointer"
+                              className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-[#F4F5F7]/50 dark:hover:bg-slate-800 cursor-pointer"
                               title="Download Folder as ZIP"
                             >
                               {downloadingFolderId === file._id ? (
@@ -627,7 +627,7 @@ export default function ClientDocumentsView({
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-3 text-[11px] text-slate-450 dark:text-slate-500 font-medium">
+                    <div className="flex items-center gap-3 text-[11px] text-slate-500 dark:text-slate-500 font-medium">
                       <span>{formatBytes(file.fileSize)}</span>
                       <span>&bull;</span>
                       <span>
@@ -654,7 +654,7 @@ export default function ClientDocumentsView({
 
             <form onSubmit={handleCreateFolder} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-450 uppercase tracking-wider block mb-1">Folder Name</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Folder Name</label>
                 <input
                   type="text"
                   value={newFolderName}
@@ -673,7 +673,7 @@ export default function ClientDocumentsView({
                     setNewFolderName('');
                     setFolderError('');
                   }}
-                  className="px-4 py-2 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-350 transition-colors"
+                  className="px-4 py-2 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-400 transition-colors"
                 >
                   Cancel
                 </button>
@@ -710,7 +710,7 @@ export default function ClientDocumentsView({
                   setIsVersionModalOpen(false);
                   setSelectedFile(null);
                 }}
-                className="text-slate-455 hover:text-slate-700 dark:hover:text-slate-350 text-xs font-bold cursor-pointer"
+                className="text-slate-500 hover:text-slate-700 dark:hover:text-slate-400 text-xs font-bold cursor-pointer"
               >
                 Close
               </button>
@@ -719,7 +719,7 @@ export default function ClientDocumentsView({
             <div className="border border-slate-100 dark:border-slate-800 rounded-lg overflow-hidden max-h-[300px] overflow-y-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900 text-slate-455 dark:text-slate-455 uppercase font-black py-2.5 px-4 block flex justify-between">
+                  <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900 text-slate-500 dark:text-slate-500 uppercase font-black py-2.5 px-4 block flex justify-between">
                     <span className="w-1/4">Copy</span>
                     <span className="w-1/4">File Size</span>
                     <span className="w-1/4">Saved By</span>
@@ -728,7 +728,7 @@ export default function ClientDocumentsView({
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 block">
                   {/* Current version */}
-                  <tr className="py-3 px-4 flex justify-between items-center bg-blue-50/30 dark:bg-blue-950/10 text-slate-855 dark:text-slate-250 font-bold">
+                  <tr className="py-3 px-4 flex justify-between items-center bg-blue-50/30 dark:bg-blue-950/10 text-slate-900 dark:text-slate-200 font-bold">
                     <td className="w-1/4 flex items-center gap-1.5">
                       <ArrowUpCircle className="w-4 h-4 text-blue-500 shrink-0" />
                       Current active copy (Version {selectedFile.version})
@@ -740,7 +740,7 @@ export default function ClientDocumentsView({
                         href={selectedFile.fileUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-blue-650 hover:underline"
+                        className="inline-flex items-center gap-1 text-blue-600 hover:underline"
                       >
                         <Download className="w-3.5 h-3.5" /> Download
                       </a>
@@ -752,7 +752,7 @@ export default function ClientDocumentsView({
                     .slice()
                     .reverse()
                     .map((ver, idx) => (
-                      <tr key={idx} className="py-3 px-4 flex justify-between items-center text-slate-650 dark:text-slate-400">
+                      <tr key={idx} className="py-3 px-4 flex justify-between items-center text-slate-600 dark:text-slate-400">
                         <td className="w-1/4 pl-5">Version {ver.version}</td>
                         <td className="w-1/4">{formatBytes(ver.fileSize)}</td>
                         <td className="w-1/4">{ver.uploadedBy ? (ver.uploadedBy as any).name : 'Unknown'}</td>
@@ -776,7 +776,7 @@ export default function ClientDocumentsView({
             {canDeleteFile(selectedFile) && (
               <div className="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-lg p-4 flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-extrabold text-slate-705 dark:text-slate-350 block">Upload Another Document</span>
+                  <span className="text-xs font-extrabold text-slate-700 dark:text-slate-400 block">Upload Another Document</span>
                   <span className="text-[10px] text-slate-500">Select a newer file from your computer to update this file. The older copies are kept safe below.</span>
                 </div>
                 <label className="bg-slate-200/80 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 px-3.5 py-1.5 rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer shrink-0">

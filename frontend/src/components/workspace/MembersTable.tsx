@@ -48,9 +48,9 @@ function formatJoinedDate(joinedAt: string): string {
 
 function StatusPill({ status }: { status: WorkspaceMember['status'] }) {
   const styles = {
-    active: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-800',
-    pending: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:text-amber-400 dark:border-amber-800',
-    inactive: 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700',
+    active: 'bg-success/10 text-success border-success/25',
+    pending: 'bg-warning/10 text-warning border-warning/25',
+    inactive: 'bg-surface-hover text-content-secondary border-line',
   } as const;
 
   const labels = {
@@ -82,22 +82,22 @@ function ConfirmRemoveModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onCancel} />
-      <div className="relative w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-900">
+      <div className="relative w-full max-w-sm rounded-2xl border border-line bg-surface p-6 shadow-2xl">
         <button
           onClick={onCancel}
-          className="absolute right-4 top-4 rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+          className="absolute right-4 top-4 rounded-lg p-1 text-content-tertiary hover:bg-surface-hover hover:text-content"
         >
           <X className="h-4 w-4" />
         </button>
 
         <div className="flex flex-col items-center gap-4 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-red-50 dark:bg-red-950/40">
-            <AlertTriangle className="h-7 w-7 text-red-500" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-danger/10">
+            <AlertTriangle className="h-7 w-7 text-danger" />
           </div>
           <div>
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">Remove member?</h3>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              <span className="font-medium text-slate-700 dark:text-slate-300">{member.name}</span> will lose
+            <h3 className="text-base font-semibold text-content">Remove member?</h3>
+            <p className="mt-1 text-sm text-content-tertiary">
+              <span className="font-medium text-content-secondary">{member.name}</span> will lose
               access to this organization immediately.
             </p>
           </div>
@@ -106,7 +106,7 @@ function ConfirmRemoveModal({
               type="button"
               disabled={loading}
               onClick={onCancel}
-              className="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+              className="flex-1 rounded-xl border border-line px-4 py-2.5 text-sm font-medium text-content-secondary hover:bg-surface-hover"
             >
               Cancel
             </button>
@@ -114,7 +114,7 @@ function ConfirmRemoveModal({
               type="button"
               disabled={loading}
               onClick={onConfirm}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-red-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-red-600 disabled:opacity-60"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-danger px-4 py-2.5 text-sm font-medium text-white hover:bg-danger/90 disabled:opacity-60"
             >
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
               Remove
@@ -154,11 +154,11 @@ export default function MembersTable({
 
   if (members.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-slate-200 py-16 text-center dark:border-slate-800">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
-          <Search className="h-5 w-5 text-slate-400" />
+      <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-line py-16 text-center">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-hover">
+          <Search className="h-5 w-5 text-content-tertiary" />
         </div>
-        <p className="text-sm text-slate-500 dark:text-slate-400">No members match your search.</p>
+        <p className="text-sm text-content-tertiary">No members match your search.</p>
       </div>
     );
   }
@@ -173,13 +173,13 @@ export default function MembersTable({
           onCancel={() => setConfirmMember(null)}
         />
       )}      {/* Desktop Table View */}
-      <div className="hidden md:block overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:border-slate-800 dark:bg-slate-950">
-        <div className="grid min-w-[860px] grid-cols-[minmax(240px,1fr)_190px_120px_140px_64px] items-center gap-6 border-b border-slate-200 bg-slate-50/80 px-6 py-4 dark:border-slate-800 dark:bg-slate-900/60">
+      <div className="hidden md:block overflow-x-auto rounded-3xl border border-line bg-surface shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+        <div className="grid min-w-[860px] grid-cols-[minmax(240px,1fr)_190px_120px_140px_64px] items-center gap-6 border-b border-line bg-surface-sunken px-6 py-4">
           {['Member', 'Role', 'Status', 'Joined', ''].map((column, index) => (
             <span
               key={column}
               className={clsx(
-                'text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500',
+                'text-[11px] font-semibold uppercase tracking-wider text-content-tertiary',
                 index === 4 && 'text-right',
               )}
             >
@@ -188,7 +188,7 @@ export default function MembersTable({
           ))}
         </div>
 
-        <div className="divide-y divide-slate-100 dark:divide-slate-800/80">
+        <div className="divide-y divide-line/80">
           {members.map((member) => {
             const isSelf = Boolean(currentUserId && member.userId === currentUserId);
             const isOwner = member.role === 'owner';
@@ -198,34 +198,34 @@ export default function MembersTable({
             return (
               <div
                 key={member.id}
-                className="grid min-w-[860px] grid-cols-[minmax(240px,1fr)_190px_120px_140px_64px] items-center gap-6 px-6 py-4 transition-all duration-200 hover:bg-slate-50/70 dark:hover:bg-slate-900/40"
+                className="grid min-w-[860px] grid-cols-[minmax(240px,1fr)_190px_120px_140px_64px] items-center gap-6 px-6 py-4 transition-all duration-200 hover:bg-surface-hover"
               >
                 <div className="flex min-w-0 items-center gap-4">
                   <div className="relative shrink-0">
                     <Avatar member={member} />
                     {member.status === 'active' && (
-                      <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500 dark:border-slate-950" />
+                      <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-success" />
                     )}
                   </div>
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100">{member.name}</p>
+                      <p className="truncate text-sm font-semibold text-content">{member.name}</p>
                       {isSelf && (
-                        <span className="rounded-md bg-blue-100 px-1.5 py-0.5 text-[10px] font-medium text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
+                        <span className="rounded-md bg-primary-subtle px-1.5 py-0.5 text-[10px] font-medium text-primary">
                           You
                         </span>
                       )}
-                      {isOwner && <Crown className="h-3.5 w-3.5 shrink-0 text-amber-500" />}
+                      {isOwner && <Crown className="h-3.5 w-3.5 shrink-0 text-warning" />}
                     </div>
-                    <p className="mt-0.5 truncate text-xs text-slate-500 dark:text-slate-400">{member.email}</p>
+                    <p className="mt-0.5 truncate text-xs text-content-tertiary">{member.email}</p>
                   </div>
                 </div>
 
                 <div className="min-w-0">
                   {canEditRole ? (
                     <div className="relative">
-                      {isRoleLoading && <Loader2 className="absolute -left-5 top-3 h-4 w-4 animate-spin text-slate-400" />}
+                      {isRoleLoading && <Loader2 className="absolute -left-5 top-3 h-4 w-4 animate-spin text-content-tertiary" />}
                       <RoleSelect
                         size="sm"
                         value={member.role}
@@ -248,20 +248,20 @@ export default function MembersTable({
 
                 <StatusPill status={member.status} />
 
-                <span className="text-sm text-slate-500 dark:text-slate-400">{formatJoinedDate(member.joinedAt)}</span>
+                <span className="text-sm text-content-tertiary">{formatJoinedDate(member.joinedAt)}</span>
 
                 <div className="flex justify-end">
                   {canManage && !isSelf && !isOwner ? (
                     <button
                       type="button"
                       onClick={() => setConfirmMember(member)}
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 transition-colors hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950/30"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-content-tertiary transition-colors hover:bg-danger/10 hover:text-danger"
                       aria-label={`Remove ${member.name}`}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   ) : (
-                    <span className="flex h-9 w-9 items-center justify-center text-slate-300 dark:text-slate-700">
+                    <span className="flex h-9 w-9 items-center justify-center text-content-tertiary">
                       <UserRound className="h-4 w-4" />
                     </span>
                   )}
@@ -281,27 +281,27 @@ export default function MembersTable({
           const isRoleLoading = rowRoleLoading === member.userId;
 
           return (
-            <div key={member.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-4.5 space-y-4 shadow-sm">
+            <div key={member.id} className="bg-surface border border-line rounded-2xl p-4.5 space-y-4 shadow-sm">
               {/* User Avatar, Name, Email and Crown/You Row */}
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <div className="relative shrink-0">
                     <Avatar member={member} />
                     {member.status === 'active' && (
-                      <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500 dark:border-slate-950" />
+                      <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-success" />
                     )}
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <p className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100">{member.name}</p>
+                      <p className="truncate text-sm font-semibold text-content">{member.name}</p>
                       {isSelf && (
-                        <span className="rounded-md bg-blue-100 px-1.5 py-0.5 text-[9px] font-medium text-blue-600 dark:bg-blue-950/40 dark:text-blue-400 shrink-0">
+                        <span className="rounded-md bg-primary-subtle px-1.5 py-0.5 text-[9px] font-medium text-primary shrink-0">
                           You
                         </span>
                       )}
-                      {isOwner && <Crown className="h-3.5 w-3.5 shrink-0 text-amber-500" />}
+                      {isOwner && <Crown className="h-3.5 w-3.5 shrink-0 text-warning" />}
                     </div>
-                    <p className="mt-0.5 truncate text-xs text-slate-500 dark:text-slate-400">{member.email}</p>
+                    <p className="mt-0.5 truncate text-xs text-content-tertiary">{member.email}</p>
                   </div>
                 </div>
 
@@ -311,13 +311,13 @@ export default function MembersTable({
                     <button
                       type="button"
                       onClick={() => setConfirmMember(member)}
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 transition-colors hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950/30 cursor-pointer"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-content-tertiary transition-colors hover:bg-danger/10 hover:text-danger cursor-pointer"
                       aria-label={`Remove ${member.name}`}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   ) : (
-                    <span className="flex h-9 w-9 items-center justify-center text-slate-300 dark:text-slate-700">
+                    <span className="flex h-9 w-9 items-center justify-center text-content-tertiary">
                       <UserRound className="h-4 w-4" />
                     </span>
                   )}
@@ -325,13 +325,13 @@ export default function MembersTable({
               </div>
 
               {/* Role, Status & Joined Info */}
-              <div className="grid grid-cols-3 gap-3 pt-3.5 border-t border-slate-100 dark:border-slate-800/60 text-xs">
+              <div className="grid grid-cols-3 gap-3 pt-3.5 border-t border-line/60 text-xs">
                 <div>
-                  <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Role</span>
+                  <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider">Role</span>
                   <div className="mt-1">
                     {canEditRole ? (
                       <div className="relative">
-                        {isRoleLoading && <Loader2 className="absolute -left-5 top-2.5 h-3.5 w-3.5 animate-spin text-slate-400" />}
+                        {isRoleLoading && <Loader2 className="absolute -left-5 top-2.5 h-3.5 w-3.5 animate-spin text-content-tertiary" />}
                         <RoleSelect
                           size="sm"
                           value={member.role}
@@ -354,15 +354,15 @@ export default function MembersTable({
                 </div>
 
                 <div>
-                  <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Status</span>
+                  <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider">Status</span>
                   <div className="mt-1">
                     <StatusPill status={member.status} />
                   </div>
                 </div>
 
                 <div>
-                  <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Joined</span>
-                  <span className="text-slate-600 dark:text-slate-350 block mt-1.5 font-medium leading-none">
+                  <span className="text-content-tertiary block text-[9px] uppercase font-bold tracking-wider">Joined</span>
+                  <span className="text-content-secondary block mt-1.5 font-medium leading-none">
                     {formatJoinedDate(member.joinedAt)}
                   </span>
                 </div>

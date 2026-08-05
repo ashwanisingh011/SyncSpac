@@ -11,19 +11,19 @@ interface WorkspaceCardProps {
 }
 
 const planColors: Record<SubscriptionPlan, string> = {
-  free: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
-  pro: 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300',
+  free: 'bg-surface-hover text-content-secondary',
+  pro: 'bg-primary-subtle text-primary',
   business:
-    'bg-violet-50 text-violet-700 dark:bg-violet-950/40 dark:text-violet-300',
+    'bg-violet-50 text-violet-700',
   enterprise:
-    'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300',
+    'bg-warning/10 text-warning',
 };
 
 export default function WorkspaceCard({ workspace, className }: WorkspaceCardProps) {
   return (
     <div
       className={clsx(
-        'group relative flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md dark:border-slate-800 dark:bg-slate-950',
+        'group relative flex flex-col gap-4 rounded-xl border border-line bg-surface p-5 shadow-sm transition-shadow hover:shadow-md',
         className,
       )}
     >
@@ -34,19 +34,19 @@ export default function WorkspaceCard({ workspace, className }: WorkspaceCardPro
           <img
             src={workspace.logoUrl}
             alt={workspace.name}
-            className="w-10 h-10 rounded-lg object-cover border border-slate-200 dark:border-slate-700"
+            className="w-10 h-10 rounded-lg object-cover border border-line"
           />
         ) : (
-          <div className="w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+          <div className="w-10 h-10 rounded-lg bg-primary text-primary-content flex items-center justify-center font-bold text-sm">
             {workspace.name.slice(0, 2).toUpperCase()}
           </div>
         )}
 
         <div className="flex-1 overflow-hidden">
-          <h3 className="text-sm font-semibold text-slate-900 truncate dark:text-slate-100">
+          <h3 className="text-sm font-semibold text-content truncate">
             {workspace.name}
           </h3>
-          <p className="text-xs text-slate-500 truncate">/{workspace.slug}</p>
+          <p className="text-xs text-content-tertiary truncate">/{workspace.slug}</p>
         </div>
 
         <span
@@ -60,7 +60,7 @@ export default function WorkspaceCard({ workspace, className }: WorkspaceCardPro
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500">
+      <div className="flex items-center justify-between text-xs text-content-tertiary">
         <span className="flex items-center gap-1">
           <Users className="w-3.5 h-3.5" />
           {workspace.memberCount} member{workspace.memberCount !== 1 ? 's' : ''}
@@ -68,7 +68,7 @@ export default function WorkspaceCard({ workspace, className }: WorkspaceCardPro
 
         <Link
           href="/workspace/members"
-          className="flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium opacity-0 group-hover:opacity-100 transition-opacity dark:text-blue-400 dark:hover:text-blue-300"
+          className="flex items-center gap-1 text-primary hover:text-primary-hover font-medium opacity-0 group-hover:opacity-100 transition-opacity"
         >
           Open <ArrowRight className="w-3.5 h-3.5" />
         </Link>

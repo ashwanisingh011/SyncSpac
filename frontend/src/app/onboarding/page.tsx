@@ -55,8 +55,8 @@ export default function OnboardingPage() {
   }, [isAuthReady, isOrgReady, user, organizations, router]);
 
   return (
-    <div className="flex flex-col items-center gap-4 text-slate-500 dark:text-slate-400">
-      <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+    <div className="flex flex-col items-center gap-4 text-content-tertiary">
+      <Loader2 className="w-8 h-8 animate-spin text-primary" />
       <p className="text-sm">Setting up your workspace…</p>
     </div>
   );

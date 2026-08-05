@@ -90,14 +90,14 @@ export default function Header({ onMenuClick, pageTitle = 'Dashboard', pageSubti
       {/* Page title */}
       <div className="hidden sm:block">
         <h1 className="text-lg font-semibold text-slate-800 dark:text-white leading-none">{pageTitle}</h1>
-        <p className="text-xs text-slate-400 dark:text-slate-450 mt-1">{pageSubtitle}</p>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">{pageSubtitle}</p>
       </div>
 
       <div className="flex-1" />
 
       {/* Search */}
       <div ref={searchRef} className="relative hidden md:block">
-        <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg px-3 py-2 w-56 lg:w-72 transition-all focus-within:border-blue-450 focus-within:bg-white focus-within:shadow-sm focus-within:shadow-blue-100 dark:focus-within:bg-slate-950/60 dark:focus-within:border-blue-500/50">
+        <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg px-3 py-2 w-56 lg:w-72 transition-all focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-sm focus-within:shadow-blue-100 dark:focus-within:bg-slate-950/60 dark:focus-within:border-blue-500/50">
           <Search className="w-3.5 h-3.5 text-slate-400 shrink-0" />
           <input
             type="text"
@@ -121,7 +121,7 @@ export default function Header({ onMenuClick, pageTitle = 'Dashboard', pageSubti
               <X className="w-3 h-3" />
             </button>
           ) : (
-            <kbd className="hidden lg:inline text-[10px] font-mono bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-450 px-1.5 py-0.5 rounded">⌘K</kbd>
+            <kbd className="hidden lg:inline text-[10px] font-mono bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-500 px-1.5 py-0.5 rounded">⌘K</kbd>
           )}
         </div>
 
@@ -212,17 +212,17 @@ export default function Header({ onMenuClick, pageTitle = 'Dashboard', pageSubti
             setShowSearchDropdown(false);
             setDateOpen(!dateOpen);
           }}
-          className="hidden sm:flex items-center gap-1.5 text-sm text-slate-650 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-all font-sans cursor-pointer"
+          className="hidden sm:flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-all font-sans cursor-pointer"
         >
-          <Calendar className="w-3.5 h-3.5 text-slate-450" />
-          <span className="font-medium text-xs text-slate-750">
+          <Calendar className="w-3.5 h-3.5 text-slate-500" />
+          <span className="font-medium text-xs text-slate-700">
             {dateRange === 'all' ? 'All time' : dateRange === 'Last 30 days' ? 'Last 30 days' : `Last ${dateRange} days`}
           </span>
           <ChevronDown className="w-3 h-3 text-slate-400" />
         </button>
 
         {dateOpen && (
-          <div className="absolute right-0 mt-1.5 w-40 rounded-lg border border-[#DFE1E6] bg-white p-1 shadow-[0_12px_24px_rgba(9,30,66,0.12)] z-30 dark:bg-slate-950 dark:border-slate-850">
+          <div className="absolute right-0 mt-1.5 w-40 rounded-lg border border-[#DFE1E6] bg-white p-1 shadow-[0_12px_24px_rgba(9,30,66,0.12)] z-30 dark:bg-slate-950 dark:border-slate-800">
             {[
               { value: '7',   label: 'Last 7 days' },
               { value: '14',  label: 'Last 14 days' },
@@ -239,7 +239,7 @@ export default function Header({ onMenuClick, pageTitle = 'Dashboard', pageSubti
                 className={`w-full text-left px-3 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
                   (dateRange === opt.value || (dateRange === 'Last 30 days' && opt.value === '30'))
                     ? 'bg-blue-50 text-blue-600 dark:bg-slate-900 dark:text-blue-300'
-                    : 'text-slate-650 hover:bg-slate-50 hover:text-slate-850 dark:text-slate-400 dark:hover:bg-slate-900/50 dark:hover:text-slate-200'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-900/50 dark:hover:text-slate-200'
                 }`}
               >
                 {opt.label}
@@ -278,8 +278,8 @@ export default function Header({ onMenuClick, pageTitle = 'Dashboard', pageSubti
                     n.dot === 'amber' ? 'bg-amber-400' : 'bg-blue-500'
                   }`} />
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-slate-800 dark:text-slate-205">{n.title}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-450 mt-0.5 truncate">{n.desc}</p>
+                    <p className="text-sm font-medium text-slate-800 dark:text-slate-200">{n.title}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-500 mt-0.5 truncate">{n.desc}</p>
                     <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">{n.time}</p>
                   </div>
                 </div>

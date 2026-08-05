@@ -14,13 +14,13 @@ export default function WorkspaceHeader({
   action,
 }: WorkspaceHeaderProps) {
   return (
-    <div className="flex items-start justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
+    <div className="flex items-start justify-between pb-6 border-b border-line">
       <div>
-        <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+        <h1 className="text-2xl font-semibold text-content">
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-1 text-sm text-content-tertiary">
             {subtitle}
           </p>
         )}

@@ -6,11 +6,11 @@ import { useOrganization } from '@/context/useOrganization';
 import { useToast } from '@/context/useToast';
 import { createOrganization } from '@/api/workspace';
 import OnboardingOrgForm from '@/components/onboarding/OnboardingOrgForm';
+import StepIndicator from '@/components/onboarding/StepIndicator';
 import type { WorkspaceFormData, OrgRole, OrganizationSummary } from '@/types/workspace';
 import { ArrowLeft, Building2 } from 'lucide-react';
+import { motion } from 'motion/react';
 import Link from 'next/link';
-
-const ONBOARDING_STEPS = ['Organization details', 'Invite members', 'Start building'];
 
 export default function CreateOrgPage() {
   const router = useRouter();
@@ -56,54 +56,38 @@ export default function CreateOrgPage() {
       {/* Back */}
       <Link
         href="/onboarding/no-org"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm text-content-tertiary hover:text-content transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
       </Link>
 
       {/* Step indicator */}
-      <div className="flex items-center gap-2 mb-6">
-        {ONBOARDING_STEPS.map((step, i) => (
-          <div key={step} className="flex items-center gap-2">
-            <div
-              className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold transition-colors ${
-                i === 0
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-slate-100 text-slate-400 dark:bg-slate-800'
-              }`}
-            >
-              {i + 1}
-            </div>
-            <span
-              className={`hidden sm:inline text-xs font-medium ${
-                i === 0
-                  ? 'text-blue-600 dark:text-blue-400'
-                  : 'text-slate-400 dark:text-slate-600'
-              }`}
-            >
-              {step}
-            </span>
-            {i < ONBOARDING_STEPS.length - 1 && (
-              <div className="w-8 h-px bg-slate-200 dark:bg-slate-800" />
-            )}
-          </div>
-        ))}
-      </div>
+      <StepIndicator current={0} className="mb-6" />
 
       {/* Card */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      <motion.div
+        initial={{ opacity: 0, y: 16, scale: 0.99 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+        className="rounded-2xl border border-line bg-surface p-7 shadow-raised"
+      >
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/40">
-            <Building2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          </div>
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 22, delay: 0.12 }}
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-subtle"
+          >
+            <Building2 className="w-5 h-5 text-primary" />
+          </motion.div>
           <div>
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <h1 className="text-lg font-semibold text-content">
               Create your organization
             </h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              This is your team&apos;s home in TaskBridge.
+            <p className="text-xs text-content-tertiary">
+              This is your team&apos;s home in SyncSpac.
             </p>
           </div>
         </div>
@@ -113,7 +97,7 @@ export default function CreateOrgPage() {
           submitLabel="Create & continue →"
           isLoading={isLoading}
         />
-      </div>
+      </motion.div>
     </div>
   );
 }

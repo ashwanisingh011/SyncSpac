@@ -15,27 +15,27 @@ const STATUS_MAP: Record<
 > = {
   active: {
     label: 'Active',
-    className: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-300',
+    className: 'bg-success/10 text-success',
   },
   trialing: {
     label: 'Trialing',
-    className: 'bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-300',
+    className: 'bg-primary-subtle text-primary',
   },
   trial: {
     label: 'Trial',
-    className: 'bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-300',
+    className: 'bg-primary-subtle text-primary',
   },
   past_due: {
     label: 'Past due',
-    className: 'bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-300',
+    className: 'bg-danger/10 text-danger',
   },
   canceled: {
     label: 'Canceled',
-    className: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+    className: 'bg-surface-hover text-content-secondary',
   },
   suspended: {
     label: 'Suspended',
-    className: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+    className: 'bg-surface-hover text-content-secondary',
   },
 };
 
@@ -51,16 +51,16 @@ function StatCard({
   sub?: ReactNode;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950">
-      <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 dark:bg-blue-950/40">
-        <Icon className="w-4.5 h-4.5 text-blue-600 dark:text-blue-400" />
+    <div className="flex items-start gap-3 rounded-xl border border-line bg-surface p-4">
+      <div className="w-9 h-9 rounded-lg bg-primary-subtle flex items-center justify-center shrink-0">
+        <Icon className="w-4.5 h-4.5 text-primary" />
       </div>
       <div>
-        <p className="text-xs text-slate-500 dark:text-slate-400">{label}</p>
-        <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+        <p className="text-xs text-content-tertiary">{label}</p>
+        <p className="text-sm font-semibold text-content mt-0.5">
           {value}
         </p>
-        {sub && <p className="text-xs text-slate-400 mt-0.5">{sub}</p>}
+        {sub && <p className="text-xs text-content-tertiary mt-0.5">{sub}</p>}
       </div>
     </div>
   );
@@ -69,7 +69,7 @@ function StatCard({
 export default function BillingOverview({ billing }: BillingOverviewProps) {
   const statusMeta = STATUS_MAP[billing?.status] || {
     label: billing?.status ? billing.status.charAt(0).toUpperCase() + billing.status.slice(1) : 'Unknown',
-    className: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+    className: 'bg-surface-hover text-content-secondary',
   };
   const seatUsagePct = billing?.seats ? Math.round((billing.usedSeats / billing.seats) * 100) : 0;
 
@@ -77,9 +77,9 @@ export default function BillingOverview({ billing }: BillingOverviewProps) {
     <div className="space-y-5">
       {/* Status banner */}
       {billing.status === 'past_due' && (
-        <div className="flex items-center gap-3 rounded-xl bg-red-50 border border-red-200 px-4 py-3 dark:bg-red-950/20 dark:border-red-800">
-          <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />
-          <p className="text-sm text-red-700 dark:text-red-300">
+        <div className="flex items-center gap-3 rounded-xl bg-danger/10 border border-danger/25 px-4 py-3">
+          <AlertCircle className="w-5 h-5 text-danger shrink-0" />
+          <p className="text-sm text-danger">
             Your last payment failed. Please update your payment method to avoid service interruption.
           </p>
         </div>
@@ -119,26 +119,26 @@ export default function BillingOverview({ billing }: BillingOverviewProps) {
       </div>
 
       {/* Seat usage bar */}
-      <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950">
+      <div className="rounded-xl border border-line bg-surface p-5">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+          <p className="text-sm font-medium text-content-secondary">
             Seat usage
           </p>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-content-tertiary">
             {billing.usedSeats} of {billing.seats} seats
           </p>
         </div>
-        <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden dark:bg-slate-800">
+        <div className="w-full h-2 bg-surface-hover rounded-full overflow-hidden">
           <div
             className={clsx(
               'h-full rounded-full transition-all',
-              seatUsagePct >= 90 ? 'bg-red-500' : 'bg-blue-500',
+              seatUsagePct >= 90 ? 'bg-danger' : 'bg-primary',
             )}
             style={{ width: `${seatUsagePct}%` }}
           />
         </div>
         {seatUsagePct >= 90 && (
-          <p className="mt-2 text-xs text-red-500">
+          <p className="mt-2 text-xs text-danger">
             You&apos;re near your seat limit. Upgrade your plan to add more members.
           </p>
         )}
@@ -146,17 +146,17 @@ export default function BillingOverview({ billing }: BillingOverviewProps) {
 
       {/* Payment method */}
       {billing.cardLast4 && (
-        <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950">
+        <div className="rounded-xl border border-line bg-surface p-5">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+              <p className="text-sm font-medium text-content-secondary mb-1">
                 Payment method
               </p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-sm text-content-tertiary">
                 {billing.cardBrand?.toUpperCase()} ···· {billing.cardLast4}
               </p>
             </div>
-            <button className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+            <button className="text-sm font-medium text-primary hover:text-primary-hover">
               Update
             </button>
           </div>

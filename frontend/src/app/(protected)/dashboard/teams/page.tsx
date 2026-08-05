@@ -11,7 +11,7 @@ export default function DashboardTeamsPage() {
   const router = useRouter();
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6">
+    <div className="bg-surface rounded-2xl border border-line p-6">
       <TeamsPage
         onTeamSelect={(teamId) => router.push(`/dashboard/teams/${teamId}`)}
       />

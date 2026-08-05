@@ -352,9 +352,9 @@ export default function CheckoutPage() {
             {/* Org details */}
             <div className="flex items-center gap-2">
               <div className="p-2 bg-slate-100 rounded-lg dark:bg-slate-800">
-                <ShoppingBag className="h-4 w-4 text-slate-600 dark:text-slate-350" />
+                <ShoppingBag className="h-4 w-4 text-slate-600 dark:text-slate-400" />
               </div>
-              <span className="text-sm font-bold text-slate-700 dark:text-slate-350">
+              <span className="text-sm font-bold text-slate-700 dark:text-slate-400">
                 {currentOrg?.name || 'TaskBridge Workspace'}
               </span>
             </div>
@@ -364,12 +364,12 @@ export default function CheckoutPage() {
               <span className="text-xs font-medium text-slate-400 dark:text-slate-500 uppercase tracking-wider block">
                 Upgrade Account
               </span>
-              <h1 className="text-xl font-extrabold text-slate-800 dark:text-slate-250">{planDetails.name}</h1>
+              <h1 className="text-xl font-extrabold text-slate-800 dark:text-slate-200">{planDetails.name}</h1>
               <div className="mt-2 flex flex-col lg:flex-row lg:items-baseline gap-2">
                 <h2 className="text-3xl font-black text-slate-900 dark:text-white">
                   {formatCurrency(total)}
                 </h2>
-                <span className="text-xs text-slate-500 dark:text-slate-450">
+                <span className="text-xs text-slate-500 dark:text-slate-500">
                   per {planDetails.billingCycle === 'yearly' ? 'year' : 'month'}
                 </span>
               </div>
@@ -482,7 +482,7 @@ export default function CheckoutPage() {
 
           {/* Total due today */}
           <div className="flex justify-between items-center text-sm pt-5 mt-6 border-t border-slate-200 dark:border-slate-800">
-            <span className="font-bold text-slate-800 dark:text-slate-350">Total due today</span>
+            <span className="font-bold text-slate-800 dark:text-slate-400">Total due today</span>
             <span className="text-xl font-black text-slate-900 dark:text-white">
               {formatCurrency(total)}
             </span>
@@ -549,7 +549,7 @@ export default function CheckoutPage() {
               <div className="bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800/80 rounded-2xl p-4 flex gap-3 text-xs text-slate-500 dark:text-slate-400">
                 <CreditCard className="w-5 h-5 text-blue-500 dark:text-blue-400 mt-0.5 shrink-0" />
                 <div className="space-y-1">
-                  <p className="font-semibold text-slate-700 dark:text-slate-350">Secure Checkout Page</p>
+                  <p className="font-semibold text-slate-700 dark:text-slate-400">Secure Checkout Page</p>
                   <p className="leading-relaxed text-[11px]">
                     UPI, Cards, Wallets, and NetBanking are accepted. Click below to continue your secure transaction using the official Razorpay popup.
                   </p>
@@ -587,7 +587,7 @@ export default function CheckoutPage() {
             </form>
 
             {/* Footer Disclaimer */}
-            <div className="text-[10px] text-slate-450 dark:text-slate-500 leading-relaxed text-center space-y-2 pt-4 w-full border-t border-slate-100 dark:border-slate-800">
+            <div className="text-[10px] text-slate-500 dark:text-slate-500 leading-relaxed text-center space-y-2 pt-4 w-full border-t border-slate-100 dark:border-slate-800">
               <p>
                 By proceeding, you authorize {currentOrg?.name || 'TaskBridge'} to manage your subscription billing.
               </p>
@@ -621,7 +621,7 @@ export default function CheckoutPage() {
               <h3 className="text-xl font-extrabold mt-1 tracking-tight">{planDetails.name}</h3>
               
               <div className="mt-4 inline-block bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
-                <span className="text-[10px] text-blue-250 font-bold block leading-none">AMOUNT DUE</span>
+                <span className="text-[10px] text-blue-200 font-bold block leading-none">AMOUNT DUE</span>
                 <span className="text-lg font-black block mt-0.5">₹{new Intl.NumberFormat('en-IN').format(totalINR)}</span>
               </div>
             </div>
@@ -656,13 +656,13 @@ export default function CheckoutPage() {
                   setShowMockModal(false);
                   setIsSubmitting(false);
                 }}
-                className="w-full py-2 text-slate-400 hover:text-slate-650 dark:text-slate-500 dark:hover:text-slate-350 text-xs font-bold text-center transition-colors block mt-2"
+                className="w-full py-2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-400 text-xs font-bold text-center transition-colors block mt-2"
               >
                 Cancel Sandbox Simulation
               </button>
             </div>
             
-            <div className="bg-slate-50 dark:bg-slate-950 p-4 border-t border-slate-100 dark:border-slate-850 text-center flex items-center justify-center gap-1.5 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+            <div className="bg-slate-50 dark:bg-slate-950 p-4 border-t border-slate-100 dark:border-slate-800 text-center flex items-center justify-center gap-1.5 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
               Secured Checkout Simulation via Razorpay
             </div>
