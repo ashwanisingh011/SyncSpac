@@ -4,8 +4,7 @@
 
 ![SyncSpac Login Screen](assets/login_screenshot.png)
 
-🚀 **Live App**: [https://syncspac.onrender.com](https://syncspac.onrender.com)  
-🔌 **Backend API**: [https://syncspac-backend.onrender.com](https://syncspac-backend.onrender.com)
+🚀 **Live App**: [https://syncspac.onrender.com](https://syncspac.onrender.com)
 
 ---
 
