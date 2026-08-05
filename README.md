@@ -2,6 +2,8 @@
 
 > An enterprise-grade, real-time project management and workspace collaboration system designed for multi-tenant organizations, high-frequency task tracking, asynchronous queue processing, and granular access control.
 
+![SyncSpac Login Screen](assets/login_screenshot.png)
+
 ---
 
 ## Executive Overview
