@@ -20,6 +20,7 @@ import VerifyEmailPageSimple from '@/app/verify-email/page';
 import VerifyEmailSentPage from '@/app/verify-email-sent/page';
 import VerifyEmailChangePage from '@/app/verify-email-change/[token]/page';
 import AcceptInvitePage from '@/app/accept-invite/[token]/page';
+import AuthCallbackPage from '@/app/auth/callback/page';
 
 // Protected Pages
 import OnboardingPage from '@/app/onboarding/page';
@@ -133,6 +134,7 @@ export default function App() {
         <Route path="/verify-email-sent" element={<VerifyEmailSentPage />} />
         <Route path="/verify-email-change/:token" element={<VerifyEmailChangePage />} />
         <Route path="/accept-invite/:token" element={<AcceptInvitePage />} />
+        <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
         {/* Onboarding flow (with OnboardingLayout wrapper) */}
         <Route element={<OnboardingLayout />}>
