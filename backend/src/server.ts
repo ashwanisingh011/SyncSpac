@@ -56,7 +56,7 @@ app.use(helmet());
 app.use(globalRateLimit);
 app.use(express.json({
   limit: '10mb',
-  verify: (req: any, res, buf) => {
+  verify: (req: any, res: any, buf: Buffer) => {
     req.rawBody = buf;
   }
 }));

@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { protect } from '../middleware/auth.js';
 
 import {
@@ -30,9 +30,9 @@ const router = express.Router();
 
 // Basic Auth (Public)
 router.post('/register', register);
-router.get('/register', (req, res) => res.redirect(process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/register` : 'http://localhost:3000/register'));
+router.get('/register', (req: Request, res: Response) => res.redirect(process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/register` : 'http://localhost:3000/register'));
 router.post('/login', login);
-router.get('/login', (req, res) => res.redirect(process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/login` : 'http://localhost:3000/login'));
+router.get('/login', (req: Request, res: Response) => res.redirect(process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/login` : 'http://localhost:3000/login'));
 router.post('/login/2fa', verifyLogin2FA);
 router.get('/google', googleAuth);
 router.get('/google/callback', googleCallback);
