@@ -2,9 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [main, master, develop]
+    branches: [main, master, develop, developement]
   pull_request:
-    branches: [main, master, develop]
+    branches: [main, master, develop, developement]
 
 jobs:
   backend-ci:
@@ -15,18 +15,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: backend/package-lock.json
 
       - name: Install Dependencies
         run: |
           cd backend
           npm ci
 
-      - name: Run Typescript Comile
+      - name: Run TypeScript Compile
         run: |
           cd backend
           npm run build
@@ -36,10 +36,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with: 
           node-version: 20
           cache: 'npm'
