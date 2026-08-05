@@ -81,3 +81,18 @@ We have successfully migrated the Client Dashboard into a **clean Next.js file-b
    - Enter card number `4242 4242 4242 4242`, expiry, and CVC.
    - Click **Subscribe**. You should be redirected back to the billing dashboard.
    - Verify the Payment Method block appears with "VISA ···· 4242".
+
+---
+
+## Deployment & CI/CD Walkthrough
+
+We have created the necessary pipeline files and instructions to deploy the full-stack system:
+
+### 1. Continuous Integration Workflow (`.github/workflows/ci.yml`)
+- Automates verification of incoming commits and pull requests.
+- **Backend CI Job**: Performs `npm ci` and runs `npm run build` to confirm compilation in strict TypeScript mode.
+- **Frontend CI Job**: Performs `npm ci`, runs code formatting/linter (`npm run lint`), and builds the static assets with Vite to ensure syntax is clean and error-free.
+
+### 2. Step-by-Step Deployment Guide (`deployment_guide.md`)
+- Added a full, easy-to-follow guide at [deployment_guide.md](file:///Users/ashwanisingh/.gemini/antigravity/worktrees/SyncSpac/plan_cicd_deployment_pipeline/deployment_guide.md) to walk you through configuring MongoDB Atlas, Upstash Redis, and launching the services on Render (Web Service for Backend, Static Site for Frontend).
+
