@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import AuthContext from './authContextInstance';
 import type { AuthUser } from './authContextInstance';
 import { clearOrganizationSession } from '@/lib/orgSession';
+import api from '@/api/axios';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -52,6 +53,7 @@ export const AuthProvider = ({ children }: AuthProviderProps): React.JSX.Element
   };
 
   const logout = (): void => {
+    api.post('/auth/logout').catch(() => {});
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     clearOrganizationSession();

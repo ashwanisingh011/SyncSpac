@@ -16,7 +16,7 @@ export default function OnboardingLayoutClient({ children }: { children: ReactNo
         <div className="absolute -bottom-40 right-1/4 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(124,108,240,0.12),transparent_65%)] blur-2xl dark:bg-[radial-gradient(circle,rgba(139,124,246,0.08),transparent_65%)]" />
       </div>
 
-      <header className="glass relative z-10 h-14 flex items-center justify-between px-6 border-b border-line">
+      <header className="glass relative z-50 h-14 flex items-center justify-between px-6 border-b border-line">
         <Link href="/onboarding" className="transition-opacity hover:opacity-80">
           <Logo size={24} />
         </Link>
