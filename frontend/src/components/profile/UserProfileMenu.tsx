@@ -78,7 +78,7 @@ export default function UserProfileMenu({
   const handleSignOut = (): void => {
     setOpen(false);
     logout();
-    router.push('/login');
+    window.location.href = '/login';
   };
 
   const renderMenuAction = (
